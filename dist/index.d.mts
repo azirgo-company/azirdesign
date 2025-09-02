@@ -1,6 +1,7 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
-import * as react from 'react';
+import * as React$1 from 'react';
 import { ReactElement, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes, AnchorHTMLAttributes } from 'react';
+import { RefineThemedLayoutV2SiderProps } from '@refinedev/ui-types';
 import { FieldValues, FieldPath, UseControllerProps, ControllerRenderProps } from 'react-hook-form';
 
 interface AddCardFormProps {
@@ -11,10 +12,15 @@ interface AddCardFormProps {
 }
 declare function AddCardForm({ user }: AddCardFormProps): react_jsx_runtime.JSX.Element;
 
-interface AppSidebarProps {
-    meta?: any;
+declare function Sidebar({ side, variant, collapsible, className, children, ...props }: React$1.ComponentProps<"div"> & {
+    side?: "left" | "right";
+    variant?: "sidebar" | "floating" | "inset";
+    collapsible?: "offcanvas" | "icon" | "none";
+}): react_jsx_runtime.JSX.Element;
+
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar>, RefineThemedLayoutV2SiderProps {
 }
-declare function AppSidebar({ meta }: AppSidebarProps): react_jsx_runtime.JSX.Element;
+declare function AppSidebar({ meta, ...props }: AppSidebarProps): react_jsx_runtime.JSX.Element;
 
 type FieldProps<TFieldValues extends FieldValues = FieldValues, TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>> = UseControllerProps<TFieldValues, TName> & {
     label?: string;
@@ -38,7 +44,7 @@ type ImagePreviewCellProps = {
 };
 declare const ImagePreviewCell: ({ src, alt, thumbnailSize, }: ImagePreviewCellProps) => react_jsx_runtime.JSX.Element;
 
-declare const Link: react.ForwardRefExoticComponent<AnchorHTMLAttributes<HTMLAnchorElement> & react.RefAttributes<HTMLAnchorElement>>;
+declare const Link: React$1.ForwardRefExoticComponent<AnchorHTMLAttributes<HTMLAnchorElement> & React$1.RefAttributes<HTMLAnchorElement>>;
 
 declare function NavMain({ items, }: {
     items: {
@@ -73,7 +79,7 @@ declare const PageHeader: ({ title, subTitle, isBack, extra, children, }: any) =
 declare function TeamSwitcher({ teams, }: {
     teams: {
         name: string;
-        logo: react.ElementType;
+        logo: React$1.ElementType;
         plan: string;
     }[];
 }): react_jsx_runtime.JSX.Element;

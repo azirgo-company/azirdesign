@@ -10,12 +10,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./components/ui/select"
-
-import { Button } from "./components/ui/button"
+} from "../ui/select"
+import { Button } from "../ui/button"
 import { ComponentProps } from "react"
 import { Table } from "@tanstack/react-table"
-import { cn } from "@/src/lib/utils"
+import { cn } from "../../../src/lib/utils"
 
 interface DataTablePaginationProps<TData> extends ComponentProps<"div"> {
   table: Table<TData>
