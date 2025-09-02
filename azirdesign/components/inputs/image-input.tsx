@@ -1,19 +1,13 @@
 "use client"
 
 import React, { useCallback, useMemo, useRef, useState } from "react"
-import { useAuth } from "@clerk/nextjs"
 import ImagePreviewCell from "../image-preview-cell"
 import Cropper from "react-easy-crop"
 import { X, Upload, Crop as CropIcon, Loader2 } from "lucide-react"
 import { Slider } from "./components/ui/slider"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "./components/ui/dialog"
+
 import { Button } from "./components/ui/button"
+import { DialogTitle } from "@radix-ui/react-dialog"
 
 export type ImageInputProps = {
   value?: string | null
