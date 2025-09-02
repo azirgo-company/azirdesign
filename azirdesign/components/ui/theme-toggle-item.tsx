@@ -2,7 +2,7 @@
 
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu"
 import { Moon, Sun } from "lucide-react"
-import { useTheme } from "../src/lib/use-theme"
+import { useTheme } from "../../../src/lib/use-theme"
 
 export function ThemeToggleItem() {
   const { theme, toggleTheme } = useTheme()
