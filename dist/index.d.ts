@@ -1,8 +1,9 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React$1 from 'react';
-import { ReactElement, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes, AnchorHTMLAttributes } from 'react';
+import { ReactElement, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes, AnchorHTMLAttributes, ReactNode } from 'react';
 import { RefineThemedLayoutV2SiderProps } from '@refinedev/ui-types';
 import { FieldValues, FieldPath, UseControllerProps, ControllerRenderProps } from 'react-hook-form';
+import { LucideIcon } from 'lucide-react';
 
 interface AddCardFormProps {
     user: {
@@ -44,13 +45,15 @@ type ImagePreviewCellProps = {
 };
 declare const ImagePreviewCell: ({ src, alt, thumbnailSize, }: ImagePreviewCellProps) => react_jsx_runtime.JSX.Element;
 
-declare const Link: React$1.ForwardRefExoticComponent<AnchorHTMLAttributes<HTMLAnchorElement> & React$1.RefAttributes<HTMLAnchorElement>>;
+declare const Link: React$1.ForwardRefExoticComponent<AnchorHTMLAttributes<HTMLAnchorElement> & {
+    asChild?: boolean;
+} & React$1.RefAttributes<HTMLAnchorElement>>;
 
 declare function NavMain({ items, }: {
     items: {
         title: string;
         url: string;
-        icon?: any;
+        icon?: LucideIcon;
         isActive?: boolean;
         items?: {
             title: string;
@@ -63,7 +66,7 @@ declare function NavProjects({ projects, }: {
     projects: {
         name: string;
         url: string;
-        icon: any;
+        icon: LucideIcon;
     }[];
 }): react_jsx_runtime.JSX.Element;
 
@@ -74,7 +77,18 @@ interface NavUserProps {
 }
 declare function NavUser({ className }: NavUserProps): react_jsx_runtime.JSX.Element;
 
-declare const PageHeader: ({ title, subTitle, isBack, extra, children, }: any) => react_jsx_runtime.JSX.Element;
+type PageHeaderProps = {
+    title?: ReactNode;
+    subTitle?: ReactNode;
+    isBack?: boolean;
+    onBack?: (e?: React.MouseEvent<HTMLElement>) => void;
+    className?: string;
+    breadcrumb?: ReactNode;
+    extra?: ReactNode;
+    children?: ReactNode;
+};
+
+declare const PageHeader: ({ extra, children, className, title, subTitle, isBack, ...props }: PageHeaderProps) => react_jsx_runtime.JSX.Element;
 
 declare function TeamSwitcher({ teams, }: {
     teams: {

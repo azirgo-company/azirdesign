@@ -1,11 +1,26 @@
 import { AnchorHTMLAttributes, forwardRef } from "react"
+import { useLink, useRouterContext, useRouterType } from "@refinedev/core"
 
-export const Link = forwardRef<
-  HTMLAnchorElement,
-  AnchorHTMLAttributes<HTMLAnchorElement>
->(({ children, href, title, className }, ref) => (
-  <a ref={ref} href={href} className={className} title={title}>
-    {children}
-  </a>
-))
+import { Slot } from "@radix-ui/react-slot"
+
+type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  asChild?: boolean
+}
+
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ children, href, title, className, asChild }, ref) => {
+    const { Link: LegacyLink } = useRouterContext()
+    const routerType = useRouterType()
+    const Link = useLink()
+
+    const ActiveLink = routerType === "legacy" ? LegacyLink : Link
+    const Comp = asChild ? Slot : ActiveLink
+
+    return (
+      <Comp ref={ref} to={href} className={className} title={title}>
+        {children}
+      </Comp>
+    )
+  }
+)
 Link.displayName = "Link"

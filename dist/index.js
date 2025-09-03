@@ -56,7 +56,7 @@ var add_card_form_default = AddCardForm;
 
 // azirdesign/components/ui/sidebar.tsx
 var React2 = __toESM(require("react"));
-var import_class_variance_authority = require("class-variance-authority");
+var import_class_variance_authority2 = require("class-variance-authority");
 var import_lucide_react2 = require("lucide-react");
 
 // azirdesign/components/ui/sheet.tsx
@@ -167,14 +167,58 @@ function SheetDescription({
 var React = __toESM(require("react"));
 
 // azirdesign/components/ui/sidebar.tsx
-var import_react_slot = require("@radix-ui/react-slot");
+var import_react_slot2 = require("@radix-ui/react-slot");
 var import_react_tooltip = require("@radix-ui/react-tooltip");
 
 // azirdesign/components/ui/skeleton.tsx
 var import_jsx_runtime3 = require("react/jsx-runtime");
 
 // azirdesign/components/ui/button.tsx
+var import_react_slot = require("@radix-ui/react-slot");
+var import_class_variance_authority = require("class-variance-authority");
 var import_jsx_runtime4 = require("react/jsx-runtime");
+var buttonVariants = (0, import_class_variance_authority.cva)(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+        destructive: "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        outline: "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+        secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        link: "text-primary underline-offset-4 hover:underline"
+      },
+      size: {
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-9"
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default"
+    }
+  }
+);
+function Button({
+  className,
+  variant,
+  size,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot.Slot : "button";
+  return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
+    Comp,
+    {
+      "data-slot": "button",
+      className: cn(buttonVariants({ variant, size, className })),
+      ...props
+    }
+  );
+}
 
 // azirdesign/components/ui/separator.tsx
 var SeparatorPrimitive = __toESM(require("@radix-ui/react-separator"));
@@ -338,6 +382,51 @@ function SidebarContent({ className, ...props }) {
     }
   );
 }
+function SidebarGroup({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-group",
+      "data-sidebar": "group",
+      className: cn("relative flex w-full min-w-0 flex-col p-2", className),
+      ...props
+    }
+  );
+}
+function SidebarGroupLabel({
+  className,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot2.Slot : "div";
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    Comp,
+    {
+      "data-slot": "sidebar-group-label",
+      "data-sidebar": "group-label",
+      className: cn(
+        "text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarGroupContent({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-group-content",
+      "data-sidebar": "group-content",
+      className: cn("w-full text-sm", className),
+      ...props
+    }
+  );
+}
 function SidebarMenu({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "ul",
@@ -360,7 +449,7 @@ function SidebarMenuItem({ className, ...props }) {
     }
   );
 }
-var sidebarMenuButtonVariants = (0, import_class_variance_authority.cva)(
+var sidebarMenuButtonVariants = (0, import_class_variance_authority2.cva)(
   "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
@@ -389,7 +478,7 @@ function SidebarMenuButton({
   className,
   ...props
 }) {
-  const Comp = asChild ? import_react_slot.Slot : "button";
+  const Comp = asChild ? import_react_slot2.Slot : "button";
   const { isMobile, state } = useSidebar();
   const button = /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     Comp,
@@ -423,24 +512,706 @@ function SidebarMenuButton({
     )
   ] });
 }
+function SidebarMenuAction({
+  className,
+  asChild = false,
+  showOnHover = false,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot2.Slot : "button";
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    Comp,
+    {
+      "data-slot": "sidebar-menu-action",
+      "data-sidebar": "menu-action",
+      className: cn(
+        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer-hover/menu-button:text-sidebar-accent-foreground absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        // Increases the hit area of the button on mobile.
+        "after:absolute after:-inset-2 md:after:hidden",
+        "peer-data-[size=sm]/menu-button:top-1",
+        "peer-data-[size=default]/menu-button:top-1.5",
+        "peer-data-[size=lg]/menu-button:top-2.5",
+        "group-data-[collapsible=icon]:hidden",
+        showOnHover && "peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarMenuSub({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "ul",
+    {
+      "data-slot": "sidebar-menu-sub",
+      "data-sidebar": "menu-sub",
+      className: cn(
+        "border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5",
+        "group-data-[collapsible=icon]:hidden",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarMenuSubItem({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "li",
+    {
+      "data-slot": "sidebar-menu-sub-item",
+      "data-sidebar": "menu-sub-item",
+      className: cn("group/menu-sub-item relative", className),
+      ...props
+    }
+  );
+}
+function SidebarMenuSubButton({
+  asChild = false,
+  size = "md",
+  isActive = false,
+  className,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot2.Slot : "a";
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    Comp,
+    {
+      "data-slot": "sidebar-menu-sub-button",
+      "data-sidebar": "menu-sub-button",
+      "data-size": size,
+      "data-active": isActive,
+      className: cn(
+        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+        "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
+        size === "sm" && "text-xs",
+        size === "md" && "text-sm",
+        "group-data-[collapsible=icon]:hidden",
+        className
+      ),
+      ...props
+    }
+  );
+}
 
 // azirdesign/components/nav-refine.tsx
+var import_core2 = require("@refinedev/core");
+
+// node_modules/@radix-ui/react-collapsible/dist/index.mjs
+var React10 = __toESM(require("react"), 1);
+
+// node_modules/@radix-ui/primitive/dist/index.mjs
+var canUseDOM = !!(typeof window !== "undefined" && window.document && window.document.createElement);
+function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
+  return function handleEvent(event) {
+    originalEventHandler?.(event);
+    if (checkForDefaultPrevented === false || !event.defaultPrevented) {
+      return ourEventHandler?.(event);
+    }
+  };
+}
+
+// node_modules/@radix-ui/react-context/dist/index.mjs
+var React3 = __toESM(require("react"), 1);
 var import_jsx_runtime8 = require("react/jsx-runtime");
+function createContextScope(scopeName, createContextScopeDeps = []) {
+  let defaultContexts = [];
+  function createContext3(rootComponentName, defaultContext) {
+    const BaseContext = React3.createContext(defaultContext);
+    const index = defaultContexts.length;
+    defaultContexts = [...defaultContexts, defaultContext];
+    const Provider = (props) => {
+      const { scope, children, ...context } = props;
+      const Context = scope?.[scopeName]?.[index] || BaseContext;
+      const value = React3.useMemo(() => context, Object.values(context));
+      return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Context.Provider, { value, children });
+    };
+    Provider.displayName = rootComponentName + "Provider";
+    function useContext22(consumerName, scope) {
+      const Context = scope?.[scopeName]?.[index] || BaseContext;
+      const context = React3.useContext(Context);
+      if (context) return context;
+      if (defaultContext !== void 0) return defaultContext;
+      throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+    }
+    return [Provider, useContext22];
+  }
+  const createScope = () => {
+    const scopeContexts = defaultContexts.map((defaultContext) => {
+      return React3.createContext(defaultContext);
+    });
+    return function useScope(scope) {
+      const contexts = scope?.[scopeName] || scopeContexts;
+      return React3.useMemo(
+        () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
+        [scope, contexts]
+      );
+    };
+  };
+  createScope.scopeName = scopeName;
+  return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+}
+function composeContextScopes(...scopes) {
+  const baseScope = scopes[0];
+  if (scopes.length === 1) return baseScope;
+  const createScope = () => {
+    const scopeHooks = scopes.map((createScope2) => ({
+      useScope: createScope2(),
+      scopeName: createScope2.scopeName
+    }));
+    return function useComposedScopes(overrideScopes) {
+      const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
+        const scopeProps = useScope(overrideScopes);
+        const currentScope = scopeProps[`__scope${scopeName}`];
+        return { ...nextScopes2, ...currentScope };
+      }, {});
+      return React3.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+    };
+  };
+  createScope.scopeName = baseScope.scopeName;
+  return createScope;
+}
+
+// node_modules/@radix-ui/react-use-controllable-state/dist/index.mjs
+var React5 = __toESM(require("react"), 1);
+
+// node_modules/@radix-ui/react-use-layout-effect/dist/index.mjs
+var React4 = __toESM(require("react"), 1);
+var useLayoutEffect2 = globalThis?.document ? React4.useLayoutEffect : () => {
+};
+
+// node_modules/@radix-ui/react-use-controllable-state/dist/index.mjs
+var React22 = __toESM(require("react"), 1);
+var useInsertionEffect = React5[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
+function useControllableState({
+  prop,
+  defaultProp,
+  onChange = () => {
+  },
+  caller
+}) {
+  const [uncontrolledProp, setUncontrolledProp, onChangeRef] = useUncontrolledState({
+    defaultProp,
+    onChange
+  });
+  const isControlled = prop !== void 0;
+  const value = isControlled ? prop : uncontrolledProp;
+  if (true) {
+    const isControlledRef = React5.useRef(prop !== void 0);
+    React5.useEffect(() => {
+      const wasControlled = isControlledRef.current;
+      if (wasControlled !== isControlled) {
+        const from = wasControlled ? "controlled" : "uncontrolled";
+        const to = isControlled ? "controlled" : "uncontrolled";
+        console.warn(
+          `${caller} is changing from ${from} to ${to}. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.`
+        );
+      }
+      isControlledRef.current = isControlled;
+    }, [isControlled, caller]);
+  }
+  const setValue = React5.useCallback(
+    (nextValue) => {
+      if (isControlled) {
+        const value2 = isFunction(nextValue) ? nextValue(prop) : nextValue;
+        if (value2 !== prop) {
+          onChangeRef.current?.(value2);
+        }
+      } else {
+        setUncontrolledProp(nextValue);
+      }
+    },
+    [isControlled, prop, setUncontrolledProp, onChangeRef]
+  );
+  return [value, setValue];
+}
+function useUncontrolledState({
+  defaultProp,
+  onChange
+}) {
+  const [value, setValue] = React5.useState(defaultProp);
+  const prevValueRef = React5.useRef(value);
+  const onChangeRef = React5.useRef(onChange);
+  useInsertionEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
+  React5.useEffect(() => {
+    if (prevValueRef.current !== value) {
+      onChangeRef.current?.(value);
+      prevValueRef.current = value;
+    }
+  }, [value, prevValueRef]);
+  return [value, setValue, onChangeRef];
+}
+function isFunction(value) {
+  return typeof value === "function";
+}
+var SYNC_STATE = Symbol("RADIX:SYNC_STATE");
+
+// node_modules/@radix-ui/react-compose-refs/dist/index.mjs
+var React6 = __toESM(require("react"), 1);
+function setRef(ref, value) {
+  if (typeof ref === "function") {
+    return ref(value);
+  } else if (ref !== null && ref !== void 0) {
+    ref.current = value;
+  }
+}
+function composeRefs(...refs) {
+  return (node) => {
+    let hasCleanup = false;
+    const cleanups = refs.map((ref) => {
+      const cleanup = setRef(ref, node);
+      if (!hasCleanup && typeof cleanup == "function") {
+        hasCleanup = true;
+      }
+      return cleanup;
+    });
+    if (hasCleanup) {
+      return () => {
+        for (let i = 0; i < cleanups.length; i++) {
+          const cleanup = cleanups[i];
+          if (typeof cleanup == "function") {
+            cleanup();
+          } else {
+            setRef(refs[i], null);
+          }
+        }
+      };
+    }
+  };
+}
+function useComposedRefs(...refs) {
+  return React6.useCallback(composeRefs(...refs), refs);
+}
+
+// node_modules/@radix-ui/react-primitive/dist/index.mjs
+var React7 = __toESM(require("react"), 1);
+var ReactDOM = __toESM(require("react-dom"), 1);
+var import_react_slot3 = require("@radix-ui/react-slot");
+var import_jsx_runtime9 = require("react/jsx-runtime");
+var NODES = [
+  "a",
+  "button",
+  "div",
+  "form",
+  "h2",
+  "h3",
+  "img",
+  "input",
+  "label",
+  "li",
+  "nav",
+  "ol",
+  "p",
+  "select",
+  "span",
+  "svg",
+  "ul"
+];
+var Primitive = NODES.reduce((primitive, node) => {
+  const Slot4 = (0, import_react_slot3.createSlot)(`Primitive.${node}`);
+  const Node = React7.forwardRef((props, forwardedRef) => {
+    const { asChild, ...primitiveProps } = props;
+    const Comp = asChild ? Slot4 : node;
+    if (typeof window !== "undefined") {
+      window[Symbol.for("radix-ui")] = true;
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Comp, { ...primitiveProps, ref: forwardedRef });
+  });
+  Node.displayName = `Primitive.${node}`;
+  return { ...primitive, [node]: Node };
+}, {});
+
+// node_modules/@radix-ui/react-presence/dist/index.mjs
+var React23 = __toESM(require("react"), 1);
+var React8 = __toESM(require("react"), 1);
+function useStateMachine(initialState, machine) {
+  return React8.useReducer((state, event) => {
+    const nextState = machine[state][event];
+    return nextState ?? state;
+  }, initialState);
+}
+var Presence = (props) => {
+  const { present, children } = props;
+  const presence = usePresence(present);
+  const child = typeof children === "function" ? children({ present: presence.isPresent }) : React23.Children.only(children);
+  const ref = useComposedRefs(presence.ref, getElementRef(child));
+  const forceMount = typeof children === "function";
+  return forceMount || presence.isPresent ? React23.cloneElement(child, { ref }) : null;
+};
+Presence.displayName = "Presence";
+function usePresence(present) {
+  const [node, setNode] = React23.useState();
+  const stylesRef = React23.useRef(null);
+  const prevPresentRef = React23.useRef(present);
+  const prevAnimationNameRef = React23.useRef("none");
+  const initialState = present ? "mounted" : "unmounted";
+  const [state, send] = useStateMachine(initialState, {
+    mounted: {
+      UNMOUNT: "unmounted",
+      ANIMATION_OUT: "unmountSuspended"
+    },
+    unmountSuspended: {
+      MOUNT: "mounted",
+      ANIMATION_END: "unmounted"
+    },
+    unmounted: {
+      MOUNT: "mounted"
+    }
+  });
+  React23.useEffect(() => {
+    const currentAnimationName = getAnimationName(stylesRef.current);
+    prevAnimationNameRef.current = state === "mounted" ? currentAnimationName : "none";
+  }, [state]);
+  useLayoutEffect2(() => {
+    const styles = stylesRef.current;
+    const wasPresent = prevPresentRef.current;
+    const hasPresentChanged = wasPresent !== present;
+    if (hasPresentChanged) {
+      const prevAnimationName = prevAnimationNameRef.current;
+      const currentAnimationName = getAnimationName(styles);
+      if (present) {
+        send("MOUNT");
+      } else if (currentAnimationName === "none" || styles?.display === "none") {
+        send("UNMOUNT");
+      } else {
+        const isAnimating = prevAnimationName !== currentAnimationName;
+        if (wasPresent && isAnimating) {
+          send("ANIMATION_OUT");
+        } else {
+          send("UNMOUNT");
+        }
+      }
+      prevPresentRef.current = present;
+    }
+  }, [present, send]);
+  useLayoutEffect2(() => {
+    if (node) {
+      let timeoutId;
+      const ownerWindow = node.ownerDocument.defaultView ?? window;
+      const handleAnimationEnd = (event) => {
+        const currentAnimationName = getAnimationName(stylesRef.current);
+        const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
+        if (event.target === node && isCurrentAnimation) {
+          send("ANIMATION_END");
+          if (!prevPresentRef.current) {
+            const currentFillMode = node.style.animationFillMode;
+            node.style.animationFillMode = "forwards";
+            timeoutId = ownerWindow.setTimeout(() => {
+              if (node.style.animationFillMode === "forwards") {
+                node.style.animationFillMode = currentFillMode;
+              }
+            });
+          }
+        }
+      };
+      const handleAnimationStart = (event) => {
+        if (event.target === node) {
+          prevAnimationNameRef.current = getAnimationName(stylesRef.current);
+        }
+      };
+      node.addEventListener("animationstart", handleAnimationStart);
+      node.addEventListener("animationcancel", handleAnimationEnd);
+      node.addEventListener("animationend", handleAnimationEnd);
+      return () => {
+        ownerWindow.clearTimeout(timeoutId);
+        node.removeEventListener("animationstart", handleAnimationStart);
+        node.removeEventListener("animationcancel", handleAnimationEnd);
+        node.removeEventListener("animationend", handleAnimationEnd);
+      };
+    } else {
+      send("ANIMATION_END");
+    }
+  }, [node, send]);
+  return {
+    isPresent: ["mounted", "unmountSuspended"].includes(state),
+    ref: React23.useCallback((node2) => {
+      stylesRef.current = node2 ? getComputedStyle(node2) : null;
+      setNode(node2);
+    }, [])
+  };
+}
+function getAnimationName(styles) {
+  return styles?.animationName || "none";
+}
+function getElementRef(element) {
+  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
+  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.ref;
+  }
+  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
+  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  if (mayWarn) {
+    return element.props.ref;
+  }
+  return element.props.ref || element.ref;
+}
+
+// node_modules/@radix-ui/react-id/dist/index.mjs
+var React9 = __toESM(require("react"), 1);
+var useReactId = React9[" useId ".trim().toString()] || (() => void 0);
+var count = 0;
+function useId(deterministicId) {
+  const [id, setId] = React9.useState(useReactId());
+  useLayoutEffect2(() => {
+    if (!deterministicId) setId((reactId) => reactId ?? String(count++));
+  }, [deterministicId]);
+  return deterministicId || (id ? `radix-${id}` : "");
+}
+
+// node_modules/@radix-ui/react-collapsible/dist/index.mjs
+var import_jsx_runtime10 = require("react/jsx-runtime");
+var COLLAPSIBLE_NAME = "Collapsible";
+var [createCollapsibleContext, createCollapsibleScope] = createContextScope(COLLAPSIBLE_NAME);
+var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
+var Collapsible = React10.forwardRef(
+  (props, forwardedRef) => {
+    const {
+      __scopeCollapsible,
+      open: openProp,
+      defaultOpen,
+      disabled,
+      onOpenChange,
+      ...collapsibleProps
+    } = props;
+    const [open, setOpen] = useControllableState({
+      prop: openProp,
+      defaultProp: defaultOpen ?? false,
+      onChange: onOpenChange,
+      caller: COLLAPSIBLE_NAME
+    });
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+      CollapsibleProvider,
+      {
+        scope: __scopeCollapsible,
+        disabled,
+        contentId: useId(),
+        open,
+        onOpenToggle: React10.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+        children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+          Primitive.div,
+          {
+            "data-state": getState(open),
+            "data-disabled": disabled ? "" : void 0,
+            ...collapsibleProps,
+            ref: forwardedRef
+          }
+        )
+      }
+    );
+  }
+);
+Collapsible.displayName = COLLAPSIBLE_NAME;
+var TRIGGER_NAME = "CollapsibleTrigger";
+var CollapsibleTrigger = React10.forwardRef(
+  (props, forwardedRef) => {
+    const { __scopeCollapsible, ...triggerProps } = props;
+    const context = useCollapsibleContext(TRIGGER_NAME, __scopeCollapsible);
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+      Primitive.button,
+      {
+        type: "button",
+        "aria-controls": context.contentId,
+        "aria-expanded": context.open || false,
+        "data-state": getState(context.open),
+        "data-disabled": context.disabled ? "" : void 0,
+        disabled: context.disabled,
+        ...triggerProps,
+        ref: forwardedRef,
+        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
+      }
+    );
+  }
+);
+CollapsibleTrigger.displayName = TRIGGER_NAME;
+var CONTENT_NAME = "CollapsibleContent";
+var CollapsibleContent = React10.forwardRef(
+  (props, forwardedRef) => {
+    const { forceMount, ...contentProps } = props;
+    const context = useCollapsibleContext(CONTENT_NAME, props.__scopeCollapsible);
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
+  }
+);
+CollapsibleContent.displayName = CONTENT_NAME;
+var CollapsibleContentImpl = React10.forwardRef((props, forwardedRef) => {
+  const { __scopeCollapsible, present, children, ...contentProps } = props;
+  const context = useCollapsibleContext(CONTENT_NAME, __scopeCollapsible);
+  const [isPresent, setIsPresent] = React10.useState(present);
+  const ref = React10.useRef(null);
+  const composedRefs = useComposedRefs(forwardedRef, ref);
+  const heightRef = React10.useRef(0);
+  const height = heightRef.current;
+  const widthRef = React10.useRef(0);
+  const width = widthRef.current;
+  const isOpen = context.open || isPresent;
+  const isMountAnimationPreventedRef = React10.useRef(isOpen);
+  const originalStylesRef = React10.useRef(void 0);
+  React10.useEffect(() => {
+    const rAF = requestAnimationFrame(() => isMountAnimationPreventedRef.current = false);
+    return () => cancelAnimationFrame(rAF);
+  }, []);
+  useLayoutEffect2(() => {
+    const node = ref.current;
+    if (node) {
+      originalStylesRef.current = originalStylesRef.current || {
+        transitionDuration: node.style.transitionDuration,
+        animationName: node.style.animationName
+      };
+      node.style.transitionDuration = "0s";
+      node.style.animationName = "none";
+      const rect = node.getBoundingClientRect();
+      heightRef.current = rect.height;
+      widthRef.current = rect.width;
+      if (!isMountAnimationPreventedRef.current) {
+        node.style.transitionDuration = originalStylesRef.current.transitionDuration;
+        node.style.animationName = originalStylesRef.current.animationName;
+      }
+      setIsPresent(present);
+    }
+  }, [context.open, present]);
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    Primitive.div,
+    {
+      "data-state": getState(context.open),
+      "data-disabled": context.disabled ? "" : void 0,
+      id: context.contentId,
+      hidden: !isOpen,
+      ...contentProps,
+      ref: composedRefs,
+      style: {
+        [`--radix-collapsible-content-height`]: height ? `${height}px` : void 0,
+        [`--radix-collapsible-content-width`]: width ? `${width}px` : void 0,
+        ...props.style
+      },
+      children: isOpen && children
+    }
+  );
+});
+function getState(open) {
+  return open ? "open" : "closed";
+}
+var Root3 = Collapsible;
+
+// azirdesign/components/ui/collapsible.tsx
+var import_jsx_runtime11 = require("react/jsx-runtime");
+function Collapsible2({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Root3, { "data-slot": "collapsible", ...props });
+}
+function CollapsibleTrigger2({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+    CollapsibleTrigger,
+    {
+      "data-slot": "collapsible-trigger",
+      ...props
+    }
+  );
+}
+function CollapsibleContent2({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+    CollapsibleContent,
+    {
+      "data-slot": "collapsible-content",
+      ...props
+    }
+  );
+}
+
+// azirdesign/components/link.tsx
+var import_react = require("react");
+var import_core = require("@refinedev/core");
+var import_react_slot4 = require("@radix-ui/react-slot");
+var import_jsx_runtime12 = require("react/jsx-runtime");
+var Link = (0, import_react.forwardRef)(
+  ({ children, href, title, className, asChild }, ref) => {
+    const { Link: LegacyLink } = (0, import_core.useRouterContext)();
+    const routerType = (0, import_core.useRouterType)();
+    const Link2 = (0, import_core.useLink)();
+    const ActiveLink = routerType === "legacy" ? LegacyLink : Link2;
+    const Comp = asChild ? import_react_slot4.Slot : ActiveLink;
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Comp, { ref, to: href, className, title, children });
+  }
+);
+Link.displayName = "Link";
+
+// azirdesign/components/nav-refine.tsx
+var import_jsx_runtime13 = require("react/jsx-runtime");
 function NavRefine() {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { children: "Navigation Refine" }) });
+  const { menuItems, selectedKey, defaultOpenKeys } = (0, import_core2.useMenu)();
+  const renderTreeView = (tree, selectedKey2) => {
+    return tree.map((item, key) => {
+      const { list, meta } = item;
+      const isSelected = item.key === selectedKey2;
+      return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+        Collapsible2,
+        {
+          asChild: true,
+          defaultOpen: isSelected,
+          className: "group/collapsible",
+          children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(CollapsibleTrigger2, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+            SidebarMenuButton,
+            {
+              asChild: true,
+              className: cn("flex items-center", isSelected && "bg-accent"),
+              children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
+                Link,
+                {
+                  href: list?.toString() ?? "#",
+                  title: meta?.label ?? item.name,
+                  children: [
+                    meta?.icon,
+                    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "ml-2", children: item.label })
+                  ]
+                },
+                key
+              )
+            }
+          ) }) }, item.key)
+        },
+        key
+      );
+    });
+  };
+  const groups = {};
+  menuItems.forEach((item) => {
+    const group = item.meta?.group || "otros";
+    if (!groups[group]) groups[group] = [];
+    groups[group].push(item);
+  });
+  const groupLabels = {
+    dashboard: "Dashboard",
+    principales: "Principales",
+    payments: "Pagos",
+    app: "Aplicaci\xF3n",
+    otros: "Otros",
+    users: "Usuarios"
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "mb-10", children: Object.entries(groups).map(([group, items]) => /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(SidebarGroup, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(SidebarGroupLabel, { children: groupLabels[group] || group }),
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(SidebarGroupContent, { children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(SidebarMenu, { children: renderTreeView(items, selectedKey) }) })
+  ] }, group)) });
 }
 
 // azirdesign/components/app-sidebar.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_jsx_runtime14 = require("react/jsx-runtime");
 function AppSidebar({ meta, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(Sidebar, { collapsible: "icon", ...props, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(SidebarHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(SidebarMenu, { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(Sidebar, { collapsible: "icon", ...props, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SidebarHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SidebarMenu, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
       SidebarMenuButton,
       {
         asChild: true,
         className: "data-[slot=sidebar-menu-button]:!p-1.5",
-        children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("a", { href: "/dashboard", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+        children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("a", { href: "/dashboard", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
             "img",
             {
               src: "/semillapp.png",
@@ -448,45 +1219,45 @@ function AppSidebar({ meta, ...props }) {
               className: "mr-2 !size-5"
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "text-base font-semibold", children: "Semillapp" })
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "text-base font-semibold", children: "Semillapp" })
         ] })
       }
     ) }) }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(SidebarContent, { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(NavRefine, {}) }),
-    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(SidebarRail, {})
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SidebarContent, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(NavRefine, {}) }),
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SidebarRail, {})
   ] });
 }
 
 // azirdesign/components/field.tsx
-var import_jsx_runtime10 = require("react/jsx-runtime");
+var import_jsx_runtime15 = require("react/jsx-runtime");
 var Field = ({ label, description, children }) => {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { children: [
-    label && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { children: label }),
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { children: [
+    label && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { children: label }),
     children,
-    description && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { children: description })
+    description && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { children: description })
   ] });
 };
 
 // azirdesign/components/form.tsx
-var import_jsx_runtime11 = require("react/jsx-runtime");
+var import_jsx_runtime16 = require("react/jsx-runtime");
 var Form = ({ children, ...props }) => {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("form", { ...props, children });
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("form", { ...props, children });
 };
 
 // azirdesign/components/image-preview-cell.tsx
-var import_react = require("react");
+var import_react2 = require("react");
 var import_image = __toESM(require("next/image"));
 var import_lucide_react3 = require("lucide-react");
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime17 = require("react/jsx-runtime");
 var ImagePreviewCell = ({
   src,
   alt = "Vista previa",
   thumbnailSize = 48
 }) => {
-  const [isOpen, setIsOpen] = (0, import_react.useState)(false);
-  const [hasError, setHasError] = (0, import_react.useState)(false);
-  const [imageLoaded, setImageLoaded] = (0, import_react.useState)(false);
-  (0, import_react.useEffect)(() => {
+  const [isOpen, setIsOpen] = (0, import_react2.useState)(false);
+  const [hasError, setHasError] = (0, import_react2.useState)(false);
+  const [imageLoaded, setImageLoaded] = (0, import_react2.useState)(false);
+  (0, import_react2.useEffect)(() => {
     if (!isOpen) return;
     const handleKeyDown = (e) => {
       if (e.key === "Escape") setIsOpen(false);
@@ -494,7 +1265,7 @@ var ImagePreviewCell = ({
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
-  (0, import_react.useEffect)(() => {
+  (0, import_react2.useEffect)(() => {
     const img = new window.Image();
     img.src = src;
     img.onload = () => {
@@ -506,8 +1277,8 @@ var ImagePreviewCell = ({
       setHasError(true);
     };
   }, [src]);
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "h-full w-full", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "h-full w-full", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
       "button",
       {
         type: "button",
@@ -515,7 +1286,7 @@ var ImagePreviewCell = ({
         className: "h-full w-full border-none bg-transparent p-0",
         style: { lineHeight: 0 },
         onClick: () => imageLoaded && setIsOpen(true),
-        children: hasError ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "flex h-12 w-12 items-center justify-center rounded border bg-gray-100 text-gray-400", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react3.Image, { size: 24 }) }) : /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        children: hasError ? /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "flex h-12 w-12 items-center justify-center rounded border bg-gray-100 text-gray-400", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_lucide_react3.Image, { size: 24 }) }) : /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
           import_image.default,
           {
             src,
@@ -527,7 +1298,7 @@ var ImagePreviewCell = ({
         )
       }
     ),
-    isOpen && imageLoaded && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    isOpen && imageLoaded && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
       "div",
       {
         role: "dialog",
@@ -535,7 +1306,7 @@ var ImagePreviewCell = ({
         tabIndex: -1,
         onClick: () => setIsOpen(false),
         className: "fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm",
-        children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
           import_image.default,
           {
             src,
@@ -551,66 +1322,489 @@ var ImagePreviewCell = ({
 };
 var image_preview_cell_default = ImagePreviewCell;
 
-// azirdesign/components/link.tsx
-var import_react2 = require("react");
-var import_jsx_runtime13 = require("react/jsx-runtime");
-var Link = (0, import_react2.forwardRef)(({ children, href, title, className }, ref) => /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("a", { ref, href, className, title, children }));
-Link.displayName = "Link";
-
 // azirdesign/components/nav-main.tsx
-var import_jsx_runtime14 = require("react/jsx-runtime");
+var import_lucide_react4 = require("lucide-react");
+var import_jsx_runtime18 = require("react/jsx-runtime");
 function NavMain({
   items
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { children: "Navigation Main" }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(SidebarGroup, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SidebarGroupLabel, { children: "Platform" }),
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SidebarMenu, { children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(
+      Collapsible2,
+      {
+        asChild: true,
+        defaultOpen: item.isActive,
+        className: "group/collapsible",
+        children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(SidebarMenuItem, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(CollapsibleTrigger2, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(SidebarMenuButton, { tooltip: item.title, children: [
+            item.icon && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(item.icon, {}),
+            /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { children: item.title }),
+            /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_lucide_react4.ChevronRight, { className: "ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(CollapsibleContent2, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SidebarMenuSub, { children: item.items?.map((subItem) => /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SidebarMenuSubItem, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SidebarMenuSubButton, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("a", { href: subItem.url, children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("span", { children: subItem.title }) }) }) }, subItem.title)) }) })
+        ] })
+      },
+      item.title
+    )) })
+  ] });
 }
 
 // azirdesign/components/nav-projects.tsx
-var import_jsx_runtime15 = require("react/jsx-runtime");
+var import_lucide_react6 = require("lucide-react");
+
+// azirdesign/components/ui/dropdown-menu.tsx
+var DropdownMenuPrimitive = __toESM(require("@radix-ui/react-dropdown-menu"));
+var import_lucide_react5 = require("lucide-react");
+var import_jsx_runtime19 = require("react/jsx-runtime");
+function DropdownMenu({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Root, { "data-slot": "dropdown-menu", ...props });
+}
+function DropdownMenuTrigger({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Trigger,
+    {
+      "data-slot": "dropdown-menu-trigger",
+      ...props
+    }
+  );
+}
+function DropdownMenuContent({
+  className,
+  sideOffset = 4,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(DropdownMenuPrimitive.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Content,
+    {
+      "data-slot": "dropdown-menu-content",
+      sideOffset,
+      className: cn(
+        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-(--radix-dropdown-menu-content-available-height) min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border p-1 shadow-md",
+        className
+      ),
+      ...props
+    }
+  ) });
+}
+function DropdownMenuItem({
+  className,
+  inset,
+  variant = "default",
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Item,
+    {
+      "data-slot": "dropdown-menu-item",
+      "data-inset": inset,
+      "data-variant": variant,
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/20 data-[variant=destructive]:focus:text-destructive data-[variant=destructive]:*:[svg]:!text-destructive [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function DropdownMenuLabel({
+  className,
+  inset,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Label,
+    {
+      "data-slot": "dropdown-menu-label",
+      "data-inset": inset,
+      className: cn(
+        "px-2 py-1.5 text-sm font-medium data-[inset]:pl-8",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function DropdownMenuSeparator({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    DropdownMenuPrimitive.Separator,
+    {
+      "data-slot": "dropdown-menu-separator",
+      className: cn("bg-border -mx-1 my-1 h-px", className),
+      ...props
+    }
+  );
+}
+function DropdownMenuShortcut({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(
+    "span",
+    {
+      "data-slot": "dropdown-menu-shortcut",
+      className: cn(
+        "text-muted-foreground ml-auto text-xs tracking-widest",
+        className
+      ),
+      ...props
+    }
+  );
+}
+
+// azirdesign/components/nav-projects.tsx
+var import_jsx_runtime20 = require("react/jsx-runtime");
 function NavProjects({
   projects
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { children: "Navigation Projects" }) });
+  const { isMobile } = useSidebar();
+  return /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(SidebarGroup, { className: "group-data-[collapsible=icon]:hidden", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(SidebarGroupLabel, { children: "Projects" }),
+    /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(SidebarMenu, { children: [
+      projects.map((item) => /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(SidebarMenuItem, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(SidebarMenuButton, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("a", { href: item.url, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(item.icon, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { children: item.name })
+        ] }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(DropdownMenu, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(SidebarMenuAction, { showOnHover: true, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(import_lucide_react6.MoreHorizontal, {}),
+            /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { className: "sr-only", children: "More" })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
+            DropdownMenuContent,
+            {
+              className: "w-48 rounded-lg",
+              side: isMobile ? "bottom" : "right",
+              align: isMobile ? "end" : "start",
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(DropdownMenuItem, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(import_lucide_react6.Folder, { className: "text-muted-foreground" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { children: "View Project" })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(DropdownMenuItem, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(import_lucide_react6.Forward, { className: "text-muted-foreground" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { children: "Share Project" })
+                ] }),
+                /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(DropdownMenuSeparator, {}),
+                /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(DropdownMenuItem, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(import_lucide_react6.Trash2, { className: "text-muted-foreground" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { children: "Delete Project" })
+                ] })
+              ]
+            }
+          )
+        ] })
+      ] }, item.name)),
+      /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(SidebarMenuButton, { className: "text-sidebar-foreground/70", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(import_lucide_react6.MoreHorizontal, { className: "text-sidebar-foreground/70" }),
+        /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("span", { children: "More" })
+      ] }) })
+    ] })
+  ] });
+}
+
+// azirdesign/components/ui/avatar.tsx
+var AvatarPrimitive = __toESM(require("@radix-ui/react-avatar"));
+var import_jsx_runtime21 = require("react/jsx-runtime");
+function Avatar({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    AvatarPrimitive.Root,
+    {
+      "data-slot": "avatar",
+      className: cn(
+        "relative flex size-8 shrink-0 overflow-hidden rounded-full",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function AvatarImage({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    AvatarPrimitive.Image,
+    {
+      "data-slot": "avatar-image",
+      className: cn("aspect-square size-full", className),
+      ...props
+    }
+  );
+}
+function AvatarFallback({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)(
+    AvatarPrimitive.Fallback,
+    {
+      "data-slot": "avatar-fallback",
+      className: cn(
+        "bg-muted flex size-full items-center justify-center rounded-full",
+        className
+      ),
+      ...props
+    }
+  );
 }
 
 // azirdesign/components/nav-user.tsx
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_lucide_react8 = require("lucide-react");
+
+// azirdesign/components/ui/theme-toggle-item.tsx
+var import_react_dropdown_menu = require("@radix-ui/react-dropdown-menu");
+var import_lucide_react7 = require("lucide-react");
+
+// src/lib/use-theme.ts
+var import_react3 = require("react");
+function useTheme() {
+  const [theme, setTheme] = (0, import_react3.useState)("light");
+  (0, import_react3.useEffect)(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      applyTheme(savedTheme);
+    } else {
+      const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const defaultTheme = systemPrefersDark ? "dark" : "light";
+      setTheme(defaultTheme);
+      applyTheme(defaultTheme);
+    }
+  }, []);
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    applyTheme(newTheme);
+  };
+  const setThemeMode = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    applyTheme(newTheme);
+  };
+  return {
+    theme,
+    toggleTheme,
+    setTheme: setThemeMode
+  };
+}
+function applyTheme(theme) {
+  const root = document.documentElement;
+  if (theme === "dark") {
+    root.classList.add("dark");
+  } else {
+    root.classList.remove("dark");
+  }
+}
+
+// azirdesign/components/ui/theme-toggle-item.tsx
+var import_jsx_runtime22 = require("react/jsx-runtime");
+function ThemeToggleItem() {
+  const { theme, toggleTheme } = useTheme();
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_react_dropdown_menu.DropdownMenuItem, { onClick: toggleTheme, children: theme === "light" ? /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(import_jsx_runtime22.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_lucide_react7.Moon, { className: "h-4 w-4" }),
+    "Modo oscuro"
+  ] }) : /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)(import_jsx_runtime22.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(import_lucide_react7.Sun, { className: "h-4 w-4" }),
+    "Modo claro"
+  ] }) });
+}
+
+// azirdesign/components/nav-user.tsx
+var import_nextjs = require("@clerk/nextjs");
+var import_navigation = require("next/navigation");
+var import_jsx_runtime23 = require("react/jsx-runtime");
 function NavUser({ className }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { children: "User Menu" }) });
+  const { isMobile } = useSidebar();
+  const { signOut } = (0, import_nextjs.useAuth)();
+  const { push } = (0, import_navigation.useRouter)();
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      push("/login");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: cn(className, ""), children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(DropdownMenu, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+      SidebarMenuButton,
+      {
+        size: "lg",
+        className: "data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground",
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(Avatar, { className: "h-8 w-8 rounded-lg", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarImage, { src: "/avatars/shadcn.jpg", alt: "Administrador" }),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarFallback, { className: "rounded-lg", children: "CN" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate font-medium", children: "Administrador" }),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate text-xs", children: "administrador@gmail.com" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_lucide_react8.ChevronsUpDown, { className: "ml-auto size-4" })
+        ]
+      }
+    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+      DropdownMenuContent,
+      {
+        className: "w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg",
+        side: isMobile ? "bottom" : "right",
+        align: "end",
+        sideOffset: 4,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuLabel, { className: "p-0 font-normal", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "flex items-center gap-2 px-1 py-1.5 text-left text-sm", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(Avatar, { className: "h-8 w-8 rounded-lg", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+                AvatarImage,
+                {
+                  src: "/avatars/shadcn.jpg",
+                  alt: "Administrador"
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarFallback, { className: "rounded-lg", children: "CN" })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate font-medium", children: "Administrador" }),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate text-xs", children: "administrador@gmail.com" })
+            ] })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuSeparator, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(ThemeToggleItem, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuSeparator, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(DropdownMenuItem, { onClick: handleSignOut, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_lucide_react8.LogOut, {}),
+            "Cerrar sesi\xF3n"
+          ] })
+        ]
+      }
+    )
+  ] }) });
 }
 
 // azirdesign/components/page-header.tsx
-var import_jsx_runtime17 = require("react/jsx-runtime");
+var import_lucide_react9 = require("lucide-react");
+
+// azirdesign/components/hooks/use-on-back.tsx
+var useOnBack = () => {
+  return () => window.history.back();
+};
+
+// azirdesign/components/page-header.tsx
+var import_jsx_runtime24 = require("react/jsx-runtime");
 var PageHeader = ({
+  extra,
+  children,
+  className,
   title,
   subTitle,
   isBack = false,
-  extra,
-  children
+  ...props
 }) => {
-  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { children: [
-    isBack && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("button", { children: "<-" }),
-    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("h2", { children: title }),
-    subTitle && /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { children: subTitle }),
-    extra,
-    children
-  ] });
+  const back = useOnBack();
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(import_jsx_runtime24.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(
+      "div",
+      {
+        className: cn(
+          "flex h-20 items-end lg:justify-between",
+          !props.breadcrumb && "h-auto"
+        ),
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "min-w-0 flex-1", children: [
+            props.breadcrumb,
+            /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
+              isBack && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(import_lucide_react9.ArrowLeft, {}) }),
+              /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)("div", { className: "inline-flex flex-col", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                subTitle && /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "flex lg:mt-0 lg:ml-4", children: extra })
+        ]
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "mt-4", children })
+  ] }) });
 };
 
 // azirdesign/components/team-switcher.tsx
-var React4 = __toESM(require("react"));
-var import_jsx_runtime18 = require("react/jsx-runtime");
+var React12 = __toESM(require("react"));
+var import_lucide_react10 = require("lucide-react");
+var import_jsx_runtime25 = require("react/jsx-runtime");
 function TeamSwitcher({
   teams
 }) {
-  const [activeTeam, setActiveTeam] = React4.useState(teams[0]);
+  const { isMobile } = useSidebar();
+  const [activeTeam, setActiveTeam] = React12.useState(teams[0]);
   if (!activeTeam) {
     return null;
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("div", { children: [
-    "Active Team: ",
-    activeTeam.name
-  ] }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(SidebarMenu, { children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(DropdownMenu, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(
+      SidebarMenuButton,
+      {
+        size: "lg",
+        className: "data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground",
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(activeTeam.logo, { className: "size-4" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("span", { className: "truncate font-medium", children: activeTeam.name }),
+            /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("span", { className: "truncate text-xs", children: activeTeam.plan })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(import_lucide_react10.ChevronsUpDown, { className: "ml-auto" })
+        ]
+      }
+    ) }),
+    /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(
+      DropdownMenuContent,
+      {
+        className: "w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg",
+        align: "start",
+        side: isMobile ? "bottom" : "right",
+        sideOffset: 4,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(DropdownMenuLabel, { className: "text-muted-foreground text-xs", children: "Teams" }),
+          teams.map((team, index) => /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(
+            DropdownMenuItem,
+            {
+              onClick: () => setActiveTeam(team),
+              className: "gap-2 p-2",
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "flex size-6 items-center justify-center rounded-md border", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(team.logo, { className: "size-3.5 shrink-0" }) }),
+                team.name,
+                /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(DropdownMenuShortcut, { children: [
+                  "\u2318",
+                  index + 1
+                ] })
+              ]
+            },
+            team.name
+          )),
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(DropdownMenuSeparator, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime25.jsxs)(DropdownMenuItem, { className: "gap-2 p-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "flex size-6 items-center justify-center rounded-md border bg-transparent", children: /* @__PURE__ */ (0, import_jsx_runtime25.jsx)(import_lucide_react10.Plus, { className: "size-4" }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime25.jsx)("div", { className: "text-muted-foreground font-medium", children: "Add team" })
+          ] })
+        ]
+      }
+    )
+  ] }) }) });
 }
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {

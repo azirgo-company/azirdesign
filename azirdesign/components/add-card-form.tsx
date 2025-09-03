@@ -1,6 +1,4 @@
 import React from "react"
-
-// Minimal SDK typing to avoid `any` while still matching the runtime shape
 interface PaymentGatewaySDK {
   generate_tokenize: (
     data: Record<string, unknown>,
