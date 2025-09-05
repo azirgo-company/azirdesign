@@ -1,13 +1,7 @@
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "./components/ui/sidebar"
-
-import { AppSidebar } from "@/src/azirdesign/components/app-sidebar"
-import { NavUser } from "@/src/azirdesign/components/nav-user"
-import { Separator } from "./components/ui/separator"
-import { ThemeToggle } from "./components/theme-toggle"
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar"
+import { ThemeToggle } from "../theme-toggle"
+import { NavUser } from "../nav-user"
+import { AppSidebar } from "../app-sidebar"
 
 export const AzirLayout = ({ children }: { children: React.ReactNode }) => {
   return (
