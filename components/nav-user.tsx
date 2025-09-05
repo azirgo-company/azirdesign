@@ -14,7 +14,7 @@ import { SidebarMenuButton, useSidebar } from "./ui/sidebar"
 import { ThemeToggleItem } from "./ui/theme-toggle-item"
 import { useAuth } from "@clerk/nextjs"
 import { useRouter } from "next/navigation"
-import { cn } from "../../src/lib/utils"
+import { cn } from "../src/lib/utils"
 
 interface NavUserProps {
   className?: string
