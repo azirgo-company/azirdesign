@@ -1,23 +1,21 @@
 {
   "name": "@azirgopro/azirdesign",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+    "dist"
   ],
   "scripts": {
-    "build": "tsup azirdesign/index.ts --out-dir dist --format cjs,esm --dts --clean"
+    "build": "tsup azirdesign/index.ts --dts --format cjs,esm"
   },
   "peerDependencies": {
     "@radix-ui/react-accordion": ">=1.1.0",
