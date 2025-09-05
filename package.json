@@ -1,18 +1,18 @@
 {
   "name": "@azirgopro/azirdesign",
   "version": "1.0.0",
-  "main": "azirdesign/dist/index.js",
-  "module": "azirdesign/dist/index.esm.js",
-  "types": "azirdesign/dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./azirdesign/dist/index.esm.js",
-      "require": "./azirdesign/dist/index.js",
-      "types": "./azirdesign/dist/index.d.ts"
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "files": [
-    "azirdesign/dist"
+    "dist"
   ],
   "scripts": {
     "build": "tsup azirdesign/index.ts --dts --format cjs,esm"
