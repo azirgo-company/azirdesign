@@ -11,21 +11,21 @@ import {
   useTranslate,
   useUserFriendlyName,
 } from "@refinedev/core"
-import {
-  DeleteButtonProps,
-  ListButtonProps,
-  RefreshButtonProps,
-} from "@/src/azirdesign/components/buttons/types"
+
 import { FC, isValidElement } from "react"
 
 import { Breadcrumbs } from "../../breadcrumb"
 import { DeleteButton } from "../../buttons/delete"
 import { EditProps } from "../types"
-import { ListButton } from "@/src/azirdesign/components/buttons/list"
 import { PageHeader } from "../../page-header"
-import { RefreshButton } from "@/src/azirdesign/components/buttons/refresh"
-import { ShowButton } from "../../buttons/show"
-import { Skeleton } from "./components/ui/skeleton"
+import {
+  ListButtonProps,
+  RefreshButtonProps,
+  DeleteButtonProps,
+} from "../../buttons/types"
+import { RefreshButton } from "../../buttons/refresh"
+import { ListButton } from "../../buttons/list"
+import { Skeleton } from "../../ui/skeleton"
 
 export const EditPage = ({
   title,

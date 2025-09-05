@@ -1,11 +1,5 @@
 "use client"
 
-import {
-  DeleteButtonProps,
-  EditButtonProps,
-  ListButtonProps,
-  RefreshButtonProps,
-} from "@/src/azirdesign/components/buttons/types"
 import React, { isValidElement } from "react"
 import {
   useBack,
@@ -20,13 +14,19 @@ import {
 } from "@refinedev/core"
 
 import { ArrowLeft } from "lucide-react"
-import { Breadcrumbs } from "@/src/azirdesign/components/breadcrumb"
-import { Button } from "./components/ui/button"
-import { EditButton } from "@/src/azirdesign/components/buttons/edit"
-import { ListButton } from "@/src/azirdesign/components/buttons/list"
-import { PageHeader } from "@/src/azirdesign/components/page-header"
-import { RefreshButton } from "@/src/azirdesign/components/buttons/refresh"
-import { ShowProps } from "@/src/azirdesign/components/crud/types"
+import { Breadcrumbs } from "../../breadcrumb"
+import { EditButton } from "../../buttons/edit"
+import { ListButton } from "../../buttons/list"
+import { RefreshButton } from "../../buttons/refresh"
+import { PageHeader } from "../../page-header"
+import { Button } from "../../ui/button"
+import { ShowProps } from "../types"
+import {
+  DeleteButtonProps,
+  EditButtonProps,
+  ListButtonProps,
+  RefreshButtonProps,
+} from "../../buttons/types"
 
 export const Show = (props: ShowProps) => {
   const {

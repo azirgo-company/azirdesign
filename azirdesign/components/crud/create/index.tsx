@@ -1,10 +1,15 @@
-import React, { ReactNode, isValidElement } from 'react'
-import { useRefineContext, useResource, useTranslate, useUserFriendlyName } from '@refinedev/core'
+import React, { isValidElement } from "react"
+import {
+  useRefineContext,
+  useResource,
+  useTranslate,
+  useUserFriendlyName,
+} from "@refinedev/core"
 
-import { Breadcrumbs } from '../../breadcrumb'
-import { CreateProps } from '../types'
-import { ListButton } from '../../buttons/list'
-import { PageHeader } from '../../page-header'
+import { Breadcrumbs } from "../../breadcrumb"
+import { CreateProps } from "../types"
+import { ListButton } from "../../buttons/list"
+import { PageHeader } from "../../page-header"
 
 export const CreatePage = ({
   title,
@@ -21,13 +26,15 @@ export const CreatePage = ({
   const { resource, identifier } = useResource(resourceFromProps)
 
   const breadcrumb =
-    typeof breadcrumbFromProps === 'undefined' ? globalBreadcrumb : breadcrumbFromProps
+    typeof breadcrumbFromProps === "undefined"
+      ? globalBreadcrumb
+      : breadcrumbFromProps
 
   const renderTitle = () => {
     if (title === false) return null
 
     if (title) {
-      if (typeof title === 'string' || typeof title === 'number') {
+      if (typeof title === "string" || typeof title === "number") {
         return <h3>{title}</h3>
       }
       return title
@@ -37,9 +44,12 @@ export const CreatePage = ({
         {translate(
           `${identifier}.titles.create`,
           `Create ${getUserFriendlyName(
-            resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
-            'singular',
-          )}`,
+            resource?.meta?.label ??
+              resource?.options?.label ??
+              resource?.label ??
+              identifier,
+            "singular"
+          )}`
         )}
       </h3>
     )
@@ -64,4 +74,4 @@ export const CreatePage = ({
   )
 }
 
-CreatePage.displayName = 'CreatePage'
+CreatePage.displayName = "CreatePage"

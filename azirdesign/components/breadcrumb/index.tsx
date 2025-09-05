@@ -1,12 +1,4 @@
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "./components/ui/breadcrumb"
-import {
   matchResourceFromRoute,
   useBreadcrumb,
   useRefineContext,
@@ -15,8 +7,16 @@ import {
 
 import { Fragment } from "react"
 import { HomeIcon } from "lucide-react"
-import { Link } from "@/src/azirdesign/components/link"
 import { RefineBreadcrumbProps } from "@refinedev/ui-types"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "../ui/breadcrumb"
+import { Link } from "../link"
 
 export type BreadcrumbProps = RefineBreadcrumbProps
 

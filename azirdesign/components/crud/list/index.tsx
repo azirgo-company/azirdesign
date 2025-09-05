@@ -4,14 +4,14 @@ import {
   useRouterType,
   useTranslate,
   useUserFriendlyName,
-} from '@refinedev/core'
+} from "@refinedev/core"
 
-import { Breadcrumbs } from '@/src/azirdesign/components/breadcrumb'
-import { CreateButton } from '@/src/azirdesign/components/buttons/create'
-import { CreateButtonProps } from '@/src/azirdesign/components/buttons/types'
-import { ListProps } from '@/src/azirdesign/components/crud/types'
-import { PageHeader } from '@/src/azirdesign/components/page-header'
-import { isValidElement } from 'react'
+import { isValidElement } from "react"
+import { Breadcrumbs } from "../../breadcrumb"
+import { CreateButton } from "../../buttons/create"
+import { CreateButtonProps } from "../../buttons/types"
+import { PageHeader } from "../../page-header"
+import { ListProps } from "../types"
 
 export const List = ({
   canCreate,
@@ -32,22 +32,27 @@ export const List = ({
   const { resource, identifier } = useResource(resourceFromProps)
 
   const isCreateButtonVisible =
-    canCreate ?? ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps)
+    canCreate ??
+    ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps)
 
   const breadcrumb =
-    typeof breadcrumbFromProps === 'undefined' ? globalBreadcrumb : breadcrumbFromProps
+    typeof breadcrumbFromProps === "undefined"
+      ? globalBreadcrumb
+      : breadcrumbFromProps
 
   const createButtonProps: CreateButtonProps | undefined = isCreateButtonVisible
     ? {
-        resource: routerType === 'legacy' ? resource?.route : identifier,
+        resource: routerType === "legacy" ? resource?.route : identifier,
         ...createButtonPropsFromProps,
       }
     : undefined
 
-  const defaultExtra = isCreateButtonVisible ? <CreateButton {...createButtonProps} /> : null
+  const defaultExtra = isCreateButtonVisible ? (
+    <CreateButton {...createButtonProps} />
+  ) : null
 
   const headerButtons = headerButtonsFromProps
-    ? typeof headerButtonsFromProps === 'function'
+    ? typeof headerButtonsFromProps === "function"
       ? headerButtonsFromProps({
           defaultButtons: defaultExtra,
           createButtonProps,
@@ -63,13 +68,20 @@ export const List = ({
           translate(
             `${identifier}.titles.list`,
             getUserFriendlyName(
-              resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
-              'plural',
-            ),
+              resource?.meta?.label ??
+                resource?.options?.label ??
+                resource?.label ??
+                identifier,
+              "plural"
+            )
           )
         }
-        extra={<div className={headerButtonProps?.className}>{headerButtons}</div>}
-        breadcrumb={isValidElement(breadcrumb) ? <>{breadcrumb}</> : <Breadcrumbs />}
+        extra={
+          <div className={headerButtonProps?.className}>{headerButtons}</div>
+        }
+        breadcrumb={
+          isValidElement(breadcrumb) ? <>{breadcrumb}</> : <Breadcrumbs />
+        }
       >
         {extra}
         <div>{children}</div>

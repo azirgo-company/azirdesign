@@ -1,18 +1,17 @@
 import {
+  RefineCrudCreateProps,
+  RefineCrudEditProps,
+  RefineCrudListProps,
+  RefineCrudShowProps,
+} from "@refinedev/ui-types"
+import { PageHeaderProps } from "../layout/header/types"
+import {
   CreateButtonProps,
   DeleteButtonProps,
   EditButtonProps,
   ListButtonProps,
   RefreshButtonProps,
-} from '@/src/azirdesign/components/buttons/types'
-import {
-  RefineCrudCreateProps,
-  RefineCrudEditProps,
-  RefineCrudListProps,
-  RefineCrudShowProps,
-} from '@refinedev/ui-types'
-
-import { PageHeaderProps } from '@/src/azirdesign/components/layout/header/types'
+} from "../buttons/types"
 
 export type CreateProps = RefineCrudCreateProps<
   React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
@@ -36,11 +35,14 @@ export type EditProps = RefineCrudEditProps<
 
 export type ListProps = Omit<
   RefineCrudListProps<
-    React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+    React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >,
     PageHeaderProps,
     CreateButtonProps
   >,
-  'createButtonProps' | 'headerButtons'
+  "createButtonProps" | "headerButtons"
 > &
   Partial<{
     createButtonProps: CreateButtonProps
