@@ -27,6 +27,16 @@ import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 function Sheet({ ...props }) {
   return /* @__PURE__ */ jsx2(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
 }
+function SheetTrigger({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx2(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
+}
+function SheetClose({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx2(SheetPrimitive.Close, { "data-slot": "sheet-close", ...props });
+}
 function SheetPortal({
   ...props
 }) {
@@ -90,6 +100,16 @@ function SheetHeader({ className, ...props }) {
     }
   );
 }
+function SheetFooter({ className, ...props }) {
+  return /* @__PURE__ */ jsx2(
+    "div",
+    {
+      "data-slot": "sheet-footer",
+      className: cn("mt-auto flex flex-col gap-2 p-4", className),
+      ...props
+    }
+  );
+}
 function SheetTitle({
   className,
   ...props
@@ -119,6 +139,20 @@ function SheetDescription({
 
 // components/hooks/use-mobile.ts
 import * as React from "react";
+var MOBILE_BREAKPOINT = 768;
+function useIsMobile() {
+  const [isMobile, setIsMobile] = React.useState(void 0);
+  React.useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const onChange = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
+    mql.addEventListener("change", onChange);
+    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+  return !!isMobile;
+}
 
 // components/ui/sidebar.tsx
 import { Slot as Slot2 } from "@radix-ui/react-slot";
@@ -192,14 +226,64 @@ function Button({
 // components/ui/separator.tsx
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import { jsx as jsx5 } from "react/jsx-runtime";
+function Separator({
+  className,
+  orientation = "horizontal",
+  decorative = true,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx5(
+    SeparatorPrimitive.Root,
+    {
+      "data-slot": "separator",
+      decorative,
+      orientation,
+      className: cn(
+        "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
+        className
+      ),
+      ...props
+    }
+  );
+}
 
 // components/ui/input.tsx
 import { jsx as jsx6 } from "react/jsx-runtime";
+function Input({ className, type, float, onChange, ...props }) {
+  const handleChange = (event) => {
+    if (float && event.target.value) {
+      const numericValue = parseFloat(event.target.value);
+      if (!isNaN(numericValue)) {
+        event.target.value = numericValue.toString();
+      }
+    }
+    onChange?.(event);
+  };
+  return /* @__PURE__ */ jsx6(
+    "input",
+    {
+      type,
+      "data-slot": "input",
+      className: cn(
+        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        className
+      ),
+      onChange: handleChange,
+      ...props
+    }
+  );
+}
 
 // components/ui/sidebar.tsx
 import { jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
+var SIDEBAR_COOKIE_NAME = "sidebar_state";
 var SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+var SIDEBAR_WIDTH = "16rem";
 var SIDEBAR_WIDTH_MOBILE = "18rem";
+var SIDEBAR_WIDTH_ICON = "3rem";
+var SIDEBAR_KEYBOARD_SHORTCUT = "b";
 var SidebarContext = React2.createContext(null);
 function useSidebar() {
   const context = React2.useContext(SidebarContext);
@@ -207,6 +291,75 @@ function useSidebar() {
     throw new Error("useSidebar must be used within a SidebarProvider.");
   }
   return context;
+}
+function SidebarProvider({
+  defaultOpen = true,
+  open: openProp,
+  onOpenChange: setOpenProp,
+  className,
+  style,
+  children,
+  ...props
+}) {
+  const isMobile = useIsMobile();
+  const [openMobile, setOpenMobile] = React2.useState(false);
+  const [_open, _setOpen] = React2.useState(defaultOpen);
+  const open = openProp ?? _open;
+  const setOpen = React2.useCallback(
+    (value) => {
+      const openState = typeof value === "function" ? value(open) : value;
+      if (setOpenProp) {
+        setOpenProp(openState);
+      } else {
+        _setOpen(openState);
+      }
+      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+    },
+    [setOpenProp, open]
+  );
+  const toggleSidebar = React2.useCallback(() => {
+    return isMobile ? setOpenMobile((open2) => !open2) : setOpen((open2) => !open2);
+  }, [isMobile, setOpen, setOpenMobile]);
+  React2.useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        toggleSidebar();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [toggleSidebar]);
+  const state = open ? "expanded" : "collapsed";
+  const contextValue = React2.useMemo(
+    () => ({
+      state,
+      open,
+      setOpen,
+      isMobile,
+      openMobile,
+      setOpenMobile,
+      toggleSidebar
+    }),
+    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+  );
+  return /* @__PURE__ */ jsx7(SidebarContext.Provider, { value: contextValue, children: /* @__PURE__ */ jsx7(TooltipProvider, { delayDuration: 0, children: /* @__PURE__ */ jsx7(
+    "div",
+    {
+      "data-slot": "sidebar-wrapper",
+      style: {
+        "--sidebar-width": SIDEBAR_WIDTH,
+        "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
+        ...style
+      },
+      className: cn(
+        "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
+        className
+      ),
+      ...props,
+      children
+    }
+  ) }) });
 }
 function Sidebar({
   side = "left",
@@ -302,6 +455,32 @@ function Sidebar({
     }
   );
 }
+function SidebarTrigger({
+  className,
+  onClick,
+  ...props
+}) {
+  const { toggleSidebar } = useSidebar();
+  return /* @__PURE__ */ jsxs3(
+    Button,
+    {
+      "data-sidebar": "trigger",
+      "data-slot": "sidebar-trigger",
+      variant: "ghost",
+      size: "icon",
+      className: cn("size-7", className),
+      onClick: (event) => {
+        onClick?.(event);
+        toggleSidebar();
+      },
+      ...props,
+      children: [
+        /* @__PURE__ */ jsx7(PanelLeftIcon, {}),
+        /* @__PURE__ */ jsx7("span", { className: "sr-only", children: "Toggle Sidebar" })
+      ]
+    }
+  );
+}
 function SidebarRail({ className, ...props }) {
   const { toggleSidebar } = useSidebar();
   return /* @__PURE__ */ jsx7(
@@ -326,6 +505,34 @@ function SidebarRail({ className, ...props }) {
     }
   );
 }
+function SidebarInset({ className, ...props }) {
+  return /* @__PURE__ */ jsx7(
+    "main",
+    {
+      "data-slot": "sidebar-inset",
+      className: cn(
+        "bg-background relative flex w-full flex-1 flex-col",
+        "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarInput({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx7(
+    Input,
+    {
+      "data-slot": "sidebar-input",
+      "data-sidebar": "input",
+      className: cn("bg-background h-8 w-full shadow-none", className),
+      ...props
+    }
+  );
+}
 function SidebarHeader({ className, ...props }) {
   return /* @__PURE__ */ jsx7(
     "div",
@@ -333,6 +540,31 @@ function SidebarHeader({ className, ...props }) {
       "data-slot": "sidebar-header",
       "data-sidebar": "header",
       className: cn("flex flex-col gap-2 p-2", className),
+      ...props
+    }
+  );
+}
+function SidebarFooter({ className, ...props }) {
+  return /* @__PURE__ */ jsx7(
+    "div",
+    {
+      "data-slot": "sidebar-footer",
+      "data-sidebar": "footer",
+      className: cn("flex flex-col gap-2 p-2", className),
+      ...props
+    }
+  );
+}
+function SidebarSeparator({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx7(
+    Separator,
+    {
+      "data-slot": "sidebar-separator",
+      "data-sidebar": "separator",
+      className: cn("bg-sidebar-border mx-2 w-auto", className),
       ...props
     }
   );
@@ -376,6 +608,28 @@ function SidebarGroupLabel({
       className: cn(
         "text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
         "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarGroupAction({
+  className,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? Slot2 : "button";
+  return /* @__PURE__ */ jsx7(
+    Comp,
+    {
+      "data-slot": "sidebar-group-action",
+      "data-sidebar": "group-action",
+      className: cn(
+        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        // Increases the hit area of the button on mobile.
+        "after:absolute after:-inset-2 md:after:hidden",
+        "group-data-[collapsible=icon]:hidden",
         className
       ),
       ...props
@@ -508,6 +762,65 @@ function SidebarMenuAction({
     }
   );
 }
+function SidebarMenuBadge({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx7(
+    "div",
+    {
+      "data-slot": "sidebar-menu-badge",
+      "data-sidebar": "menu-badge",
+      className: cn(
+        "text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none",
+        "peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground",
+        "peer-data-[size=sm]/menu-button:top-1",
+        "peer-data-[size=default]/menu-button:top-1.5",
+        "peer-data-[size=lg]/menu-button:top-2.5",
+        "group-data-[collapsible=icon]:hidden",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarMenuSkeleton({
+  className,
+  showIcon = false,
+  ...props
+}) {
+  const width = React2.useMemo(() => {
+    return `${Math.floor(Math.random() * 40) + 50}%`;
+  }, []);
+  return /* @__PURE__ */ jsxs3(
+    "div",
+    {
+      "data-slot": "sidebar-menu-skeleton",
+      "data-sidebar": "menu-skeleton",
+      className: cn("flex h-8 items-center gap-2 rounded-md px-2", className),
+      ...props,
+      children: [
+        showIcon && /* @__PURE__ */ jsx7(
+          Skeleton,
+          {
+            className: "size-4 rounded-md",
+            "data-sidebar": "menu-skeleton-icon"
+          }
+        ),
+        /* @__PURE__ */ jsx7(
+          Skeleton,
+          {
+            className: "h-4 max-w-(--skeleton-width) flex-1",
+            "data-sidebar": "menu-skeleton-text",
+            style: {
+              "--skeleton-width": width
+            }
+          }
+        )
+      ]
+    }
+  );
+}
 function SidebarMenuSub({ className, ...props }) {
   return /* @__PURE__ */ jsx7(
     "ul",
@@ -587,17 +900,17 @@ import * as React3 from "react";
 import { jsx as jsx8 } from "react/jsx-runtime";
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
-  function createContext3(rootComponentName, defaultContext) {
+  function createContext32(rootComponentName, defaultContext) {
     const BaseContext = React3.createContext(defaultContext);
     const index = defaultContexts.length;
     defaultContexts = [...defaultContexts, defaultContext];
-    const Provider = (props) => {
+    const Provider2 = (props) => {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
       const value = React3.useMemo(() => context, Object.values(context));
       return /* @__PURE__ */ jsx8(Context.Provider, { value, children });
     };
-    Provider.displayName = rootComponentName + "Provider";
+    Provider2.displayName = rootComponentName + "Provider";
     function useContext22(consumerName, scope) {
       const Context = scope?.[scopeName]?.[index] || BaseContext;
       const context = React3.useContext(Context);
@@ -605,7 +918,7 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
       if (defaultContext !== void 0) return defaultContext;
       throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
     }
-    return [Provider, useContext22];
+    return [Provider2, useContext22];
   }
   const createScope = () => {
     const scopeContexts = defaultContexts.map((defaultContext) => {
@@ -620,7 +933,7 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
     };
   };
   createScope.scopeName = scopeName;
-  return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+  return [createContext32, composeContextScopes(createScope, ...createContextScopeDeps)];
 }
 function composeContextScopes(...scopes) {
   const baseScope = scopes[0];
@@ -781,10 +1094,10 @@ var NODES = [
   "ul"
 ];
 var Primitive = NODES.reduce((primitive, node) => {
-  const Slot6 = createSlot(`Primitive.${node}`);
+  const Slot7 = createSlot(`Primitive.${node}`);
   const Node = React7.forwardRef((props, forwardedRef) => {
     const { asChild, ...primitiveProps } = props;
-    const Comp = asChild ? Slot6 : node;
+    const Comp = asChild ? Slot7 : node;
     if (typeof window !== "undefined") {
       window[Symbol.for("radix-ui")] = true;
     }
@@ -1336,6 +1649,11 @@ function DropdownMenu({
 }) {
   return /* @__PURE__ */ jsx19(DropdownMenuPrimitive.Root, { "data-slot": "dropdown-menu", ...props });
 }
+function DropdownMenuPortal({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx19(DropdownMenuPrimitive.Portal, { "data-slot": "dropdown-menu-portal", ...props });
+}
 function DropdownMenuTrigger({
   ...props
 }) {
@@ -1365,6 +1683,11 @@ function DropdownMenuContent({
     }
   ) });
 }
+function DropdownMenuGroup({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx19(DropdownMenuPrimitive.Group, { "data-slot": "dropdown-menu-group", ...props });
+}
 function DropdownMenuItem({
   className,
   inset,
@@ -1382,6 +1705,61 @@ function DropdownMenuItem({
         className
       ),
       ...props
+    }
+  );
+}
+function DropdownMenuCheckboxItem({
+  className,
+  children,
+  checked,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs9(
+    DropdownMenuPrimitive.CheckboxItem,
+    {
+      "data-slot": "dropdown-menu-checkbox-item",
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      checked,
+      ...props,
+      children: [
+        /* @__PURE__ */ jsx19("span", { className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ jsx19(DropdownMenuPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx19(CheckIcon, { className: "size-4" }) }) }),
+        children
+      ]
+    }
+  );
+}
+function DropdownMenuRadioGroup({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx19(
+    DropdownMenuPrimitive.RadioGroup,
+    {
+      "data-slot": "dropdown-menu-radio-group",
+      ...props
+    }
+  );
+}
+function DropdownMenuRadioItem({
+  className,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs9(
+    DropdownMenuPrimitive.RadioItem,
+    {
+      "data-slot": "dropdown-menu-radio-item",
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground relative flex cursor-default items-center gap-2 rounded-sm py-1.5 pr-2 pl-8 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props,
+      children: [
+        /* @__PURE__ */ jsx19("span", { className: "pointer-events-none absolute left-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ jsx19(DropdownMenuPrimitive.ItemIndicator, { children: /* @__PURE__ */ jsx19(CircleIcon, { className: "size-2 fill-current" }) }) }),
+        children
+      ]
     }
   );
 }
@@ -1426,6 +1804,50 @@ function DropdownMenuShortcut({
       "data-slot": "dropdown-menu-shortcut",
       className: cn(
         "text-muted-foreground ml-auto text-xs tracking-widest",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function DropdownMenuSub({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx19(DropdownMenuPrimitive.Sub, { "data-slot": "dropdown-menu-sub", ...props });
+}
+function DropdownMenuSubTrigger({
+  className,
+  inset,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs9(
+    DropdownMenuPrimitive.SubTrigger,
+    {
+      "data-slot": "dropdown-menu-sub-trigger",
+      "data-inset": inset,
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground flex cursor-default items-center rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[inset]:pl-8",
+        className
+      ),
+      ...props,
+      children: [
+        children,
+        /* @__PURE__ */ jsx19(ChevronRightIcon, { className: "ml-auto size-4" })
+      ]
+    }
+  );
+}
+function DropdownMenuSubContent({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx19(
+    DropdownMenuPrimitive.SubContent,
+    {
+      "data-slot": "dropdown-menu-sub-content",
+      className: cn(
+        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] origin-(--radix-dropdown-menu-content-transform-origin) overflow-hidden rounded-md border p-1 shadow-lg",
         className
       ),
       ...props
@@ -1838,18 +2260,68 @@ import { useDeleteButton } from "@refinedev/core";
 import * as React13 from "react";
 import { CheckIcon as CheckIcon2, LucideClockFading, XIcon as XIcon2 } from "lucide-react";
 import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
-  AlertDialogAction
+  AlertDialog as AlertDialog2,
+  AlertDialogTrigger as AlertDialogTrigger2,
+  AlertDialogContent as AlertDialogContent2,
+  AlertDialogTitle as AlertDialogTitle2,
+  AlertDialogDescription as AlertDialogDescription2,
+  AlertDialogCancel as AlertDialogCancel2,
+  AlertDialogAction as AlertDialogAction2
 } from "@radix-ui/react-alert-dialog";
 
 // components/ui/alert-dialog.tsx
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { jsx as jsx27, jsxs as jsxs16 } from "react/jsx-runtime";
+function AlertDialog({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(AlertDialogPrimitive.Root, { "data-slot": "alert-dialog", ...props });
+}
+function AlertDialogTrigger({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(AlertDialogPrimitive.Trigger, { "data-slot": "alert-dialog-trigger", ...props });
+}
+function AlertDialogPortal({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(AlertDialogPrimitive.Portal, { "data-slot": "alert-dialog-portal", ...props });
+}
+function AlertDialogOverlay({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(
+    AlertDialogPrimitive.Overlay,
+    {
+      "data-slot": "alert-dialog-overlay",
+      className: cn(
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function AlertDialogContent({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs16(AlertDialogPortal, { children: [
+    /* @__PURE__ */ jsx27(AlertDialogOverlay, {}),
+    /* @__PURE__ */ jsx27(
+      AlertDialogPrimitive.Content,
+      {
+        "data-slot": "alert-dialog-content",
+        className: cn(
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
+          className
+        ),
+        ...props
+      }
+    )
+  ] });
+}
 function AlertDialogHeader({
   className,
   ...props
@@ -1875,6 +2347,56 @@ function AlertDialogFooter({
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         className
       ),
+      ...props
+    }
+  );
+}
+function AlertDialogTitle({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(
+    AlertDialogPrimitive.Title,
+    {
+      "data-slot": "alert-dialog-title",
+      className: cn("text-lg font-semibold", className),
+      ...props
+    }
+  );
+}
+function AlertDialogDescription({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(
+    AlertDialogPrimitive.Description,
+    {
+      "data-slot": "alert-dialog-description",
+      className: cn("text-muted-foreground text-sm", className),
+      ...props
+    }
+  );
+}
+function AlertDialogAction({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(
+    AlertDialogPrimitive.Action,
+    {
+      className: cn(buttonVariants(), className),
+      ...props
+    }
+  );
+}
+function AlertDialogCancel({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(
+    AlertDialogPrimitive.Cancel,
+    {
+      className: cn(buttonVariants({ variant: "outline" }), className),
       ...props
     }
   );
@@ -1913,21 +2435,21 @@ var ConfirmDialog = ({
     return /* @__PURE__ */ jsx28(CheckIcon2, { className: "mr-2 h-4 w-4" });
   }, [okIcon, loading]);
   return /* @__PURE__ */ jsxs17(
-    AlertDialog,
+    AlertDialog2,
     {
       open,
       onOpenChange,
       defaultOpen,
       ...alertDialogProps,
       children: [
-        /* @__PURE__ */ jsx28(AlertDialogTrigger, { asChild: true, children }),
-        /* @__PURE__ */ jsxs17(AlertDialogContent, { children: [
+        /* @__PURE__ */ jsx28(AlertDialogTrigger2, { asChild: true, children }),
+        /* @__PURE__ */ jsxs17(AlertDialogContent2, { children: [
           /* @__PURE__ */ jsxs17(AlertDialogHeader, { children: [
-            /* @__PURE__ */ jsx28(AlertDialogTitle, { children: title }),
-            /* @__PURE__ */ jsx28(AlertDialogDescription, { children: description })
+            /* @__PURE__ */ jsx28(AlertDialogTitle2, { children: title }),
+            /* @__PURE__ */ jsx28(AlertDialogDescription2, { children: description })
           ] }),
           /* @__PURE__ */ jsxs17(AlertDialogFooter, { children: [
-            /* @__PURE__ */ jsx28(AlertDialogCancel, { asChild: true, children: /* @__PURE__ */ jsxs17(
+            /* @__PURE__ */ jsx28(AlertDialogCancel2, { asChild: true, children: /* @__PURE__ */ jsxs17(
               "button",
               {
                 type: "button",
@@ -1940,7 +2462,7 @@ var ConfirmDialog = ({
                 ]
               }
             ) }),
-            /* @__PURE__ */ jsx28(AlertDialogAction, { asChild: true, children: /* @__PURE__ */ jsxs17(
+            /* @__PURE__ */ jsx28(AlertDialogAction2, { asChild: true, children: /* @__PURE__ */ jsxs17(
               "button",
               {
                 type: "button",
@@ -2337,6 +2859,25 @@ function BreadcrumbSeparator({
       className: cn("[&>svg]:size-3.5", className),
       ...props,
       children: children ?? /* @__PURE__ */ jsx35(ChevronRight2, {})
+    }
+  );
+}
+function BreadcrumbEllipsis({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsxs19(
+    "span",
+    {
+      "data-slot": "breadcrumb-ellipsis",
+      role: "presentation",
+      "aria-hidden": "true",
+      className: cn("flex size-9 items-center justify-center", className),
+      ...props,
+      children: [
+        /* @__PURE__ */ jsx35(MoreHorizontal2, { className: "size-4" }),
+        /* @__PURE__ */ jsx35("span", { className: "sr-only", children: "More" })
+      ]
     }
   );
 }
@@ -2741,17 +3282,167 @@ var Show = (props) => {
     }
   );
 };
+
+// components/ui/card.tsx
+import { jsx as jsx41 } from "react/jsx-runtime";
+function Card({ className, ...props }) {
+  return /* @__PURE__ */ jsx41(
+    "div",
+    {
+      "data-slot": "card",
+      className: cn(
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        className
+      ),
+      ...props
+    }
+  );
+}
+
+// components/ui/form.tsx
+import * as React16 from "react";
+import { Slot as Slot6 } from "@radix-ui/react-slot";
+import {
+  Controller,
+  FormProvider,
+  useFormContext,
+  useFormState
+} from "react-hook-form";
+
+// components/ui/label.tsx
+import * as LabelPrimitive from "@radix-ui/react-label";
+import { jsx as jsx42 } from "react/jsx-runtime";
+function Label2({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx42(
+    LabelPrimitive.Root,
+    {
+      "data-slot": "label",
+      className: cn(
+        "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        className
+      ),
+      ...props
+    }
+  );
+}
+
+// components/ui/form.tsx
+import { jsx as jsx43 } from "react/jsx-runtime";
+var Form2 = FormProvider;
+var FormFieldContext = React16.createContext(
+  {}
+);
+var FormItemContext = React16.createContext(
+  {}
+);
+
+// components/ui/select.tsx
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { CheckIcon as CheckIcon3, ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { jsx as jsx44, jsxs as jsxs25 } from "react/jsx-runtime";
+function Select({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx44(SelectPrimitive.Root, { "data-slot": "select", ...props });
+}
+
+// components/ui/table.tsx
+import { jsx as jsx45 } from "react/jsx-runtime";
+function Table({ className, ...props }) {
+  return /* @__PURE__ */ jsx45(
+    "div",
+    {
+      "data-slot": "table-container",
+      className: "relative w-full overflow-x-auto",
+      children: /* @__PURE__ */ jsx45(
+        "table",
+        {
+          "data-slot": "table",
+          className: cn("w-full caption-bottom text-sm", className),
+          ...props
+        }
+      )
+    }
+  );
+}
+
+// components/ui/tooltip.tsx
+import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+import { jsx as jsx46, jsxs as jsxs26 } from "react/jsx-runtime";
+function TooltipProvider2({
+  delayDuration = 0,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx46(
+    TooltipPrimitive.Provider,
+    {
+      "data-slot": "tooltip-provider",
+      delayDuration,
+      ...props
+    }
+  );
+}
+function Tooltip2({
+  ...props
+}) {
+  return /* @__PURE__ */ jsx46(TooltipProvider2, { children: /* @__PURE__ */ jsx46(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
+}
 export {
   add_card_form_default as AddCardForm,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
+  AlertDialogTitle,
+  AlertDialogTrigger,
   AppSidebar,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  Button,
+  Card,
+  Collapsible2 as Collapsible,
+  ConfirmDialog,
   CreateButton,
   CreatePage,
   DeleteButton,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
   EditButton,
   EditPage,
   Field,
   Form,
   image_preview_cell_default as ImagePreviewCell,
+  Input,
+  Label2 as Label,
   Link,
   List,
   ListButton,
@@ -2762,7 +3453,51 @@ export {
   PageHeader,
   RefreshButton,
   SaveButton,
+  Select,
+  Separator,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
   Show,
   ShowButton,
-  TeamSwitcher
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupAction,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInput,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSkeleton,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarProvider,
+  SidebarRail,
+  SidebarSeparator,
+  SidebarTrigger,
+  Skeleton,
+  Table,
+  TeamSwitcher,
+  ThemeToggleItem,
+  Tooltip2 as Tooltip,
+  Form2 as UIForm,
+  buttonVariants,
+  cn,
+  useIsMobile,
+  useOnBack,
+  useSidebar,
+  useTheme
 };

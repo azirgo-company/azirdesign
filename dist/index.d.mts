@@ -1,13 +1,24 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
+import * as class_variance_authority_dist_types from 'class-variance-authority/dist/types';
 import * as React$1 from 'react';
 import React__default, { ReactElement, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes, AnchorHTMLAttributes, ReactNode, FC } from 'react';
+import { VariantProps } from 'class-variance-authority';
+import * as TooltipPrimitive from '@radix-ui/react-tooltip';
+import { TooltipContent } from '@radix-ui/react-tooltip';
+import * as SeparatorPrimitive from '@radix-ui/react-separator';
 import { RefineThemedLayoutV2SiderProps, RefineCreateButtonProps, RefineDeleteButtonProps, RefineEditButtonProps, RefineListButtonProps, RefineRefreshButtonProps, RefineSaveButtonProps, RefineButtonResourceProps, RefineButtonSingleProps, RefineShowButtonProps, RefineCrudCreateProps, RefineCrudEditProps, RefineCrudListProps, RefineCrudShowProps } from '@refinedev/ui-types';
+import * as react_hook_form from 'react-hook-form';
 import { FieldValues, FieldPath, UseControllerProps, ControllerRenderProps } from 'react-hook-form';
 import { LucideIcon } from 'lucide-react';
 import { CanAccess } from '@refinedev/core';
-import * as class_variance_authority_dist_types from 'class-variance-authority/dist/types';
-import { VariantProps } from 'class-variance-authority';
-import { AlertDialogProps } from '@radix-ui/react-alert-dialog';
+import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
+import { AlertDialogProps, AlertDialog as AlertDialog$1 } from '@radix-ui/react-alert-dialog';
+import * as AvatarPrimitive from '@radix-ui/react-avatar';
+import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import * as LabelPrimitive from '@radix-ui/react-label';
+import * as SelectPrimitive from '@radix-ui/react-select';
+import * as SheetPrimitive from '@radix-ui/react-dialog';
 
 interface AddCardFormProps {
     user: {
@@ -17,20 +28,88 @@ interface AddCardFormProps {
 }
 declare function AddCardForm({ user }: AddCardFormProps): react_jsx_runtime.JSX.Element;
 
-declare const buttonVariants: (props?: {
-    variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost";
-    size?: "default" | "sm" | "lg" | "icon";
-} & class_variance_authority_dist_types.ClassProp) => string;
+declare const buttonVariants: (props?: ({
+    variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
+    size?: "default" | "sm" | "lg" | "icon" | null | undefined;
+} & class_variance_authority_dist_types.ClassProp) | undefined) => string;
 interface ButtonProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
     asChild?: boolean;
     loading?: boolean;
     icon?: React$1.ReactElement<SVGSVGElement>;
 }
+declare function Button({ className, variant, size, asChild, ...props }: React$1.ComponentProps<"button"> & ButtonProps & VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+}): react_jsx_runtime.JSX.Element;
 
+declare function Separator({ className, orientation, decorative, ...props }: React$1.ComponentProps<typeof SeparatorPrimitive.Root>): react_jsx_runtime.JSX.Element;
+
+interface InputProps extends Omit<React$1.ComponentProps<"input">, "onChange"> {
+    float?: boolean;
+    onChange?: (event: React$1.ChangeEvent<HTMLInputElement>) => void;
+}
+declare function Input({ className, type, float, onChange, ...props }: InputProps): react_jsx_runtime.JSX.Element;
+
+type SidebarContextProps = {
+    state: "expanded" | "collapsed";
+    open: boolean;
+    setOpen: (open: boolean) => void;
+    openMobile: boolean;
+    setOpenMobile: (open: boolean) => void;
+    isMobile: boolean;
+    toggleSidebar: () => void;
+};
+declare function useSidebar(): SidebarContextProps;
+declare function SidebarProvider({ defaultOpen, open: openProp, onOpenChange: setOpenProp, className, style, children, ...props }: React$1.ComponentProps<"div"> & {
+    defaultOpen?: boolean;
+    open?: boolean;
+    onOpenChange?: (open: boolean) => void;
+}): react_jsx_runtime.JSX.Element;
 declare function Sidebar({ side, variant, collapsible, className, children, ...props }: React$1.ComponentProps<"div"> & {
     side?: "left" | "right";
     variant?: "sidebar" | "floating" | "inset";
     collapsible?: "offcanvas" | "icon" | "none";
+}): react_jsx_runtime.JSX.Element;
+declare function SidebarTrigger({ className, onClick, ...props }: React$1.ComponentProps<typeof Button>): react_jsx_runtime.JSX.Element;
+declare function SidebarRail({ className, ...props }: React$1.ComponentProps<"button">): react_jsx_runtime.JSX.Element;
+declare function SidebarInset({ className, ...props }: React$1.ComponentProps<"main">): react_jsx_runtime.JSX.Element;
+declare function SidebarInput({ className, ...props }: React$1.ComponentProps<typeof Input>): react_jsx_runtime.JSX.Element;
+declare function SidebarHeader({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SidebarFooter({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SidebarSeparator({ className, ...props }: React$1.ComponentProps<typeof Separator>): react_jsx_runtime.JSX.Element;
+declare function SidebarContent({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SidebarGroup({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SidebarGroupLabel({ className, asChild, ...props }: React$1.ComponentProps<"div"> & {
+    asChild?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function SidebarGroupAction({ className, asChild, ...props }: React$1.ComponentProps<"button"> & {
+    asChild?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function SidebarGroupContent({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SidebarMenu({ className, ...props }: React$1.ComponentProps<"ul">): react_jsx_runtime.JSX.Element;
+declare function SidebarMenuItem({ className, ...props }: React$1.ComponentProps<"li">): react_jsx_runtime.JSX.Element;
+declare const sidebarMenuButtonVariants: (props?: ({
+    variant?: "default" | "outline" | null | undefined;
+    size?: "default" | "sm" | "lg" | null | undefined;
+} & class_variance_authority_dist_types.ClassProp) | undefined) => string;
+declare function SidebarMenuButton({ asChild, isActive, variant, size, tooltip, className, ...props }: React$1.ComponentProps<"button"> & {
+    asChild?: boolean;
+    isActive?: boolean;
+    tooltip?: string | React$1.ComponentProps<typeof TooltipContent>;
+} & VariantProps<typeof sidebarMenuButtonVariants>): react_jsx_runtime.JSX.Element;
+declare function SidebarMenuAction({ className, asChild, showOnHover, ...props }: React$1.ComponentProps<"button"> & {
+    asChild?: boolean;
+    showOnHover?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function SidebarMenuBadge({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SidebarMenuSkeleton({ className, showIcon, ...props }: React$1.ComponentProps<"div"> & {
+    showIcon?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function SidebarMenuSub({ className, ...props }: React$1.ComponentProps<"ul">): react_jsx_runtime.JSX.Element;
+declare function SidebarMenuSubItem({ className, ...props }: React$1.ComponentProps<"li">): react_jsx_runtime.JSX.Element;
+declare function SidebarMenuSubButton({ asChild, size, isActive, className, ...props }: React$1.ComponentProps<"a"> & {
+    asChild?: boolean;
+    size?: "sm" | "md";
+    isActive?: boolean;
 }): react_jsx_runtime.JSX.Element;
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar>, RefineThemedLayoutV2SiderProps {
@@ -50,7 +129,7 @@ type FieldProps<TFieldValues extends FieldValues = FieldValues, TName extends Fi
 declare const Field: ({ label, description, children }: FieldProps) => react_jsx_runtime.JSX.Element;
 
 type FormProps = PropsWithChildren & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
-declare const Form: ({ children, ...props }: FormProps) => react_jsx_runtime.JSX.Element;
+declare const Form$1: ({ children, ...props }: FormProps) => react_jsx_runtime.JSX.Element;
 
 type ImagePreviewCellProps = {
     src: string;
@@ -110,9 +189,9 @@ declare function TeamSwitcher({ teams, }: {
         logo: React$1.ElementType;
         plan: string;
     }[];
-}): react_jsx_runtime.JSX.Element;
+}): react_jsx_runtime.JSX.Element | null;
 
-type ConfirmDialogProps = AlertDialogProps & {
+type ConfirmDialogProps$1 = AlertDialogProps & {
     title?: string;
     description?: string;
     okIcon?: ReactElement<SVGSVGElement>;
@@ -133,7 +212,7 @@ type CustomButtonProps<T> = ButtonProps & T;
 type ShowButtonProps = CustomButtonProps<RefineShowButtonProps>;
 type CreateButtonProps = CustomButtonProps<Pick<RefineCreateButtonProps, "resource" | "hideText" | "accessControl" | "meta" | "onClick">>;
 type DeleteButtonProps = CustomButtonProps<RefineDeleteButtonProps<{
-    confirmDescription?: ConfirmDialogProps["description"];
+    confirmDescription?: ConfirmDialogProps$1["description"];
 }>>;
 type EditButtonProps = CustomButtonProps<RefineEditButtonProps>;
 type ListButtonProps = CustomButtonProps<RefineListButtonProps>;
@@ -147,12 +226,12 @@ declare const CreateButton: FC<CreateButtonProps>;
 declare const DeleteButton: FC<DeleteButtonProps>;
 
 declare const EditButton: {
-    ({ resource, recordItemId, hideText, accessControl, meta, onClick, children, ...props }: EditButtonProps): react_jsx_runtime.JSX.Element;
+    ({ resource, recordItemId, hideText, accessControl, meta, onClick, children, ...props }: EditButtonProps): react_jsx_runtime.JSX.Element | null;
     displayName: string;
 };
 
 declare const ListButton: {
-    ({ resource: resourceNameFromProps, hideText, accessControl, meta, children, onClick, ...props }: ListButtonProps): react_jsx_runtime.JSX.Element;
+    ({ resource: resourceNameFromProps, hideText, accessControl, meta, children, onClick, ...props }: ListButtonProps): react_jsx_runtime.JSX.Element | null;
     displayName: string;
 };
 
@@ -164,7 +243,7 @@ declare const RefreshButton: {
 declare const SaveButton: FC<SaveButtonProps>;
 
 declare const ShowButton: {
-    ({ resource: resourceNameFromProps, recordItemId, hideText, accessControl, meta, children, onClick, ...props }: ShowButtonProps): react_jsx_runtime.JSX.Element;
+    ({ resource: resourceNameFromProps, recordItemId, hideText, accessControl, meta, children, onClick, ...props }: ShowButtonProps): react_jsx_runtime.JSX.Element | null;
     displayName: string;
 };
 
@@ -210,4 +289,114 @@ declare const List: ({ canCreate, title, children, createButtonProps: createButt
 
 declare const Show: (props: ShowProps) => react_jsx_runtime.JSX.Element;
 
-export { AddCardForm, AppSidebar, CreateButton, CreatePage, DeleteButton, EditButton, EditPage, Field, Form, ImagePreviewCell, Link, List, ListButton, NavMain, NavProjects, NavRefine, NavUser, PageHeader, RefreshButton, SaveButton, Show, ShowButton, TeamSwitcher };
+declare function AlertDialog({ ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Root>): react_jsx_runtime.JSX.Element;
+declare function AlertDialogTrigger({ ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Trigger>): react_jsx_runtime.JSX.Element;
+declare function AlertDialogPortal({ ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Portal>): react_jsx_runtime.JSX.Element;
+declare function AlertDialogOverlay({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Overlay>): react_jsx_runtime.JSX.Element;
+declare function AlertDialogContent({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Content>): react_jsx_runtime.JSX.Element;
+declare function AlertDialogHeader({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function AlertDialogFooter({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function AlertDialogTitle({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Title>): react_jsx_runtime.JSX.Element;
+declare function AlertDialogDescription({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Description>): react_jsx_runtime.JSX.Element;
+declare function AlertDialogAction({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Action>): react_jsx_runtime.JSX.Element;
+declare function AlertDialogCancel({ className, ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Cancel>): react_jsx_runtime.JSX.Element;
+
+declare function Avatar({ className, ...props }: React$1.ComponentProps<typeof AvatarPrimitive.Root>): react_jsx_runtime.JSX.Element;
+declare function AvatarImage({ className, ...props }: React$1.ComponentProps<typeof AvatarPrimitive.Image>): react_jsx_runtime.JSX.Element;
+declare function AvatarFallback({ className, ...props }: React$1.ComponentProps<typeof AvatarPrimitive.Fallback>): react_jsx_runtime.JSX.Element;
+
+declare function Breadcrumb({ ...props }: React$1.ComponentProps<"nav">): react_jsx_runtime.JSX.Element;
+declare function BreadcrumbList({ className, ...props }: React$1.ComponentProps<"ol">): react_jsx_runtime.JSX.Element;
+declare function BreadcrumbItem({ className, ...props }: React$1.ComponentProps<"li">): react_jsx_runtime.JSX.Element;
+declare function BreadcrumbLink({ asChild, className, ...props }: React$1.ComponentProps<"a"> & {
+    asChild?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function BreadcrumbPage({ className, ...props }: React$1.ComponentProps<"span">): react_jsx_runtime.JSX.Element;
+declare function BreadcrumbSeparator({ children, className, ...props }: React$1.ComponentProps<"li">): react_jsx_runtime.JSX.Element;
+declare function BreadcrumbEllipsis({ className, ...props }: React$1.ComponentProps<"span">): react_jsx_runtime.JSX.Element;
+
+declare function Card({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+
+declare function Collapsible({ ...props }: React.ComponentProps<typeof CollapsiblePrimitive.Root>): react_jsx_runtime.JSX.Element;
+
+declare function DropdownMenu({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Root>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuPortal({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Portal>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuTrigger({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Trigger>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuContent({ className, sideOffset, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Content>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuGroup({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Group>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuItem({ className, inset, variant, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
+    inset?: boolean;
+    variant?: "default" | "destructive";
+}): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuCheckboxItem({ className, children, checked, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.CheckboxItem>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuRadioGroup({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuRadioItem({ className, children, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.RadioItem>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuLabel({ className, inset, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Label> & {
+    inset?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuSeparator({ className, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Separator>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuShortcut({ className, ...props }: React$1.ComponentProps<"span">): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuSub({ ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.Sub>): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuSubTrigger({ className, inset, children, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> & {
+    inset?: boolean;
+}): react_jsx_runtime.JSX.Element;
+declare function DropdownMenuSubContent({ className, ...props }: React$1.ComponentProps<typeof DropdownMenuPrimitive.SubContent>): react_jsx_runtime.JSX.Element;
+
+declare const Form: <TFieldValues extends FieldValues, TContext = any, TTransformedValues = TFieldValues>(props: react_hook_form.FormProviderProps<TFieldValues, TContext, TTransformedValues>) => React$1.JSX.Element;
+
+declare function Label({ className, ...props }: React$1.ComponentProps<typeof LabelPrimitive.Root>): react_jsx_runtime.JSX.Element;
+
+declare function Select({ ...props }: React$1.ComponentProps<typeof SelectPrimitive.Root>): react_jsx_runtime.JSX.Element;
+
+declare function Sheet({ ...props }: React$1.ComponentProps<typeof SheetPrimitive.Root>): react_jsx_runtime.JSX.Element;
+declare function SheetTrigger({ ...props }: React$1.ComponentProps<typeof SheetPrimitive.Trigger>): react_jsx_runtime.JSX.Element;
+declare function SheetClose({ ...props }: React$1.ComponentProps<typeof SheetPrimitive.Close>): react_jsx_runtime.JSX.Element;
+declare function SheetContent({ className, children, side, ...props }: React$1.ComponentProps<typeof SheetPrimitive.Content> & {
+    side?: "top" | "right" | "bottom" | "left";
+}): react_jsx_runtime.JSX.Element;
+declare function SheetHeader({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SheetFooter({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+declare function SheetTitle({ className, ...props }: React$1.ComponentProps<typeof SheetPrimitive.Title>): react_jsx_runtime.JSX.Element;
+declare function SheetDescription({ className, ...props }: React$1.ComponentProps<typeof SheetPrimitive.Description>): react_jsx_runtime.JSX.Element;
+
+declare function Skeleton({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
+
+declare function Table({ className, ...props }: React$1.ComponentProps<"table">): react_jsx_runtime.JSX.Element;
+
+declare function ThemeToggleItem(): react_jsx_runtime.JSX.Element;
+
+declare function Tooltip({ ...props }: React$1.ComponentProps<typeof TooltipPrimitive.Root>): react_jsx_runtime.JSX.Element;
+
+type ConfirmDialogProps = React$1.ComponentPropsWithoutRef<typeof AlertDialog$1> & {
+    children: React$1.ReactNode;
+    title?: string;
+    description?: string;
+    okText?: string;
+    cancelText?: string;
+    loading?: boolean;
+    onConfirm?: () => void;
+    okIcon?: React$1.ReactElement;
+    cancelIcon?: React$1.ReactElement;
+    okIconSide?: "left" | "right";
+    cancelIconSide?: "left" | "right";
+    okButtonVariant?: ButtonProps["variant"];
+    cancelButtonVariant?: ButtonProps["variant"];
+    okButtonSize?: ButtonProps["size"];
+    cancelButtonSize?: ButtonProps["size"];
+};
+declare const ConfirmDialog: React$1.FC<ConfirmDialogProps>;
+
+declare function useIsMobile(): boolean;
+
+declare const useOnBack: () => (() => void);
+
+declare function cn(...args: any[]): string;
+
+type Theme = "light" | "dark";
+declare function useTheme(): {
+    theme: Theme;
+    toggleTheme: () => void;
+    setTheme: (newTheme: Theme) => void;
+};
+
+export { AddCardForm, AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger, AppSidebar, Avatar, AvatarFallback, AvatarImage, Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, type ButtonProps, Card, Collapsible, ConfirmDialog, type ConfirmDialogProps, CreateButton, CreatePage, DeleteButton, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EditButton, EditPage, Field, Form$1 as Form, ImagePreviewCell, Input, Label, Link, List, ListButton, NavMain, NavProjects, NavRefine, NavUser, PageHeader, RefreshButton, SaveButton, Select, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Show, ShowButton, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, Table, TeamSwitcher, ThemeToggleItem, Tooltip, Form as UIForm, buttonVariants, cn, useIsMobile, useOnBack, useSidebar, useTheme };
