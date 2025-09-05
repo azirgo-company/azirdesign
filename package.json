@@ -12,10 +12,12 @@
     }
   },
   "files": [
-    "dist"
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "build": "tsup azirdesign/index.ts --dts --format cjs,esm"
+  "build": "tsup src/index.ts --dts --format cjs,esm"
   },
   "peerDependencies": {
     "@radix-ui/react-accordion": ">=1.1.0",

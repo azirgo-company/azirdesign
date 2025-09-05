@@ -1,9 +1,13 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React$1 from 'react';
-import { ReactElement, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes, AnchorHTMLAttributes, ReactNode } from 'react';
-import { RefineThemedLayoutV2SiderProps } from '@refinedev/ui-types';
+import React__default, { ReactElement, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes, AnchorHTMLAttributes, ReactNode, FC } from 'react';
+import { RefineThemedLayoutV2SiderProps, RefineCreateButtonProps, RefineDeleteButtonProps, RefineEditButtonProps, RefineListButtonProps, RefineRefreshButtonProps, RefineSaveButtonProps, RefineButtonResourceProps, RefineButtonSingleProps, RefineShowButtonProps, RefineCrudCreateProps, RefineCrudEditProps, RefineCrudListProps, RefineCrudShowProps } from '@refinedev/ui-types';
 import { FieldValues, FieldPath, UseControllerProps, ControllerRenderProps } from 'react-hook-form';
 import { LucideIcon } from 'lucide-react';
+import { CanAccess } from '@refinedev/core';
+import * as class_variance_authority_dist_types from 'class-variance-authority/dist/types';
+import { VariantProps } from 'class-variance-authority';
+import { AlertDialogProps } from '@radix-ui/react-alert-dialog';
 
 interface AddCardFormProps {
     user: {
@@ -12,6 +16,16 @@ interface AddCardFormProps {
     };
 }
 declare function AddCardForm({ user }: AddCardFormProps): react_jsx_runtime.JSX.Element;
+
+declare const buttonVariants: (props?: {
+    variant?: "link" | "default" | "destructive" | "outline" | "secondary" | "ghost";
+    size?: "default" | "sm" | "lg" | "icon";
+} & class_variance_authority_dist_types.ClassProp) => string;
+interface ButtonProps extends React$1.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+    asChild?: boolean;
+    loading?: boolean;
+    icon?: React$1.ReactElement<SVGSVGElement>;
+}
 
 declare function Sidebar({ side, variant, collapsible, className, children, ...props }: React$1.ComponentProps<"div"> & {
     side?: "left" | "right";
@@ -98,4 +112,102 @@ declare function TeamSwitcher({ teams, }: {
     }[];
 }): react_jsx_runtime.JSX.Element;
 
-export { AddCardForm, AppSidebar, Field, Form, ImagePreviewCell, Link, NavMain, NavProjects, NavRefine, NavUser, PageHeader, TeamSwitcher };
+type ConfirmDialogProps = AlertDialogProps & {
+    title?: string;
+    description?: string;
+    okIcon?: ReactElement<SVGSVGElement>;
+    okIconSide?: "left" | "right";
+    cancelIconSide?: "left" | "right";
+    cancelIcon?: ReactElement<SVGSVGElement>;
+    okText?: string;
+    cancelText?: string;
+    loading?: boolean;
+    children?: ReactElement<SVGSVGElement>;
+    okButtonVariant?: VariantProps<typeof buttonVariants>["variant"];
+    cancelButtonVariant?: VariantProps<typeof buttonVariants>["variant"];
+    okButtonSize?: VariantProps<typeof buttonVariants>["size"];
+    cancelButtonSize?: VariantProps<typeof buttonVariants>["size"];
+};
+
+type CustomButtonProps<T> = ButtonProps & T;
+type ShowButtonProps = CustomButtonProps<RefineShowButtonProps>;
+type CreateButtonProps = CustomButtonProps<Pick<RefineCreateButtonProps, "resource" | "hideText" | "accessControl" | "meta" | "onClick">>;
+type DeleteButtonProps = CustomButtonProps<RefineDeleteButtonProps<{
+    confirmDescription?: ConfirmDialogProps["description"];
+}>>;
+type EditButtonProps = CustomButtonProps<RefineEditButtonProps>;
+type ListButtonProps = CustomButtonProps<RefineListButtonProps>;
+type SaveButtonProps = ButtonProps & RefineSaveButtonProps & RefineButtonResourceProps & RefineButtonSingleProps & {
+    access?: Omit<React.ComponentProps<typeof CanAccess>, "children" | "action" | "resource" | "params">;
+};
+type RefreshButtonProps = CustomButtonProps<RefineRefreshButtonProps>;
+
+declare const CreateButton: FC<CreateButtonProps>;
+
+declare const DeleteButton: FC<DeleteButtonProps>;
+
+declare const EditButton: {
+    ({ resource, recordItemId, hideText, accessControl, meta, onClick, children, ...props }: EditButtonProps): react_jsx_runtime.JSX.Element;
+    displayName: string;
+};
+
+declare const ListButton: {
+    ({ resource: resourceNameFromProps, hideText, accessControl, meta, children, onClick, ...props }: ListButtonProps): react_jsx_runtime.JSX.Element;
+    displayName: string;
+};
+
+declare const RefreshButton: {
+    ({ resource, recordItemId, hideText, dataProviderName, children, ...props }: RefreshButtonProps): react_jsx_runtime.JSX.Element;
+    displayName: string;
+};
+
+declare const SaveButton: FC<SaveButtonProps>;
+
+declare const ShowButton: {
+    ({ resource: resourceNameFromProps, recordItemId, hideText, accessControl, meta, children, onClick, ...props }: ShowButtonProps): react_jsx_runtime.JSX.Element;
+    displayName: string;
+};
+
+type CreateProps = RefineCrudCreateProps<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, PageHeaderProps> & Partial<{
+    extra: React.ReactNode;
+}>;
+type EditProps = RefineCrudEditProps<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>> & Partial<{
+    extra: React.ReactNode;
+    headerButtons: (props: {
+        defaultButtons: React.ReactNode;
+        listButtonProps: ListButtonProps | undefined;
+        refreshButtonProps: RefreshButtonProps | undefined;
+    }) => React.ReactNode;
+}>;
+type ListProps = Omit<RefineCrudListProps<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, PageHeaderProps, CreateButtonProps>, "createButtonProps" | "headerButtons"> & Partial<{
+    createButtonProps: CreateButtonProps;
+    extra: React.ReactNode;
+    className: string;
+    headerButtons: (props: {
+        defaultButtons: React.ReactNode;
+        createButtonProps: CreateButtonProps | undefined;
+    }) => React.ReactNode;
+}>;
+type ShowProps = RefineCrudShowProps<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, PageHeaderProps> & Partial<{
+    extra: React.ReactNode;
+    headerButtons: (props: {
+        defaultButtons: React.ReactNode;
+        deleteButtonProps: DeleteButtonProps | undefined;
+        editButtonProps: EditButtonProps | undefined;
+        listButtonProps: ListButtonProps | undefined;
+        refreshButtonProps: RefreshButtonProps | undefined;
+    }) => React.ReactNode;
+}>;
+
+declare const CreatePage: {
+    ({ title, resource: resourceFromProps, breadcrumb: breadcrumbFromProps, extra, children, }: CreateProps): ReturnType<React__default.FC<CreateProps>>;
+    displayName: string;
+};
+
+declare const EditPage: ({ title, resource: resourceFromProps, mutationMode: mutationModeFromProps, recordItemId, deleteButtonProps: deleteButtonPropsFromProps, headerButtons: headerButtonsFromProps, dataProviderName, extra, breadcrumb: breadcrumbFromProps, canDelete, children, isLoading, autoSaveProps, }: EditProps) => react_jsx_runtime.JSX.Element;
+
+declare const List: ({ canCreate, title, children, createButtonProps: createButtonPropsFromProps, resource: resourceFromProps, breadcrumb: breadcrumbFromProps, headerButtonProps, headerButtons: headerButtonsFromProps, extra, }: ListProps) => react_jsx_runtime.JSX.Element;
+
+declare const Show: (props: ShowProps) => react_jsx_runtime.JSX.Element;
+
+export { AddCardForm, AppSidebar, CreateButton, CreatePage, DeleteButton, EditButton, EditPage, Field, Form, ImagePreviewCell, Link, List, ListButton, NavMain, NavProjects, NavRefine, NavUser, PageHeader, RefreshButton, SaveButton, Show, ShowButton, TeamSwitcher };

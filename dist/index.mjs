@@ -1,4 +1,4 @@
-// azirdesign/components/add-card-form.tsx
+// components/add-card-form.tsx
 import { jsx, jsxs } from "react/jsx-runtime";
 function AddCardForm({ user }) {
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsxs("div", { children: [
@@ -8,12 +8,12 @@ function AddCardForm({ user }) {
 }
 var add_card_form_default = AddCardForm;
 
-// azirdesign/components/ui/sidebar.tsx
+// components/ui/sidebar.tsx
 import * as React2 from "react";
 import { cva as cva2 } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 
-// azirdesign/components/ui/sheet.tsx
+// components/ui/sheet.tsx
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 
@@ -22,7 +22,7 @@ function cn(...args) {
   return args.filter(Boolean).join(" ");
 }
 
-// azirdesign/components/ui/sheet.tsx
+// components/ui/sheet.tsx
 import { jsx as jsx2, jsxs as jsxs2 } from "react/jsx-runtime";
 function Sheet({ ...props }) {
   return /* @__PURE__ */ jsx2(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
@@ -117,10 +117,10 @@ function SheetDescription({
   );
 }
 
-// azirdesign/components/hooks/use-mobile.ts
+// components/hooks/use-mobile.ts
 import * as React from "react";
 
-// azirdesign/components/ui/sidebar.tsx
+// components/ui/sidebar.tsx
 import { Slot as Slot2 } from "@radix-ui/react-slot";
 import {
   TooltipProvider,
@@ -129,10 +129,20 @@ import {
   TooltipTrigger
 } from "@radix-ui/react-tooltip";
 
-// azirdesign/components/ui/skeleton.tsx
+// components/ui/skeleton.tsx
 import { jsx as jsx3 } from "react/jsx-runtime";
+function Skeleton({ className, ...props }) {
+  return /* @__PURE__ */ jsx3(
+    "div",
+    {
+      "data-slot": "skeleton",
+      className: cn("bg-accent animate-pulse rounded-md", className),
+      ...props
+    }
+  );
+}
 
-// azirdesign/components/ui/button.tsx
+// components/ui/button.tsx
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import { jsx as jsx4 } from "react/jsx-runtime";
@@ -179,14 +189,14 @@ function Button({
   );
 }
 
-// azirdesign/components/ui/separator.tsx
+// components/ui/separator.tsx
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import { jsx as jsx5 } from "react/jsx-runtime";
 
-// azirdesign/components/ui/input.tsx
+// components/ui/input.tsx
 import { jsx as jsx6 } from "react/jsx-runtime";
 
-// azirdesign/components/ui/sidebar.tsx
+// components/ui/sidebar.tsx
 import { jsx as jsx7, jsxs as jsxs3 } from "react/jsx-runtime";
 var SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 var SIDEBAR_WIDTH_MOBILE = "18rem";
@@ -555,7 +565,7 @@ function SidebarMenuSubButton({
   );
 }
 
-// azirdesign/components/nav-refine.tsx
+// components/nav-refine.tsx
 import { useMenu } from "@refinedev/core";
 
 // node_modules/@radix-ui/react-collapsible/dist/index.mjs
@@ -771,10 +781,10 @@ var NODES = [
   "ul"
 ];
 var Primitive = NODES.reduce((primitive, node) => {
-  const Slot4 = createSlot(`Primitive.${node}`);
+  const Slot6 = createSlot(`Primitive.${node}`);
   const Node = React7.forwardRef((props, forwardedRef) => {
     const { asChild, ...primitiveProps } = props;
-    const Comp = asChild ? Slot4 : node;
+    const Comp = asChild ? Slot6 : node;
     if (typeof window !== "undefined") {
       window[Symbol.for("radix-ui")] = true;
     }
@@ -1055,7 +1065,7 @@ function getState(open) {
 }
 var Root3 = Collapsible;
 
-// azirdesign/components/ui/collapsible.tsx
+// components/ui/collapsible.tsx
 import { jsx as jsx11 } from "react/jsx-runtime";
 function Collapsible2({
   ...props
@@ -1085,7 +1095,7 @@ function CollapsibleContent2({
   );
 }
 
-// azirdesign/components/link.tsx
+// components/link.tsx
 import { forwardRef as forwardRef3 } from "react";
 import { useLink, useRouterContext, useRouterType } from "@refinedev/core";
 import { Slot as Slot3 } from "@radix-ui/react-slot";
@@ -1102,7 +1112,7 @@ var Link = forwardRef3(
 );
 Link.displayName = "Link";
 
-// azirdesign/components/nav-refine.tsx
+// components/nav-refine.tsx
 import { jsx as jsx13, jsxs as jsxs4 } from "react/jsx-runtime";
 function NavRefine() {
   const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
@@ -1160,7 +1170,7 @@ function NavRefine() {
   ] }, group)) });
 }
 
-// azirdesign/components/app-sidebar.tsx
+// components/app-sidebar.tsx
 import { jsx as jsx14, jsxs as jsxs5 } from "react/jsx-runtime";
 function AppSidebar({ meta, ...props }) {
   return /* @__PURE__ */ jsxs5(Sidebar, { collapsible: "icon", ...props, children: [
@@ -1187,7 +1197,7 @@ function AppSidebar({ meta, ...props }) {
   ] });
 }
 
-// azirdesign/components/field.tsx
+// components/field.tsx
 import { jsx as jsx15, jsxs as jsxs6 } from "react/jsx-runtime";
 var Field = ({ label, description, children }) => {
   return /* @__PURE__ */ jsxs6("div", { children: [
@@ -1197,13 +1207,13 @@ var Field = ({ label, description, children }) => {
   ] });
 };
 
-// azirdesign/components/form.tsx
+// components/form.tsx
 import { jsx as jsx16 } from "react/jsx-runtime";
 var Form = ({ children, ...props }) => {
   return /* @__PURE__ */ jsx16("form", { ...props, children });
 };
 
-// azirdesign/components/image-preview-cell.tsx
+// components/image-preview-cell.tsx
 import { useState as useState7, useEffect as useEffect7 } from "react";
 import Image from "next/image";
 import { Image as ImageIcon } from "lucide-react";
@@ -1281,7 +1291,7 @@ var ImagePreviewCell = ({
 };
 var image_preview_cell_default = ImagePreviewCell;
 
-// azirdesign/components/nav-main.tsx
+// components/nav-main.tsx
 import { ChevronRight } from "lucide-react";
 import { jsx as jsx18, jsxs as jsxs8 } from "react/jsx-runtime";
 function NavMain({
@@ -1309,7 +1319,7 @@ function NavMain({
   ] });
 }
 
-// azirdesign/components/nav-projects.tsx
+// components/nav-projects.tsx
 import {
   Folder,
   Forward,
@@ -1317,7 +1327,7 @@ import {
   Trash2
 } from "lucide-react";
 
-// azirdesign/components/ui/dropdown-menu.tsx
+// components/ui/dropdown-menu.tsx
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
 import { jsx as jsx19, jsxs as jsxs9 } from "react/jsx-runtime";
@@ -1423,7 +1433,7 @@ function DropdownMenuShortcut({
   );
 }
 
-// azirdesign/components/nav-projects.tsx
+// components/nav-projects.tsx
 import { jsx as jsx20, jsxs as jsxs10 } from "react/jsx-runtime";
 function NavProjects({
   projects
@@ -1475,7 +1485,7 @@ function NavProjects({
   ] });
 }
 
-// azirdesign/components/ui/avatar.tsx
+// components/ui/avatar.tsx
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { jsx as jsx21 } from "react/jsx-runtime";
 function Avatar({
@@ -1524,10 +1534,10 @@ function AvatarFallback({
   );
 }
 
-// azirdesign/components/nav-user.tsx
+// components/nav-user.tsx
 import { ChevronsUpDown, LogOut } from "lucide-react";
 
-// azirdesign/components/ui/theme-toggle-item.tsx
+// components/ui/theme-toggle-item.tsx
 import { DropdownMenuItem as DropdownMenuItem2 } from "@radix-ui/react-dropdown-menu";
 import { Moon, Sun } from "lucide-react";
 
@@ -1575,7 +1585,7 @@ function applyTheme(theme) {
   }
 }
 
-// azirdesign/components/ui/theme-toggle-item.tsx
+// components/ui/theme-toggle-item.tsx
 import { Fragment, jsx as jsx22, jsxs as jsxs11 } from "react/jsx-runtime";
 function ThemeToggleItem() {
   const { theme, toggleTheme } = useTheme();
@@ -1588,7 +1598,7 @@ function ThemeToggleItem() {
   ] }) });
 }
 
-// azirdesign/components/nav-user.tsx
+// components/nav-user.tsx
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { jsx as jsx23, jsxs as jsxs12 } from "react/jsx-runtime";
@@ -1660,15 +1670,15 @@ function NavUser({ className }) {
   ] }) });
 }
 
-// azirdesign/components/page-header.tsx
+// components/page-header.tsx
 import { ArrowLeft } from "lucide-react";
 
-// azirdesign/components/hooks/use-on-back.tsx
+// components/hooks/use-on-back.tsx
 var useOnBack = () => {
   return () => window.history.back();
 };
 
-// azirdesign/components/page-header.tsx
+// components/page-header.tsx
 import { Fragment as Fragment2, jsx as jsx24, jsxs as jsxs13 } from "react/jsx-runtime";
 var PageHeader = ({
   extra,
@@ -1707,7 +1717,7 @@ var PageHeader = ({
   ] }) });
 };
 
-// azirdesign/components/team-switcher.tsx
+// components/team-switcher.tsx
 import * as React12 from "react";
 import { ChevronsUpDown as ChevronsUpDown2, Plus } from "lucide-react";
 import { jsx as jsx25, jsxs as jsxs14 } from "react/jsx-runtime";
@@ -1770,17 +1780,989 @@ function TeamSwitcher({
     )
   ] }) }) });
 }
+
+// components/buttons/create/index.tsx
+import { useCreateButton, useNavigation } from "@refinedev/core";
+import { Loader2, SquarePlusIcon } from "lucide-react";
+import { useState as useState10 } from "react";
+import { jsx as jsx26, jsxs as jsxs15 } from "react/jsx-runtime";
+var CreateButton = ({
+  resource,
+  hideText = false,
+  accessControl,
+  meta,
+  children,
+  onClick,
+  ...props
+}) => {
+  const [loading, setLoading] = useState10(false);
+  const navigation = useNavigation();
+  const { hidden, disabled, label, title, to } = useCreateButton({
+    resource,
+    accessControl,
+    meta
+  });
+  if (hidden) return null;
+  return /* @__PURE__ */ jsxs15(
+    Button,
+    {
+      disabled: disabled || loading,
+      title,
+      icon: /* @__PURE__ */ jsx26(SquarePlusIcon, { className: "mr-2 h-4 w-4" }),
+      onClick: (e) => {
+        if (onClick) {
+          onClick(e);
+        }
+        if (to) {
+          e.preventDefault();
+          navigation.push(to);
+          setLoading(true);
+        }
+      },
+      ...props,
+      "data-testid": "create-button",
+      children: [
+        !hideText && (children ?? label),
+        loading && /* @__PURE__ */ jsx26(Loader2, { className: "ml-2 h-4 w-4 animate-spin" })
+      ]
+    }
+  );
+};
+CreateButton.displayName = "CreateButton";
+
+// components/buttons/delete/index.tsx
+import { Trash2Icon } from "lucide-react";
+import { useDeleteButton } from "@refinedev/core";
+
+// components/dialog/confirm-dialog.tsx
+import * as React13 from "react";
+import { CheckIcon as CheckIcon2, LucideClockFading, XIcon as XIcon2 } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogCancel,
+  AlertDialogAction
+} from "@radix-ui/react-alert-dialog";
+
+// components/ui/alert-dialog.tsx
+import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
+import { jsx as jsx27, jsxs as jsxs16 } from "react/jsx-runtime";
+function AlertDialogHeader({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(
+    "div",
+    {
+      "data-slot": "alert-dialog-header",
+      className: cn("flex flex-col gap-2 text-center sm:text-left", className),
+      ...props
+    }
+  );
+}
+function AlertDialogFooter({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx27(
+    "div",
+    {
+      "data-slot": "alert-dialog-footer",
+      className: cn(
+        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        className
+      ),
+      ...props
+    }
+  );
+}
+
+// components/dialog/confirm-dialog.tsx
+import { jsx as jsx28, jsxs as jsxs17 } from "react/jsx-runtime";
+var ConfirmDialog = ({
+  children,
+  title = "Are you sure?",
+  description = "This action cannot be undone.",
+  okText = "Ok",
+  cancelText = "Cancel",
+  loading = false,
+  okIconSide = "left",
+  cancelIconSide = "left",
+  onConfirm,
+  okIcon,
+  cancelIcon,
+  okButtonVariant = "default",
+  cancelButtonVariant = "outline",
+  okButtonSize = "default",
+  cancelButtonSize = "default",
+  open,
+  onOpenChange,
+  defaultOpen,
+  ...alertDialogProps
+}) => {
+  const CancelIcon = React13.useMemo(() => {
+    if (React13.isValidElement(cancelIcon)) return cancelIcon;
+    return /* @__PURE__ */ jsx28(XIcon2, { className: "mr-2 h-4 w-4" });
+  }, [cancelIcon]);
+  const OkIcon = React13.useMemo(() => {
+    if (loading) return /* @__PURE__ */ jsx28(LucideClockFading, { className: "mr-2 h-4 w-4" });
+    if (React13.isValidElement(okIcon)) return okIcon;
+    return /* @__PURE__ */ jsx28(CheckIcon2, { className: "mr-2 h-4 w-4" });
+  }, [okIcon, loading]);
+  return /* @__PURE__ */ jsxs17(
+    AlertDialog,
+    {
+      open,
+      onOpenChange,
+      defaultOpen,
+      ...alertDialogProps,
+      children: [
+        /* @__PURE__ */ jsx28(AlertDialogTrigger, { asChild: true, children }),
+        /* @__PURE__ */ jsxs17(AlertDialogContent, { children: [
+          /* @__PURE__ */ jsxs17(AlertDialogHeader, { children: [
+            /* @__PURE__ */ jsx28(AlertDialogTitle, { children: title }),
+            /* @__PURE__ */ jsx28(AlertDialogDescription, { children: description })
+          ] }),
+          /* @__PURE__ */ jsxs17(AlertDialogFooter, { children: [
+            /* @__PURE__ */ jsx28(AlertDialogCancel, { asChild: true, children: /* @__PURE__ */ jsxs17(
+              "button",
+              {
+                type: "button",
+                disabled: loading,
+                className: `btn btn-${cancelButtonVariant} btn-${cancelButtonSize}`,
+                children: [
+                  cancelIconSide === "left" && CancelIcon,
+                  cancelText,
+                  cancelIconSide === "right" && CancelIcon
+                ]
+              }
+            ) }),
+            /* @__PURE__ */ jsx28(AlertDialogAction, { asChild: true, children: /* @__PURE__ */ jsxs17(
+              "button",
+              {
+                type: "button",
+                disabled: loading,
+                onClick: onConfirm,
+                children: [
+                  okIconSide === "left" && OkIcon,
+                  okText,
+                  okIconSide === "right" && OkIcon
+                ]
+              }
+            ) })
+          ] })
+        ] })
+      ]
+    }
+  );
+};
+ConfirmDialog.displayName = "ConfirmDialog";
+
+// components/buttons/delete/index.tsx
+import { jsx as jsx29 } from "react/jsx-runtime";
+var DeleteButton = ({
+  resource,
+  recordItemId,
+  onSuccess,
+  mutationMode: mutationModeProp,
+  confirmTitle,
+  confirmDescription,
+  successNotification,
+  errorNotification,
+  hideText = false,
+  accessControl,
+  meta,
+  dataProviderName,
+  confirmOkText,
+  confirmCancelText,
+  invalidates,
+  children,
+  ...props
+}) => {
+  const {
+    title,
+    label,
+    hidden,
+    disabled,
+    loading,
+    confirmTitle: defaultConfirmTitle,
+    confirmOkLabel: defaultConfirmOkLabel,
+    cancelLabel: defaultCancelLabel,
+    onConfirm,
+    canAccess
+  } = useDeleteButton({
+    resource,
+    id: recordItemId,
+    dataProviderName,
+    invalidates,
+    meta,
+    onSuccess,
+    mutationMode: mutationModeProp,
+    errorNotification,
+    successNotification,
+    accessControl
+  });
+  if (hidden || !canAccess?.can) return null;
+  return /* @__PURE__ */ jsx29(
+    ConfirmDialog,
+    {
+      okText: confirmOkText ?? defaultConfirmOkLabel,
+      cancelText: confirmCancelText ?? defaultCancelLabel,
+      okButtonVariant: "destructive",
+      cancelButtonVariant: "outline",
+      title: confirmTitle ?? defaultConfirmTitle,
+      description: confirmDescription,
+      loading,
+      onConfirm,
+      children: /* @__PURE__ */ jsx29(
+        Button,
+        {
+          disabled,
+          title,
+          loading,
+          "data-testId": "delete-button",
+          className: "bg-rose-500 text-slate-50",
+          ...props,
+          children: /* @__PURE__ */ jsx29(Trash2Icon, { className: "h-4 w-4" })
+        }
+      )
+    }
+  );
+};
+DeleteButton.displayName = "DeleteButton";
+
+// components/buttons/edit/index.tsx
+import { SquarePenIcon } from "lucide-react";
+import { useEditButton } from "@refinedev/core";
+import { jsx as jsx30 } from "react/jsx-runtime";
+var EditButton = ({
+  resource,
+  recordItemId,
+  hideText = false,
+  accessControl,
+  meta,
+  onClick,
+  children,
+  ...props
+}) => {
+  const { hidden, disabled, label, title, LinkComponent, to } = useEditButton({
+    resource,
+    id: recordItemId,
+    accessControl,
+    meta
+  });
+  if (hidden) return null;
+  if (recordItemId === void 0 || recordItemId === null) return null;
+  const resolvedTo = typeof to === "string" ? to.includes("[id]") ? to.replace("[id]", String(recordItemId)) : to : `/edit/${String(recordItemId)}`;
+  const isDisabled = disabled || props.disabled;
+  const handleClick = (e) => {
+    if (isDisabled) {
+      e.preventDefault();
+      return;
+    }
+    if (onClick) {
+      e.preventDefault();
+      onClick(e);
+    }
+  };
+  const text = children ?? label ?? "Editar";
+  const ariaLabel = hideText ? typeof text === "string" ? text : "Editar" : void 0;
+  return /* @__PURE__ */ jsx30(Button, { asChild: true, title, disabled: isDisabled, ...props, children: /* @__PURE__ */ jsx30(
+    LinkComponent,
+    {
+      to: resolvedTo,
+      replace: false,
+      onClick: handleClick,
+      "aria-label": ariaLabel,
+      children: /* @__PURE__ */ jsx30(SquarePenIcon, { className: hideText ? "h-4 w-4" : "h-4 w-4" })
+    }
+  ) });
+};
+EditButton.displayName = "EditButton";
+
+// components/buttons/list/index.tsx
+import { ListIcon } from "lucide-react";
+import { useListButton } from "@refinedev/core";
+import { jsx as jsx31 } from "react/jsx-runtime";
+var ListButton = ({
+  resource: resourceNameFromProps,
+  hideText = false,
+  accessControl,
+  meta,
+  children,
+  onClick,
+  ...props
+}) => {
+  const { hidden, disabled, label, title, LinkComponent, to } = useListButton({
+    resource: resourceNameFromProps,
+    accessControl,
+    meta
+  });
+  if (hidden) return null;
+  return /* @__PURE__ */ jsx31(
+    LinkComponent,
+    {
+      to,
+      replace: false,
+      onClick: (e) => {
+        if (disabled) {
+          e.preventDefault();
+          return;
+        }
+        if (onClick) {
+          e.preventDefault();
+          onClick(e);
+        }
+      },
+      children: /* @__PURE__ */ jsx31(
+        Button,
+        {
+          disabled,
+          title,
+          icon: /* @__PURE__ */ jsx31(ListIcon, { className: "mr-2 h-4 w-4" }),
+          ...props,
+          children: !hideText && (children ?? label)
+        }
+      )
+    }
+  );
+};
+ListButton.displayName = "ListButton";
+
+// components/buttons/refresh/index.tsx
+import { RefreshCwIcon } from "lucide-react";
+import { useRefreshButton } from "@refinedev/core";
+import { jsx as jsx32 } from "react/jsx-runtime";
+var RefreshButton = ({
+  resource,
+  recordItemId,
+  hideText = false,
+  dataProviderName,
+  children,
+  ...props
+}) => {
+  const { onClick, label, loading } = useRefreshButton({
+    resource,
+    id: recordItemId,
+    dataProviderName
+  });
+  return /* @__PURE__ */ jsx32(
+    Button,
+    {
+      onClick,
+      loading,
+      icon: /* @__PURE__ */ jsx32(RefreshCwIcon, { className: "mr-2 h-4 w-4" }),
+      ...props,
+      children: !hideText && (children ?? label)
+    }
+  );
+};
+RefreshButton.displayName = "RefreshButton";
+
+// components/buttons/save/index.tsx
+import { CanAccess, useSaveButton } from "@refinedev/core";
+import { Loader2 as Loader22, SaveIcon } from "lucide-react";
+import { Slot as Slot4 } from "@radix-ui/react-slot";
+import { jsx as jsx33, jsxs as jsxs18 } from "react/jsx-runtime";
+var SaveButton = ({
+  hideText = false,
+  children,
+  accessControl,
+  access,
+  resource,
+  recordItemId,
+  loading,
+  ...props
+}) => {
+  const { label } = useSaveButton();
+  const Com = !accessControl?.enabled ? Slot4 : CanAccess;
+  if (accessControl?.hideIfUnauthorized && accessControl?.enabled) {
+    return null;
+  }
+  return /* @__PURE__ */ jsx33(
+    Com,
+    {
+      params: {
+        id: recordItemId
+      },
+      resource,
+      action: "save",
+      ...access,
+      children: /* @__PURE__ */ jsxs18(Button, { ...props, disabled: loading, children: [
+        loading && /* @__PURE__ */ jsx33(Loader22, { className: "mr-2 h-4 w-4 animate-spin" }),
+        !hideText && (children ?? label),
+        /* @__PURE__ */ jsx33(SaveIcon, { className: "mr-2 h-4 w-4" })
+      ] })
+    }
+  );
+};
+SaveButton.displayName = "SaveButton";
+
+// components/buttons/show/index.tsx
+import { EyeIcon } from "lucide-react";
+import { useShowButton } from "@refinedev/core";
+import { jsx as jsx34 } from "react/jsx-runtime";
+var ShowButton = ({
+  resource: resourceNameFromProps,
+  recordItemId,
+  hideText = false,
+  accessControl,
+  meta,
+  children,
+  onClick,
+  ...props
+}) => {
+  const { to, label, title, hidden, disabled, LinkComponent } = useShowButton({
+    resource: resourceNameFromProps,
+    id: recordItemId,
+    accessControl,
+    meta
+  });
+  const isDisabled = disabled || props.disabled;
+  const isHidden = hidden || props.hidden;
+  if (isHidden) return null;
+  const resolvedTo = typeof to === "string" && to.includes("[id]") ? to.replace("[id]", String(recordItemId)) : to ?? `/show/${String(recordItemId)}`;
+  return /* @__PURE__ */ jsx34(
+    LinkComponent,
+    {
+      to: resolvedTo,
+      replace: false,
+      onClick: (e) => {
+        if (isDisabled) {
+          e.preventDefault();
+          return;
+        }
+        if (onClick) {
+          e.preventDefault();
+          onClick(e);
+        }
+      },
+      children: /* @__PURE__ */ jsx34(Button, { title, disabled: isDisabled, ...props, children: /* @__PURE__ */ jsx34(EyeIcon, { className: "h-4 w-4" }) })
+    }
+  );
+};
+ShowButton.displayName = "ShowButton";
+
+// components/crud/create/index.tsx
+import { isValidElement as isValidElement2 } from "react";
+import {
+  useRefineContext as useRefineContext2,
+  useResource as useResource2,
+  useTranslate,
+  useUserFriendlyName
+} from "@refinedev/core";
+
+// components/breadcrumb/index.tsx
+import {
+  matchResourceFromRoute,
+  useBreadcrumb,
+  useRefineContext,
+  useResource
+} from "@refinedev/core";
+import { Fragment as Fragment3 } from "react";
+import { HomeIcon } from "lucide-react";
+
+// components/ui/breadcrumb.tsx
+import { ChevronRight as ChevronRight2, MoreHorizontal as MoreHorizontal2 } from "lucide-react";
+import { Slot as Slot5 } from "@radix-ui/react-slot";
+import { jsx as jsx35, jsxs as jsxs19 } from "react/jsx-runtime";
+function Breadcrumb({ ...props }) {
+  return /* @__PURE__ */ jsx35("nav", { "aria-label": "breadcrumb", "data-slot": "breadcrumb", ...props });
+}
+function BreadcrumbList({ className, ...props }) {
+  return /* @__PURE__ */ jsx35(
+    "ol",
+    {
+      "data-slot": "breadcrumb-list",
+      className: cn(
+        "text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function BreadcrumbItem({ className, ...props }) {
+  return /* @__PURE__ */ jsx35(
+    "li",
+    {
+      "data-slot": "breadcrumb-item",
+      className: cn("inline-flex items-center gap-1.5", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbLink({
+  asChild,
+  className,
+  ...props
+}) {
+  const Comp = asChild ? Slot5 : "a";
+  return /* @__PURE__ */ jsx35(
+    Comp,
+    {
+      "data-slot": "breadcrumb-link",
+      className: cn("hover:text-foreground transition-colors", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbPage({ className, ...props }) {
+  return /* @__PURE__ */ jsx35(
+    "span",
+    {
+      "data-slot": "breadcrumb-page",
+      role: "link",
+      "aria-disabled": "true",
+      "aria-current": "page",
+      className: cn("text-foreground font-normal", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbSeparator({
+  children,
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ jsx35(
+    "li",
+    {
+      "data-slot": "breadcrumb-separator",
+      role: "presentation",
+      "aria-hidden": "true",
+      className: cn("[&>svg]:size-3.5", className),
+      ...props,
+      children: children ?? /* @__PURE__ */ jsx35(ChevronRight2, {})
+    }
+  );
+}
+
+// components/breadcrumb/index.tsx
+import { Fragment as Fragment4, jsx as jsx36, jsxs as jsxs20 } from "react/jsx-runtime";
+var Breadcrumbs = ({ showHome = true, meta }) => {
+  const { breadcrumbs } = useBreadcrumb({
+    meta
+  });
+  const { hasDashboard } = useRefineContext();
+  const { resources } = useResource();
+  const dashboardResource = resources[0];
+  const rootRouteResource = matchResourceFromRoute("/", resources);
+  const BreadCrumbItems = breadcrumbs.map(({ label, href }, key) => /* @__PURE__ */ jsxs20(Fragment3, { children: [
+    /* @__PURE__ */ jsx36(BreadcrumbItem, { children: href ? /* @__PURE__ */ jsx36(BreadcrumbLink, { asChild: true, href: `#x`, children: /* @__PURE__ */ jsx36(Link, { href, children: label }) }) : /* @__PURE__ */ jsx36(BreadcrumbPage, { children: label }) }),
+    key < breadcrumbs.length - 1 && /* @__PURE__ */ jsx36(BreadcrumbSeparator, {})
+  ] }, key));
+  return /* @__PURE__ */ jsx36(Breadcrumb, { children: /* @__PURE__ */ jsxs20(BreadcrumbList, { children: [
+    showHome || hasDashboard || rootRouteResource.found ? /* @__PURE__ */ jsxs20(Fragment4, { children: [
+      /* @__PURE__ */ jsx36(BreadcrumbItem, { children: /* @__PURE__ */ jsx36(
+        BreadcrumbLink,
+        {
+          href: dashboardResource.list?.toString(),
+          asChild: true,
+          title: dashboardResource?.meta?.title ?? dashboardResource.name ?? "Dashboard",
+          children: /* @__PURE__ */ jsx36(
+            Link,
+            {
+              href: dashboardResource.list?.toString(),
+              title: dashboardResource?.meta?.title ?? dashboardResource.name ?? "Dashboard",
+              children: dashboardResource?.meta?.icon ?? /* @__PURE__ */ jsx36(HomeIcon, { className: "h-4 w-4" })
+            }
+          )
+        }
+      ) }),
+      /* @__PURE__ */ jsx36(BreadcrumbSeparator, {})
+    ] }) : null,
+    BreadCrumbItems
+  ] }) });
+};
+
+// components/crud/create/index.tsx
+import { Fragment as Fragment5, jsx as jsx37, jsxs as jsxs21 } from "react/jsx-runtime";
+var CreatePage = ({
+  title,
+  resource: resourceFromProps,
+  breadcrumb: breadcrumbFromProps,
+  extra,
+  children
+}) => {
+  const translate = useTranslate();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = useRefineContext2();
+  const getUserFriendlyName = useUserFriendlyName();
+  const { resource, identifier } = useResource2(resourceFromProps);
+  const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
+  const renderTitle = () => {
+    if (title === false) return null;
+    if (title) {
+      if (typeof title === "string" || typeof title === "number") {
+        return /* @__PURE__ */ jsx37("h3", { children: title });
+      }
+      return title;
+    }
+    return /* @__PURE__ */ jsx37("h3", { children: translate(
+      `${identifier}.titles.create`,
+      `Create ${getUserFriendlyName(
+        resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
+        "singular"
+      )}`
+    ) });
+  };
+  return /* @__PURE__ */ jsxs21(Fragment5, { children: [
+    /* @__PURE__ */ jsx37(
+      PageHeader,
+      {
+        title: renderTitle(),
+        isBack: true,
+        breadcrumb: isValidElement2(breadcrumb) ? breadcrumb : /* @__PURE__ */ jsx37(Breadcrumbs, {}),
+        extra: extra ?? /* @__PURE__ */ jsx37(Fragment5, { children: /* @__PURE__ */ jsx37(ListButton, { resource: resourceFromProps }) })
+      }
+    ),
+    /* @__PURE__ */ jsx37("div", { className: "!mt-0 pt-4", children })
+  ] });
+};
+CreatePage.displayName = "CreatePage";
+
+// components/crud/edit/index.tsx
+import {
+  AutoSaveIndicator,
+  useBack,
+  useGo,
+  useMutationMode,
+  useNavigation as useNavigation2,
+  useRefineContext as useRefineContext3,
+  useResource as useResource3,
+  useRouterType as useRouterType2,
+  useToPath,
+  useTranslate as useTranslate2,
+  useUserFriendlyName as useUserFriendlyName2
+} from "@refinedev/core";
+import { isValidElement as isValidElement3 } from "react";
+import { Fragment as Fragment6, jsx as jsx38, jsxs as jsxs22 } from "react/jsx-runtime";
+var EditPage = ({
+  title,
+  resource: resourceFromProps,
+  mutationMode: mutationModeFromProps,
+  recordItemId,
+  deleteButtonProps: deleteButtonPropsFromProps,
+  headerButtons: headerButtonsFromProps,
+  dataProviderName,
+  extra,
+  breadcrumb: breadcrumbFromProps,
+  canDelete = true,
+  children,
+  isLoading,
+  autoSaveProps
+}) => {
+  const translate = useTranslate2();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = useRefineContext3();
+  const { mutationMode: mutationModeContext } = useMutationMode();
+  const mutationMode = mutationModeFromProps ?? mutationModeContext;
+  const routerType = useRouterType2();
+  const back = useBack();
+  const go = useGo();
+  const { goBack, list: legacyGoList } = useNavigation2();
+  const getUserFriendlyName = useUserFriendlyName2();
+  const {
+    resource,
+    action,
+    id: idFromParams,
+    identifier
+  } = useResource3(resourceFromProps);
+  const goListPath = useToPath({
+    resource,
+    action: "list"
+  });
+  const id = recordItemId ?? idFromParams;
+  const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
+  const hasList = resource?.list && !recordItemId;
+  const isDeleteButtonVisible = canDelete ?? ((resource?.meta?.canDelete ?? resource?.canDelete) || deleteButtonPropsFromProps);
+  const listButtonProps = hasList ? {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier
+  } : void 0;
+  const refreshButtonProps = {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    recordItemId: id,
+    dataProviderName
+  };
+  const deleteButtonProps = isDeleteButtonVisible ? {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    mutationMode,
+    onSuccess: () => {
+      if (routerType === "legacy") {
+        legacyGoList(resource?.route ?? resource?.name ?? "");
+      } else {
+        go({ to: goListPath });
+      }
+    },
+    recordItemId: id,
+    dataProviderName,
+    ...deleteButtonPropsFromProps
+  } : void 0;
+  const defaultHeaderButtons = /* @__PURE__ */ jsxs22("div", { className: "flex flex-row items-center gap-2", children: [
+    autoSaveProps && /* @__PURE__ */ jsx38(AutoSaveIndicator, { ...autoSaveProps }),
+    hasList && /* @__PURE__ */ jsx38(ListButton, { ...listButtonProps }),
+    /* @__PURE__ */ jsx38(RefreshButton, { ...refreshButtonProps }),
+    /* @__PURE__ */ jsx38(DeleteButton, { ...deleteButtonProps })
+  ] });
+  const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
+    defaultButtons: defaultHeaderButtons,
+    listButtonProps,
+    refreshButtonProps
+  }) : headerButtonsFromProps : defaultHeaderButtons;
+  const renderTitle = () => {
+    if (title === false) return null;
+    if (title) {
+      if (typeof title === "string" || typeof title === "number") {
+        return /* @__PURE__ */ jsx38("h3", { className: "text-2xl leading-tight font-bold", children: title });
+      }
+      return title;
+    }
+    return /* @__PURE__ */ jsx38("h3", { className: "text-2xl leading-tight font-bold", children: translate(
+      `${identifier}.titles.show`,
+      `Show ${getUserFriendlyName(
+        resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
+        "singular"
+      )}`
+    ) });
+  };
+  return /* @__PURE__ */ jsxs22(Fragment6, { children: [
+    /* @__PURE__ */ jsx38(
+      PageHeader,
+      {
+        title: renderTitle(),
+        isBack: true,
+        breadcrumb: isValidElement3(breadcrumb) ? breadcrumb : /* @__PURE__ */ jsx38(Breadcrumbs, {}),
+        extra: extra ?? /* @__PURE__ */ jsx38("div", { className: "inline-flex flex-row items-center gap-x-2", children: headerButtons })
+      }
+    ),
+    /* @__PURE__ */ jsxs22("div", { className: "pt-4", children: [
+      isLoading && /* @__PURE__ */ jsx38(Skeleton, { className: "h-[80vh] w-full" }),
+      !isLoading && children
+    ] })
+  ] });
+};
+
+// components/crud/list/index.tsx
+import {
+  useRefineContext as useRefineContext4,
+  useResource as useResource4,
+  useRouterType as useRouterType3,
+  useTranslate as useTranslate3,
+  useUserFriendlyName as useUserFriendlyName3
+} from "@refinedev/core";
+import { isValidElement as isValidElement4 } from "react";
+import { Fragment as Fragment7, jsx as jsx39, jsxs as jsxs23 } from "react/jsx-runtime";
+var List = ({
+  canCreate,
+  title,
+  children,
+  createButtonProps: createButtonPropsFromProps,
+  resource: resourceFromProps,
+  breadcrumb: breadcrumbFromProps,
+  headerButtonProps,
+  headerButtons: headerButtonsFromProps,
+  extra
+}) => {
+  const translate = useTranslate3();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = useRefineContext4();
+  const routerType = useRouterType3();
+  const getUserFriendlyName = useUserFriendlyName3();
+  const { resource, identifier } = useResource4(resourceFromProps);
+  const isCreateButtonVisible = canCreate ?? ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps);
+  const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
+  const createButtonProps = isCreateButtonVisible ? {
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    ...createButtonPropsFromProps
+  } : void 0;
+  const defaultExtra = isCreateButtonVisible ? /* @__PURE__ */ jsx39(CreateButton, { ...createButtonProps }) : null;
+  const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
+    defaultButtons: defaultExtra,
+    createButtonProps
+  }) : headerButtonsFromProps : defaultExtra;
+  return /* @__PURE__ */ jsx39("div", { children: /* @__PURE__ */ jsxs23(
+    PageHeader,
+    {
+      title: title ?? translate(
+        `${identifier}.titles.list`,
+        getUserFriendlyName(
+          resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
+          "plural"
+        )
+      ),
+      extra: /* @__PURE__ */ jsx39("div", { className: headerButtonProps?.className, children: headerButtons }),
+      breadcrumb: isValidElement4(breadcrumb) ? /* @__PURE__ */ jsx39(Fragment7, { children: breadcrumb }) : /* @__PURE__ */ jsx39(Breadcrumbs, {}),
+      children: [
+        extra,
+        /* @__PURE__ */ jsx39("div", { children })
+      ]
+    }
+  ) });
+};
+
+// components/crud/show/index.tsx
+import { isValidElement as isValidElement5 } from "react";
+import {
+  useBack as useBack2,
+  useGo as useGo2,
+  useNavigation as useNavigation3,
+  useRefineContext as useRefineContext5,
+  useResource as useResource5,
+  useRouterType as useRouterType4,
+  useToPath as useToPath2,
+  useTranslate as useTranslate4,
+  useUserFriendlyName as useUserFriendlyName4
+} from "@refinedev/core";
+import { ArrowLeft as ArrowLeft2 } from "lucide-react";
+import { Fragment as Fragment8, jsx as jsx40, jsxs as jsxs24 } from "react/jsx-runtime";
+var Show = (props) => {
+  const {
+    children,
+    resource: resourceFromProps,
+    recordItemId,
+    canDelete,
+    deleteButtonProps: deleteButtonPropsFromProps,
+    canEdit,
+    dataProviderName,
+    isLoading,
+    footerButtons: footerButtonsFromProps,
+    footerButtonProps,
+    headerButtons: headerButtonsFromProps,
+    headerButtonProps,
+    wrapperProps,
+    contentProps,
+    headerProps,
+    goBack: goBackFromProps,
+    breadcrumb: breadcrumbFromProps,
+    title
+  } = props;
+  const translate = useTranslate4();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = useRefineContext5();
+  const routerType = useRouterType4();
+  const back = useBack2();
+  const go = useGo2();
+  const { goBack, list: legacyGoList } = useNavigation3();
+  const getUserFriendlyName = useUserFriendlyName4();
+  const {
+    resource,
+    action,
+    id: idFromParams,
+    identifier
+  } = useResource5(resourceFromProps);
+  const goListPath = useToPath2({
+    resource,
+    action: "list"
+  });
+  const id = recordItemId ?? idFromParams;
+  const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
+  const hasList = resource?.list && !recordItemId;
+  const isDeleteButtonVisible = canDelete ?? ((resource?.meta?.canDelete ?? resource?.canDelete) || deleteButtonPropsFromProps);
+  const isEditButtonVisible = canEdit ?? resource?.canEdit ?? !!resource?.edit;
+  const listButtonProps = hasList ? {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier
+  } : void 0;
+  const editButtonProps = isEditButtonVisible ? {
+    colorScheme: "brand",
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    recordItemId: id
+  } : void 0;
+  const deleteButtonProps = isDeleteButtonVisible ? {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    recordItemId: id,
+    onSuccess: () => {
+      if (routerType === "legacy") {
+        legacyGoList(resource?.route ?? resource?.name ?? "");
+      } else {
+        go({ to: goListPath });
+      }
+    },
+    dataProviderName,
+    ...deleteButtonPropsFromProps
+  } : void 0;
+  const refreshButtonProps = {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    recordItemId: id,
+    dataProviderName
+  };
+  const defaultHeaderButtons = /* @__PURE__ */ jsxs24(Fragment8, { children: [
+    listButtonProps && /* @__PURE__ */ jsx40(ListButton, { ...listButtonProps }),
+    isEditButtonVisible && /* @__PURE__ */ jsx40(EditButton, { colorScheme: "brand", ...editButtonProps }),
+    /* @__PURE__ */ jsx40(RefreshButton, { ...refreshButtonProps })
+  ] });
+  const buttonBack = goBackFromProps === null ? null : /* @__PURE__ */ jsx40(
+    Button,
+    {
+      "aria-label": "back",
+      variant: "ghost",
+      size: "sm",
+      onClick: action !== "list" && typeof action !== "undefined" ? routerType === "legacy" ? goBack : back : void 0,
+      children: typeof goBackFromProps !== "undefined" ? goBackFromProps : /* @__PURE__ */ jsx40(ArrowLeft2, {})
+    }
+  );
+  const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
+    defaultButtons: defaultHeaderButtons,
+    deleteButtonProps,
+    editButtonProps,
+    listButtonProps,
+    refreshButtonProps
+  }) : headerButtonsFromProps : defaultHeaderButtons;
+  const footerButtons = footerButtonsFromProps ? typeof footerButtonsFromProps === "function" ? footerButtonsFromProps({ defaultButtons: null }) : footerButtonsFromProps : null;
+  const renderTitle = () => {
+    if (title === false) return null;
+    if (title) {
+      if (typeof title === "string" || typeof title === "number") {
+        return /* @__PURE__ */ jsx40("h3", { className: "text-2xl leading-tight font-bold", children: title });
+      }
+      return title;
+    }
+    return /* @__PURE__ */ jsx40("h3", { className: "text-2xl leading-tight font-bold", children: translate(
+      `${identifier}.titles.show`,
+      `Show ${getUserFriendlyName(
+        resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
+        "singular"
+      )}`
+    ) });
+  };
+  return /* @__PURE__ */ jsx40(
+    PageHeader,
+    {
+      title: renderTitle(),
+      isBack: true,
+      breadcrumb: isValidElement5(breadcrumb) ? /* @__PURE__ */ jsx40(Fragment8, { children: breadcrumb }) : /* @__PURE__ */ jsx40(Breadcrumbs, {}),
+      children
+    }
+  );
+};
 export {
   add_card_form_default as AddCardForm,
   AppSidebar,
+  CreateButton,
+  CreatePage,
+  DeleteButton,
+  EditButton,
+  EditPage,
   Field,
   Form,
   image_preview_cell_default as ImagePreviewCell,
   Link,
+  List,
+  ListButton,
   NavMain,
   NavProjects,
   NavRefine,
   NavUser,
   PageHeader,
+  RefreshButton,
+  SaveButton,
+  Show,
+  ShowButton,
   TeamSwitcher
 };

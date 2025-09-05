@@ -31,20 +31,31 @@ var index_exports = {};
 __export(index_exports, {
   AddCardForm: () => add_card_form_default,
   AppSidebar: () => AppSidebar,
+  CreateButton: () => CreateButton,
+  CreatePage: () => CreatePage,
+  DeleteButton: () => DeleteButton,
+  EditButton: () => EditButton,
+  EditPage: () => EditPage,
   Field: () => Field,
   Form: () => Form,
   ImagePreviewCell: () => image_preview_cell_default,
   Link: () => Link,
+  List: () => List,
+  ListButton: () => ListButton,
   NavMain: () => NavMain,
   NavProjects: () => NavProjects,
   NavRefine: () => NavRefine,
   NavUser: () => NavUser,
   PageHeader: () => PageHeader,
+  RefreshButton: () => RefreshButton,
+  SaveButton: () => SaveButton,
+  Show: () => Show,
+  ShowButton: () => ShowButton,
   TeamSwitcher: () => TeamSwitcher
 });
 module.exports = __toCommonJS(index_exports);
 
-// azirdesign/components/add-card-form.tsx
+// components/add-card-form.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
 function AddCardForm({ user }) {
   return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
@@ -54,12 +65,12 @@ function AddCardForm({ user }) {
 }
 var add_card_form_default = AddCardForm;
 
-// azirdesign/components/ui/sidebar.tsx
+// components/ui/sidebar.tsx
 var React2 = __toESM(require("react"));
 var import_class_variance_authority2 = require("class-variance-authority");
 var import_lucide_react2 = require("lucide-react");
 
-// azirdesign/components/ui/sheet.tsx
+// components/ui/sheet.tsx
 var SheetPrimitive = __toESM(require("@radix-ui/react-dialog"));
 var import_lucide_react = require("lucide-react");
 
@@ -68,7 +79,7 @@ function cn(...args) {
   return args.filter(Boolean).join(" ");
 }
 
-// azirdesign/components/ui/sheet.tsx
+// components/ui/sheet.tsx
 var import_jsx_runtime2 = require("react/jsx-runtime");
 function Sheet({ ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
@@ -163,17 +174,27 @@ function SheetDescription({
   );
 }
 
-// azirdesign/components/hooks/use-mobile.ts
+// components/hooks/use-mobile.ts
 var React = __toESM(require("react"));
 
-// azirdesign/components/ui/sidebar.tsx
+// components/ui/sidebar.tsx
 var import_react_slot2 = require("@radix-ui/react-slot");
 var import_react_tooltip = require("@radix-ui/react-tooltip");
 
-// azirdesign/components/ui/skeleton.tsx
+// components/ui/skeleton.tsx
 var import_jsx_runtime3 = require("react/jsx-runtime");
+function Skeleton({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(
+    "div",
+    {
+      "data-slot": "skeleton",
+      className: cn("bg-accent animate-pulse rounded-md", className),
+      ...props
+    }
+  );
+}
 
-// azirdesign/components/ui/button.tsx
+// components/ui/button.tsx
 var import_react_slot = require("@radix-ui/react-slot");
 var import_class_variance_authority = require("class-variance-authority");
 var import_jsx_runtime4 = require("react/jsx-runtime");
@@ -220,14 +241,14 @@ function Button({
   );
 }
 
-// azirdesign/components/ui/separator.tsx
+// components/ui/separator.tsx
 var SeparatorPrimitive = __toESM(require("@radix-ui/react-separator"));
 var import_jsx_runtime5 = require("react/jsx-runtime");
 
-// azirdesign/components/ui/input.tsx
+// components/ui/input.tsx
 var import_jsx_runtime6 = require("react/jsx-runtime");
 
-// azirdesign/components/ui/sidebar.tsx
+// components/ui/sidebar.tsx
 var import_jsx_runtime7 = require("react/jsx-runtime");
 var SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
 var SIDEBAR_WIDTH_MOBILE = "18rem";
@@ -596,7 +617,7 @@ function SidebarMenuSubButton({
   );
 }
 
-// azirdesign/components/nav-refine.tsx
+// components/nav-refine.tsx
 var import_core2 = require("@refinedev/core");
 
 // node_modules/@radix-ui/react-collapsible/dist/index.mjs
@@ -812,10 +833,10 @@ var NODES = [
   "ul"
 ];
 var Primitive = NODES.reduce((primitive, node) => {
-  const Slot4 = (0, import_react_slot3.createSlot)(`Primitive.${node}`);
+  const Slot6 = (0, import_react_slot3.createSlot)(`Primitive.${node}`);
   const Node = React7.forwardRef((props, forwardedRef) => {
     const { asChild, ...primitiveProps } = props;
-    const Comp = asChild ? Slot4 : node;
+    const Comp = asChild ? Slot6 : node;
     if (typeof window !== "undefined") {
       window[Symbol.for("radix-ui")] = true;
     }
@@ -1096,7 +1117,7 @@ function getState(open) {
 }
 var Root3 = Collapsible;
 
-// azirdesign/components/ui/collapsible.tsx
+// components/ui/collapsible.tsx
 var import_jsx_runtime11 = require("react/jsx-runtime");
 function Collapsible2({
   ...props
@@ -1126,7 +1147,7 @@ function CollapsibleContent2({
   );
 }
 
-// azirdesign/components/link.tsx
+// components/link.tsx
 var import_react = require("react");
 var import_core = require("@refinedev/core");
 var import_react_slot4 = require("@radix-ui/react-slot");
@@ -1143,7 +1164,7 @@ var Link = (0, import_react.forwardRef)(
 );
 Link.displayName = "Link";
 
-// azirdesign/components/nav-refine.tsx
+// components/nav-refine.tsx
 var import_jsx_runtime13 = require("react/jsx-runtime");
 function NavRefine() {
   const { menuItems, selectedKey, defaultOpenKeys } = (0, import_core2.useMenu)();
@@ -1201,7 +1222,7 @@ function NavRefine() {
   ] }, group)) });
 }
 
-// azirdesign/components/app-sidebar.tsx
+// components/app-sidebar.tsx
 var import_jsx_runtime14 = require("react/jsx-runtime");
 function AppSidebar({ meta, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(Sidebar, { collapsible: "icon", ...props, children: [
@@ -1228,7 +1249,7 @@ function AppSidebar({ meta, ...props }) {
   ] });
 }
 
-// azirdesign/components/field.tsx
+// components/field.tsx
 var import_jsx_runtime15 = require("react/jsx-runtime");
 var Field = ({ label, description, children }) => {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { children: [
@@ -1238,13 +1259,13 @@ var Field = ({ label, description, children }) => {
   ] });
 };
 
-// azirdesign/components/form.tsx
+// components/form.tsx
 var import_jsx_runtime16 = require("react/jsx-runtime");
 var Form = ({ children, ...props }) => {
   return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("form", { ...props, children });
 };
 
-// azirdesign/components/image-preview-cell.tsx
+// components/image-preview-cell.tsx
 var import_react2 = require("react");
 var import_image = __toESM(require("next/image"));
 var import_lucide_react3 = require("lucide-react");
@@ -1322,7 +1343,7 @@ var ImagePreviewCell = ({
 };
 var image_preview_cell_default = ImagePreviewCell;
 
-// azirdesign/components/nav-main.tsx
+// components/nav-main.tsx
 var import_lucide_react4 = require("lucide-react");
 var import_jsx_runtime18 = require("react/jsx-runtime");
 function NavMain({
@@ -1350,10 +1371,10 @@ function NavMain({
   ] });
 }
 
-// azirdesign/components/nav-projects.tsx
+// components/nav-projects.tsx
 var import_lucide_react6 = require("lucide-react");
 
-// azirdesign/components/ui/dropdown-menu.tsx
+// components/ui/dropdown-menu.tsx
 var DropdownMenuPrimitive = __toESM(require("@radix-ui/react-dropdown-menu"));
 var import_lucide_react5 = require("lucide-react");
 var import_jsx_runtime19 = require("react/jsx-runtime");
@@ -1459,7 +1480,7 @@ function DropdownMenuShortcut({
   );
 }
 
-// azirdesign/components/nav-projects.tsx
+// components/nav-projects.tsx
 var import_jsx_runtime20 = require("react/jsx-runtime");
 function NavProjects({
   projects
@@ -1511,7 +1532,7 @@ function NavProjects({
   ] });
 }
 
-// azirdesign/components/ui/avatar.tsx
+// components/ui/avatar.tsx
 var AvatarPrimitive = __toESM(require("@radix-ui/react-avatar"));
 var import_jsx_runtime21 = require("react/jsx-runtime");
 function Avatar({
@@ -1560,10 +1581,10 @@ function AvatarFallback({
   );
 }
 
-// azirdesign/components/nav-user.tsx
+// components/nav-user.tsx
 var import_lucide_react8 = require("lucide-react");
 
-// azirdesign/components/ui/theme-toggle-item.tsx
+// components/ui/theme-toggle-item.tsx
 var import_react_dropdown_menu = require("@radix-ui/react-dropdown-menu");
 var import_lucide_react7 = require("lucide-react");
 
@@ -1611,7 +1632,7 @@ function applyTheme(theme) {
   }
 }
 
-// azirdesign/components/ui/theme-toggle-item.tsx
+// components/ui/theme-toggle-item.tsx
 var import_jsx_runtime22 = require("react/jsx-runtime");
 function ThemeToggleItem() {
   const { theme, toggleTheme } = useTheme();
@@ -1624,7 +1645,7 @@ function ThemeToggleItem() {
   ] }) });
 }
 
-// azirdesign/components/nav-user.tsx
+// components/nav-user.tsx
 var import_nextjs = require("@clerk/nextjs");
 var import_navigation = require("next/navigation");
 var import_jsx_runtime23 = require("react/jsx-runtime");
@@ -1696,15 +1717,15 @@ function NavUser({ className }) {
   ] }) });
 }
 
-// azirdesign/components/page-header.tsx
+// components/page-header.tsx
 var import_lucide_react9 = require("lucide-react");
 
-// azirdesign/components/hooks/use-on-back.tsx
+// components/hooks/use-on-back.tsx
 var useOnBack = () => {
   return () => window.history.back();
 };
 
-// azirdesign/components/page-header.tsx
+// components/page-header.tsx
 var import_jsx_runtime24 = require("react/jsx-runtime");
 var PageHeader = ({
   extra,
@@ -1743,7 +1764,7 @@ var PageHeader = ({
   ] }) });
 };
 
-// azirdesign/components/team-switcher.tsx
+// components/team-switcher.tsx
 var React12 = __toESM(require("react"));
 var import_lucide_react10 = require("lucide-react");
 var import_jsx_runtime25 = require("react/jsx-runtime");
@@ -1806,18 +1827,944 @@ function TeamSwitcher({
     )
   ] }) }) });
 }
+
+// components/buttons/create/index.tsx
+var import_core3 = require("@refinedev/core");
+var import_lucide_react11 = require("lucide-react");
+var import_react4 = require("react");
+var import_jsx_runtime26 = require("react/jsx-runtime");
+var CreateButton = ({
+  resource,
+  hideText = false,
+  accessControl,
+  meta,
+  children,
+  onClick,
+  ...props
+}) => {
+  const [loading, setLoading] = (0, import_react4.useState)(false);
+  const navigation = (0, import_core3.useNavigation)();
+  const { hidden, disabled, label, title, to } = (0, import_core3.useCreateButton)({
+    resource,
+    accessControl,
+    meta
+  });
+  if (hidden) return null;
+  return /* @__PURE__ */ (0, import_jsx_runtime26.jsxs)(
+    Button,
+    {
+      disabled: disabled || loading,
+      title,
+      icon: /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(import_lucide_react11.SquarePlusIcon, { className: "mr-2 h-4 w-4" }),
+      onClick: (e) => {
+        if (onClick) {
+          onClick(e);
+        }
+        if (to) {
+          e.preventDefault();
+          navigation.push(to);
+          setLoading(true);
+        }
+      },
+      ...props,
+      "data-testid": "create-button",
+      children: [
+        !hideText && (children ?? label),
+        loading && /* @__PURE__ */ (0, import_jsx_runtime26.jsx)(import_lucide_react11.Loader2, { className: "ml-2 h-4 w-4 animate-spin" })
+      ]
+    }
+  );
+};
+CreateButton.displayName = "CreateButton";
+
+// components/buttons/delete/index.tsx
+var import_lucide_react13 = require("lucide-react");
+var import_core4 = require("@refinedev/core");
+
+// components/dialog/confirm-dialog.tsx
+var React13 = __toESM(require("react"));
+var import_lucide_react12 = require("lucide-react");
+var import_react_alert_dialog = require("@radix-ui/react-alert-dialog");
+
+// components/ui/alert-dialog.tsx
+var AlertDialogPrimitive = __toESM(require("@radix-ui/react-alert-dialog"));
+var import_jsx_runtime27 = require("react/jsx-runtime");
+function AlertDialogHeader({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    "div",
+    {
+      "data-slot": "alert-dialog-header",
+      className: cn("flex flex-col gap-2 text-center sm:text-left", className),
+      ...props
+    }
+  );
+}
+function AlertDialogFooter({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime27.jsx)(
+    "div",
+    {
+      "data-slot": "alert-dialog-footer",
+      className: cn(
+        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        className
+      ),
+      ...props
+    }
+  );
+}
+
+// components/dialog/confirm-dialog.tsx
+var import_jsx_runtime28 = require("react/jsx-runtime");
+var ConfirmDialog = ({
+  children,
+  title = "Are you sure?",
+  description = "This action cannot be undone.",
+  okText = "Ok",
+  cancelText = "Cancel",
+  loading = false,
+  okIconSide = "left",
+  cancelIconSide = "left",
+  onConfirm,
+  okIcon,
+  cancelIcon,
+  okButtonVariant = "default",
+  cancelButtonVariant = "outline",
+  okButtonSize = "default",
+  cancelButtonSize = "default",
+  open,
+  onOpenChange,
+  defaultOpen,
+  ...alertDialogProps
+}) => {
+  const CancelIcon = React13.useMemo(() => {
+    if (React13.isValidElement(cancelIcon)) return cancelIcon;
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_lucide_react12.XIcon, { className: "mr-2 h-4 w-4" });
+  }, [cancelIcon]);
+  const OkIcon = React13.useMemo(() => {
+    if (loading) return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_lucide_react12.LucideClockFading, { className: "mr-2 h-4 w-4" });
+    if (React13.isValidElement(okIcon)) return okIcon;
+    return /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_lucide_react12.CheckIcon, { className: "mr-2 h-4 w-4" });
+  }, [okIcon, loading]);
+  return /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
+    import_react_alert_dialog.AlertDialog,
+    {
+      open,
+      onOpenChange,
+      defaultOpen,
+      ...alertDialogProps,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_react_alert_dialog.AlertDialogTrigger, { asChild: true, children }),
+        /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(import_react_alert_dialog.AlertDialogContent, { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(AlertDialogHeader, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_react_alert_dialog.AlertDialogTitle, { children: title }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_react_alert_dialog.AlertDialogDescription, { children: description })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(AlertDialogFooter, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_react_alert_dialog.AlertDialogCancel, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
+              "button",
+              {
+                type: "button",
+                disabled: loading,
+                className: `btn btn-${cancelButtonVariant} btn-${cancelButtonSize}`,
+                children: [
+                  cancelIconSide === "left" && CancelIcon,
+                  cancelText,
+                  cancelIconSide === "right" && CancelIcon
+                ]
+              }
+            ) }),
+            /* @__PURE__ */ (0, import_jsx_runtime28.jsx)(import_react_alert_dialog.AlertDialogAction, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime28.jsxs)(
+              "button",
+              {
+                type: "button",
+                disabled: loading,
+                onClick: onConfirm,
+                children: [
+                  okIconSide === "left" && OkIcon,
+                  okText,
+                  okIconSide === "right" && OkIcon
+                ]
+              }
+            ) })
+          ] })
+        ] })
+      ]
+    }
+  );
+};
+ConfirmDialog.displayName = "ConfirmDialog";
+
+// components/buttons/delete/index.tsx
+var import_jsx_runtime29 = require("react/jsx-runtime");
+var DeleteButton = ({
+  resource,
+  recordItemId,
+  onSuccess,
+  mutationMode: mutationModeProp,
+  confirmTitle,
+  confirmDescription,
+  successNotification,
+  errorNotification,
+  hideText = false,
+  accessControl,
+  meta,
+  dataProviderName,
+  confirmOkText,
+  confirmCancelText,
+  invalidates,
+  children,
+  ...props
+}) => {
+  const {
+    title,
+    label,
+    hidden,
+    disabled,
+    loading,
+    confirmTitle: defaultConfirmTitle,
+    confirmOkLabel: defaultConfirmOkLabel,
+    cancelLabel: defaultCancelLabel,
+    onConfirm,
+    canAccess
+  } = (0, import_core4.useDeleteButton)({
+    resource,
+    id: recordItemId,
+    dataProviderName,
+    invalidates,
+    meta,
+    onSuccess,
+    mutationMode: mutationModeProp,
+    errorNotification,
+    successNotification,
+    accessControl
+  });
+  if (hidden || !canAccess?.can) return null;
+  return /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+    ConfirmDialog,
+    {
+      okText: confirmOkText ?? defaultConfirmOkLabel,
+      cancelText: confirmCancelText ?? defaultCancelLabel,
+      okButtonVariant: "destructive",
+      cancelButtonVariant: "outline",
+      title: confirmTitle ?? defaultConfirmTitle,
+      description: confirmDescription,
+      loading,
+      onConfirm,
+      children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(
+        Button,
+        {
+          disabled,
+          title,
+          loading,
+          "data-testId": "delete-button",
+          className: "bg-rose-500 text-slate-50",
+          ...props,
+          children: /* @__PURE__ */ (0, import_jsx_runtime29.jsx)(import_lucide_react13.Trash2Icon, { className: "h-4 w-4" })
+        }
+      )
+    }
+  );
+};
+DeleteButton.displayName = "DeleteButton";
+
+// components/buttons/edit/index.tsx
+var import_lucide_react14 = require("lucide-react");
+var import_core5 = require("@refinedev/core");
+var import_jsx_runtime30 = require("react/jsx-runtime");
+var EditButton = ({
+  resource,
+  recordItemId,
+  hideText = false,
+  accessControl,
+  meta,
+  onClick,
+  children,
+  ...props
+}) => {
+  const { hidden, disabled, label, title, LinkComponent, to } = (0, import_core5.useEditButton)({
+    resource,
+    id: recordItemId,
+    accessControl,
+    meta
+  });
+  if (hidden) return null;
+  if (recordItemId === void 0 || recordItemId === null) return null;
+  const resolvedTo = typeof to === "string" ? to.includes("[id]") ? to.replace("[id]", String(recordItemId)) : to : `/edit/${String(recordItemId)}`;
+  const isDisabled = disabled || props.disabled;
+  const handleClick = (e) => {
+    if (isDisabled) {
+      e.preventDefault();
+      return;
+    }
+    if (onClick) {
+      e.preventDefault();
+      onClick(e);
+    }
+  };
+  const text = children ?? label ?? "Editar";
+  const ariaLabel = hideText ? typeof text === "string" ? text : "Editar" : void 0;
+  return /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Button, { asChild: true, title, disabled: isDisabled, ...props, children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(
+    LinkComponent,
+    {
+      to: resolvedTo,
+      replace: false,
+      onClick: handleClick,
+      "aria-label": ariaLabel,
+      children: /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(import_lucide_react14.SquarePenIcon, { className: hideText ? "h-4 w-4" : "h-4 w-4" })
+    }
+  ) });
+};
+EditButton.displayName = "EditButton";
+
+// components/buttons/list/index.tsx
+var import_lucide_react15 = require("lucide-react");
+var import_core6 = require("@refinedev/core");
+var import_jsx_runtime31 = require("react/jsx-runtime");
+var ListButton = ({
+  resource: resourceNameFromProps,
+  hideText = false,
+  accessControl,
+  meta,
+  children,
+  onClick,
+  ...props
+}) => {
+  const { hidden, disabled, label, title, LinkComponent, to } = (0, import_core6.useListButton)({
+    resource: resourceNameFromProps,
+    accessControl,
+    meta
+  });
+  if (hidden) return null;
+  return /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
+    LinkComponent,
+    {
+      to,
+      replace: false,
+      onClick: (e) => {
+        if (disabled) {
+          e.preventDefault();
+          return;
+        }
+        if (onClick) {
+          e.preventDefault();
+          onClick(e);
+        }
+      },
+      children: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
+        Button,
+        {
+          disabled,
+          title,
+          icon: /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(import_lucide_react15.ListIcon, { className: "mr-2 h-4 w-4" }),
+          ...props,
+          children: !hideText && (children ?? label)
+        }
+      )
+    }
+  );
+};
+ListButton.displayName = "ListButton";
+
+// components/buttons/refresh/index.tsx
+var import_lucide_react16 = require("lucide-react");
+var import_core7 = require("@refinedev/core");
+var import_jsx_runtime32 = require("react/jsx-runtime");
+var RefreshButton = ({
+  resource,
+  recordItemId,
+  hideText = false,
+  dataProviderName,
+  children,
+  ...props
+}) => {
+  const { onClick, label, loading } = (0, import_core7.useRefreshButton)({
+    resource,
+    id: recordItemId,
+    dataProviderName
+  });
+  return /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(
+    Button,
+    {
+      onClick,
+      loading,
+      icon: /* @__PURE__ */ (0, import_jsx_runtime32.jsx)(import_lucide_react16.RefreshCwIcon, { className: "mr-2 h-4 w-4" }),
+      ...props,
+      children: !hideText && (children ?? label)
+    }
+  );
+};
+RefreshButton.displayName = "RefreshButton";
+
+// components/buttons/save/index.tsx
+var import_core8 = require("@refinedev/core");
+var import_lucide_react17 = require("lucide-react");
+var import_react_slot5 = require("@radix-ui/react-slot");
+var import_jsx_runtime33 = require("react/jsx-runtime");
+var SaveButton = ({
+  hideText = false,
+  children,
+  accessControl,
+  access,
+  resource,
+  recordItemId,
+  loading,
+  ...props
+}) => {
+  const { label } = (0, import_core8.useSaveButton)();
+  const Com = !accessControl?.enabled ? import_react_slot5.Slot : import_core8.CanAccess;
+  if (accessControl?.hideIfUnauthorized && accessControl?.enabled) {
+    return null;
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(
+    Com,
+    {
+      params: {
+        id: recordItemId
+      },
+      resource,
+      action: "save",
+      ...access,
+      children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(Button, { ...props, disabled: loading, children: [
+        loading && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(import_lucide_react17.Loader2, { className: "mr-2 h-4 w-4 animate-spin" }),
+        !hideText && (children ?? label),
+        /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(import_lucide_react17.SaveIcon, { className: "mr-2 h-4 w-4" })
+      ] })
+    }
+  );
+};
+SaveButton.displayName = "SaveButton";
+
+// components/buttons/show/index.tsx
+var import_lucide_react18 = require("lucide-react");
+var import_core9 = require("@refinedev/core");
+var import_jsx_runtime34 = require("react/jsx-runtime");
+var ShowButton = ({
+  resource: resourceNameFromProps,
+  recordItemId,
+  hideText = false,
+  accessControl,
+  meta,
+  children,
+  onClick,
+  ...props
+}) => {
+  const { to, label, title, hidden, disabled, LinkComponent } = (0, import_core9.useShowButton)({
+    resource: resourceNameFromProps,
+    id: recordItemId,
+    accessControl,
+    meta
+  });
+  const isDisabled = disabled || props.disabled;
+  const isHidden = hidden || props.hidden;
+  if (isHidden) return null;
+  const resolvedTo = typeof to === "string" && to.includes("[id]") ? to.replace("[id]", String(recordItemId)) : to ?? `/show/${String(recordItemId)}`;
+  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(
+    LinkComponent,
+    {
+      to: resolvedTo,
+      replace: false,
+      onClick: (e) => {
+        if (isDisabled) {
+          e.preventDefault();
+          return;
+        }
+        if (onClick) {
+          e.preventDefault();
+          onClick(e);
+        }
+      },
+      children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Button, { title, disabled: isDisabled, ...props, children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(import_lucide_react18.EyeIcon, { className: "h-4 w-4" }) })
+    }
+  );
+};
+ShowButton.displayName = "ShowButton";
+
+// components/crud/create/index.tsx
+var import_react6 = require("react");
+var import_core11 = require("@refinedev/core");
+
+// components/breadcrumb/index.tsx
+var import_core10 = require("@refinedev/core");
+var import_react5 = require("react");
+var import_lucide_react20 = require("lucide-react");
+
+// components/ui/breadcrumb.tsx
+var import_lucide_react19 = require("lucide-react");
+var import_react_slot6 = require("@radix-ui/react-slot");
+var import_jsx_runtime35 = require("react/jsx-runtime");
+function Breadcrumb({ ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("nav", { "aria-label": "breadcrumb", "data-slot": "breadcrumb", ...props });
+}
+function BreadcrumbList({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+    "ol",
+    {
+      "data-slot": "breadcrumb-list",
+      className: cn(
+        "text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function BreadcrumbItem({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+    "li",
+    {
+      "data-slot": "breadcrumb-item",
+      className: cn("inline-flex items-center gap-1.5", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbLink({
+  asChild,
+  className,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot6.Slot : "a";
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+    Comp,
+    {
+      "data-slot": "breadcrumb-link",
+      className: cn("hover:text-foreground transition-colors", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbPage({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+    "span",
+    {
+      "data-slot": "breadcrumb-page",
+      role: "link",
+      "aria-disabled": "true",
+      "aria-current": "page",
+      className: cn("text-foreground font-normal", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbSeparator({
+  children,
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+    "li",
+    {
+      "data-slot": "breadcrumb-separator",
+      role: "presentation",
+      "aria-hidden": "true",
+      className: cn("[&>svg]:size-3.5", className),
+      ...props,
+      children: children ?? /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_lucide_react19.ChevronRight, {})
+    }
+  );
+}
+
+// components/breadcrumb/index.tsx
+var import_jsx_runtime36 = require("react/jsx-runtime");
+var Breadcrumbs = ({ showHome = true, meta }) => {
+  const { breadcrumbs } = (0, import_core10.useBreadcrumb)({
+    meta
+  });
+  const { hasDashboard } = (0, import_core10.useRefineContext)();
+  const { resources } = (0, import_core10.useResource)();
+  const dashboardResource = resources[0];
+  const rootRouteResource = (0, import_core10.matchResourceFromRoute)("/", resources);
+  const BreadCrumbItems = breadcrumbs.map(({ label, href }, key) => /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_react5.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(BreadcrumbItem, { children: href ? /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(BreadcrumbLink, { asChild: true, href: `#x`, children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Link, { href, children: label }) }) : /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(BreadcrumbPage, { children: label }) }),
+    key < breadcrumbs.length - 1 && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(BreadcrumbSeparator, {})
+  ] }, key));
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Breadcrumb, { children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(BreadcrumbList, { children: [
+    showHome || hasDashboard || rootRouteResource.found ? /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(BreadcrumbItem, { children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(
+        BreadcrumbLink,
+        {
+          href: dashboardResource.list?.toString(),
+          asChild: true,
+          title: dashboardResource?.meta?.title ?? dashboardResource.name ?? "Dashboard",
+          children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(
+            Link,
+            {
+              href: dashboardResource.list?.toString(),
+              title: dashboardResource?.meta?.title ?? dashboardResource.name ?? "Dashboard",
+              children: dashboardResource?.meta?.icon ?? /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(import_lucide_react20.HomeIcon, { className: "h-4 w-4" })
+            }
+          )
+        }
+      ) }),
+      /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(BreadcrumbSeparator, {})
+    ] }) : null,
+    BreadCrumbItems
+  ] }) });
+};
+
+// components/crud/create/index.tsx
+var import_jsx_runtime37 = require("react/jsx-runtime");
+var CreatePage = ({
+  title,
+  resource: resourceFromProps,
+  breadcrumb: breadcrumbFromProps,
+  extra,
+  children
+}) => {
+  const translate = (0, import_core11.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core11.useRefineContext)();
+  const getUserFriendlyName = (0, import_core11.useUserFriendlyName)();
+  const { resource, identifier } = (0, import_core11.useResource)(resourceFromProps);
+  const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
+  const renderTitle = () => {
+    if (title === false) return null;
+    if (title) {
+      if (typeof title === "string" || typeof title === "number") {
+        return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h3", { children: title });
+      }
+      return title;
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h3", { children: translate(
+      `${identifier}.titles.create`,
+      `Create ${getUserFriendlyName(
+        resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
+        "singular"
+      )}`
+    ) });
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(import_jsx_runtime37.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
+      PageHeader,
+      {
+        title: renderTitle(),
+        isBack: true,
+        breadcrumb: (0, import_react6.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Breadcrumbs, {}),
+        extra: extra ?? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(import_jsx_runtime37.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(ListButton, { resource: resourceFromProps }) })
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: "!mt-0 pt-4", children })
+  ] });
+};
+CreatePage.displayName = "CreatePage";
+
+// components/crud/edit/index.tsx
+var import_core12 = require("@refinedev/core");
+var import_react7 = require("react");
+var import_jsx_runtime38 = require("react/jsx-runtime");
+var EditPage = ({
+  title,
+  resource: resourceFromProps,
+  mutationMode: mutationModeFromProps,
+  recordItemId,
+  deleteButtonProps: deleteButtonPropsFromProps,
+  headerButtons: headerButtonsFromProps,
+  dataProviderName,
+  extra,
+  breadcrumb: breadcrumbFromProps,
+  canDelete = true,
+  children,
+  isLoading,
+  autoSaveProps
+}) => {
+  const translate = (0, import_core12.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core12.useRefineContext)();
+  const { mutationMode: mutationModeContext } = (0, import_core12.useMutationMode)();
+  const mutationMode = mutationModeFromProps ?? mutationModeContext;
+  const routerType = (0, import_core12.useRouterType)();
+  const back = (0, import_core12.useBack)();
+  const go = (0, import_core12.useGo)();
+  const { goBack, list: legacyGoList } = (0, import_core12.useNavigation)();
+  const getUserFriendlyName = (0, import_core12.useUserFriendlyName)();
+  const {
+    resource,
+    action,
+    id: idFromParams,
+    identifier
+  } = (0, import_core12.useResource)(resourceFromProps);
+  const goListPath = (0, import_core12.useToPath)({
+    resource,
+    action: "list"
+  });
+  const id = recordItemId ?? idFromParams;
+  const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
+  const hasList = resource?.list && !recordItemId;
+  const isDeleteButtonVisible = canDelete ?? ((resource?.meta?.canDelete ?? resource?.canDelete) || deleteButtonPropsFromProps);
+  const listButtonProps = hasList ? {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier
+  } : void 0;
+  const refreshButtonProps = {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    recordItemId: id,
+    dataProviderName
+  };
+  const deleteButtonProps = isDeleteButtonVisible ? {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    mutationMode,
+    onSuccess: () => {
+      if (routerType === "legacy") {
+        legacyGoList(resource?.route ?? resource?.name ?? "");
+      } else {
+        go({ to: goListPath });
+      }
+    },
+    recordItemId: id,
+    dataProviderName,
+    ...deleteButtonPropsFromProps
+  } : void 0;
+  const defaultHeaderButtons = /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("div", { className: "flex flex-row items-center gap-2", children: [
+    autoSaveProps && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_core12.AutoSaveIndicator, { ...autoSaveProps }),
+    hasList && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(ListButton, { ...listButtonProps }),
+    /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(RefreshButton, { ...refreshButtonProps }),
+    /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(DeleteButton, { ...deleteButtonProps })
+  ] });
+  const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
+    defaultButtons: defaultHeaderButtons,
+    listButtonProps,
+    refreshButtonProps
+  }) : headerButtonsFromProps : defaultHeaderButtons;
+  const renderTitle = () => {
+    if (title === false) return null;
+    if (title) {
+      if (typeof title === "string" || typeof title === "number") {
+        return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: title });
+      }
+      return title;
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: translate(
+      `${identifier}.titles.show`,
+      `Show ${getUserFriendlyName(
+        resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
+        "singular"
+      )}`
+    ) });
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)(import_jsx_runtime38.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
+      PageHeader,
+      {
+        title: renderTitle(),
+        isBack: true,
+        breadcrumb: (0, import_react7.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Breadcrumbs, {}),
+        extra: extra ?? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("div", { className: "inline-flex flex-row items-center gap-x-2", children: headerButtons })
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)("div", { className: "pt-4", children: [
+      isLoading && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Skeleton, { className: "h-[80vh] w-full" }),
+      !isLoading && children
+    ] })
+  ] });
+};
+
+// components/crud/list/index.tsx
+var import_core13 = require("@refinedev/core");
+var import_react8 = require("react");
+var import_jsx_runtime39 = require("react/jsx-runtime");
+var List = ({
+  canCreate,
+  title,
+  children,
+  createButtonProps: createButtonPropsFromProps,
+  resource: resourceFromProps,
+  breadcrumb: breadcrumbFromProps,
+  headerButtonProps,
+  headerButtons: headerButtonsFromProps,
+  extra
+}) => {
+  const translate = (0, import_core13.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core13.useRefineContext)();
+  const routerType = (0, import_core13.useRouterType)();
+  const getUserFriendlyName = (0, import_core13.useUserFriendlyName)();
+  const { resource, identifier } = (0, import_core13.useResource)(resourceFromProps);
+  const isCreateButtonVisible = canCreate ?? ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps);
+  const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
+  const createButtonProps = isCreateButtonVisible ? {
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    ...createButtonPropsFromProps
+  } : void 0;
+  const defaultExtra = isCreateButtonVisible ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(CreateButton, { ...createButtonProps }) : null;
+  const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
+    defaultButtons: defaultExtra,
+    createButtonProps
+  }) : headerButtonsFromProps : defaultExtra;
+  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)(
+    PageHeader,
+    {
+      title: title ?? translate(
+        `${identifier}.titles.list`,
+        getUserFriendlyName(
+          resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
+          "plural"
+        )
+      ),
+      extra: /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", { className: headerButtonProps?.className, children: headerButtons }),
+      breadcrumb: (0, import_react8.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(import_jsx_runtime39.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(Breadcrumbs, {}),
+      children: [
+        extra,
+        /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("div", { children })
+      ]
+    }
+  ) });
+};
+
+// components/crud/show/index.tsx
+var import_react9 = require("react");
+var import_core14 = require("@refinedev/core");
+var import_lucide_react21 = require("lucide-react");
+var import_jsx_runtime40 = require("react/jsx-runtime");
+var Show = (props) => {
+  const {
+    children,
+    resource: resourceFromProps,
+    recordItemId,
+    canDelete,
+    deleteButtonProps: deleteButtonPropsFromProps,
+    canEdit,
+    dataProviderName,
+    isLoading,
+    footerButtons: footerButtonsFromProps,
+    footerButtonProps,
+    headerButtons: headerButtonsFromProps,
+    headerButtonProps,
+    wrapperProps,
+    contentProps,
+    headerProps,
+    goBack: goBackFromProps,
+    breadcrumb: breadcrumbFromProps,
+    title
+  } = props;
+  const translate = (0, import_core14.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core14.useRefineContext)();
+  const routerType = (0, import_core14.useRouterType)();
+  const back = (0, import_core14.useBack)();
+  const go = (0, import_core14.useGo)();
+  const { goBack, list: legacyGoList } = (0, import_core14.useNavigation)();
+  const getUserFriendlyName = (0, import_core14.useUserFriendlyName)();
+  const {
+    resource,
+    action,
+    id: idFromParams,
+    identifier
+  } = (0, import_core14.useResource)(resourceFromProps);
+  const goListPath = (0, import_core14.useToPath)({
+    resource,
+    action: "list"
+  });
+  const id = recordItemId ?? idFromParams;
+  const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
+  const hasList = resource?.list && !recordItemId;
+  const isDeleteButtonVisible = canDelete ?? ((resource?.meta?.canDelete ?? resource?.canDelete) || deleteButtonPropsFromProps);
+  const isEditButtonVisible = canEdit ?? resource?.canEdit ?? !!resource?.edit;
+  const listButtonProps = hasList ? {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier
+  } : void 0;
+  const editButtonProps = isEditButtonVisible ? {
+    colorScheme: "brand",
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    recordItemId: id
+  } : void 0;
+  const deleteButtonProps = isDeleteButtonVisible ? {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    recordItemId: id,
+    onSuccess: () => {
+      if (routerType === "legacy") {
+        legacyGoList(resource?.route ?? resource?.name ?? "");
+      } else {
+        go({ to: goListPath });
+      }
+    },
+    dataProviderName,
+    ...deleteButtonPropsFromProps
+  } : void 0;
+  const refreshButtonProps = {
+    ...isLoading ? { disabled: true } : {},
+    resource: routerType === "legacy" ? resource?.route : identifier,
+    recordItemId: id,
+    dataProviderName
+  };
+  const defaultHeaderButtons = /* @__PURE__ */ (0, import_jsx_runtime40.jsxs)(import_jsx_runtime40.Fragment, { children: [
+    listButtonProps && /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(ListButton, { ...listButtonProps }),
+    isEditButtonVisible && /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(EditButton, { colorScheme: "brand", ...editButtonProps }),
+    /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(RefreshButton, { ...refreshButtonProps })
+  ] });
+  const buttonBack = goBackFromProps === null ? null : /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(
+    Button,
+    {
+      "aria-label": "back",
+      variant: "ghost",
+      size: "sm",
+      onClick: action !== "list" && typeof action !== "undefined" ? routerType === "legacy" ? goBack : back : void 0,
+      children: typeof goBackFromProps !== "undefined" ? goBackFromProps : /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(import_lucide_react21.ArrowLeft, {})
+    }
+  );
+  const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
+    defaultButtons: defaultHeaderButtons,
+    deleteButtonProps,
+    editButtonProps,
+    listButtonProps,
+    refreshButtonProps
+  }) : headerButtonsFromProps : defaultHeaderButtons;
+  const footerButtons = footerButtonsFromProps ? typeof footerButtonsFromProps === "function" ? footerButtonsFromProps({ defaultButtons: null }) : footerButtonsFromProps : null;
+  const renderTitle = () => {
+    if (title === false) return null;
+    if (title) {
+      if (typeof title === "string" || typeof title === "number") {
+        return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: title });
+      }
+      return title;
+    }
+    return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: translate(
+      `${identifier}.titles.show`,
+      `Show ${getUserFriendlyName(
+        resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
+        "singular"
+      )}`
+    ) });
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(
+    PageHeader,
+    {
+      title: renderTitle(),
+      isBack: true,
+      breadcrumb: (0, import_react9.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(import_jsx_runtime40.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(Breadcrumbs, {}),
+      children
+    }
+  );
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AddCardForm,
   AppSidebar,
+  CreateButton,
+  CreatePage,
+  DeleteButton,
+  EditButton,
+  EditPage,
   Field,
   Form,
   ImagePreviewCell,
   Link,
+  List,
+  ListButton,
   NavMain,
   NavProjects,
   NavRefine,
   NavUser,
   PageHeader,
+  RefreshButton,
+  SaveButton,
+  Show,
+  ShowButton,
   TeamSwitcher
 });

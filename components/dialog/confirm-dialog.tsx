@@ -1,7 +1,7 @@
 import * as React from "react"
+
+import { CheckIcon, LucideClockFading, XIcon } from "lucide-react"
 import {
-  AlertDialogHeader,
-  AlertDialogFooter,
   AlertDialog,
   AlertDialogTrigger,
   AlertDialogContent,
@@ -9,9 +9,9 @@ import {
   AlertDialogDescription,
   AlertDialogCancel,
   AlertDialogAction,
-} from "./components/ui/alert-dialog"
-import { ButtonProps } from "./components/ui/button"
-import { CheckIcon, LucideClockFading, XIcon } from "lucide-react"
+} from "@radix-ui/react-alert-dialog"
+import { ButtonProps } from "../ui/button"
+import { AlertDialogFooter, AlertDialogHeader } from "../ui/alert-dialog"
 
 export type ConfirmDialogProps = React.ComponentPropsWithoutRef<
   typeof AlertDialog
