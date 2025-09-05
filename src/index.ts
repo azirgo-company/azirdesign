@@ -136,5 +136,5 @@ export { cn } from "../src/lib/utils"
 export { useTheme } from "../src/lib/use-theme"
 
 //Azirgo
-export { AzirLayout } from "../components/layout"
+export { default as AzirLayout } from "../components/layout"
 export { default as AzirTable } from "../components/table/azir-table"

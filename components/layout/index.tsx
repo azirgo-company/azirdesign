@@ -22,3 +22,5 @@ export const AzirLayout = ({ children }: { children: React.ReactNode }) => {
     </SidebarProvider>
   )
 }
+
+export default AzirLayout
