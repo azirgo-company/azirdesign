@@ -2,7 +2,7 @@ import { AlertDialogProps } from "@radix-ui/react-alert-dialog"
 // import { DeleteButtonValues } from '@refinedev/core/dist/hooks/button/delete-button'
 import type { ReactElement } from "react"
 import { VariantProps } from "class-variance-authority"
-import { buttonVariants } from "./components/ui/button"
+import { buttonVariants } from "../ui/button"
 
 export type ConfirmDialogProps = AlertDialogProps & {
   title?: string

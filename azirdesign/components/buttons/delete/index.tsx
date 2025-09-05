@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import { Trash2Icon } from "lucide-react"
 import { useDeleteButton } from "@refinedev/core"
-import { Button } from "./components/ui/button"
+import { Button } from "../../ui/button"
 import { DeleteButtonProps } from "../types"
 import { ConfirmDialog } from "../../dialog/confirm-dialog"
 

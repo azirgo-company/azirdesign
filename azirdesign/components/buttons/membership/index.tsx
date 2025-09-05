@@ -1,4 +1,4 @@
-import { Button } from "./components/ui/button"
+import { Button } from "../../ui/button"
 import { CreditCardIcon } from "lucide-react"
 import { useState } from "react"
 import { MembershipDialog } from "../../dialog/membership-dialog"

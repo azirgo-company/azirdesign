@@ -1,9 +1,9 @@
-import { CreateButtonProps } from "@/src/azirdesign/components/buttons/types"
-import { Button } from "./components/ui/button"
 import { useCreateButton, useNavigation } from "@refinedev/core"
 
 import { Loader2, SquarePlusIcon } from "lucide-react"
 import { useState, type FC } from "react"
+import { CreateButtonProps } from "../types"
+import { Button } from "../../ui/button"
 
 export const CreateButton: FC<CreateButtonProps> = ({
   resource,

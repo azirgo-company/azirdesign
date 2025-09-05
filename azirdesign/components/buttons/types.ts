@@ -12,10 +12,10 @@ import {
   RefineShowButtonProps,
 } from "@refinedev/ui-types"
 
-import { ButtonProps } from "./components/ui/button"
 import { CanAccess } from "@refinedev/core"
 import { ComponentProps } from "react"
-import { ConfirmDialogProps } from "@/src/azirdesign/components/buttons/confirm-dialog"
+import { ButtonProps } from "../ui/button"
+import { ConfirmDialogProps } from "./confirm-dialog"
 
 type CustomButtonProps<T> = ButtonProps & T
 

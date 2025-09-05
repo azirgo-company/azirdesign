@@ -1,7 +1,7 @@
-import { Button } from "./components/ui/button"
-import { RefreshButtonProps } from "@/src/azirdesign/components/buttons/types"
+import { Button } from "../../ui/button"
 import { RefreshCwIcon } from "lucide-react"
 import { useRefreshButton } from "@refinedev/core"
+import { RefreshButtonProps } from "../types"
 
 export const RefreshButton = ({
   resource,

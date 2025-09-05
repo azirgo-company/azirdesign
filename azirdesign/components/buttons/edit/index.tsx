@@ -1,8 +1,8 @@
-import { Button } from "./components/ui/button"
-import { EditButtonProps } from "@/src/azirdesign/components/buttons/types"
+import { Button } from "../../ui/button"
 import { SquarePenIcon } from "lucide-react"
 import { useEditButton } from "@refinedev/core"
 import * as React from "react"
+import { EditButtonProps } from "../types"
 
 export const EditButton = ({
   resource,

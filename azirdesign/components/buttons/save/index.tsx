@@ -3,7 +3,7 @@ import { Loader2, SaveIcon } from "lucide-react"
 
 import type { FC } from "react"
 import { Slot } from "@radix-ui/react-slot"
-import { Button } from "./components/ui/button"
+import { Button } from "../../ui/button"
 import { SaveButtonProps } from "../types"
 
 export const SaveButton: FC<SaveButtonProps> = ({

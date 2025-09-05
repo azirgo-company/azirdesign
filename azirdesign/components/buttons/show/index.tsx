@@ -1,8 +1,8 @@
-import { Button } from "./components/ui/button"
+import { Button } from "../../ui/button"
 import { EyeIcon } from "lucide-react"
-import { ShowButtonProps } from "@/src/azirdesign/components/buttons/types"
 import { useShowButton } from "@refinedev/core"
 import * as React from "react"
+import { ShowButtonProps } from "../types"
 
 export const ShowButton = ({
   resource: resourceNameFromProps,
