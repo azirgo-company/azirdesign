@@ -1,6 +1,6 @@
 {
   "name": "@azirgopro/azirdesign",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component library built with TypeScript, Tailwind CSS, and Radix UI",
   "keywords": [
     "react",
