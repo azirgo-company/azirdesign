@@ -2,7 +2,7 @@ import { ArrowLeft } from "lucide-react"
 import { Button } from "./ui/button"
 import { PageHeaderProps } from "./layout/header/types"
 import { useOnBack } from "./hooks/use-on-back"
-import { cn } from "../../src/lib/utils"
+import { cn } from "../src/lib/utils"
 
 export const PageHeader = ({
   extra,

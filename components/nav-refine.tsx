@@ -10,7 +10,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar"
-import { cn } from "../../src/lib/utils"
+import { cn } from "../src/lib/utils"
 import { Link } from "./link"
 
 export function NavRefine() {

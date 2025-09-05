@@ -12,6 +12,6 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["azirdesign/components", "azirdesign/index.ts"],
+  "include": ["components", "azirdesign/index.ts"],
   "exclude": ["node_modules", "dist"]
 }

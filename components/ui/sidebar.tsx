@@ -18,7 +18,7 @@ import {
   Tooltip,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip"
-import { cn } from "../../../src/lib/utils"
+import { cn } from "../../src/lib/utils"
 import { Skeleton } from "./skeleton"
 import { Button } from "./button"
 import { Separator } from "./separator"
