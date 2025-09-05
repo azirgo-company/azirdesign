@@ -10,7 +10,7 @@ import { RefineThemedLayoutV2SiderProps, RefineCreateButtonProps, RefineDeleteBu
 import * as react_hook_form from 'react-hook-form';
 import { FieldValues, FieldPath, UseControllerProps, ControllerRenderProps } from 'react-hook-form';
 import { LucideIcon } from 'lucide-react';
-import { CanAccess } from '@refinedev/core';
+import { CanAccess, BaseRecord, HttpError } from '@refinedev/core';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import { AlertDialogProps, AlertDialog as AlertDialog$1 } from '@radix-ui/react-alert-dialog';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
@@ -19,6 +19,7 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import * as SheetPrimitive from '@radix-ui/react-dialog';
+import { UseTableReturnType } from '@refinedev/react-table';
 
 interface AddCardFormProps {
     user: {
@@ -399,4 +400,12 @@ declare function useTheme(): {
     setTheme: (newTheme: Theme) => void;
 };
 
-export { AddCardForm, AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger, AppSidebar, Avatar, AvatarFallback, AvatarImage, Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, type ButtonProps, Card, Collapsible, ConfirmDialog, type ConfirmDialogProps, CreateButton, CreatePage, DeleteButton, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EditButton, EditPage, Field, Form$1 as Form, ImagePreviewCell, Input, Label, Link, List, ListButton, NavMain, NavProjects, NavRefine, NavUser, PageHeader, RefreshButton, SaveButton, Select, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Show, ShowButton, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, Table, TeamSwitcher, ThemeToggleItem, Tooltip, Form as UIForm, buttonVariants, cn, useIsMobile, useOnBack, useSidebar, useTheme };
+declare const AzirLayout: ({ children }: {
+    children: React.ReactNode;
+}) => react_jsx_runtime.JSX.Element;
+
+declare function AzirTable<TQueryFnData extends BaseRecord = BaseRecord, TError extends HttpError = HttpError, TData extends BaseRecord = TQueryFnData>({ table }: {
+    table: UseTableReturnType<TData, TError>;
+}): react_jsx_runtime.JSX.Element;
+
+export { AddCardForm, AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger, AppSidebar, Avatar, AvatarFallback, AvatarImage, AzirLayout, AzirTable, Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, type ButtonProps, Card, Collapsible, ConfirmDialog, type ConfirmDialogProps, CreateButton, CreatePage, DeleteButton, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EditButton, EditPage, Field, Form$1 as Form, ImagePreviewCell, Input, Label, Link, List, ListButton, NavMain, NavProjects, NavRefine, NavUser, PageHeader, RefreshButton, SaveButton, Select, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Show, ShowButton, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Skeleton, Table, TeamSwitcher, ThemeToggleItem, Tooltip, Form as UIForm, buttonVariants, cn, useIsMobile, useOnBack, useSidebar, useTheme };

@@ -46,6 +46,8 @@ __export(index_exports, {
   Avatar: () => Avatar,
   AvatarFallback: () => AvatarFallback,
   AvatarImage: () => AvatarImage,
+  AzirLayout: () => layout_default,
+  AzirTable: () => AzirTable,
   Breadcrumb: () => Breadcrumb,
   BreadcrumbEllipsis: () => BreadcrumbEllipsis,
   BreadcrumbItem: () => BreadcrumbItem,
@@ -3431,6 +3433,123 @@ function Select({
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.Root, { "data-slot": "select", ...props });
 }
+function SelectValue({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.Value, { "data-slot": "select-value", ...props });
+}
+function SelectTrigger({
+  className,
+  size = "default",
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
+    SelectPrimitive.Trigger,
+    {
+      "data-slot": "select-trigger",
+      "data-size": size,
+      className: cn(
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      ),
+      ...props,
+      children: [
+        children,
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react22.ChevronDownIcon, { className: "size-4 opacity-50" }) })
+      ]
+    }
+  );
+}
+function SelectContent({
+  className,
+  children,
+  position = "popper",
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
+    SelectPrimitive.Content,
+    {
+      "data-slot": "select-content",
+      className: cn(
+        "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border shadow-md",
+        position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+        className
+      ),
+      position,
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectScrollUpButton, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+          SelectPrimitive.Viewport,
+          {
+            className: cn(
+              "p-1",
+              position === "popper" && "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"
+            ),
+            children
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectScrollDownButton, {})
+      ]
+    }
+  ) });
+}
+function SelectItem({
+  className,
+  children,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
+    SelectPrimitive.Item,
+    {
+      "data-slot": "select-item",
+      className: cn(
+        "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        className
+      ),
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("span", { className: "absolute right-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react22.CheckIcon, { className: "size-4" }) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.ItemText, { children })
+      ]
+    }
+  );
+}
+function SelectScrollUpButton({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+    SelectPrimitive.ScrollUpButton,
+    {
+      "data-slot": "select-scroll-up-button",
+      className: cn(
+        "flex cursor-default items-center justify-center py-1",
+        className
+      ),
+      ...props,
+      children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react22.ChevronUpIcon, { className: "size-4" })
+    }
+  );
+}
+function SelectScrollDownButton({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+    SelectPrimitive.ScrollDownButton,
+    {
+      "data-slot": "select-scroll-down-button",
+      className: cn(
+        "flex cursor-default items-center justify-center py-1",
+        className
+      ),
+      ...props,
+      children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react22.ChevronDownIcon, { className: "size-4" })
+    }
+  );
+}
 
 // components/ui/table.tsx
 var import_jsx_runtime45 = require("react/jsx-runtime");
@@ -3448,6 +3567,65 @@ function Table({ className, ...props }) {
           ...props
         }
       )
+    }
+  );
+}
+function TableHeader({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
+    "thead",
+    {
+      "data-slot": "table-header",
+      className: cn("[&_tr]:border-b", className),
+      ...props
+    }
+  );
+}
+function TableBody({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
+    "tbody",
+    {
+      "data-slot": "table-body",
+      className: cn("[&_tr:last-child]:border-0", className),
+      ...props
+    }
+  );
+}
+function TableRow({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
+    "tr",
+    {
+      "data-slot": "table-row",
+      className: cn(
+        "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableHead({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
+    "th",
+    {
+      "data-slot": "table-head",
+      className: cn(
+        "text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function TableCell({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
+    "td",
+    {
+      "data-slot": "table-cell",
+      className: cn(
+        "p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+        className
+      ),
+      ...props
     }
   );
 }
@@ -3473,6 +3651,185 @@ function Tooltip2({
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(TooltipProvider2, { children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
 }
+
+// components/theme-toggle.tsx
+var import_lucide_react23 = require("lucide-react");
+var import_jsx_runtime47 = require("react/jsx-runtime");
+function ThemeToggle({
+  variant = "ghost",
+  size = "icon",
+  className
+}) {
+  const { theme, toggleTheme } = useTheme();
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+    Button,
+    {
+      variant,
+      size,
+      onClick: toggleTheme,
+      className,
+      "aria-label": "Cambiar tema",
+      children: theme === "light" ? /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(import_lucide_react23.Moon, { className: "h-4 w-4" }) : /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(import_lucide_react23.Sun, { className: "h-4 w-4" })
+    }
+  );
+}
+
+// components/layout/index.tsx
+var import_jsx_runtime48 = require("react/jsx-runtime");
+var AzirLayout = ({ children }) => {
+  return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(SidebarProvider, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(AppSidebar, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(SidebarInset, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("header", { className: "flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12", children: /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex w-full items-center justify-between gap-2 px-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(SidebarTrigger, { className: "-ml-1" }),
+        /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(ThemeToggle, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(NavUser, { className: "-mr-2" })
+        ] })
+      ] }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("div", { className: "flex flex-1 flex-col gap-4 p-4 pt-0", children })
+    ] })
+  ] });
+};
+var layout_default = AzirLayout;
+
+// components/table/azir-table.tsx
+var import_lucide_react25 = require("lucide-react");
+var import_react_table = require("@tanstack/react-table");
+
+// components/table/pagination.tsx
+var import_lucide_react24 = require("lucide-react");
+var import_jsx_runtime49 = require("react/jsx-runtime");
+function DataTablePagination({
+  table,
+  className
+}) {
+  const { pageIndex, pageSize } = table.getState().pagination;
+  const pageCount = table.getPageCount();
+  const canPreviousPage = table.getCanPreviousPage();
+  const canNextPage = table.getCanNextPage();
+  const selectedRows = table.getFilteredSelectedRowModel().rows.length;
+  const totalRows = table.getFilteredRowModel().rows.length;
+  const handlePageSizeChange = (value) => {
+    table.setPageSize(Number(value));
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: cn("flex items-center justify-between px-2", className), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "text-muted-foreground flex-1 text-sm", children: [
+      selectedRows,
+      " of ",
+      totalRows,
+      " row(s) selected."
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-6 lg:space-x-8", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "text-sm font-medium", children: "Rows per page" }),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Select, { value: `${pageSize}`, onValueChange: handlePageSizeChange, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectTrigger, { className: "h-8 w-[70px]", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectValue, { placeholder: pageSize }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectContent, { side: "top", children: [10, 20, 25, 30, 40, 50].map((size) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectItem, { value: `${size}`, children: size }, size)) })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex w-[100px] items-center justify-center text-sm font-medium", children: [
+        "Page ",
+        pageIndex + 1,
+        " of ",
+        pageCount
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+          Button,
+          {
+            variant: "outline",
+            size: "icon",
+            className: "hidden size-8 lg:flex",
+            onClick: () => table.setPageIndex(0),
+            disabled: !canPreviousPage,
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to first page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react24.ChevronsLeft, {})
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+          Button,
+          {
+            variant: "outline",
+            size: "icon",
+            className: "size-8",
+            onClick: () => table.previousPage(),
+            disabled: !canPreviousPage,
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to previous page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react24.ChevronLeft, {})
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+          Button,
+          {
+            variant: "outline",
+            size: "icon",
+            className: "size-8",
+            onClick: () => table.nextPage(),
+            disabled: !canNextPage,
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to next page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react24.ChevronRight, {})
+            ]
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+          Button,
+          {
+            variant: "outline",
+            size: "icon",
+            className: "hidden size-8 lg:flex",
+            onClick: () => table.setPageIndex(pageCount - 1),
+            disabled: !canNextPage,
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to last page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react24.ChevronsRight, {})
+            ]
+          }
+        )
+      ] })
+    ] })
+  ] });
+}
+
+// components/table/azir-table.tsx
+var import_jsx_runtime50 = require("react/jsx-runtime");
+function AzirTable({ table }) {
+  const {
+    refineCore: {
+      tableQuery: { isFetching }
+    }
+  } = table;
+  return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(import_jsx_runtime50.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "relative overflow-hidden rounded-md border", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Table, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
+          return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableHead, { children: header.isPlaceholder ? null : (0, import_react_table.flexRender)(
+            header.column.columnDef.header,
+            header.getContext()
+          ) }, header.id);
+        }) }, headerGroup.id)) }),
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableBody, { children: table.getRowModel().rows?.length ? table.getRowModel().rows.map((row) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
+          TableRow,
+          {
+            "data-state": row.getIsSelected() && "selected",
+            children: row.getVisibleCells().map((cell) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableCell, { children: (0, import_react_table.flexRender)(
+              cell.column.columnDef.cell,
+              cell.getContext()
+            ) }, cell.id))
+          },
+          row.id
+        )) : /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableRow, { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableCell, { colSpan: 2, className: "h-24 w-full text-center", children: "No hay resultados." }) }) })
+      ] }),
+      isFetching && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "absolute inset-0 z-10 flex items-center justify-center bg-white/30", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(import_lucide_react25.Loader, { className: "animate-spin" }) })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(DataTablePagination, { className: "mt-2", table })
+  ] });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   AddCardForm,
@@ -3491,6 +3848,8 @@ function Tooltip2({
   Avatar,
   AvatarFallback,
   AvatarImage,
+  AzirLayout,
+  AzirTable,
   Breadcrumb,
   BreadcrumbEllipsis,
   BreadcrumbItem,
@@ -3585,3 +3944,4 @@ function Tooltip2({
   useSidebar,
   useTheme
 });
+//# sourceMappingURL=index.js.map

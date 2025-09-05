@@ -14,7 +14,7 @@ import {
 import { Button } from "../ui/button"
 import { ComponentProps } from "react"
 import { Table } from "@tanstack/react-table"
-import { cn } from "../../../src/lib/utils"
+import { cn } from "../../src"
 
 interface DataTablePaginationProps<TData> extends ComponentProps<"div"> {
   table: Table<TData>
