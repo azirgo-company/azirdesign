@@ -4,9 +4,15 @@ export default defineConfig({
   entry: {
     index: "src/index.ts",
     client: "src/client.ts", // NUEVO
+    styles: "src/styles.css", // Incluir CSS
   },
   format: ["cjs", "esm"],
-  dts: true,
+  dts: {
+    entry: {
+      index: "src/index.ts",
+      client: "src/client.ts",
+    },
+  },
   splitting: false,
   sourcemap: true,
   clean: true,
@@ -35,5 +41,8 @@ export default defineConfig({
     "lucide-react",
     "next",
     "tailwind-merge",
+    "tailwindcss",
+    "tw-animate-css",
+    "leaflet/dist/leaflet.css",
   ],
 })
