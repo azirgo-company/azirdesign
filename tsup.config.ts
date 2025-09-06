@@ -42,7 +42,6 @@ export default defineConfig({
     "next",
     "tailwind-merge",
     "tailwindcss",
-    "tw-animate-css",
     "leaflet/dist/leaflet.css",
   ],
 })
