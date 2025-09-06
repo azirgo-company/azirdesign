@@ -2,7 +2,6 @@
 export { default as AddCardForm } from "../components/add-card-form"
 export { AppSidebar } from "../components/app-sidebar"
 export { Field } from "../components/field"
-export { Form } from "../components/form"
 export { default as ImagePreviewCell } from "../components/image-preview-cell"
 export { Link } from "../components/link"
 export { NavMain } from "../components/nav-main"
@@ -75,7 +74,6 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu"
-export { Form as UIForm } from "../components/ui/form"
 export { Input } from "../components/ui/input"
 export { Label } from "../components/ui/label"
 export { Select } from "../components/ui/select"

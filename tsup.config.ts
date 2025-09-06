@@ -1,7 +1,10 @@
 import { defineConfig } from "tsup"
 
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: {
+    index: "src/index.ts",
+    client: "src/client.ts", // NUEVO
+  },
   format: ["cjs", "esm"],
   dts: true,
   splitting: false,
@@ -10,6 +13,8 @@ export default defineConfig({
   external: [
     "react",
     "react-dom",
+    "react-hook-form",
+    "@clerk/nextjs",
     "@radix-ui/react-accordion",
     "@radix-ui/react-alert-dialog",
     "@radix-ui/react-avatar",
@@ -29,8 +34,6 @@ export default defineConfig({
     "class-variance-authority",
     "lucide-react",
     "next",
-    "react-hook-form",
     "tailwind-merge",
-    "@clerk/nextjs",
   ],
 })
