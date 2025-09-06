@@ -1,4 +1,5 @@
 "use client"
+import "./styles.css"
 
 // Business Components (with client-side features)
 export { default as AddCardForm } from "../components/add-card-form"

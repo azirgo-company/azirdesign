@@ -34,7 +34,6 @@
       "import": "./dist/client.mjs",
       "require": "./dist/client.js"
     },
-    "./styles.css": "./dist/styles.css",
     "./leaflet.css": "./dist/leaflet.css"
   },
   "files": [
@@ -43,7 +42,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && npm run copy-css",
+    "copy-css": "copy src\\styles.css dist\\styles.css && copy src\\leaflet.css dist\\leaflet.css",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build"
