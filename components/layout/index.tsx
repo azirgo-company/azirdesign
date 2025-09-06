@@ -1,3 +1,5 @@
+"use client"
+
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar"
 import { ThemeToggle } from "../theme-toggle"
 import { NavUser } from "../nav-user"
