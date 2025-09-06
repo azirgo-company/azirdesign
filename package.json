@@ -34,7 +34,8 @@
       "import": "./dist/client.mjs",
       "require": "./dist/client.js"
     },
-    "./leaflet.css": "./dist/leaflet.css"
+    "./leaflet.css": "./dist/leaflet.css",
+    "./styles.css": "./dist/styles.css"
   },
   "files": [
     "dist/**/*",
