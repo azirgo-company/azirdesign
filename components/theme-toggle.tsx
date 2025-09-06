@@ -1,7 +1,8 @@
 "use client"
 
 import { Moon, Sun } from "lucide-react"
-import { Button, useTheme } from "../azirdesign"
+import { Button } from "./ui/button"
+import { useTheme } from "../src/lib/use-theme"
 
 interface ThemeToggleProps {
   variant?: "default" | "ghost" | "outline"

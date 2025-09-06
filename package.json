@@ -28,6 +28,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.mjs",
+      "require": "./dist/client.js"
     }
   },
   "files": [
@@ -36,8 +41,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --dts --format cjs,esm",
-    "dev": "tsup src/index.ts --dts --format cjs,esm --watch",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run clean && npm run build"
   },

@@ -28,8 +28,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var index_exports = {};
-__export(index_exports, {
+var src_exports = {};
+__export(src_exports, {
   Breadcrumb: () => Breadcrumb,
   BreadcrumbEllipsis: () => BreadcrumbEllipsis,
   BreadcrumbItem: () => BreadcrumbItem,
@@ -48,7 +48,7 @@ __export(index_exports, {
   buttonVariants: () => buttonVariants,
   cn: () => cn
 });
-module.exports = __toCommonJS(index_exports);
+module.exports = __toCommonJS(src_exports);
 
 // components/field.tsx
 var import_jsx_runtime = require("react/jsx-runtime");
