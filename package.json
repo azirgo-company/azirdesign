@@ -70,8 +70,7 @@
   },
   "devDependencies": {
     "tsup": "^8.5.0",
-    "typescript": "^5.9.2",
-    "react-hook-form": ">=7.62.0"
+    "typescript": "^5.9.2"
   },
   "dependencies": {}
 }
