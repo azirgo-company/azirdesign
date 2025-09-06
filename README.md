@@ -10,6 +10,33 @@ npm install "@azirgopro/azirdesign": "git@github.com:azirgo-company/azirdesign.g
 
 ## Usage
 
+### 1. Import the styles
+
+First, you need to import the CSS styles in your main file (e.g., `layout.tsx`, `_app.tsx`, or `globals.css`):
+
+```tsx
+// In your layout.tsx or _app.tsx
+import "@azirgopro/azirdesign/styles.css"
+```
+
+Or in your CSS file:
+
+```css
+/* In your globals.css or main CSS file */
+@import "@azirgopro/azirdesign/styles.css";
+```
+
+**Optional - If you're using Leaflet components:**
+
+```tsx
+// Only import this if you're using map components
+import "@azirgopro/azirdesign/leaflet.css"
+```
+
+**Important:** This library uses Tailwind CSS. Make sure your project has Tailwind CSS installed and configured. The library includes its own styles, but you need to ensure Tailwind is processing them correctly in your build pipeline.
+
+### 2. Use the components
+
 ```tsx
 import { Button, Card, Avatar } from "@azirgopro/azirdesign"
 
@@ -61,8 +88,48 @@ This library requires the following peer dependencies:
   "react": ">=18.0.0",
   "react-dom": ">=18.0.0",
   "tailwind-merge": ">=2.2.0",
-  "tailwindcss": ">=3.4.0"
+  "tailwindcss": ">=3.4.0",
+  "leaflet": ">=1.9.0"
 }
+```
+
+## Troubleshooting
+
+### Styles not loading
+
+If the styles are not appearing in your project:
+
+1. **Make sure you're importing the CSS file:**
+
+   ```tsx
+   import "@azirgopro/azirdesign/styles.css"
+   ```
+
+2. **Check your Tailwind CSS configuration:**
+   Make sure your `tailwind.config.js` includes the library path:
+
+   ```js
+   module.exports = {
+     content: [
+       // ... your existing paths
+       "./node_modules/@azirgopro/azirdesign/**/*.{js,ts,jsx,tsx}",
+     ],
+     // ... rest of config
+   }
+   ```
+
+3. **Verify Tailwind CSS version compatibility:**
+   This library is designed to work with Tailwind CSS v3.4.0+
+
+4. **Check build order:**
+   Make sure the CSS import comes before any component usage
+
+### TypeScript errors
+
+Make sure you have the required peer dependencies installed:
+
+```bash
+npm install react react-dom @types/react @types/react-dom
 ```
 
 ## Development
