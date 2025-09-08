@@ -43,12 +43,25 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsup && npm run copy-css",
-    "copy-css": "copy src\\styles.css dist\\styles.css && copy src\\leaflet.css dist\\leaflet.css",
-    "dev": "tsup --watch",
-    "clean": "rm -rf dist",
+    "build": "tsup && npm run build:css && npm run copy:leaflet",
+    "build:css": "postcss ./src/styles.css -o ./dist/styles.css",
+    "copy:leaflet": "cpy node_modules/leaflet/dist/leaflet.css dist/ --flat",
+    "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build"
   },
+  "devDependencies": {
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "postcss": "^8.4.0",
+    "cpy-cli": "^5.0.0",
+    "rimraf": "^5.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.0"
+  },
+  "sideEffects": [
+    "dist/styles.css",
+    "dist/leaflet.css"
+  ],
   "peerDependencies": {
     "@clerk/nextjs": ">=6.31.0",
     "@radix-ui/react-accordion": ">=1.1.0",
@@ -76,10 +89,6 @@
     "tailwind-merge": ">=2.2.0",
     "tailwindcss": ">=3.4.0",
     "leaflet": ">=1.9.0"
-  },
-  "devDependencies": {
-    "tsup": "^8.5.0",
-    "typescript": "^5.9.2"
   },
   "dependencies": {}
 }
