@@ -3536,9 +3536,14 @@ function ThemeToggle({
 
 // components/layout/index.tsx
 var import_jsx_runtime45 = require("react/jsx-runtime");
-var AzirLayout = ({ children }) => {
+var AzirLayout = ({
+  children,
+  sidebarSrc = "/semillapp.png",
+  sidebarAlt = "Semillapp Logo",
+  sidebarSpan = "Semillapp"
+}) => {
   return /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(SidebarProvider, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(AppSidebar, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
     /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(SidebarInset, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("header", { className: "flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12", children: /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)("div", { className: "flex w-full items-center justify-between gap-2 px-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(SidebarTrigger, { className: "-ml-1" }),

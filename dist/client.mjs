@@ -3469,9 +3469,14 @@ function ThemeToggle({
 
 // components/layout/index.tsx
 import { jsx as jsx45, jsxs as jsxs25 } from "react/jsx-runtime";
-var AzirLayout = ({ children }) => {
+var AzirLayout = ({
+  children,
+  sidebarSrc = "/semillapp.png",
+  sidebarAlt = "Semillapp Logo",
+  sidebarSpan = "Semillapp"
+}) => {
   return /* @__PURE__ */ jsxs25(SidebarProvider, { children: [
-    /* @__PURE__ */ jsx45(AppSidebar, {}),
+    /* @__PURE__ */ jsx45(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
     /* @__PURE__ */ jsxs25(SidebarInset, { children: [
       /* @__PURE__ */ jsx45("header", { className: "flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12", children: /* @__PURE__ */ jsxs25("div", { className: "flex w-full items-center justify-between gap-2 px-4", children: [
         /* @__PURE__ */ jsx45(SidebarTrigger, { className: "-ml-1" }),

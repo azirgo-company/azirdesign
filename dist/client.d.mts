@@ -333,8 +333,11 @@ declare function useTheme(): {
     setTheme: (newTheme: Theme) => void;
 };
 
-declare const AzirLayout: ({ children }: {
+declare const AzirLayout: ({ children, sidebarSrc, sidebarAlt, sidebarSpan, }: {
     children: React.ReactNode;
+    sidebarSrc?: string;
+    sidebarAlt?: string;
+    sidebarSpan?: string;
 }) => react_jsx_runtime.JSX.Element;
 
 declare function AzirTable<TQueryFnData extends BaseRecord = BaseRecord, TError extends HttpError = HttpError, TData extends BaseRecord = TQueryFnData>({ table }: {
