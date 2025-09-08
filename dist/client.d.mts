@@ -96,8 +96,11 @@ declare function SidebarMenuSubButton({ asChild, size, isActive, className, ...p
 }): react_jsx_runtime.JSX.Element;
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar>, RefineThemedLayoutV2SiderProps {
+    src?: string;
+    alt?: string;
+    span?: string;
 }
-declare function AppSidebar({ meta, ...props }: AppSidebarProps): react_jsx_runtime.JSX.Element;
+declare function AppSidebar({ meta, src, alt, span, ...props }: AppSidebarProps): react_jsx_runtime.JSX.Element;
 
 declare function NavMain({ items, }: {
     items: {

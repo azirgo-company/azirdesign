@@ -1487,7 +1487,13 @@ function NavRefine() {
 
 // components/app-sidebar.tsx
 import { jsx as jsx14, jsxs as jsxs5 } from "react/jsx-runtime";
-function AppSidebar({ meta, ...props }) {
+function AppSidebar({
+  meta,
+  src = "/dashboard.png",
+  alt = "Dashboard",
+  span = "Dashboard",
+  ...props
+}) {
   return /* @__PURE__ */ jsxs5(Sidebar, { collapsible: "icon", ...props, children: [
     /* @__PURE__ */ jsx14(SidebarHeader, { children: /* @__PURE__ */ jsx14(SidebarMenu, { children: /* @__PURE__ */ jsx14(SidebarMenuItem, { children: /* @__PURE__ */ jsx14(
       SidebarMenuButton,
@@ -1495,15 +1501,8 @@ function AppSidebar({ meta, ...props }) {
         asChild: true,
         className: "data-[slot=sidebar-menu-button]:!p-1.5",
         children: /* @__PURE__ */ jsxs5("a", { href: "/dashboard", children: [
-          /* @__PURE__ */ jsx14(
-            "img",
-            {
-              src: "/semillapp.png",
-              alt: "Semillapp Logo",
-              className: "mr-2 !size-5"
-            }
-          ),
-          /* @__PURE__ */ jsx14("span", { className: "text-base font-semibold", children: "Semillapp" })
+          /* @__PURE__ */ jsx14("img", { src, alt, className: "mr-2 !size-5" }),
+          /* @__PURE__ */ jsx14("span", { className: "text-base font-semibold", children: span })
         ] })
       }
     ) }) }) }),

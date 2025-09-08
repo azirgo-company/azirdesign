@@ -14,9 +14,19 @@ import { RefineThemedLayoutV2SiderProps } from "@refinedev/ui-types"
 
 interface AppSidebarProps
   extends React.ComponentProps<typeof Sidebar>,
-    RefineThemedLayoutV2SiderProps {}
+    RefineThemedLayoutV2SiderProps {
+  src?: string
+  alt?: string
+  span?: string
+}
 
-export function AppSidebar({ meta, ...props }: AppSidebarProps) {
+export function AppSidebar({
+  meta,
+  src = "/dashboard.png",
+  alt = "Dashboard",
+  span = "Dashboard",
+  ...props
+}: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -27,12 +37,8 @@ export function AppSidebar({ meta, ...props }: AppSidebarProps) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="/dashboard">
-                <img
-                  src="/semillapp.png"
-                  alt="Semillapp Logo"
-                  className="mr-2 !size-5"
-                />
-                <span className="text-base font-semibold">Semillapp</span>
+                <img src={src} alt={alt} className="mr-2 !size-5" />
+                <span className="text-base font-semibold">{span}</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>

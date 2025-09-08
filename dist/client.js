@@ -1610,7 +1610,13 @@ function NavRefine() {
 
 // components/app-sidebar.tsx
 var import_jsx_runtime14 = require("react/jsx-runtime");
-function AppSidebar({ meta, ...props }) {
+function AppSidebar({
+  meta,
+  src = "/dashboard.png",
+  alt = "Dashboard",
+  span = "Dashboard",
+  ...props
+}) {
   return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(Sidebar, { collapsible: "icon", ...props, children: [
     /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SidebarHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SidebarMenu, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
       SidebarMenuButton,
@@ -1618,15 +1624,8 @@ function AppSidebar({ meta, ...props }) {
         asChild: true,
         className: "data-[slot=sidebar-menu-button]:!p-1.5",
         children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("a", { href: "/dashboard", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
-            "img",
-            {
-              src: "/semillapp.png",
-              alt: "Semillapp Logo",
-              className: "mr-2 !size-5"
-            }
-          ),
-          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "text-base font-semibold", children: "Semillapp" })
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("img", { src, alt, className: "mr-2 !size-5" }),
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "text-base font-semibold", children: span })
         ] })
       }
     ) }) }) }),
