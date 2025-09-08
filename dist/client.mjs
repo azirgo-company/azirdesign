@@ -3498,21 +3498,7 @@ import {
   ChevronsLeft,
   ChevronsRight
 } from "lucide-react";
-
-// components/field.tsx
 import { jsx as jsx46, jsxs as jsxs26 } from "react/jsx-runtime";
-
-// components/image-preview-cell.tsx
-import { useState as useState10, useEffect as useEffect8 } from "react";
-import Image2 from "next/image";
-import { Image as ImageIcon } from "lucide-react";
-import { jsx as jsx47, jsxs as jsxs27 } from "react/jsx-runtime";
-
-// components/ui/card.tsx
-import { jsx as jsx48 } from "react/jsx-runtime";
-
-// components/table/pagination.tsx
-import { jsx as jsx49, jsxs as jsxs28 } from "react/jsx-runtime";
 function DataTablePagination({
   table,
   className
@@ -3526,29 +3512,29 @@ function DataTablePagination({
   const handlePageSizeChange = (value) => {
     table.setPageSize(Number(value));
   };
-  return /* @__PURE__ */ jsxs28("div", { className: cn("flex items-center justify-between px-2", className), children: [
-    /* @__PURE__ */ jsxs28("div", { className: "text-muted-foreground flex-1 text-sm", children: [
+  return /* @__PURE__ */ jsxs26("div", { className: cn("flex items-center justify-between px-2", className), children: [
+    /* @__PURE__ */ jsxs26("div", { className: "text-muted-foreground flex-1 text-sm", children: [
       selectedRows,
       " of ",
       totalRows,
       " row(s) selected."
     ] }),
-    /* @__PURE__ */ jsxs28("div", { className: "flex items-center space-x-6 lg:space-x-8", children: [
-      /* @__PURE__ */ jsxs28("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ jsx49("p", { className: "text-sm font-medium", children: "Rows per page" }),
-        /* @__PURE__ */ jsxs28(Select, { value: `${pageSize}`, onValueChange: handlePageSizeChange, children: [
-          /* @__PURE__ */ jsx49(SelectTrigger, { className: "h-8 w-[70px]", children: /* @__PURE__ */ jsx49(SelectValue, { placeholder: pageSize }) }),
-          /* @__PURE__ */ jsx49(SelectContent, { side: "top", children: [10, 20, 25, 30, 40, 50].map((size) => /* @__PURE__ */ jsx49(SelectItem, { value: `${size}`, children: size }, size)) })
+    /* @__PURE__ */ jsxs26("div", { className: "flex items-center space-x-6 lg:space-x-8", children: [
+      /* @__PURE__ */ jsxs26("div", { className: "flex items-center space-x-2", children: [
+        /* @__PURE__ */ jsx46("p", { className: "text-sm font-medium", children: "Rows per page" }),
+        /* @__PURE__ */ jsxs26(Select, { value: `${pageSize}`, onValueChange: handlePageSizeChange, children: [
+          /* @__PURE__ */ jsx46(SelectTrigger, { className: "h-8 w-[70px]", children: /* @__PURE__ */ jsx46(SelectValue, { placeholder: pageSize }) }),
+          /* @__PURE__ */ jsx46(SelectContent, { side: "top", children: [10, 20, 25, 30, 40, 50].map((size) => /* @__PURE__ */ jsx46(SelectItem, { value: `${size}`, children: size }, size)) })
         ] })
       ] }),
-      /* @__PURE__ */ jsxs28("div", { className: "flex w-[100px] items-center justify-center text-sm font-medium", children: [
+      /* @__PURE__ */ jsxs26("div", { className: "flex w-[100px] items-center justify-center text-sm font-medium", children: [
         "Page ",
         pageIndex + 1,
         " of ",
         pageCount
       ] }),
-      /* @__PURE__ */ jsxs28("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ jsxs28(
+      /* @__PURE__ */ jsxs26("div", { className: "flex items-center space-x-2", children: [
+        /* @__PURE__ */ jsxs26(
           Button,
           {
             variant: "outline",
@@ -3557,12 +3543,12 @@ function DataTablePagination({
             onClick: () => table.setPageIndex(0),
             disabled: !canPreviousPage,
             children: [
-              /* @__PURE__ */ jsx49("span", { className: "sr-only", children: "Go to first page" }),
-              /* @__PURE__ */ jsx49(ChevronsLeft, {})
+              /* @__PURE__ */ jsx46("span", { className: "sr-only", children: "Go to first page" }),
+              /* @__PURE__ */ jsx46(ChevronsLeft, {})
             ]
           }
         ),
-        /* @__PURE__ */ jsxs28(
+        /* @__PURE__ */ jsxs26(
           Button,
           {
             variant: "outline",
@@ -3571,12 +3557,12 @@ function DataTablePagination({
             onClick: () => table.previousPage(),
             disabled: !canPreviousPage,
             children: [
-              /* @__PURE__ */ jsx49("span", { className: "sr-only", children: "Go to previous page" }),
-              /* @__PURE__ */ jsx49(ChevronLeft, {})
+              /* @__PURE__ */ jsx46("span", { className: "sr-only", children: "Go to previous page" }),
+              /* @__PURE__ */ jsx46(ChevronLeft, {})
             ]
           }
         ),
-        /* @__PURE__ */ jsxs28(
+        /* @__PURE__ */ jsxs26(
           Button,
           {
             variant: "outline",
@@ -3585,12 +3571,12 @@ function DataTablePagination({
             onClick: () => table.nextPage(),
             disabled: !canNextPage,
             children: [
-              /* @__PURE__ */ jsx49("span", { className: "sr-only", children: "Go to next page" }),
-              /* @__PURE__ */ jsx49(ChevronRight3, {})
+              /* @__PURE__ */ jsx46("span", { className: "sr-only", children: "Go to next page" }),
+              /* @__PURE__ */ jsx46(ChevronRight3, {})
             ]
           }
         ),
-        /* @__PURE__ */ jsxs28(
+        /* @__PURE__ */ jsxs26(
           Button,
           {
             variant: "outline",
@@ -3599,8 +3585,8 @@ function DataTablePagination({
             onClick: () => table.setPageIndex(pageCount - 1),
             disabled: !canNextPage,
             children: [
-              /* @__PURE__ */ jsx49("span", { className: "sr-only", children: "Go to last page" }),
-              /* @__PURE__ */ jsx49(ChevronsRight, {})
+              /* @__PURE__ */ jsx46("span", { className: "sr-only", children: "Go to last page" }),
+              /* @__PURE__ */ jsx46(ChevronsRight, {})
             ]
           }
         )
@@ -3610,37 +3596,37 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
-import { Fragment as Fragment9, jsx as jsx50, jsxs as jsxs29 } from "react/jsx-runtime";
+import { Fragment as Fragment9, jsx as jsx47, jsxs as jsxs27 } from "react/jsx-runtime";
 function AzirTable({ table }) {
   const {
     refineCore: {
       tableQuery: { isFetching }
     }
   } = table;
-  return /* @__PURE__ */ jsxs29(Fragment9, { children: [
-    /* @__PURE__ */ jsxs29("div", { className: "relative overflow-hidden rounded-md border", children: [
-      /* @__PURE__ */ jsxs29(Table, { children: [
-        /* @__PURE__ */ jsx50(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ jsx50(TableRow, { children: headerGroup.headers.map((header) => {
-          return /* @__PURE__ */ jsx50(TableHead, { children: header.isPlaceholder ? null : flexRender(
+  return /* @__PURE__ */ jsxs27(Fragment9, { children: [
+    /* @__PURE__ */ jsxs27("div", { className: "relative overflow-hidden rounded-md border", children: [
+      /* @__PURE__ */ jsxs27(Table, { children: [
+        /* @__PURE__ */ jsx47(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ jsx47(TableRow, { children: headerGroup.headers.map((header) => {
+          return /* @__PURE__ */ jsx47(TableHead, { children: header.isPlaceholder ? null : flexRender(
             header.column.columnDef.header,
             header.getContext()
           ) }, header.id);
         }) }, headerGroup.id)) }),
-        /* @__PURE__ */ jsx50(TableBody, { children: table.getRowModel().rows?.length ? table.getRowModel().rows.map((row) => /* @__PURE__ */ jsx50(
+        /* @__PURE__ */ jsx47(TableBody, { children: table.getRowModel().rows?.length ? table.getRowModel().rows.map((row) => /* @__PURE__ */ jsx47(
           TableRow,
           {
             "data-state": row.getIsSelected() && "selected",
-            children: row.getVisibleCells().map((cell) => /* @__PURE__ */ jsx50(TableCell, { children: flexRender(
+            children: row.getVisibleCells().map((cell) => /* @__PURE__ */ jsx47(TableCell, { children: flexRender(
               cell.column.columnDef.cell,
               cell.getContext()
             ) }, cell.id))
           },
           row.id
-        )) : /* @__PURE__ */ jsx50(TableRow, { children: /* @__PURE__ */ jsx50(TableCell, { colSpan: 2, className: "h-24 w-full text-center", children: "No hay resultados." }) }) })
+        )) : /* @__PURE__ */ jsx47(TableRow, { children: /* @__PURE__ */ jsx47(TableCell, { colSpan: 2, className: "h-24 w-full text-center", children: "No hay resultados." }) }) })
       ] }),
-      isFetching && /* @__PURE__ */ jsx50("div", { className: "absolute inset-0 z-10 flex items-center justify-center bg-white/30", children: /* @__PURE__ */ jsx50(Loader, { className: "animate-spin" }) })
+      isFetching && /* @__PURE__ */ jsx47("div", { className: "absolute inset-0 z-10 flex items-center justify-center bg-white/30", children: /* @__PURE__ */ jsx47(Loader, { className: "animate-spin" }) })
     ] }),
-    /* @__PURE__ */ jsx50(DataTablePagination, { className: "mt-2", table })
+    /* @__PURE__ */ jsx47(DataTablePagination, { className: "mt-2", table })
   ] });
 }
 export {

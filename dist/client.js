@@ -3555,26 +3555,12 @@ var AzirLayout = ({ children }) => {
 var layout_default = AzirLayout;
 
 // components/table/azir-table.tsx
-var import_lucide_react25 = require("lucide-react");
+var import_lucide_react24 = require("lucide-react");
 var import_react_table = require("@tanstack/react-table");
 
 // components/table/pagination.tsx
-var import_lucide_react24 = require("lucide-react");
-
-// components/field.tsx
-var import_jsx_runtime46 = require("react/jsx-runtime");
-
-// components/image-preview-cell.tsx
-var import_react9 = require("react");
-var import_image = __toESM(require("next/image"));
 var import_lucide_react23 = require("lucide-react");
-var import_jsx_runtime47 = require("react/jsx-runtime");
-
-// components/ui/card.tsx
-var import_jsx_runtime48 = require("react/jsx-runtime");
-
-// components/table/pagination.tsx
-var import_jsx_runtime49 = require("react/jsx-runtime");
+var import_jsx_runtime46 = require("react/jsx-runtime");
 function DataTablePagination({
   table,
   className
@@ -3588,29 +3574,29 @@ function DataTablePagination({
   const handlePageSizeChange = (value) => {
     table.setPageSize(Number(value));
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: cn("flex items-center justify-between px-2", className), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "text-muted-foreground flex-1 text-sm", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: cn("flex items-center justify-between px-2", className), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "text-muted-foreground flex-1 text-sm", children: [
       selectedRows,
       " of ",
       totalRows,
       " row(s) selected."
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-6 lg:space-x-8", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "text-sm font-medium", children: "Rows per page" }),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Select, { value: `${pageSize}`, onValueChange: handlePageSizeChange, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectTrigger, { className: "h-8 w-[70px]", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectValue, { placeholder: pageSize }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectContent, { side: "top", children: [10, 20, 25, 30, 40, 50].map((size) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectItem, { value: `${size}`, children: size }, size)) })
+    /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "flex items-center space-x-6 lg:space-x-8", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "flex items-center space-x-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("p", { className: "text-sm font-medium", children: "Rows per page" }),
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(Select, { value: `${pageSize}`, onValueChange: handlePageSizeChange, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(SelectTrigger, { className: "h-8 w-[70px]", children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(SelectValue, { placeholder: pageSize }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(SelectContent, { side: "top", children: [10, 20, 25, 30, 40, 50].map((size) => /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(SelectItem, { value: `${size}`, children: size }, size)) })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex w-[100px] items-center justify-center text-sm font-medium", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "flex w-[100px] items-center justify-center text-sm font-medium", children: [
         "Page ",
         pageIndex + 1,
         " of ",
         pageCount
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+      /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)("div", { className: "flex items-center space-x-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(
           Button,
           {
             variant: "outline",
@@ -3619,12 +3605,12 @@ function DataTablePagination({
             onClick: () => table.setPageIndex(0),
             disabled: !canPreviousPage,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to first page" }),
-              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react24.ChevronsLeft, {})
+              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "sr-only", children: "Go to first page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_lucide_react23.ChevronsLeft, {})
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(
           Button,
           {
             variant: "outline",
@@ -3633,12 +3619,12 @@ function DataTablePagination({
             onClick: () => table.previousPage(),
             disabled: !canPreviousPage,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to previous page" }),
-              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react24.ChevronLeft, {})
+              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "sr-only", children: "Go to previous page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_lucide_react23.ChevronLeft, {})
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(
           Button,
           {
             variant: "outline",
@@ -3647,12 +3633,12 @@ function DataTablePagination({
             onClick: () => table.nextPage(),
             disabled: !canNextPage,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to next page" }),
-              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react24.ChevronRight, {})
+              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "sr-only", children: "Go to next page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_lucide_react23.ChevronRight, {})
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime46.jsxs)(
           Button,
           {
             variant: "outline",
@@ -3661,8 +3647,8 @@ function DataTablePagination({
             onClick: () => table.setPageIndex(pageCount - 1),
             disabled: !canNextPage,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to last page" }),
-              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react24.ChevronsRight, {})
+              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)("span", { className: "sr-only", children: "Go to last page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_lucide_react23.ChevronsRight, {})
             ]
           }
         )
@@ -3672,37 +3658,37 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
-var import_jsx_runtime50 = require("react/jsx-runtime");
+var import_jsx_runtime47 = require("react/jsx-runtime");
 function AzirTable({ table }) {
   const {
     refineCore: {
       tableQuery: { isFetching }
     }
   } = table;
-  return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(import_jsx_runtime50.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "relative overflow-hidden rounded-md border", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Table, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableHead, { children: header.isPlaceholder ? null : (0, import_react_table.flexRender)(
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(import_jsx_runtime47.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "relative overflow-hidden rounded-md border", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(Table, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
+          return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(TableHead, { children: header.isPlaceholder ? null : (0, import_react_table.flexRender)(
             header.column.columnDef.header,
             header.getContext()
           ) }, header.id);
         }) }, headerGroup.id)) }),
-        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableBody, { children: table.getRowModel().rows?.length ? table.getRowModel().rows.map((row) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(TableBody, { children: table.getRowModel().rows?.length ? table.getRowModel().rows.map((row) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
           TableRow,
           {
             "data-state": row.getIsSelected() && "selected",
-            children: row.getVisibleCells().map((cell) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableCell, { children: (0, import_react_table.flexRender)(
+            children: row.getVisibleCells().map((cell) => /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(TableCell, { children: (0, import_react_table.flexRender)(
               cell.column.columnDef.cell,
               cell.getContext()
             ) }, cell.id))
           },
           row.id
-        )) : /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableRow, { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableCell, { colSpan: 2, className: "h-24 w-full text-center", children: "No hay resultados." }) }) })
+        )) : /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(TableRow, { children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(TableCell, { colSpan: 2, className: "h-24 w-full text-center", children: "No hay resultados." }) }) })
       ] }),
-      isFetching && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "absolute inset-0 z-10 flex items-center justify-center bg-white/30", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(import_lucide_react25.Loader, { className: "animate-spin" }) })
+      isFetching && /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "absolute inset-0 z-10 flex items-center justify-center bg-white/30", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(import_lucide_react24.Loader, { className: "animate-spin" }) })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(DataTablePagination, { className: "mt-2", table })
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(DataTablePagination, { className: "mt-2", table })
   ] });
 }
 // Annotate the CommonJS export names for ESM import in node:
