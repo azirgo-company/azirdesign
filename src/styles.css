@@ -1,6 +1,8 @@
+/* src/styles.css (lib) */
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "leaflet/dist/leaflet.css";
+
+/* dile a Tailwind dónde están las clases de tu LIB */
+@source "./**/*.{ts,tsx,js,jsx}";
 
 @custom-variant dark (&:is(.dark *));
 
