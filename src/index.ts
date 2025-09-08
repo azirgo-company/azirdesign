@@ -26,6 +26,7 @@ export {
   CardContent,
   CardFooter,
   CardTitle,
+  CardDescription,
 } from "../components/ui/card"
 export { Input } from "../components/ui/input"
 export { Skeleton } from "../components/ui/skeleton"

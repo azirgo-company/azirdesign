@@ -40,6 +40,7 @@ __export(src_exports, {
   Button: () => Button,
   Card: () => Card,
   CardContent: () => CardContent,
+  CardDescription: () => CardDescription,
   CardFooter: () => CardFooter,
   CardHeader: () => CardHeader,
   CardTitle: () => CardTitle,
@@ -393,6 +394,16 @@ function CardTitle({ className, ...props }) {
     }
   );
 }
+function CardDescription({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "div",
+    {
+      "data-slot": "card-description",
+      className: cn("text-muted-foreground text-sm", className),
+      ...props
+    }
+  );
+}
 function CardContent({ className, ...props }) {
   return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "div",
@@ -467,6 +478,7 @@ function Skeleton({ className, ...props }) {
   Button,
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,

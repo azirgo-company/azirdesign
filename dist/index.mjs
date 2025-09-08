@@ -337,6 +337,16 @@ function CardTitle({ className, ...props }) {
     }
   );
 }
+function CardDescription({ className, ...props }) {
+  return /* @__PURE__ */ jsx7(
+    "div",
+    {
+      "data-slot": "card-description",
+      className: cn("text-muted-foreground text-sm", className),
+      ...props
+    }
+  );
+}
 function CardContent({ className, ...props }) {
   return /* @__PURE__ */ jsx7(
     "div",
@@ -410,6 +420,7 @@ export {
   Button,
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,

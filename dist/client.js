@@ -2046,21 +2046,9 @@ function ThemeToggleItem() {
 }
 
 // components/nav-user.tsx
-var import_nextjs = require("@clerk/nextjs");
-var import_navigation = require("next/navigation");
 var import_jsx_runtime20 = require("react/jsx-runtime");
-function NavUser({ className }) {
+function NavUser({ className, handleSignOut }) {
   const { isMobile } = useSidebar();
-  const { signOut } = (0, import_nextjs.useAuth)();
-  const { push } = (0, import_navigation.useRouter)();
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-      push("/login");
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
   return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("div", { className: cn(className, ""), children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(DropdownMenu, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)(
       SidebarMenuButton,
@@ -3540,7 +3528,8 @@ var AzirLayout = ({
   children,
   sidebarSrc = "/semillapp.png",
   sidebarAlt = "Semillapp Logo",
-  sidebarSpan = "Semillapp"
+  sidebarSpan = "Semillapp",
+  handleSignOut
 }) => {
   return /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)(SidebarProvider, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
@@ -3549,7 +3538,7 @@ var AzirLayout = ({
         /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(SidebarTrigger, { className: "-ml-1" }),
         /* @__PURE__ */ (0, import_jsx_runtime45.jsxs)("div", { className: "flex items-center gap-2", children: [
           /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(ThemeToggle, {}),
-          /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(NavUser, { className: "-mr-2" })
+          /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(NavUser, { className: "-mr-2", handleSignOut })
         ] })
       ] }) }),
       /* @__PURE__ */ (0, import_jsx_runtime45.jsx)("div", { className: "flex flex-1 flex-col gap-4 p-4 pt-0", children })

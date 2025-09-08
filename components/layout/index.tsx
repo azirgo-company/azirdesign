@@ -10,11 +10,13 @@ export const AzirLayout = ({
   sidebarSrc = "/semillapp.png",
   sidebarAlt = "Semillapp Logo",
   sidebarSpan = "Semillapp",
+  handleSignOut,
 }: {
   children: React.ReactNode
   sidebarSrc?: string
   sidebarAlt?: string
   sidebarSpan?: string
+  handleSignOut: () => Promise<void> | void
 }) => {
   return (
     <SidebarProvider>
@@ -25,7 +27,7 @@ export const AzirLayout = ({
             <SidebarTrigger className="-ml-1" />
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              <NavUser className="-mr-2" />
+              <NavUser className="-mr-2" handleSignOut={handleSignOut} />
             </div>
           </div>
         </header>

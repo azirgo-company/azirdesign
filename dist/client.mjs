@@ -1928,21 +1928,9 @@ function ThemeToggleItem() {
 }
 
 // components/nav-user.tsx
-import { useAuth } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { jsx as jsx20, jsxs as jsxs10 } from "react/jsx-runtime";
-function NavUser({ className }) {
+function NavUser({ className, handleSignOut }) {
   const { isMobile } = useSidebar();
-  const { signOut } = useAuth();
-  const { push } = useRouter();
-  const handleSignOut = async () => {
-    try {
-      await signOut();
-      push("/login");
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
   return /* @__PURE__ */ jsx20("div", { className: cn(className, ""), children: /* @__PURE__ */ jsxs10(DropdownMenu, { children: [
     /* @__PURE__ */ jsx20(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ jsxs10(
       SidebarMenuButton,
@@ -3473,7 +3461,8 @@ var AzirLayout = ({
   children,
   sidebarSrc = "/semillapp.png",
   sidebarAlt = "Semillapp Logo",
-  sidebarSpan = "Semillapp"
+  sidebarSpan = "Semillapp",
+  handleSignOut
 }) => {
   return /* @__PURE__ */ jsxs25(SidebarProvider, { children: [
     /* @__PURE__ */ jsx45(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
@@ -3482,7 +3471,7 @@ var AzirLayout = ({
         /* @__PURE__ */ jsx45(SidebarTrigger, { className: "-ml-1" }),
         /* @__PURE__ */ jsxs25("div", { className: "flex items-center gap-2", children: [
           /* @__PURE__ */ jsx45(ThemeToggle, {}),
-          /* @__PURE__ */ jsx45(NavUser, { className: "-mr-2" })
+          /* @__PURE__ */ jsx45(NavUser, { className: "-mr-2", handleSignOut })
         ] })
       ] }) }),
       /* @__PURE__ */ jsx45("div", { className: "flex flex-1 flex-col gap-4 p-4 pt-0", children })

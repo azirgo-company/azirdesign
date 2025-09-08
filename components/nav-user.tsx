@@ -18,20 +18,10 @@ import { cn } from "../src/lib/utils"
 
 interface NavUserProps {
   className?: string
+  handleSignOut: () => Promise<void> | void
 }
-export function NavUser({ className }: NavUserProps) {
+export function NavUser({ className, handleSignOut }: NavUserProps) {
   const { isMobile } = useSidebar()
-  const { signOut } = useAuth()
-  const { push } = useRouter()
-
-  const handleSignOut = async () => {
-    try {
-      await signOut()
-      push("/login")
-    } catch (error) {
-      console.error("Error signing out:", error)
-    }
-  }
 
   return (
     <div className={cn(className, "")}>
