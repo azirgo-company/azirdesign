@@ -20,7 +20,13 @@ export {
   buttonVariants,
   type ButtonProps,
 } from "../components/ui/button"
-export { Card } from "../components/ui/card"
+export {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "../components/ui/card"
 export { Input } from "../components/ui/input"
 export { Skeleton } from "../components/ui/skeleton"
 

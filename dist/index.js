@@ -39,6 +39,10 @@ __export(src_exports, {
   BreadcrumbSeparator: () => BreadcrumbSeparator,
   Button: () => Button,
   Card: () => Card,
+  CardContent: () => CardContent,
+  CardFooter: () => CardFooter,
+  CardHeader: () => CardHeader,
+  CardTitle: () => CardTitle,
   Field: () => Field,
   ImagePreviewCell: () => image_preview_cell_default,
   Input: () => Input,
@@ -366,6 +370,49 @@ function Card({ className, ...props }) {
     }
   );
 }
+function CardHeader({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "div",
+    {
+      "data-slot": "card-header",
+      className: cn(
+        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CardTitle({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "div",
+    {
+      "data-slot": "card-title",
+      className: cn("leading-none font-semibold", className),
+      ...props
+    }
+  );
+}
+function CardContent({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "div",
+    {
+      "data-slot": "card-content",
+      className: cn("px-6", className),
+      ...props
+    }
+  );
+}
+function CardFooter({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "div",
+    {
+      "data-slot": "card-footer",
+      className: cn("flex items-center px-6 [.border-t]:pt-6", className),
+      ...props
+    }
+  );
+}
 
 // components/ui/input.tsx
 var import_jsx_runtime8 = require("react/jsx-runtime");
@@ -419,6 +466,10 @@ function Skeleton({ className, ...props }) {
   BreadcrumbSeparator,
   Button,
   Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
   Field,
   ImagePreviewCell,
   Input,
