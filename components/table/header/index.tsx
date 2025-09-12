@@ -5,8 +5,8 @@ import {
 } from "lucide-react"
 import React, { ReactNode } from "react"
 
-import { Button } from "./components/ui/button"
 import { HeaderContext } from "@tanstack/react-table"
+import { Button } from "../../ui/button"
 
 type TableHeaderActionsProps<TData> = HeaderContext<TData, unknown> & {
   label: string

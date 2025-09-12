@@ -1,4 +1,5 @@
-"use client"
+export { default as ActionsField } from "../components/fields/actions-field"
+;("use client")
 import "./styles.css"
 
 // Business Components (with client-side features)
@@ -121,3 +122,8 @@ export { useTheme } from "../src/lib/use-theme"
 // Azirgo Components (with client-side features)
 export { default as AzirLayout } from "../components/layout"
 export { default as AzirTable } from "../components/table/azir-table"
+// Table Header Filters
+export { FilterRadioButton } from "../components/table/header/filter-radio-button"
+export { FilterPopoverInput as FilterContain } from "../components/table/header/filter-constain"
+export { FilterBetweenDate } from "../components/table/header/filter-between-date"
+export { default as TableHeader } from "../components/table/header/index"

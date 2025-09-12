@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "./components/ui/popover"
-import { Button } from "./components/ui/button"
-import { RadioGroup, RadioGroupItem } from "./components/ui/radio-group"
+
 import { Check, Filter, FunnelX } from "lucide-react"
+import { Button } from "../../ui/button"
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover"
+import { RadioGroup, RadioGroupItem } from "../../ui/radio-group"
 
 interface Option<T> {
   value: T

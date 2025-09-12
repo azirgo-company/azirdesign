@@ -1,12 +1,8 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react"
 import { Check, Funnel, FunnelX, Search, X } from "lucide-react"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "./components/ui/popover"
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover"
 
-import { Button } from "./components/ui/button"
+import { Button } from "../../ui/button"
 import { HeaderContext } from "@tanstack/react-table"
 
 /**

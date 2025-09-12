@@ -1,7 +1,7 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as class_variance_authority_dist_types from 'class-variance-authority/dist/types';
 import * as React$1 from 'react';
-import React__default, { ReactElement, FC, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes } from 'react';
+import React__default, { ReactElement, FC, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes, ReactNode } from 'react';
 import { VariantProps } from 'class-variance-authority';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { TooltipContent } from '@radix-ui/react-tooltip';
@@ -21,6 +21,13 @@ import * as LabelPrimitive from '@radix-ui/react-label';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import * as SheetPrimitive from '@radix-ui/react-dialog';
 import { UseTableReturnType } from '@refinedev/react-table';
+import { HeaderContext } from '@tanstack/react-table';
+
+type ActionsFieldProps = {
+    id: string;
+    resource?: string;
+};
+declare function ActionsField({ id, resource }: ActionsFieldProps): react_jsx_runtime.JSX.Element | null;
 
 interface AddCardFormProps {
     user: {
@@ -346,4 +353,37 @@ declare function AzirTable<TQueryFnData extends BaseRecord = BaseRecord, TError 
     table: UseTableReturnType<TData, TError>;
 }): react_jsx_runtime.JSX.Element;
 
-export { AddCardForm, AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger, AppSidebar, Avatar, AvatarFallback, AvatarImage, AzirLayout, AzirTable, Collapsible, ConfirmDialog, type ConfirmDialogProps, CreateButton, CreatePage, DeleteButton, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EditButton, EditPage, Form$1 as Form, Label, List, ListButton, NavMain, NavProjects, NavRefine, NavUser, RefreshButton, SaveButton, Select, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Show, ShowButton, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Table, TeamSwitcher, ThemeToggleItem, Tooltip, Form as UIForm, useIsMobile, useOnBack, useSidebar, useTheme };
+interface Option<T> {
+    value: T;
+    label: string;
+}
+interface FilterSelectButtonProps<T> {
+    value: T | undefined;
+    setValue: (value: T | undefined) => void;
+    options: Option<T>[];
+    placeholder?: string;
+}
+declare function FilterRadioButton<T extends string | number | boolean>({ value, setValue, options, placeholder, }: FilterSelectButtonProps<T>): react_jsx_runtime.JSX.Element;
+
+/**
+ * FilterPopoverInput
+ * A table column filter input with popover, clear, and apply actions.
+ * - Shows a funnel icon when no filter is set.
+ * - Shows a truncated filter value and clear icon when filter is set.
+ * - Clicking the value or funnel opens a popover to edit/apply/clear the filter.
+ */
+interface FilterPopoverInputProps<TData> extends HeaderContext<TData, unknown> {
+    placeholder?: string;
+}
+declare function FilterPopoverInput<TData>({ column, placeholder, }: FilterPopoverInputProps<TData>): react_jsx_runtime.JSX.Element;
+
+declare function FilterBetweenDate<TData>({ column, }: HeaderContext<TData, unknown>): react_jsx_runtime.JSX.Element;
+
+type TableHeaderActionsProps<TData> = HeaderContext<TData, unknown> & {
+    label: string;
+    sortable?: boolean;
+    filter?: ReactNode;
+};
+declare function TableHeaderActions<TData>({ column, label, sortable, filter, }: TableHeaderActionsProps<TData>): react_jsx_runtime.JSX.Element;
+
+export { ActionsField, AddCardForm, AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, AlertDialogPortal, AlertDialogTitle, AlertDialogTrigger, AppSidebar, Avatar, AvatarFallback, AvatarImage, AzirLayout, AzirTable, Collapsible, ConfirmDialog, type ConfirmDialogProps, CreateButton, CreatePage, DeleteButton, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EditButton, EditPage, FilterBetweenDate, FilterPopoverInput as FilterContain, FilterRadioButton, Form$1 as Form, Label, List, ListButton, NavMain, NavProjects, NavRefine, NavUser, RefreshButton, SaveButton, Select, Separator, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, Show, ShowButton, Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupAction, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInput, SidebarInset, SidebarMenu, SidebarMenuAction, SidebarMenuBadge, SidebarMenuButton, SidebarMenuItem, SidebarMenuSkeleton, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem, SidebarProvider, SidebarRail, SidebarSeparator, SidebarTrigger, Table, TableHeaderActions as TableHeader, TeamSwitcher, ThemeToggleItem, Tooltip, Form as UIForm, useIsMobile, useOnBack, useSidebar, useTheme };

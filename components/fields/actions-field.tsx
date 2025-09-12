@@ -1,14 +1,7 @@
 "use client"
 
 import { useShowButton, useEditButton, useDeleteButton } from "@refinedev/core"
-import { Button } from "./components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./components/ui/dropdown-menu"
+
 import {
   MoreHorizontalIcon,
   EyeIcon,
@@ -17,8 +10,15 @@ import {
   CreditCardIcon,
 } from "lucide-react"
 import { useState } from "react"
-import { MembershipDialog } from "../dialog/membership-dialog"
 import { ConfirmDialog } from "../dialog/confirm-dialog"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu"
+import { Button } from "../ui/button"
 
 type ActionsFieldProps = {
   id: string
@@ -147,15 +147,6 @@ export default function ActionsField({ id, resource }: ActionsFieldProps) {
           )}
         </DropdownMenuContent>
       </DropdownMenu>
-
-      {/* Dialogs */}
-      {resource === "users" && (
-        <MembershipDialog
-          isOpen={membershipDialogOpen}
-          onOpenChange={setMembershipDialogOpen}
-          userId={id}
-        />
-      )}
 
       <ConfirmDialog
         open={deleteDialogOpen}

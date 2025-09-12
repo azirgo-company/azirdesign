@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react"
 import { CalendarDays, Check, FunnelX } from "lucide-react"
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "./components/ui/popover"
-import { Button } from "./components/ui/button"
+import { Popover, PopoverTrigger, PopoverContent } from "../../ui/popover"
+import { Button } from "../../ui/button"
 import { format } from "date-fns"
 import { HeaderContext } from "@tanstack/react-table"
-import { Calendar } from "./components/ui/calendar"
 import { DateRange } from "react-day-picker"
+import { Calendar } from "../../ui/calendar"
 
 export function FilterBetweenDate<TData>({
   column,
