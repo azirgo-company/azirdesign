@@ -3670,9 +3670,6 @@ var AzirLayout = ({
 };
 var layout_default = AzirLayout;
 
-// components/table/azir-table.tsx
-var import_lucide_react25 = require("lucide-react");
-
 // components/table/pagination.tsx
 var import_lucide_react24 = require("lucide-react");
 var import_jsx_runtime47 = require("react/jsx-runtime");
@@ -3773,6 +3770,7 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
+var import_lucide_react25 = require("lucide-react");
 var import_react_table = require("@tanstack/react-table");
 var import_jsx_runtime48 = require("react/jsx-runtime");
 function AzirTable({ table }) {

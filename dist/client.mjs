@@ -3603,9 +3603,6 @@ var AzirLayout = ({
 };
 var layout_default = AzirLayout;
 
-// components/table/azir-table.tsx
-import { Loader } from "lucide-react";
-
 // components/table/pagination.tsx
 import {
   ChevronLeft,
@@ -3711,6 +3708,7 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
+import { Loader } from "lucide-react";
 import { flexRender } from "@tanstack/react-table";
 import { Fragment as Fragment10, jsx as jsx48, jsxs as jsxs28 } from "react/jsx-runtime";
 function AzirTable({ table }) {
