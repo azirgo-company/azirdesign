@@ -3605,7 +3605,6 @@ var layout_default = AzirLayout;
 
 // components/table/azir-table.tsx
 import { Loader } from "lucide-react";
-import { flexRender } from "@tanstack/react-table";
 
 // components/table/pagination.tsx
 import {
@@ -3712,6 +3711,7 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
+import { flexRender } from "@tanstack/react-table";
 import { Fragment as Fragment10, jsx as jsx48, jsxs as jsxs28 } from "react/jsx-runtime";
 function AzirTable({ table }) {
   const {
@@ -5950,7 +5950,7 @@ export {
   EditButton,
   EditPage,
   FilterBetweenDate,
-  FilterPopoverInput as FilterContain,
+  FilterPopoverInput,
   FilterRadioButton,
   Form,
   Label2 as Label,
@@ -5998,7 +5998,7 @@ export {
   SidebarSeparator,
   SidebarTrigger,
   Table,
-  header_default as TableHeader,
+  header_default as TableHeaderActions,
   TeamSwitcher,
   ThemeToggleItem,
   Tooltip2 as Tooltip,

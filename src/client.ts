@@ -124,6 +124,6 @@ export { default as AzirLayout } from "../components/layout"
 export { default as AzirTable } from "../components/table/azir-table"
 // Table Header Filters
 export { FilterRadioButton } from "../components/table/header/filter-radio-button"
-export { FilterPopoverInput as FilterContain } from "../components/table/header/filter-constain"
+export { FilterPopoverInput } from "../components/table/header/filter-constain"
 export { FilterBetweenDate } from "../components/table/header/filter-between-date"
-export { default as TableHeader } from "../components/table/header/index"
+export { default as TableHeaderActions } from "../components/table/header/index"

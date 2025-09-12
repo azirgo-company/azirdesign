@@ -72,7 +72,7 @@ __export(client_exports, {
   EditButton: () => EditButton,
   EditPage: () => EditPage,
   FilterBetweenDate: () => FilterBetweenDate,
-  FilterContain: () => FilterPopoverInput,
+  FilterPopoverInput: () => FilterPopoverInput,
   FilterRadioButton: () => FilterRadioButton,
   Form: () => Form,
   Label: () => Label2,
@@ -120,7 +120,7 @@ __export(client_exports, {
   SidebarSeparator: () => SidebarSeparator,
   SidebarTrigger: () => SidebarTrigger,
   Table: () => Table,
-  TableHeader: () => header_default,
+  TableHeaderActions: () => header_default,
   TeamSwitcher: () => TeamSwitcher,
   ThemeToggleItem: () => ThemeToggleItem,
   Tooltip: () => Tooltip2,
@@ -3672,7 +3672,6 @@ var layout_default = AzirLayout;
 
 // components/table/azir-table.tsx
 var import_lucide_react25 = require("lucide-react");
-var import_react_table = require("@tanstack/react-table");
 
 // components/table/pagination.tsx
 var import_lucide_react24 = require("lucide-react");
@@ -3774,6 +3773,7 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
+var import_react_table = require("@tanstack/react-table");
 var import_jsx_runtime48 = require("react/jsx-runtime");
 function AzirTable({ table }) {
   const {
@@ -6005,7 +6005,7 @@ var header_default = TableHeaderActions;
   EditButton,
   EditPage,
   FilterBetweenDate,
-  FilterContain,
+  FilterPopoverInput,
   FilterRadioButton,
   Form,
   Label,
@@ -6053,7 +6053,7 @@ var header_default = TableHeaderActions;
   SidebarSeparator,
   SidebarTrigger,
   Table,
-  TableHeader,
+  TableHeaderActions,
   TeamSwitcher,
   ThemeToggleItem,
   Tooltip,

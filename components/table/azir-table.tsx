@@ -1,8 +1,4 @@
 import { BaseRecord, HttpError } from "@refinedev/core"
-
-import { Loader } from "lucide-react"
-import { UseTableReturnType } from "@refinedev/react-table"
-import { flexRender } from "@tanstack/react-table"
 import {
   TableBody,
   TableCell,
@@ -12,6 +8,9 @@ import {
   Table as TableUi,
 } from "../ui/table"
 import { DataTablePagination } from "./pagination"
+import { Loader } from "lucide-react"
+import { UseTableReturnType } from "@refinedev/react-table"
+import { flexRender } from "@tanstack/react-table"
 
 export default function AzirTable<
   TQueryFnData extends BaseRecord = BaseRecord,
