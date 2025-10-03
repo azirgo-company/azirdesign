@@ -12,11 +12,12 @@ import { LucideIcon } from 'lucide-react';
 import { CanAccess, BaseRecord, HttpError } from '@refinedev/core';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import { AlertDialogProps, AlertDialog as AlertDialog$1 } from '@radix-ui/react-alert-dialog';
+import * as react_hook_form from 'react-hook-form';
+import { FieldValues } from 'react-hook-form';
+import { UseFormReturnType } from '@refinedev/react-hook-form';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import * as react_hook_form from 'react-hook-form';
-import { FieldValues } from 'react-hook-form';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import * as SelectPrimitive from '@radix-ui/react-select';
 import * as SheetPrimitive from '@radix-ui/react-dialog';
@@ -244,8 +245,13 @@ declare const List: ({ canCreate, title, children, createButtonProps: createButt
 
 declare const Show: (props: ShowProps) => react_jsx_runtime.JSX.Element;
 
-type FormProps = PropsWithChildren & DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>;
-declare const Form$1: ({ children, ...props }: FormProps) => react_jsx_runtime.JSX.Element;
+type NativeFormProps = Omit<DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>, "onSubmit">;
+type FormProps<TQueryFnData extends BaseRecord = BaseRecord, TError extends HttpError = HttpError, TVariables extends FieldValues = FieldValues, TContext extends object = {}, TData extends BaseRecord = TQueryFnData, TResponse extends BaseRecord = TData, TResponseError extends HttpError = TError> = PropsWithChildren & UseFormReturnType<TQueryFnData, TError, TVariables, TContext, TData, TResponse, TResponseError> & {
+    formProps?: NativeFormProps;
+    isWatchable?: boolean;
+    hideCancel?: boolean;
+};
+declare const Form$1: <TQueryFnData extends BaseRecord = BaseRecord, TError extends HttpError = HttpError, TVariables extends FieldValues = FieldValues, TContext extends object = {}, TData extends BaseRecord = TQueryFnData, TResponse extends BaseRecord = TData, TResponseError extends HttpError = TError>({ formProps, isWatchable, saveButtonProps, ...props }: FormProps<TQueryFnData, TError, TVariables, TContext, TData, TResponse, TResponseError>) => react_jsx_runtime.JSX.Element;
 
 declare function AlertDialog({ ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Root>): react_jsx_runtime.JSX.Element;
 declare function AlertDialogTrigger({ ...props }: React$1.ComponentProps<typeof AlertDialogPrimitive.Trigger>): react_jsx_runtime.JSX.Element;
