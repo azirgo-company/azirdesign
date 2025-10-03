@@ -46,7 +46,7 @@
   "scripts": {
     "build": "tsup && npm run build:css && npm run copy:leaflet",
     "build:css": "postcss ./src/styles.css -o ./dist/styles.css",
-    "copy:leaflet": "cpy node_modules/leaflet/dist/leaflet.css dist/ --flat",
+    "copy:leaflet": "cpy node_modules/leaflet/dist/leaflet.css dist/ --flat && cpy node_modules/leaflet/dist/images/** dist/images/",
     "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build"
   },
