@@ -87,7 +87,7 @@ export default function ImageInput({
   onChange,
   label = "Imagen",
   disabled,
-  uploadUrl = "https://semillapp-api-production-08ab.up.railway.app/upload",
+  uploadUrl,
   cropSize = 300,
   formFieldName = "file",
   className,
@@ -95,6 +95,8 @@ export default function ImageInput({
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string | null>(value ?? null)
   const [localFileUrl, setLocalFileUrl] = useState<string | null>(null)
+  const resolvedUploadUrl =
+    uploadUrl ?? "https://semillapp-api-production-08ab.up.railway.app/upload"
 
   // Cropper state
   const [isCropOpen, setIsCropOpen] = useState(false)
@@ -173,7 +175,7 @@ export default function ImageInput({
       const formData = new FormData()
       formData.append(formFieldName, blob, "image.jpg")
 
-      const res = await fetch(uploadUrl, {
+      const res = await fetch(resolvedUploadUrl, {
         method: "POST",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData,
@@ -201,7 +203,7 @@ export default function ImageInput({
     localFileUrl,
     previewUrl,
     onChange,
-    uploadUrl,
+    resolvedUploadUrl,
     token,
   ])
 

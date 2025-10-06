@@ -571,7 +571,7 @@ function ImageInput({
   onChange,
   label = "Imagen",
   disabled,
-  uploadUrl = "https://semillapp-api-production-08ab.up.railway.app/upload",
+  uploadUrl,
   cropSize = 300,
   formFieldName = "file",
   className
@@ -579,6 +579,7 @@ function ImageInput({
   const inputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState2(value ?? null);
   const [localFileUrl, setLocalFileUrl] = useState2(null);
+  const resolvedUploadUrl = uploadUrl ?? "https://semillapp-api-production-08ab.up.railway.app/upload";
   const [isCropOpen, setIsCropOpen] = useState2(false);
   const [crop, setCrop] = useState2({ x: 0, y: 0 });
   const [zoom, setZoom] = useState2(1);
@@ -636,7 +637,7 @@ function ImageInput({
       const blob = await getCroppedBlob(src, croppedAreaPixels, cropSize);
       const formData = new FormData();
       formData.append(formFieldName, blob, "image.jpg");
-      const res = await fetch(uploadUrl, {
+      const res = await fetch(resolvedUploadUrl, {
         method: "POST",
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData
@@ -663,7 +664,7 @@ function ImageInput({
     localFileUrl,
     previewUrl,
     onChange,
-    uploadUrl,
+    resolvedUploadUrl,
     token
   ]);
   const clearImage = () => {
