@@ -51,6 +51,7 @@ __export(src_exports, {
   Link: () => Link,
   PageHeader: () => PageHeader,
   Skeleton: () => Skeleton,
+  Textarea: () => Textarea,
   buttonVariants: () => buttonVariants,
   cn: () => cn
 });
@@ -914,6 +915,40 @@ function ImageInput({
     )
   ] });
 }
+
+// components/ui/text-area.tsx
+var React3 = __toESM(require("react"));
+var import_jsx_runtime12 = require("react/jsx-runtime");
+function Textarea({ className, ...props }) {
+  const [value, setValue] = React3.useState(props.value ?? "");
+  const maxLength = props.maxLength;
+  React3.useEffect(() => {
+    setValue(props.value ?? "");
+  }, [props.value]);
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    props.onChange?.(event);
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "relative w-full", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+      "textarea",
+      {
+        "data-slot": "textarea",
+        className: cn(
+          "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          className
+        ),
+        onChange: handleChange,
+        ...props
+      }
+    ),
+    typeof maxLength === "number" && /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { className: "text-muted-foreground absolute right-2 bottom-[-22px] bg-transparent px-1 text-xs", children: [
+      value?.toString().length,
+      "/",
+      maxLength
+    ] })
+  ] });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Breadcrumb,
@@ -937,6 +972,7 @@ function ImageInput({
   Link,
   PageHeader,
   Skeleton,
+  Textarea,
   buttonVariants,
   cn
 });

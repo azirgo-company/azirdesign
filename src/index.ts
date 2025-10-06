@@ -31,4 +31,5 @@ export {
 export { Input } from "../components/ui/input"
 export { Skeleton } from "../components/ui/skeleton"
 export { default as ImageInput } from "../components/inputs/image-input"
+export { Textarea } from "../components/ui/text-area"
 export { cn } from "../src/lib/utils"

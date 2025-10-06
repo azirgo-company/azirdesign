@@ -63,6 +63,8 @@ type ImageInputProps = {
 };
 declare function ImageInput({ value, onChange, label, disabled, uploadUrl, cropSize, formFieldName, className, }: ImageInputProps): react_jsx_runtime.JSX.Element;
 
+declare function Textarea({ className, ...props }: React$1.ComponentProps<"textarea">): react_jsx_runtime.JSX.Element;
+
 declare function cn(...args: any[]): string;
 
-export { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Field, ImageInput, ImagePreviewCell, Link, PageHeader, Skeleton, cn };
+export { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Field, ImageInput, ImagePreviewCell, Link, PageHeader, Skeleton, Textarea, cn };
