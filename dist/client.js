@@ -140,7 +140,6 @@ var import_react = require("react");
 // components/dialog/confirm-dialog.tsx
 var React = __toESM(require("react"));
 var import_lucide_react = require("lucide-react");
-var import_react_alert_dialog = require("@radix-ui/react-alert-dialog");
 
 // components/ui/alert-dialog.tsx
 var AlertDialogPrimitive = __toESM(require("@radix-ui/react-alert-dialog"));
@@ -362,21 +361,21 @@ var ConfirmDialog = ({
     return /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_lucide_react.CheckIcon, { className: "mr-2 h-4 w-4" });
   }, [okIcon, loading]);
   return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
-    import_react_alert_dialog.AlertDialog,
+    AlertDialog,
     {
       open,
       onOpenChange,
       defaultOpen,
       ...alertDialogProps,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_alert_dialog.AlertDialogTrigger, { asChild: true, children }),
-        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(import_react_alert_dialog.AlertDialogContent, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(AlertDialogTrigger, { asChild: true, children }),
+        /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(AlertDialogContent, { children: [
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(AlertDialogHeader, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_alert_dialog.AlertDialogTitle, { children: title }),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_alert_dialog.AlertDialogDescription, { children: description })
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(AlertDialogTitle, { children: title }),
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(AlertDialogDescription, { children: description })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(AlertDialogFooter, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_alert_dialog.AlertDialogCancel, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(AlertDialogCancel, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
               "button",
               {
                 type: "button",
@@ -389,7 +388,7 @@ var ConfirmDialog = ({
                 ]
               }
             ) }),
-            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(import_react_alert_dialog.AlertDialogAction, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
+            /* @__PURE__ */ (0, import_jsx_runtime3.jsx)(AlertDialogAction, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)(
               "button",
               {
                 type: "button",

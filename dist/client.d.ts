@@ -11,7 +11,7 @@ import { RefineThemedLayoutV2SiderProps, RefineCreateButtonProps, RefineDeleteBu
 import { LucideIcon } from 'lucide-react';
 import { CanAccess, BaseRecord, HttpError } from '@refinedev/core';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
-import { AlertDialogProps, AlertDialog as AlertDialog$1 } from '@radix-ui/react-alert-dialog';
+import { AlertDialogProps } from '@radix-ui/react-alert-dialog';
 import * as react_hook_form from 'react-hook-form';
 import { FieldValues } from 'react-hook-form';
 import { UseFormReturnType } from '@refinedev/react-hook-form';
@@ -317,7 +317,7 @@ declare function ThemeToggleItem(): react_jsx_runtime.JSX.Element;
 
 declare function Tooltip({ ...props }: React$1.ComponentProps<typeof TooltipPrimitive.Root>): react_jsx_runtime.JSX.Element;
 
-type ConfirmDialogProps = React$1.ComponentPropsWithoutRef<typeof AlertDialog$1> & {
+type ConfirmDialogProps = React$1.ComponentPropsWithoutRef<typeof AlertDialog> & {
     children: React$1.ReactNode;
     title?: string;
     description?: string;

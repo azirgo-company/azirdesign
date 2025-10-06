@@ -12,15 +12,6 @@ import { useState } from "react";
 // components/dialog/confirm-dialog.tsx
 import * as React from "react";
 import { CheckIcon, LucideClockFading, XIcon } from "lucide-react";
-import {
-  AlertDialog as AlertDialog2,
-  AlertDialogTrigger as AlertDialogTrigger2,
-  AlertDialogContent as AlertDialogContent2,
-  AlertDialogTitle as AlertDialogTitle2,
-  AlertDialogDescription as AlertDialogDescription2,
-  AlertDialogCancel as AlertDialogCancel2,
-  AlertDialogAction as AlertDialogAction2
-} from "@radix-ui/react-alert-dialog";
 
 // components/ui/alert-dialog.tsx
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
@@ -242,21 +233,21 @@ var ConfirmDialog = ({
     return /* @__PURE__ */ jsx3(CheckIcon, { className: "mr-2 h-4 w-4" });
   }, [okIcon, loading]);
   return /* @__PURE__ */ jsxs2(
-    AlertDialog2,
+    AlertDialog,
     {
       open,
       onOpenChange,
       defaultOpen,
       ...alertDialogProps,
       children: [
-        /* @__PURE__ */ jsx3(AlertDialogTrigger2, { asChild: true, children }),
-        /* @__PURE__ */ jsxs2(AlertDialogContent2, { children: [
+        /* @__PURE__ */ jsx3(AlertDialogTrigger, { asChild: true, children }),
+        /* @__PURE__ */ jsxs2(AlertDialogContent, { children: [
           /* @__PURE__ */ jsxs2(AlertDialogHeader, { children: [
-            /* @__PURE__ */ jsx3(AlertDialogTitle2, { children: title }),
-            /* @__PURE__ */ jsx3(AlertDialogDescription2, { children: description })
+            /* @__PURE__ */ jsx3(AlertDialogTitle, { children: title }),
+            /* @__PURE__ */ jsx3(AlertDialogDescription, { children: description })
           ] }),
           /* @__PURE__ */ jsxs2(AlertDialogFooter, { children: [
-            /* @__PURE__ */ jsx3(AlertDialogCancel2, { asChild: true, children: /* @__PURE__ */ jsxs2(
+            /* @__PURE__ */ jsx3(AlertDialogCancel, { asChild: true, children: /* @__PURE__ */ jsxs2(
               "button",
               {
                 type: "button",
@@ -269,7 +260,7 @@ var ConfirmDialog = ({
                 ]
               }
             ) }),
-            /* @__PURE__ */ jsx3(AlertDialogAction2, { asChild: true, children: /* @__PURE__ */ jsxs2(
+            /* @__PURE__ */ jsx3(AlertDialogAction, { asChild: true, children: /* @__PURE__ */ jsxs2(
               "button",
               {
                 type: "button",
