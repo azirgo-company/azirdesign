@@ -6,12 +6,12 @@ import {
   useUserFriendlyName,
 } from "@refinedev/core"
 
-import { isValidElement } from "react"
 import { Breadcrumbs } from "../../breadcrumb"
 import { CreateButton } from "../../buttons/create"
 import { CreateButtonProps } from "../../buttons/types"
-import { PageHeader } from "../../page-header"
 import { ListProps } from "../types"
+import { PageHeader } from "../../page-header"
+import { isValidElement } from "react"
 
 export const List = ({
   canCreate,

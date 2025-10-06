@@ -51,6 +51,18 @@ declare function CardFooter({ className, ...props }: React$1.ComponentProps<"div
 
 declare function Skeleton({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
 
+type ImageInputProps = {
+    value?: string | null;
+    onChange: (url: string | null) => void;
+    label?: string;
+    disabled?: boolean;
+    uploadUrl?: string;
+    cropSize?: number;
+    formFieldName?: string;
+    className?: string;
+};
+declare function ImageInput({ value, onChange, label, disabled, uploadUrl, cropSize, formFieldName, className, }: ImageInputProps): react_jsx_runtime.JSX.Element;
+
 declare function cn(...args: any[]): string;
 
-export { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Field, ImagePreviewCell, Link, PageHeader, Skeleton, cn };
+export { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Field, ImageInput, ImagePreviewCell, Link, PageHeader, Skeleton, cn };

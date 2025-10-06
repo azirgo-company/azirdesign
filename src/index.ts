@@ -30,6 +30,5 @@ export {
 } from "../components/ui/card"
 export { Input } from "../components/ui/input"
 export { Skeleton } from "../components/ui/skeleton"
-
-// Server-safe Utils
+export { default as ImageInput } from "../components/inputs/image-input"
 export { cn } from "../src/lib/utils"

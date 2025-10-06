@@ -45,6 +45,7 @@ __export(src_exports, {
   CardHeader: () => CardHeader,
   CardTitle: () => CardTitle,
   Field: () => Field,
+  ImageInput: () => ImageInput,
   ImagePreviewCell: () => image_preview_cell_default,
   Input: () => Input,
   Link: () => Link,
@@ -466,6 +467,453 @@ function Skeleton({ className, ...props }) {
     }
   );
 }
+
+// components/inputs/image-input.tsx
+var import_react3 = __toESM(require("react"));
+var import_react_easy_crop = __toESM(require("react-easy-crop"));
+var import_lucide_react5 = require("lucide-react");
+
+// components/ui/dialog.tsx
+var DialogPrimitive = __toESM(require("@radix-ui/react-dialog"));
+var import_lucide_react4 = require("lucide-react");
+var import_jsx_runtime10 = require("react/jsx-runtime");
+function Dialog({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
+}
+function DialogPortal({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
+}
+function DialogOverlay({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    DialogPrimitive.Overlay,
+    {
+      "data-slot": "dialog-overlay",
+      className: cn(
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function DialogContent({
+  className,
+  children,
+  showCloseButton = true,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(DialogPortal, { "data-slot": "dialog-portal", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(DialogOverlay, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+      DialogPrimitive.Content,
+      {
+        "data-slot": "dialog-content",
+        className: cn(
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
+          className
+        ),
+        ...props,
+        children: [
+          children,
+          showCloseButton && /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+            DialogPrimitive.Close,
+            {
+              "data-slot": "dialog-close",
+              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_lucide_react4.XIcon, {}),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "sr-only", children: "Close" })
+              ]
+            }
+          )
+        ]
+      }
+    )
+  ] });
+}
+function DialogHeader({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "div",
+    {
+      "data-slot": "dialog-header",
+      className: cn("flex flex-col gap-2 text-center sm:text-left", className),
+      ...props
+    }
+  );
+}
+function DialogFooter({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "div",
+    {
+      "data-slot": "dialog-footer",
+      className: cn(
+        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function DialogTitle({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    DialogPrimitive.Title,
+    {
+      "data-slot": "dialog-title",
+      className: cn("text-lg leading-none font-semibold", className),
+      ...props
+    }
+  );
+}
+
+// components/inputs/image-input.tsx
+var import_nextjs = require("@clerk/nextjs");
+var import_react_slider = require("@radix-ui/react-slider");
+var import_jsx_runtime11 = require("react/jsx-runtime");
+async function getCroppedBlob(imageSrc, pixelCrop, outputSize = 300) {
+  const img = await new Promise((resolve, reject) => {
+    const image = new Image();
+    image.crossOrigin = "anonymous";
+    image.onload = () => resolve(image);
+    image.onerror = reject;
+    image.src = imageSrc;
+  });
+  let outputWidth = outputSize;
+  let outputHeight = outputSize;
+  if (outputSize === 296) {
+    outputWidth = 560;
+    outputHeight = 296;
+  }
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("No canvas context");
+  canvas.width = outputWidth;
+  canvas.height = outputHeight;
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(
+    img,
+    pixelCrop.x,
+    pixelCrop.y,
+    pixelCrop.width,
+    pixelCrop.height,
+    0,
+    0,
+    outputWidth,
+    outputHeight
+  );
+  return new Promise((resolve, reject) => {
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return reject(new Error("Canvas is empty"));
+        resolve(blob);
+      },
+      "image/jpeg",
+      0.92
+    );
+  });
+}
+function classNames(...parts) {
+  return parts.filter(Boolean).join(" ");
+}
+function ImageInput({
+  value,
+  onChange,
+  label = "Imagen",
+  disabled,
+  uploadUrl = "https://semillapp-api-production-08ab.up.railway.app/upload",
+  cropSize = 300,
+  formFieldName = "file",
+  className
+}) {
+  const inputRef = (0, import_react3.useRef)(null);
+  const [previewUrl, setPreviewUrl] = (0, import_react3.useState)(value ?? null);
+  const [localFileUrl, setLocalFileUrl] = (0, import_react3.useState)(null);
+  const [isCropOpen, setIsCropOpen] = (0, import_react3.useState)(false);
+  const [crop, setCrop] = (0, import_react3.useState)({ x: 0, y: 0 });
+  const [zoom, setZoom] = (0, import_react3.useState)(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = (0, import_react3.useState)(null);
+  const [isUploading, setIsUploading] = (0, import_react3.useState)(false);
+  const [error, setError] = (0, import_react3.useState)(null);
+  const { getToken } = (0, import_nextjs.useAuth)();
+  const [token, setToken] = (0, import_react3.useState)(null);
+  import_react3.default.useEffect(() => {
+    getToken().then(setToken);
+  }, [getToken]);
+  import_react3.default.useEffect(() => {
+    setPreviewUrl(value ?? null);
+  }, [value]);
+  const onSelectFile = (0, import_react3.useCallback)((file) => {
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    setLocalFileUrl(url);
+    setIsCropOpen(true);
+    setZoom(1);
+    setCrop({ x: 0, y: 0 });
+    setError(null);
+  }, []);
+  const onInputChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) onSelectFile(file);
+  };
+  const onDrop = (0, import_react3.useCallback)(
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (disabled) return;
+      const file = e.dataTransfer.files?.[0];
+      if (file && file.type.startsWith("image/")) onSelectFile(file);
+    },
+    [disabled, onSelectFile]
+  );
+  const onDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  const onCropComplete = (0, import_react3.useCallback)(
+    (_area, areaPixels) => {
+      setCroppedAreaPixels(areaPixels);
+    },
+    []
+  );
+  const doUpload = (0, import_react3.useCallback)(async () => {
+    if (!croppedAreaPixels) return;
+    setIsUploading(true);
+    setError(null);
+    try {
+      const src = localFileUrl ?? previewUrl;
+      if (!src) throw new Error("No hay imagen seleccionada");
+      const blob = await getCroppedBlob(src, croppedAreaPixels, cropSize);
+      const formData = new FormData();
+      formData.append(formFieldName, blob, "image.jpg");
+      const res = await fetch(uploadUrl, {
+        method: "POST",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        body: formData
+      });
+      if (!res.ok) throw new Error(`Upload failed (${res.status})`);
+      const json = await res.json();
+      if (!json.url) throw new Error("Response missing url");
+      setPreviewUrl(json.url);
+      onChange(json.url);
+      setIsCropOpen(false);
+    } catch (err) {
+      const error2 = err;
+      console.log("Error uploading image:", error2.message);
+      setError(error2?.message ?? "Error subiendo la imagen");
+    } finally {
+      setIsUploading(false);
+      if (localFileUrl) URL.revokeObjectURL(localFileUrl);
+      setLocalFileUrl(null);
+    }
+  }, [
+    croppedAreaPixels,
+    cropSize,
+    formFieldName,
+    localFileUrl,
+    previewUrl,
+    onChange,
+    uploadUrl,
+    token
+  ]);
+  const clearImage = () => {
+    setPreviewUrl(null);
+    onChange(null);
+    setError(null);
+  };
+  const dropLabel = (0, import_react3.useMemo)(() => {
+    let cropText = `se recorta a ${cropSize}\xD7${cropSize}`;
+    if (cropSize === 296) cropText = "se recorta a 560\xD7296";
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex flex-col items-center justify-center gap-1 text-center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "rounded-full border p-1.5", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.Upload, { className: "h-3.5 w-3.5" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "text-xs font-medium", children: "Selecciona o arrastra una imagen" }),
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "text-muted-foreground text-[11px]", children: [
+        "PNG, JPG \u2022 ",
+        cropText
+      ] })
+    ] });
+  }, [cropSize]);
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: classNames("w-full", className), children: [
+    label && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("label", { className: "text-foreground mb-2 block text-sm font-medium", children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex items-start gap-4", children: [
+      previewUrl && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "bg-muted relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "h-full w-full object-cover", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(image_preview_cell_default, { src: previewUrl, alt: "preview" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+          "button",
+          {
+            type: "button",
+            onClick: clearImage,
+            disabled,
+            className: "bg-background/95 hover:bg-background absolute top-1 right-1 rounded-full border p-1 shadow",
+            title: "Quitar imagen",
+            "aria-label": "Quitar imagen",
+            children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.X, { className: "h-3.5 w-3.5" })
+          }
+        )
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex flex-1 flex-col gap-2", children: [
+        !previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+          "div",
+          {
+            onDrop,
+            onDragOver,
+            role: "button",
+            tabIndex: 0,
+            onKeyDown: (e) => {
+              if (!disabled && (e.key === "Enter" || e.key === " ")) {
+                e.preventDefault();
+                inputRef.current?.click();
+              }
+            },
+            className: classNames(
+              "relative flex h-20 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-dashed px-3",
+              disabled ? "cursor-not-allowed opacity-60" : "hover:bg-muted/50"
+            ),
+            onClick: () => !disabled && inputRef.current?.click(),
+            children: [
+              dropLabel,
+              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+                "input",
+                {
+                  ref: inputRef,
+                  type: "file",
+                  accept: "image/*",
+                  onChange: onInputChange,
+                  className: "hidden",
+                  disabled
+                }
+              )
+            ]
+          }
+        ) : /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+          Button,
+          {
+            variant: "secondary",
+            size: "sm",
+            type: "button",
+            onClick: () => inputRef.current?.click(),
+            disabled,
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.Upload, { className: "mr-2 h-3.5 w-3.5" }),
+              " Cambiar imagen",
+              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+                "input",
+                {
+                  ref: inputRef,
+                  type: "file",
+                  accept: "image/*",
+                  onChange: onInputChange,
+                  className: "hidden",
+                  disabled
+                }
+              )
+            ]
+          }
+        ),
+        previewUrl && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+          Button,
+          {
+            variant: "secondary",
+            size: "sm",
+            type: "button",
+            onClick: () => setIsCropOpen(true),
+            disabled,
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.Crop, { className: "mr-2 h-3.5 w-3.5" }),
+              " Recortar"
+            ]
+          }
+        )
+      ] })
+    ] }),
+    error && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "text-destructive mt-2 text-sm", children: error }),
+    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+      Dialog,
+      {
+        open: isCropOpen,
+        onOpenChange: (open) => {
+          if (!isUploading) setIsCropOpen(open);
+        },
+        children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(DialogContent, { className: "max-w-xl", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogTitle, { children: "Recortar imagen" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "bg-muted relative aspect-square w-full overflow-hidden rounded-lg", children: localFileUrl || previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+            import_react_easy_crop.default,
+            {
+              image: localFileUrl ?? previewUrl,
+              crop,
+              zoom,
+              aspect: cropSize === 296 ? 560 / 296 : 1,
+              onCropChange: setCrop,
+              onCropComplete,
+              onZoomChange: setZoom,
+              restrictPosition: true,
+              showGrid: true
+            }
+          ) : /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "text-muted-foreground flex h-full items-center justify-center text-sm", children: "Selecciona una imagen para recortar" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "mt-4 space-y-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "text-muted-foreground text-xs", children: "Zoom" }),
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+              import_react_slider.Slider,
+              {
+                value: [zoom],
+                min: 1,
+                max: 4,
+                step: 0.1,
+                onValueChange: (v) => setZoom(v[0] ?? 1)
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "text-muted-foreground text-xs", children: [
+              "Salida final:",
+              " ",
+              cropSize === 296 ? "560\xD7296" : `${cropSize}\xD7${cropSize}`,
+              "px"
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(DialogFooter, { className: "gap-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+              Button,
+              {
+                type: "button",
+                variant: "ghost",
+                onClick: () => {
+                  setIsCropOpen(false);
+                  if (localFileUrl) URL.revokeObjectURL(localFileUrl);
+                  setLocalFileUrl(null);
+                  setCroppedAreaPixels(null);
+                },
+                disabled: isUploading,
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.X, { className: "mr-2 h-4 w-4" }),
+                  " Cancelar"
+                ]
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+              Button,
+              {
+                type: "button",
+                onClick: doUpload,
+                disabled: isUploading || !croppedAreaPixels || !(localFileUrl || previewUrl),
+                children: isUploading ? /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(import_jsx_runtime11.Fragment, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.Loader2, { className: "mr-2 h-4 w-4 animate-spin" }),
+                  " Subiendo\u2026"
+                ] }) : /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_jsx_runtime11.Fragment, { children: "Aceptar" })
+              }
+            )
+          ] })
+        ] })
+      }
+    )
+  ] });
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Breadcrumb,
@@ -483,6 +931,7 @@ function Skeleton({ className, ...props }) {
   CardHeader,
   CardTitle,
   Field,
+  ImageInput,
   ImagePreviewCell,
   Input,
   Link,
