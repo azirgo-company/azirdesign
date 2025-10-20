@@ -112,12 +112,6 @@ export default function ImageInput({
   const [isUploading, setIsUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const { getToken } = useAuth()
-  const [token, setToken] = useState<string | null>(null)
-  React.useEffect(() => {
-    getToken().then(setToken)
-  }, [getToken])
-
   React.useEffect(() => {
     setPreviewUrl(value ?? null)
   }, [value])
@@ -177,7 +171,6 @@ export default function ImageInput({
 
       const res = await fetch(resolvedUploadUrl, {
         method: "POST",
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData,
       })
       if (!res.ok) throw new Error(`Upload failed (${res.status})`)
@@ -204,7 +197,6 @@ export default function ImageInput({
     previewUrl,
     onChange,
     resolvedUploadUrl,
-    token,
   ])
 
   const clearImage = () => {
