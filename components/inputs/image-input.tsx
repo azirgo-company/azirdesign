@@ -11,7 +11,6 @@ import {
   DialogTitle,
   DialogFooter,
 } from "../ui/dialog"
-import { useAuth } from "@clerk/nextjs"
 import { Button } from "../ui/button"
 import { Slider } from "@radix-ui/react-slider"
 
