@@ -35,12 +35,12 @@ export const CreatePage = ({
 
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return <h3>{title}</h3>
+        return <h2>{title}</h2>
       }
       return title
     }
     return (
-      <h3>
+      <h2>
         {translate(
           `${identifier}.titles.create`,
           `Create ${getUserFriendlyName(
@@ -51,7 +51,7 @@ export const CreatePage = ({
             "singular"
           )}`
         )}
-      </h3>
+      </h2>
     )
   }
 

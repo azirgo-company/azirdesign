@@ -26,13 +26,6 @@ Or in your CSS file:
 @import "@azirgopro/azirdesign/styles.css";
 ```
 
-**Optional - If you're using Leaflet components:**
-
-```tsx
-// Only import this if you're using map components
-import "@azirgopro/azirdesign/leaflet.css"
-```
-
 **Important:** This library uses Tailwind CSS. Make sure your project has Tailwind CSS installed and configured. The library includes its own styles, but you need to ensure Tailwind is processing them correctly in your build pipeline.
 
 ### 2. Use the components
