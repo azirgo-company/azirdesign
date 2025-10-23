@@ -33,9 +33,9 @@ export const PageHeader = ({
                 </Button>
               )}
               <div className="inline-flex flex-col">
-                <h2 className="text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white">
+                <div className="text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white">
                   {title}
-                </h2>
+                </div>
                 {subTitle && (
                   <div className="mt-2 flex items-center text-sm text-gray-300">
                     {subTitle}

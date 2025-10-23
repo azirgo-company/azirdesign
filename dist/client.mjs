@@ -2891,7 +2891,7 @@ var PageHeader = ({
             /* @__PURE__ */ jsxs19("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
               isBack && /* @__PURE__ */ jsx34(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ jsx34(ArrowLeft, {}) }),
               /* @__PURE__ */ jsxs19("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ jsx34("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                /* @__PURE__ */ jsx34("div", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
                 subTitle && /* @__PURE__ */ jsx34("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
