@@ -3036,11 +3036,11 @@ var CreatePage = ({
     if (title === false) return null;
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h3", { children: title });
+        return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { children: title });
       }
       return title;
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h3", { children: translate(
+    return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { children: translate(
       `${identifier}.titles.create`,
       `Create ${getUserFriendlyName(
         resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
@@ -3145,11 +3145,11 @@ var EditPage = ({
     if (title === false) return null;
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: title });
+        return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { className: "text-2xl leading-tight font-bold", children: title });
       }
       return title;
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: translate(
+    return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { className: "text-2xl leading-tight font-bold", children: translate(
       `${identifier}.titles.show`,
       `Show ${getUserFriendlyName(
         resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,

@@ -577,7 +577,6 @@ function DialogTitle({
 }
 
 // components/inputs/image-input.tsx
-var import_nextjs = require("@clerk/nextjs");
 var import_react_slider = require("@radix-ui/react-slider");
 var import_jsx_runtime11 = require("react/jsx-runtime");
 async function getCroppedBlob(imageSrc, pixelCrop, outputSize = 300) {
@@ -645,11 +644,6 @@ function ImageInput({
   const [croppedAreaPixels, setCroppedAreaPixels] = (0, import_react3.useState)(null);
   const [isUploading, setIsUploading] = (0, import_react3.useState)(false);
   const [error, setError] = (0, import_react3.useState)(null);
-  const { getToken } = (0, import_nextjs.useAuth)();
-  const [token, setToken] = (0, import_react3.useState)(null);
-  import_react3.default.useEffect(() => {
-    getToken().then(setToken);
-  }, [getToken]);
   import_react3.default.useEffect(() => {
     setPreviewUrl(value ?? null);
   }, [value]);
@@ -698,7 +692,6 @@ function ImageInput({
       formData.append(formFieldName, blob, "image.jpg");
       const res = await fetch(resolvedUploadUrl, {
         method: "POST",
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData
       });
       if (!res.ok) throw new Error(`Upload failed (${res.status})`);
@@ -723,8 +716,7 @@ function ImageInput({
     localFileUrl,
     previewUrl,
     onChange,
-    resolvedUploadUrl,
-    token
+    resolvedUploadUrl
   ]);
   const clearImage = () => {
     setPreviewUrl(null);

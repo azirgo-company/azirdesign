@@ -518,7 +518,6 @@ function DialogTitle({
 }
 
 // components/inputs/image-input.tsx
-import { useAuth } from "@clerk/nextjs";
 import { Slider } from "@radix-ui/react-slider";
 import { Fragment as Fragment2, jsx as jsx11, jsxs as jsxs6 } from "react/jsx-runtime";
 async function getCroppedBlob(imageSrc, pixelCrop, outputSize = 300) {
@@ -586,11 +585,6 @@ function ImageInput({
   const [croppedAreaPixels, setCroppedAreaPixels] = useState2(null);
   const [isUploading, setIsUploading] = useState2(false);
   const [error, setError] = useState2(null);
-  const { getToken } = useAuth();
-  const [token, setToken] = useState2(null);
-  React2.useEffect(() => {
-    getToken().then(setToken);
-  }, [getToken]);
   React2.useEffect(() => {
     setPreviewUrl(value ?? null);
   }, [value]);
@@ -639,7 +633,6 @@ function ImageInput({
       formData.append(formFieldName, blob, "image.jpg");
       const res = await fetch(resolvedUploadUrl, {
         method: "POST",
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: formData
       });
       if (!res.ok) throw new Error(`Upload failed (${res.status})`);
@@ -664,8 +657,7 @@ function ImageInput({
     localFileUrl,
     previewUrl,
     onChange,
-    resolvedUploadUrl,
-    token
+    resolvedUploadUrl
   ]);
   const clearImage = () => {
     setPreviewUrl(null);
