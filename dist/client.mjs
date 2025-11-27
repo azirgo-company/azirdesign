@@ -2157,6 +2157,9 @@ function NavProjects({
   ] });
 }
 
+// components/nav-user.tsx
+import { ChevronsUpDown, LogOut } from "lucide-react";
+
 // components/ui/avatar.tsx
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { jsx as jsx21 } from "react/jsx-runtime";
@@ -2205,9 +2208,6 @@ function AvatarFallback({
     }
   );
 }
-
-// components/nav-user.tsx
-import { ChevronsUpDown, LogOut } from "lucide-react";
 
 // components/ui/theme-toggle-item.tsx
 import { DropdownMenuItem as DropdownMenuItem2 } from "@radix-ui/react-dropdown-menu";
@@ -2272,62 +2272,68 @@ function ThemeToggleItem() {
 
 // components/nav-user.tsx
 import { jsx as jsx23, jsxs as jsxs13 } from "react/jsx-runtime";
-function NavUser({ className, handleSignOut }) {
+function NavUser({
+  className,
+  handleSignOut,
+  name,
+  email,
+  avatarUrl
+}) {
   const { isMobile } = useSidebar();
-  return /* @__PURE__ */ jsx23("div", { className: cn(className, ""), children: /* @__PURE__ */ jsxs13(DropdownMenu, { children: [
-    /* @__PURE__ */ jsx23(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ jsxs13(
-      SidebarMenuButton,
-      {
-        size: "lg",
-        className: "data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground",
-        children: [
-          /* @__PURE__ */ jsxs13(Avatar, { className: "h-8 w-8 rounded-lg", children: [
-            /* @__PURE__ */ jsx23(AvatarImage, { src: "/avatars/shadcn.jpg", alt: "Administrador" }),
-            /* @__PURE__ */ jsx23(AvatarFallback, { className: "rounded-lg", children: "CN" })
-          ] }),
-          /* @__PURE__ */ jsxs13("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
-            /* @__PURE__ */ jsx23("span", { className: "truncate font-medium", children: "Administrador" }),
-            /* @__PURE__ */ jsx23("span", { className: "truncate text-xs", children: "administrador@gmail.com" })
-          ] }),
-          /* @__PURE__ */ jsx23(ChevronsUpDown, { className: "ml-auto size-4" })
-        ]
-      }
-    ) }),
-    /* @__PURE__ */ jsxs13(
-      DropdownMenuContent,
-      {
-        className: "w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg",
-        side: isMobile ? "bottom" : "right",
-        align: "end",
-        sideOffset: 4,
-        children: [
-          /* @__PURE__ */ jsx23(DropdownMenuLabel, { className: "p-0 font-normal", children: /* @__PURE__ */ jsxs13("div", { className: "flex items-center gap-2 px-1 py-1.5 text-left text-sm", children: [
+  const displayName = name || "Administrador";
+  const displayEmail = email || "administrador@gmail.com";
+  const displayAvatar = avatarUrl || "/avatars/shadcn.jpg";
+  return /* @__PURE__ */ jsxs13("div", { className: cn(className, ""), children: [
+    "...",
+    /* @__PURE__ */ jsxs13(DropdownMenu, { children: [
+      /* @__PURE__ */ jsx23(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ jsxs13(
+        SidebarMenuButton,
+        {
+          size: "lg",
+          className: "data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground",
+          children: [
             /* @__PURE__ */ jsxs13(Avatar, { className: "h-8 w-8 rounded-lg", children: [
-              /* @__PURE__ */ jsx23(
-                AvatarImage,
-                {
-                  src: "/avatars/shadcn.jpg",
-                  alt: "Administrador"
-                }
-              ),
-              /* @__PURE__ */ jsx23(AvatarFallback, { className: "rounded-lg", children: "CN" })
+              /* @__PURE__ */ jsx23(AvatarImage, { src: displayAvatar, alt: displayName }),
+              /* @__PURE__ */ jsx23(AvatarFallback, { className: "rounded-lg", children: displayName.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) })
             ] }),
             /* @__PURE__ */ jsxs13("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
-              /* @__PURE__ */ jsx23("span", { className: "truncate font-medium", children: "Administrador" }),
-              /* @__PURE__ */ jsx23("span", { className: "truncate text-xs", children: "administrador@gmail.com" })
+              /* @__PURE__ */ jsx23("span", { className: "truncate font-medium", children: displayName }),
+              /* @__PURE__ */ jsx23("span", { className: "truncate text-xs", children: displayEmail })
+            ] }),
+            /* @__PURE__ */ jsx23(ChevronsUpDown, { className: "ml-auto size-4" })
+          ]
+        }
+      ) }),
+      /* @__PURE__ */ jsxs13(
+        DropdownMenuContent,
+        {
+          className: "w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg",
+          side: isMobile ? "bottom" : "right",
+          align: "end",
+          sideOffset: 4,
+          children: [
+            /* @__PURE__ */ jsx23(DropdownMenuLabel, { className: "p-0 font-normal", children: /* @__PURE__ */ jsxs13("div", { className: "flex items-center gap-2 px-1 py-1.5 text-left text-sm", children: [
+              /* @__PURE__ */ jsxs13(Avatar, { className: "h-8 w-8 rounded-lg", children: [
+                /* @__PURE__ */ jsx23(AvatarImage, { src: displayAvatar, alt: displayName }),
+                /* @__PURE__ */ jsx23(AvatarFallback, { className: "rounded-lg", children: displayName.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) })
+              ] }),
+              /* @__PURE__ */ jsxs13("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
+                /* @__PURE__ */ jsx23("span", { className: "truncate font-medium", children: displayName }),
+                /* @__PURE__ */ jsx23("span", { className: "truncate text-xs", children: displayEmail })
+              ] })
+            ] }) }),
+            /* @__PURE__ */ jsx23(DropdownMenuSeparator, {}),
+            /* @__PURE__ */ jsx23(ThemeToggleItem, {}),
+            /* @__PURE__ */ jsx23(DropdownMenuSeparator, {}),
+            /* @__PURE__ */ jsxs13(DropdownMenuItem, { onClick: handleSignOut, children: [
+              /* @__PURE__ */ jsx23(LogOut, {}),
+              "Cerrar sesi\xF3n"
             ] })
-          ] }) }),
-          /* @__PURE__ */ jsx23(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ jsx23(ThemeToggleItem, {}),
-          /* @__PURE__ */ jsx23(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ jsxs13(DropdownMenuItem, { onClick: handleSignOut, children: [
-            /* @__PURE__ */ jsx23(LogOut, {}),
-            "Cerrar sesi\xF3n"
-          ] })
-        ]
-      }
-    )
-  ] }) });
+          ]
+        }
+      )
+    ] })
+  ] });
 }
 
 // components/team-switcher.tsx
@@ -2891,7 +2897,7 @@ var PageHeader = ({
             /* @__PURE__ */ jsxs19("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
               isBack && /* @__PURE__ */ jsx34(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ jsx34(ArrowLeft, {}) }),
               /* @__PURE__ */ jsxs19("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ jsx34("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                /* @__PURE__ */ jsx34("div", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
                 subTitle && /* @__PURE__ */ jsx34("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
@@ -3663,7 +3669,10 @@ var AzirLayout = ({
   sidebarSrc = "/semillapp.png",
   sidebarAlt = "Semillapp Logo",
   sidebarSpan = "Semillapp",
-  handleSignOut
+  handleSignOut,
+  name,
+  email,
+  avatarUrl
 }) => {
   return /* @__PURE__ */ jsxs27(SidebarProvider, { children: [
     /* @__PURE__ */ jsx47(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
@@ -3672,7 +3681,16 @@ var AzirLayout = ({
         /* @__PURE__ */ jsx47(SidebarTrigger, { className: "-ml-1" }),
         /* @__PURE__ */ jsxs27("div", { className: "flex items-center gap-2", children: [
           /* @__PURE__ */ jsx47(ThemeToggle, {}),
-          /* @__PURE__ */ jsx47(NavUser, { className: "-mr-2", handleSignOut })
+          /* @__PURE__ */ jsx47(
+            NavUser,
+            {
+              className: "-mr-2",
+              handleSignOut,
+              name,
+              email,
+              avatarUrl
+            }
+          )
         ] })
       ] }) }),
       /* @__PURE__ */ jsx47("div", { className: "flex flex-1 flex-col gap-4 p-4 pt-0", children })
