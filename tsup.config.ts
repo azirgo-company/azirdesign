@@ -5,7 +5,6 @@ export default defineConfig({
     index: "src/index.ts",
     client: "src/client.ts", // NUEVO
     styles: "src/styles.css", // Incluir CSS
-    leaflet: "src/leaflet.css", // CSS para Leaflet (opcional)
   },
   format: ["cjs", "esm"],
   dts: {
@@ -43,6 +42,5 @@ export default defineConfig({
     "next",
     "tailwind-merge",
     "tailwindcss",
-    "leaflet/dist/leaflet.css",
   ],
 })

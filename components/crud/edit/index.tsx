@@ -134,14 +134,14 @@ export const EditPage = ({
 
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return <h3 className="text-2xl leading-tight font-bold">{title}</h3>
+        return <h2 className="text-2xl leading-tight font-bold">{title}</h2>
       }
 
       return title
     }
 
     return (
-      <h3 className="text-2xl leading-tight font-bold">
+      <h2 className="text-2xl leading-tight font-bold">
         {translate(
           `${identifier}.titles.show`,
           `Show ${getUserFriendlyName(
@@ -152,7 +152,7 @@ export const EditPage = ({
             "singular"
           )}`
         )}
-      </h3>
+      </h2>
     )
   }
 

@@ -2934,11 +2934,11 @@ var CreatePage = ({
     if (title === false) return null;
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return /* @__PURE__ */ jsx35("h3", { children: title });
+        return /* @__PURE__ */ jsx35("h2", { children: title });
       }
       return title;
     }
-    return /* @__PURE__ */ jsx35("h3", { children: translate(
+    return /* @__PURE__ */ jsx35("h2", { children: translate(
       `${identifier}.titles.create`,
       `Create ${getUserFriendlyName(
         resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
@@ -3055,11 +3055,11 @@ var EditPage = ({
     if (title === false) return null;
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return /* @__PURE__ */ jsx36("h3", { className: "text-2xl leading-tight font-bold", children: title });
+        return /* @__PURE__ */ jsx36("h2", { className: "text-2xl leading-tight font-bold", children: title });
       }
       return title;
     }
-    return /* @__PURE__ */ jsx36("h3", { className: "text-2xl leading-tight font-bold", children: translate(
+    return /* @__PURE__ */ jsx36("h2", { className: "text-2xl leading-tight font-bold", children: translate(
       `${identifier}.titles.show`,
       `Show ${getUserFriendlyName(
         resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
