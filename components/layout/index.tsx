@@ -1,9 +1,9 @@
 "use client"
 
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar"
-import { ThemeToggle } from "../theme-toggle"
-import { NavUser } from "../nav-user"
 import { AppSidebar } from "../app-sidebar"
+import { NavUser } from "../nav-user"
+import { ThemeToggle } from "../theme-toggle"
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "../ui/sidebar"
 
 export const AzirLayout = ({
   children,
@@ -11,12 +11,18 @@ export const AzirLayout = ({
   sidebarAlt = "Semillapp Logo",
   sidebarSpan = "Semillapp",
   handleSignOut,
+  name,
+  email,
+  avatarUrl,
 }: {
   children: React.ReactNode
   sidebarSrc?: string
   sidebarAlt?: string
   sidebarSpan?: string
   handleSignOut: () => Promise<void> | void
+  name?: string
+  email?: string
+  avatarUrl?: string
 }) => {
   return (
     <SidebarProvider>
@@ -27,7 +33,13 @@ export const AzirLayout = ({
             <SidebarTrigger className="-ml-1" />
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              <NavUser className="-mr-2" handleSignOut={handleSignOut} />
+              <NavUser
+                className="-mr-2"
+                handleSignOut={handleSignOut}
+                name={name}
+                email={email}
+                avatarUrl={avatarUrl}
+              />
             </div>
           </div>
         </header>
