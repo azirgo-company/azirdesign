@@ -2275,6 +2275,9 @@ function NavProjects({
   ] });
 }
 
+// components/nav-user.tsx
+var import_lucide_react9 = require("lucide-react");
+
 // components/ui/avatar.tsx
 var AvatarPrimitive = __toESM(require("@radix-ui/react-avatar"));
 var import_jsx_runtime21 = require("react/jsx-runtime");
@@ -2323,9 +2326,6 @@ function AvatarFallback({
     }
   );
 }
-
-// components/nav-user.tsx
-var import_lucide_react9 = require("lucide-react");
 
 // components/ui/theme-toggle-item.tsx
 var import_react_dropdown_menu = require("@radix-ui/react-dropdown-menu");
@@ -2390,62 +2390,68 @@ function ThemeToggleItem() {
 
 // components/nav-user.tsx
 var import_jsx_runtime23 = require("react/jsx-runtime");
-function NavUser({ className, handleSignOut }) {
+function NavUser({
+  className,
+  handleSignOut,
+  name,
+  email,
+  avatarUrl
+}) {
   const { isMobile } = useSidebar();
-  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: cn(className, ""), children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(DropdownMenu, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
-      SidebarMenuButton,
-      {
-        size: "lg",
-        className: "data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground",
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(Avatar, { className: "h-8 w-8 rounded-lg", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarImage, { src: "/avatars/shadcn.jpg", alt: "Administrador" }),
-            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarFallback, { className: "rounded-lg", children: "CN" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate font-medium", children: "Administrador" }),
-            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate text-xs", children: "administrador@gmail.com" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_lucide_react9.ChevronsUpDown, { className: "ml-auto size-4" })
-        ]
-      }
-    ) }),
-    /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
-      DropdownMenuContent,
-      {
-        className: "w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg",
-        side: isMobile ? "bottom" : "right",
-        align: "end",
-        sideOffset: 4,
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuLabel, { className: "p-0 font-normal", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "flex items-center gap-2 px-1 py-1.5 text-left text-sm", children: [
+  const displayName = name || "Administrador";
+  const displayEmail = email || "administrador@gmail.com";
+  const displayAvatar = avatarUrl || "/avatars/shadcn.jpg";
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: cn(className, ""), children: [
+    "...",
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(DropdownMenu, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+        SidebarMenuButton,
+        {
+          size: "lg",
+          className: "data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground",
+          children: [
             /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(Avatar, { className: "h-8 w-8 rounded-lg", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
-                AvatarImage,
-                {
-                  src: "/avatars/shadcn.jpg",
-                  alt: "Administrador"
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarFallback, { className: "rounded-lg", children: "CN" })
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarImage, { src: displayAvatar, alt: displayName }),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarFallback, { className: "rounded-lg", children: displayName.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate font-medium", children: "Administrador" }),
-              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate text-xs", children: "administrador@gmail.com" })
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate font-medium", children: displayName }),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate text-xs", children: displayEmail })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_lucide_react9.ChevronsUpDown, { className: "ml-auto size-4" })
+          ]
+        }
+      ) }),
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+        DropdownMenuContent,
+        {
+          className: "w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg",
+          side: isMobile ? "bottom" : "right",
+          align: "end",
+          sideOffset: 4,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuLabel, { className: "p-0 font-normal", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "flex items-center gap-2 px-1 py-1.5 text-left text-sm", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(Avatar, { className: "h-8 w-8 rounded-lg", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarImage, { src: displayAvatar, alt: displayName }),
+                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(AvatarFallback, { className: "rounded-lg", children: displayName.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2) })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "grid flex-1 text-left text-sm leading-tight", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate font-medium", children: displayName }),
+                /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("span", { className: "truncate text-xs", children: displayEmail })
+              ] })
+            ] }) }),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuSeparator, {}),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(ThemeToggleItem, {}),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuSeparator, {}),
+            /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(DropdownMenuItem, { onClick: handleSignOut, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_lucide_react9.LogOut, {}),
+              "Cerrar sesi\xF3n"
             ] })
-          ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(ThemeToggleItem, {}),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(DropdownMenuSeparator, {}),
-          /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(DropdownMenuItem, { onClick: handleSignOut, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(import_lucide_react9.LogOut, {}),
-            "Cerrar sesi\xF3n"
-          ] })
-        ]
-      }
-    )
-  ] }) });
+          ]
+        }
+      )
+    ] })
+  ] });
 }
 
 // components/team-switcher.tsx
@@ -3731,7 +3737,10 @@ var AzirLayout = ({
   sidebarSrc = "/semillapp.png",
   sidebarAlt = "Semillapp Logo",
   sidebarSpan = "Semillapp",
-  handleSignOut
+  handleSignOut,
+  name,
+  email,
+  avatarUrl
 }) => {
   return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(SidebarProvider, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
@@ -3740,7 +3749,16 @@ var AzirLayout = ({
         /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(SidebarTrigger, { className: "-ml-1" }),
         /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "flex items-center gap-2", children: [
           /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ThemeToggle, {}),
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(NavUser, { className: "-mr-2", handleSignOut })
+          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+            NavUser,
+            {
+              className: "-mr-2",
+              handleSignOut,
+              name,
+              email,
+              avatarUrl
+            }
+          )
         ] })
       ] }) }),
       /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "flex flex-1 flex-col gap-4 p-4 pt-0", children })

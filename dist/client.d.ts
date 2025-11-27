@@ -136,8 +136,11 @@ declare function NavRefine(): react_jsx_runtime.JSX.Element;
 interface NavUserProps {
     className?: string;
     handleSignOut: () => Promise<void> | void;
+    name?: string;
+    email?: string;
+    avatarUrl?: string;
 }
-declare function NavUser({ className, handleSignOut }: NavUserProps): react_jsx_runtime.JSX.Element;
+declare function NavUser({ className, handleSignOut, name, email, avatarUrl, }: NavUserProps): react_jsx_runtime.JSX.Element;
 
 declare function TeamSwitcher({ teams, }: {
     teams: {
@@ -347,12 +350,15 @@ declare function useTheme(): {
     setTheme: (newTheme: Theme) => void;
 };
 
-declare const AzirLayout: ({ children, sidebarSrc, sidebarAlt, sidebarSpan, handleSignOut, }: {
+declare const AzirLayout: ({ children, sidebarSrc, sidebarAlt, sidebarSpan, handleSignOut, name, email, avatarUrl, }: {
     children: React.ReactNode;
     sidebarSrc?: string;
     sidebarAlt?: string;
     sidebarSpan?: string;
     handleSignOut: () => Promise<void> | void;
+    name?: string;
+    email?: string;
+    avatarUrl?: string;
 }) => react_jsx_runtime.JSX.Element;
 
 declare function AzirTable<TQueryFnData extends BaseRecord = BaseRecord, TError extends HttpError = HttpError, TData extends BaseRecord = TQueryFnData>({ table }: {
