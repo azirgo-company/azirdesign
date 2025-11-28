@@ -3200,6 +3200,7 @@ var List = ({
       ),
       extra: /* @__PURE__ */ jsx38("div", { className: headerButtonProps?.className, children: headerButtons }),
       breadcrumb: isValidElement4(breadcrumb) ? /* @__PURE__ */ jsx38(Fragment8, { children: breadcrumb }) : /* @__PURE__ */ jsx38(Breadcrumbs, {}),
+      showReloadButton: false,
       children: [
         extra,
         /* @__PURE__ */ jsx38("div", { children })
@@ -3298,8 +3299,7 @@ var Show = (props) => {
   };
   const defaultHeaderButtons = /* @__PURE__ */ jsxs24(Fragment9, { children: [
     listButtonProps && /* @__PURE__ */ jsx39(ListButton, { ...listButtonProps }),
-    isEditButtonVisible && /* @__PURE__ */ jsx39(EditButton, { colorScheme: "brand", ...editButtonProps }),
-    /* @__PURE__ */ jsx39(ReloadButton, {})
+    isEditButtonVisible && /* @__PURE__ */ jsx39(EditButton, { colorScheme: "brand", ...editButtonProps })
   ] });
   const buttonBack = goBackFromProps === null ? null : /* @__PURE__ */ jsx39(
     Button,
@@ -3773,6 +3773,10 @@ var AzirLayout = ({
 };
 var layout_default = AzirLayout;
 
+// components/table/azir-table.tsx
+import { flexRender } from "@tanstack/react-table";
+import { Loader } from "lucide-react";
+
 // components/table/pagination.tsx
 import {
   ChevronLeft,
@@ -3878,8 +3882,6 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
-import { Loader } from "lucide-react";
-import { flexRender } from "@tanstack/react-table";
 import { Fragment as Fragment10, jsx as jsx50, jsxs as jsxs30 } from "react/jsx-runtime";
 function AzirTable({ table }) {
   const {
@@ -3888,6 +3890,7 @@ function AzirTable({ table }) {
     }
   } = table;
   return /* @__PURE__ */ jsxs30(Fragment10, { children: [
+    /* @__PURE__ */ jsx50("div", { className: "mb-2 flex justify-end", children: /* @__PURE__ */ jsx50(ReloadButton, { variant: "secondary", size: "sm" }) }),
     /* @__PURE__ */ jsxs30("div", { className: "relative overflow-hidden rounded-md border", children: [
       /* @__PURE__ */ jsxs30(Table, { children: [
         /* @__PURE__ */ jsx50(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ jsx50(TableRow, { children: headerGroup.headers.map((header) => {

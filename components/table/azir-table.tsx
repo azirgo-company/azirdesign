@@ -1,4 +1,8 @@
 import { BaseRecord, HttpError } from "@refinedev/core"
+import { UseTableReturnType } from "@refinedev/react-table"
+import { flexRender } from "@tanstack/react-table"
+import { Loader } from "lucide-react"
+import { ReloadButton } from "../reload-button"
 import {
   TableBody,
   TableCell,
@@ -8,9 +12,6 @@ import {
   Table as TableUi,
 } from "../ui/table"
 import { DataTablePagination } from "./pagination"
-import { Loader } from "lucide-react"
-import { UseTableReturnType } from "@refinedev/react-table"
-import { flexRender } from "@tanstack/react-table"
 
 export default function AzirTable<
   TQueryFnData extends BaseRecord = BaseRecord,
@@ -25,6 +26,9 @@ export default function AzirTable<
 
   return (
     <>
+      <div className="mb-2 flex justify-end">
+        <ReloadButton variant="secondary" size="sm" />
+      </div>
       <div className="relative overflow-hidden rounded-md border">
         <TableUi>
           <TableHeader>

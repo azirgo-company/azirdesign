@@ -329,236 +329,30 @@ var PageHeader = ({
   ] }) });
 };
 
-// components/ui/breadcrumb.tsx
-var import_lucide_react4 = require("lucide-react");
-var import_react_slot3 = require("@radix-ui/react-slot");
-var import_jsx_runtime7 = require("react/jsx-runtime");
-function Breadcrumb({ ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("nav", { "aria-label": "breadcrumb", "data-slot": "breadcrumb", ...props });
-}
-function BreadcrumbList({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    "ol",
-    {
-      "data-slot": "breadcrumb-list",
-      className: cn(
-        "text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function BreadcrumbItem({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    "li",
-    {
-      "data-slot": "breadcrumb-item",
-      className: cn("inline-flex items-center gap-1.5", className),
-      ...props
-    }
-  );
-}
-function BreadcrumbLink({
-  asChild,
-  className,
-  ...props
-}) {
-  const Comp = asChild ? import_react_slot3.Slot : "a";
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    Comp,
-    {
-      "data-slot": "breadcrumb-link",
-      className: cn("hover:text-foreground transition-colors", className),
-      ...props
-    }
-  );
-}
-function BreadcrumbPage({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    "span",
-    {
-      "data-slot": "breadcrumb-page",
-      role: "link",
-      "aria-disabled": "true",
-      "aria-current": "page",
-      className: cn("text-foreground font-normal", className),
-      ...props
-    }
-  );
-}
-function BreadcrumbSeparator({
-  children,
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    "li",
-    {
-      "data-slot": "breadcrumb-separator",
-      role: "presentation",
-      "aria-hidden": "true",
-      className: cn("[&>svg]:size-3.5", className),
-      ...props,
-      children: children ?? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react4.ChevronRight, {})
-    }
-  );
-}
-function BreadcrumbEllipsis({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
-    "span",
-    {
-      "data-slot": "breadcrumb-ellipsis",
-      role: "presentation",
-      "aria-hidden": "true",
-      className: cn("flex size-9 items-center justify-center", className),
-      ...props,
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react4.MoreHorizontal, { className: "size-4" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "sr-only", children: "More" })
-      ]
-    }
-  );
-}
-
-// components/ui/card.tsx
-var import_jsx_runtime8 = require("react/jsx-runtime");
-function Card({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-    "div",
-    {
-      "data-slot": "card",
-      className: cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CardHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-    "div",
-    {
-      "data-slot": "card-header",
-      className: cn(
-        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function CardTitle({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-    "div",
-    {
-      "data-slot": "card-title",
-      className: cn("leading-none font-semibold", className),
-      ...props
-    }
-  );
-}
-function CardDescription({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-    "div",
-    {
-      "data-slot": "card-description",
-      className: cn("text-muted-foreground text-sm", className),
-      ...props
-    }
-  );
-}
-function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-    "div",
-    {
-      "data-slot": "card-content",
-      className: cn("px-6", className),
-      ...props
-    }
-  );
-}
-function CardFooter({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-    "div",
-    {
-      "data-slot": "card-footer",
-      className: cn("flex items-center px-6 [.border-t]:pt-6", className),
-      ...props
-    }
-  );
-}
-
-// components/ui/input.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
-function Input({ className, type, float, onChange, ...props }) {
-  const handleChange = (event) => {
-    if (float && event.target.value) {
-      const numericValue = parseFloat(event.target.value);
-      if (!isNaN(numericValue)) {
-        event.target.value = numericValue.toString();
-      }
-    }
-    onChange?.(event);
-  };
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
-    "input",
-    {
-      type,
-      "data-slot": "input",
-      className: cn(
-        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-        className
-      ),
-      onChange: handleChange,
-      ...props
-    }
-  );
-}
-
-// components/ui/skeleton.tsx
-var import_jsx_runtime10 = require("react/jsx-runtime");
-function Skeleton({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
-    "div",
-    {
-      "data-slot": "skeleton",
-      className: cn("bg-accent animate-pulse rounded-md", className),
-      ...props
-    }
-  );
-}
-
 // components/inputs/image-input.tsx
 var import_react4 = __toESM(require("react"));
 var import_react_easy_crop = __toESM(require("react-easy-crop"));
-var import_lucide_react6 = require("lucide-react");
+var import_lucide_react5 = require("lucide-react");
 
 // components/ui/dialog.tsx
 var DialogPrimitive = __toESM(require("@radix-ui/react-dialog"));
-var import_lucide_react5 = require("lucide-react");
-var import_jsx_runtime11 = require("react/jsx-runtime");
+var import_lucide_react4 = require("lucide-react");
+var import_jsx_runtime7 = require("react/jsx-runtime");
 function Dialog({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
 }
 function DialogPortal({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
 }
 function DialogOverlay({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     DialogPrimitive.Overlay,
     {
       "data-slot": "dialog-overlay",
@@ -576,9 +370,9 @@ function DialogContent({
   showCloseButton = true,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(DialogPortal, { "data-slot": "dialog-portal", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogOverlay, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(DialogPortal, { "data-slot": "dialog-portal", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DialogOverlay, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
       DialogPrimitive.Content,
       {
         "data-slot": "dialog-content",
@@ -589,14 +383,14 @@ function DialogContent({
         ...props,
         children: [
           children,
-          showCloseButton && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+          showCloseButton && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
             DialogPrimitive.Close,
             {
               "data-slot": "dialog-close",
               className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.XIcon, {}),
-                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "sr-only", children: "Close" })
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react4.XIcon, {}),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "sr-only", children: "Close" })
               ]
             }
           )
@@ -606,7 +400,7 @@ function DialogContent({
   ] });
 }
 function DialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "div",
     {
       "data-slot": "dialog-header",
@@ -616,7 +410,7 @@ function DialogHeader({ className, ...props }) {
   );
 }
 function DialogFooter({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "div",
     {
       "data-slot": "dialog-footer",
@@ -632,7 +426,7 @@ function DialogTitle({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     DialogPrimitive.Title,
     {
       "data-slot": "dialog-title",
@@ -644,7 +438,7 @@ function DialogTitle({
 
 // components/inputs/image-input.tsx
 var import_react_slider = require("@radix-ui/react-slider");
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime8 = require("react/jsx-runtime");
 async function getCroppedBlob(imageSrc, pixelCrop, outputSize = 300) {
   const img = await new Promise((resolve, reject) => {
     const image = new Image();
@@ -792,21 +586,21 @@ function ImageInput({
   const dropLabel = (0, import_react4.useMemo)(() => {
     let cropText = `se recorta a ${cropSize}\xD7${cropSize}`;
     if (cropSize === 296) cropText = "se recorta a 560\xD7296";
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex flex-col items-center justify-center gap-1 text-center", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "rounded-full border p-1.5", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.Upload, { className: "h-3.5 w-3.5" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-xs font-medium", children: "Selecciona o arrastra una imagen" }),
-      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "text-muted-foreground text-[11px]", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex flex-col items-center justify-center gap-1 text-center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "rounded-full border p-1.5", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react5.Upload, { className: "h-3.5 w-3.5" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "text-xs font-medium", children: "Selecciona o arrastra una imagen" }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "text-muted-foreground text-[11px]", children: [
         "PNG, JPG \u2022 ",
         cropText
       ] })
     ] });
   }, [cropSize]);
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: classNames("w-full", className), children: [
-    label && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("label", { className: "text-foreground mb-2 block text-sm font-medium", children: label }),
-    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex items-start gap-4", children: [
-      previewUrl && /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-muted relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "h-full w-full object-cover", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(image_preview_cell_default, { src: previewUrl, alt: "preview" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: classNames("w-full", className), children: [
+    label && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("label", { className: "text-foreground mb-2 block text-sm font-medium", children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex items-start gap-4", children: [
+      previewUrl && /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "bg-muted relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "h-full w-full object-cover", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(image_preview_cell_default, { src: previewUrl, alt: "preview" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
           "button",
           {
             type: "button",
@@ -815,12 +609,12 @@ function ImageInput({
             className: "bg-background/95 hover:bg-background absolute top-1 right-1 rounded-full border p-1 shadow",
             title: "Quitar imagen",
             "aria-label": "Quitar imagen",
-            children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.X, { className: "h-3.5 w-3.5" })
+            children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react5.X, { className: "h-3.5 w-3.5" })
           }
         )
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex flex-1 flex-col gap-2", children: [
-        !previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "flex flex-1 flex-col gap-2", children: [
+        !previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
           "div",
           {
             onDrop,
@@ -840,7 +634,7 @@ function ImageInput({
             onClick: () => !disabled && inputRef.current?.click(),
             children: [
               dropLabel,
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
                 "input",
                 {
                   ref: inputRef,
@@ -853,7 +647,7 @@ function ImageInput({
               )
             ]
           }
-        ) : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+        ) : /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
           Button,
           {
             variant: "secondary",
@@ -862,9 +656,9 @@ function ImageInput({
             onClick: () => inputRef.current?.click(),
             disabled,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.Upload, { className: "mr-2 h-3.5 w-3.5" }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react5.Upload, { className: "mr-2 h-3.5 w-3.5" }),
               " Cambiar imagen",
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
                 "input",
                 {
                   ref: inputRef,
@@ -878,7 +672,7 @@ function ImageInput({
             ]
           }
         ),
-        previewUrl && /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+        previewUrl && /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
           Button,
           {
             variant: "secondary",
@@ -887,24 +681,24 @@ function ImageInput({
             onClick: () => setIsCropOpen(true),
             disabled,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.Crop, { className: "mr-2 h-3.5 w-3.5" }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react5.Crop, { className: "mr-2 h-3.5 w-3.5" }),
               " Recortar"
             ]
           }
         )
       ] })
     ] }),
-    error && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-destructive mt-2 text-sm", children: error }),
-    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    error && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "text-destructive mt-2 text-sm", children: error }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
       Dialog,
       {
         open: isCropOpen,
         onOpenChange: (open) => {
           if (!isUploading) setIsCropOpen(open);
         },
-        children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(DialogContent, { className: "max-w-xl", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DialogHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DialogTitle, { children: "Recortar imagen" }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "bg-muted relative aspect-square w-full overflow-hidden rounded-lg", children: localFileUrl || previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(DialogContent, { className: "max-w-xl", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(DialogHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(DialogTitle, { children: "Recortar imagen" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "bg-muted relative aspect-square w-full overflow-hidden rounded-lg", children: localFileUrl || previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             import_react_easy_crop.default,
             {
               image: localFileUrl ?? previewUrl,
@@ -917,10 +711,10 @@ function ImageInput({
               restrictPosition: true,
               showGrid: true
             }
-          ) : /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-muted-foreground flex h-full items-center justify-center text-sm", children: "Selecciona una imagen para recortar" }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-4 space-y-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-muted-foreground text-xs", children: "Zoom" }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          ) : /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "text-muted-foreground flex h-full items-center justify-center text-sm", children: "Selecciona una imagen para recortar" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "mt-4 space-y-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "text-muted-foreground text-xs", children: "Zoom" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
               import_react_slider.Slider,
               {
                 value: [zoom],
@@ -930,15 +724,15 @@ function ImageInput({
                 onValueChange: (v) => setZoom(v[0] ?? 1)
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "text-muted-foreground text-xs", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "text-muted-foreground text-xs", children: [
               "Salida final:",
               " ",
               cropSize === 296 ? "560\xD7296" : `${cropSize}\xD7${cropSize}`,
               "px"
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(DialogFooter, { className: "gap-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(DialogFooter, { className: "gap-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
               Button,
               {
                 type: "button",
@@ -951,21 +745,21 @@ function ImageInput({
                 },
                 disabled: isUploading,
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.X, { className: "mr-2 h-4 w-4" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react5.X, { className: "mr-2 h-4 w-4" }),
                   " Cancelar"
                 ]
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
               Button,
               {
                 type: "button",
                 onClick: doUpload,
                 disabled: isUploading || !croppedAreaPixels || !(localFileUrl || previewUrl),
-                children: isUploading ? /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(import_jsx_runtime12.Fragment, { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.Loader2, { className: "mr-2 h-4 w-4 animate-spin" }),
+                children: isUploading ? /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(import_jsx_runtime8.Fragment, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_lucide_react5.Loader2, { className: "mr-2 h-4 w-4 animate-spin" }),
                   " Subiendo\u2026"
-                ] }) : /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_jsx_runtime12.Fragment, { children: "Aceptar" })
+                ] }) : /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(import_jsx_runtime8.Fragment, { children: "Aceptar" })
               }
             )
           ] })
@@ -973,6 +767,212 @@ function ImageInput({
       }
     )
   ] });
+}
+
+// components/ui/breadcrumb.tsx
+var import_lucide_react6 = require("lucide-react");
+var import_react_slot3 = require("@radix-ui/react-slot");
+var import_jsx_runtime9 = require("react/jsx-runtime");
+function Breadcrumb({ ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("nav", { "aria-label": "breadcrumb", "data-slot": "breadcrumb", ...props });
+}
+function BreadcrumbList({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+    "ol",
+    {
+      "data-slot": "breadcrumb-list",
+      className: cn(
+        "text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function BreadcrumbItem({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+    "li",
+    {
+      "data-slot": "breadcrumb-item",
+      className: cn("inline-flex items-center gap-1.5", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbLink({
+  asChild,
+  className,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot3.Slot : "a";
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+    Comp,
+    {
+      "data-slot": "breadcrumb-link",
+      className: cn("hover:text-foreground transition-colors", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbPage({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+    "span",
+    {
+      "data-slot": "breadcrumb-page",
+      role: "link",
+      "aria-disabled": "true",
+      "aria-current": "page",
+      className: cn("text-foreground font-normal", className),
+      ...props
+    }
+  );
+}
+function BreadcrumbSeparator({
+  children,
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+    "li",
+    {
+      "data-slot": "breadcrumb-separator",
+      role: "presentation",
+      "aria-hidden": "true",
+      className: cn("[&>svg]:size-3.5", className),
+      ...props,
+      children: children ?? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_lucide_react6.ChevronRight, {})
+    }
+  );
+}
+function BreadcrumbEllipsis({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
+    "span",
+    {
+      "data-slot": "breadcrumb-ellipsis",
+      role: "presentation",
+      "aria-hidden": "true",
+      className: cn("flex size-9 items-center justify-center", className),
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(import_lucide_react6.MoreHorizontal, { className: "size-4" }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "sr-only", children: "More" })
+      ]
+    }
+  );
+}
+
+// components/ui/card.tsx
+var import_jsx_runtime10 = require("react/jsx-runtime");
+function Card({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "div",
+    {
+      "data-slot": "card",
+      className: cn(
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CardHeader({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "div",
+    {
+      "data-slot": "card-header",
+      className: cn(
+        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function CardTitle({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "div",
+    {
+      "data-slot": "card-title",
+      className: cn("leading-none font-semibold", className),
+      ...props
+    }
+  );
+}
+function CardDescription({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "div",
+    {
+      "data-slot": "card-description",
+      className: cn("text-muted-foreground text-sm", className),
+      ...props
+    }
+  );
+}
+function CardContent({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "div",
+    {
+      "data-slot": "card-content",
+      className: cn("px-6", className),
+      ...props
+    }
+  );
+}
+function CardFooter({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+    "div",
+    {
+      "data-slot": "card-footer",
+      className: cn("flex items-center px-6 [.border-t]:pt-6", className),
+      ...props
+    }
+  );
+}
+
+// components/ui/input.tsx
+var import_jsx_runtime11 = require("react/jsx-runtime");
+function Input({ className, type, float, onChange, ...props }) {
+  const handleChange = (event) => {
+    if (float && event.target.value) {
+      const numericValue = parseFloat(event.target.value);
+      if (!isNaN(numericValue)) {
+        event.target.value = numericValue.toString();
+      }
+    }
+    onChange?.(event);
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+    "input",
+    {
+      type,
+      "data-slot": "input",
+      className: cn(
+        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        className
+      ),
+      onChange: handleChange,
+      ...props
+    }
+  );
+}
+
+// components/ui/skeleton.tsx
+var import_jsx_runtime12 = require("react/jsx-runtime");
+function Skeleton({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    "div",
+    {
+      "data-slot": "skeleton",
+      className: cn("bg-accent animate-pulse rounded-md", className),
+      ...props
+    }
+  );
 }
 
 // components/ui/text-area.tsx

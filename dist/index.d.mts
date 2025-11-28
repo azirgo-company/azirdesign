@@ -32,6 +32,18 @@ declare const Link: React$1.ForwardRefExoticComponent<AnchorHTMLAttributes<HTMLA
 
 declare const PageHeader: ({ extra, children, className, title, subTitle, isBack, reloadId, reloadInvalidates, showReloadButton, ...props }: PageHeaderProps) => react_jsx_runtime.JSX.Element;
 
+type ImageInputProps = {
+    value?: string | null;
+    onChange: (url: string | null) => void;
+    label?: string;
+    disabled?: boolean;
+    uploadUrl?: string;
+    cropSize?: number;
+    formFieldName?: string;
+    className?: string;
+};
+declare function ImageInput({ value, onChange, label, disabled, uploadUrl, cropSize, formFieldName, className, }: ImageInputProps): react_jsx_runtime.JSX.Element;
+
 declare function Breadcrumb({ ...props }: React$1.ComponentProps<"nav">): react_jsx_runtime.JSX.Element;
 declare function BreadcrumbList({ className, ...props }: React$1.ComponentProps<"ol">): react_jsx_runtime.JSX.Element;
 declare function BreadcrumbItem({ className, ...props }: React$1.ComponentProps<"li">): react_jsx_runtime.JSX.Element;
@@ -50,18 +62,6 @@ declare function CardContent({ className, ...props }: React$1.ComponentProps<"di
 declare function CardFooter({ className, ...props }: React$1.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
 
 declare function Skeleton({ className, ...props }: React.ComponentProps<"div">): react_jsx_runtime.JSX.Element;
-
-type ImageInputProps = {
-    value?: string | null;
-    onChange: (url: string | null) => void;
-    label?: string;
-    disabled?: boolean;
-    uploadUrl?: string;
-    cropSize?: number;
-    formFieldName?: string;
-    className?: string;
-};
-declare function ImageInput({ value, onChange, label, disabled, uploadUrl, cropSize, formFieldName, className, }: ImageInputProps): react_jsx_runtime.JSX.Element;
 
 declare function Textarea({ className, ...props }: React$1.ComponentProps<"textarea">): react_jsx_runtime.JSX.Element;
 

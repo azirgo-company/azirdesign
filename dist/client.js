@@ -3290,6 +3290,7 @@ var List = ({
       ),
       extra: /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("div", { className: headerButtonProps?.className, children: headerButtons }),
       breadcrumb: (0, import_react9.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_jsx_runtime38.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Breadcrumbs, {}),
+      showReloadButton: false,
       children: [
         extra,
         /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("div", { children })
@@ -3378,8 +3379,7 @@ var Show = (props) => {
   };
   const defaultHeaderButtons = /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)(import_jsx_runtime39.Fragment, { children: [
     listButtonProps && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(ListButton, { ...listButtonProps }),
-    isEditButtonVisible && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(EditButton, { colorScheme: "brand", ...editButtonProps }),
-    /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(ReloadButton, {})
+    isEditButtonVisible && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(EditButton, { colorScheme: "brand", ...editButtonProps })
   ] });
   const buttonBack = goBackFromProps === null ? null : /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(
     Button,
@@ -3841,6 +3841,10 @@ var AzirLayout = ({
 };
 var layout_default = AzirLayout;
 
+// components/table/azir-table.tsx
+var import_react_table = require("@tanstack/react-table");
+var import_lucide_react26 = require("lucide-react");
+
 // components/table/pagination.tsx
 var import_lucide_react25 = require("lucide-react");
 var import_jsx_runtime49 = require("react/jsx-runtime");
@@ -3941,8 +3945,6 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
-var import_lucide_react26 = require("lucide-react");
-var import_react_table = require("@tanstack/react-table");
 var import_jsx_runtime50 = require("react/jsx-runtime");
 function AzirTable({ table }) {
   const {
@@ -3951,6 +3953,7 @@ function AzirTable({ table }) {
     }
   } = table;
   return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(import_jsx_runtime50.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "mb-2 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(ReloadButton, { variant: "secondary", size: "sm" }) }),
     /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "relative overflow-hidden rounded-md border", children: [
       /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Table, { children: [
         /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableRow, { children: headerGroup.headers.map((header) => {

@@ -24,7 +24,6 @@ import {
   RefreshButtonProps,
 } from "../../buttons/types"
 import { PageHeader } from "../../page-header"
-import { ReloadButton } from "../../reload-button"
 import { Button } from "../../ui/button"
 import { ShowProps } from "../types"
 
@@ -129,7 +128,6 @@ export const Show = (props: ShowProps) => {
         <EditButton colorScheme="brand" {...editButtonProps} />
       )}
       {/* {isDeleteButtonVisible && <DeleteButton {...deleteButtonProps} />} */}
-      <ReloadButton />
     </>
   )
 
