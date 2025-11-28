@@ -1,5 +1,6 @@
 "use client"
 
+import { Toaster } from "react-hot-toast"
 import { AppSidebar } from "../app-sidebar"
 import { NavUser } from "../nav-user"
 import { ThemeToggle } from "../theme-toggle"
@@ -26,6 +27,7 @@ export const AzirLayout = ({
 }) => {
   return (
     <SidebarProvider>
+      <Toaster />
       <AppSidebar src={sidebarSrc} alt={sidebarAlt} span={sidebarSpan} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">

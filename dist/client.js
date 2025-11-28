@@ -2855,7 +2855,7 @@ var ShowButton = ({
 ShowButton.displayName = "ShowButton";
 
 // components/crud/create/index.tsx
-var import_react6 = require("react");
+var import_react7 = require("react");
 
 // components/breadcrumb/index.tsx
 var import_core11 = require("@refinedev/core");
@@ -2977,7 +2977,10 @@ var Breadcrumbs = ({ showHome = true, meta }) => {
 };
 
 // components/page-header.tsx
+var import_core12 = require("@refinedev/core");
 var import_lucide_react20 = require("lucide-react");
+var import_react6 = require("react");
+var import_react_hot_toast = __toESM(require("react-hot-toast"));
 
 // components/hooks/use-on-back.tsx
 var useOnBack = () => {
@@ -2996,6 +2999,11 @@ var PageHeader = ({
   ...props
 }) => {
   const back = useOnBack();
+  const invalidate = (0, import_core12.useInvalidate)();
+  const [isPending, startTransition] = (0, import_react6.useTransition)();
+  const { resource } = (0, import_core12.useResource)();
+  console.log("Current resource in PageHeader:", resource);
+  console.log("Rendering PageHeader with title:", title);
   return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(import_jsx_runtime34.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(
       "div",
@@ -3010,12 +3018,40 @@ var PageHeader = ({
             /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
               isBack && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(import_lucide_react20.ArrowLeft, {}) }),
               /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
                 subTitle && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "flex lg:mt-0 lg:ml-4", children: extra })
+          /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(
+              Button,
+              {
+                variant: "secondary",
+                disabled: isPending,
+                onClick: () => {
+                  startTransition(() => {
+                    invalidate({
+                      resource: resource?.name,
+                      invalidates: ["list"]
+                    }).then(() => {
+                      import_react_hot_toast.default.success("Informaci\xF3n actualizada");
+                    });
+                  });
+                },
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(
+                    import_lucide_react20.RefreshCwIcon,
+                    {
+                      className: "h-4 w-4" + (isPending ? " animate-spin" : "")
+                    }
+                  ),
+                  /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "hidden md:block", children: "Recargar" })
+                ]
+              }
+            ),
+            extra
+          ] })
         ]
       }
     ),
@@ -3024,7 +3060,7 @@ var PageHeader = ({
 };
 
 // components/crud/create/index.tsx
-var import_core12 = require("@refinedev/core");
+var import_core13 = require("@refinedev/core");
 var import_jsx_runtime35 = require("react/jsx-runtime");
 var CreatePage = ({
   title,
@@ -3033,10 +3069,10 @@ var CreatePage = ({
   extra,
   children
 }) => {
-  const translate = (0, import_core12.useTranslate)();
-  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core12.useRefineContext)();
-  const getUserFriendlyName = (0, import_core12.useUserFriendlyName)();
-  const { resource, identifier } = (0, import_core12.useResource)(resourceFromProps);
+  const translate = (0, import_core13.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core13.useRefineContext)();
+  const getUserFriendlyName = (0, import_core13.useUserFriendlyName)();
+  const { resource, identifier } = (0, import_core13.useResource)(resourceFromProps);
   const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
   const renderTitle = () => {
     if (title === false) return null;
@@ -3060,7 +3096,7 @@ var CreatePage = ({
       {
         title: renderTitle(),
         isBack: true,
-        breadcrumb: (0, import_react6.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Breadcrumbs, {}),
+        breadcrumb: (0, import_react7.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Breadcrumbs, {}),
         extra: extra ?? /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_jsx_runtime35.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(ListButton, { resource: resourceFromProps }) })
       }
     ),
@@ -3070,8 +3106,8 @@ var CreatePage = ({
 CreatePage.displayName = "CreatePage";
 
 // components/crud/edit/index.tsx
-var import_core13 = require("@refinedev/core");
-var import_react7 = require("react");
+var import_core14 = require("@refinedev/core");
+var import_react8 = require("react");
 var import_jsx_runtime36 = require("react/jsx-runtime");
 var EditPage = ({
   title,
@@ -3088,22 +3124,22 @@ var EditPage = ({
   isLoading,
   autoSaveProps
 }) => {
-  const translate = (0, import_core13.useTranslate)();
-  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core13.useRefineContext)();
-  const { mutationMode: mutationModeContext } = (0, import_core13.useMutationMode)();
+  const translate = (0, import_core14.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core14.useRefineContext)();
+  const { mutationMode: mutationModeContext } = (0, import_core14.useMutationMode)();
   const mutationMode = mutationModeFromProps ?? mutationModeContext;
-  const routerType = (0, import_core13.useRouterType)();
-  const back = (0, import_core13.useBack)();
-  const go = (0, import_core13.useGo)();
-  const { goBack, list: legacyGoList } = (0, import_core13.useNavigation)();
-  const getUserFriendlyName = (0, import_core13.useUserFriendlyName)();
+  const routerType = (0, import_core14.useRouterType)();
+  const back = (0, import_core14.useBack)();
+  const go = (0, import_core14.useGo)();
+  const { goBack, list: legacyGoList } = (0, import_core14.useNavigation)();
+  const getUserFriendlyName = (0, import_core14.useUserFriendlyName)();
   const {
     resource,
     action,
     id: idFromParams,
     identifier
-  } = (0, import_core13.useResource)(resourceFromProps);
-  const goListPath = (0, import_core13.useToPath)({
+  } = (0, import_core14.useResource)(resourceFromProps);
+  const goListPath = (0, import_core14.useToPath)({
     resource,
     action: "list"
   });
@@ -3137,7 +3173,7 @@ var EditPage = ({
     ...deleteButtonPropsFromProps
   } : void 0;
   const defaultHeaderButtons = /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "flex flex-row items-center gap-2", children: [
-    autoSaveProps && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(import_core13.AutoSaveIndicator, { ...autoSaveProps }),
+    autoSaveProps && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(import_core14.AutoSaveIndicator, { ...autoSaveProps }),
     hasList && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(ListButton, { ...listButtonProps }),
     /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(RefreshButton, { ...refreshButtonProps }),
     /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(DeleteButton, { ...deleteButtonProps })
@@ -3169,7 +3205,7 @@ var EditPage = ({
       {
         title: renderTitle(),
         isBack: true,
-        breadcrumb: (0, import_react7.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Breadcrumbs, {}),
+        breadcrumb: (0, import_react8.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Breadcrumbs, {}),
         extra: extra ?? /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "inline-flex flex-row items-center gap-x-2", children: headerButtons })
       }
     ),
@@ -3181,8 +3217,8 @@ var EditPage = ({
 };
 
 // components/crud/list/index.tsx
-var import_core14 = require("@refinedev/core");
-var import_react8 = require("react");
+var import_core15 = require("@refinedev/core");
+var import_react9 = require("react");
 var import_jsx_runtime37 = require("react/jsx-runtime");
 var List = ({
   canCreate,
@@ -3195,11 +3231,11 @@ var List = ({
   headerButtons: headerButtonsFromProps,
   extra
 }) => {
-  const translate = (0, import_core14.useTranslate)();
-  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core14.useRefineContext)();
-  const routerType = (0, import_core14.useRouterType)();
-  const getUserFriendlyName = (0, import_core14.useUserFriendlyName)();
-  const { resource, identifier } = (0, import_core14.useResource)(resourceFromProps);
+  const translate = (0, import_core15.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core15.useRefineContext)();
+  const routerType = (0, import_core15.useRouterType)();
+  const getUserFriendlyName = (0, import_core15.useUserFriendlyName)();
+  const { resource, identifier } = (0, import_core15.useResource)(resourceFromProps);
   const isCreateButtonVisible = canCreate ?? ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps);
   const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
   const createButtonProps = isCreateButtonVisible ? {
@@ -3222,7 +3258,7 @@ var List = ({
         )
       ),
       extra: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: headerButtonProps?.className, children: headerButtons }),
-      breadcrumb: (0, import_react8.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(import_jsx_runtime37.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Breadcrumbs, {}),
+      breadcrumb: (0, import_react9.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(import_jsx_runtime37.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Breadcrumbs, {}),
       children: [
         extra,
         /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { children })
@@ -3232,8 +3268,8 @@ var List = ({
 };
 
 // components/crud/show/index.tsx
-var import_react9 = require("react");
-var import_core15 = require("@refinedev/core");
+var import_react10 = require("react");
+var import_core16 = require("@refinedev/core");
 var import_lucide_react21 = require("lucide-react");
 var import_jsx_runtime38 = require("react/jsx-runtime");
 var Show = (props) => {
@@ -3257,20 +3293,20 @@ var Show = (props) => {
     breadcrumb: breadcrumbFromProps,
     title
   } = props;
-  const translate = (0, import_core15.useTranslate)();
-  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core15.useRefineContext)();
-  const routerType = (0, import_core15.useRouterType)();
-  const back = (0, import_core15.useBack)();
-  const go = (0, import_core15.useGo)();
-  const { goBack, list: legacyGoList } = (0, import_core15.useNavigation)();
-  const getUserFriendlyName = (0, import_core15.useUserFriendlyName)();
+  const translate = (0, import_core16.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core16.useRefineContext)();
+  const routerType = (0, import_core16.useRouterType)();
+  const back = (0, import_core16.useBack)();
+  const go = (0, import_core16.useGo)();
+  const { goBack, list: legacyGoList } = (0, import_core16.useNavigation)();
+  const getUserFriendlyName = (0, import_core16.useUserFriendlyName)();
   const {
     resource,
     action,
     id: idFromParams,
     identifier
-  } = (0, import_core15.useResource)(resourceFromProps);
-  const goListPath = (0, import_core15.useToPath)({
+  } = (0, import_core16.useResource)(resourceFromProps);
+  const goListPath = (0, import_core16.useToPath)({
     resource,
     action: "list"
   });
@@ -3353,7 +3389,7 @@ var Show = (props) => {
     {
       title: renderTitle(),
       isBack: true,
-      breadcrumb: (0, import_react9.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_jsx_runtime38.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Breadcrumbs, {}),
+      breadcrumb: (0, import_react10.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_jsx_runtime38.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Breadcrumbs, {}),
       children
     }
   );
@@ -3395,8 +3431,8 @@ var FormItemContext = React15.createContext(
 );
 
 // components/form.tsx
-var import_core16 = require("@refinedev/core");
-var import_react10 = require("react");
+var import_core17 = require("@refinedev/core");
+var import_react11 = require("react");
 
 // components/ui/card.tsx
 var import_jsx_runtime41 = require("react/jsx-runtime");
@@ -3442,11 +3478,11 @@ var Form2 = ({
   saveButtonProps,
   ...props
 }) => {
-  const watchable = (0, import_react10.useRef)(false);
-  const { resource: _resource, action } = (0, import_core16.useParsed)();
-  const routerType = (0, import_core16.useRouterType)();
-  const back = (0, import_core16.useBack)();
-  const { goBack } = (0, import_core16.useNavigation)();
+  const watchable = (0, import_react11.useRef)(false);
+  const { resource: _resource, action } = (0, import_core17.useParsed)();
+  const routerType = (0, import_core17.useRouterType)();
+  const back = (0, import_core17.useBack)();
+  const { goBack } = (0, import_core17.useNavigation)();
   const onBack = action !== "list" || typeof action !== "undefined" ? routerType === "legacy" ? goBack : back : void 0;
   if (isWatchable && !watchable.current) {
     watchable.current = true;
@@ -3708,6 +3744,9 @@ function Tooltip2({
   return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(TooltipProvider2, { children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
 }
 
+// components/layout/index.tsx
+var import_react_hot_toast2 = require("react-hot-toast");
+
 // components/theme-toggle.tsx
 var import_lucide_react23 = require("lucide-react");
 var import_jsx_runtime46 = require("react/jsx-runtime");
@@ -3743,6 +3782,7 @@ var AzirLayout = ({
   avatarUrl
 }) => {
   return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(SidebarProvider, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(import_react_hot_toast2.Toaster, {}),
     /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
     /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(SidebarInset, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("header", { className: "flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "flex w-full items-center justify-between gap-2 px-4", children: [
@@ -3904,7 +3944,7 @@ function AzirTable({ table }) {
 }
 
 // components/table/header/filter-radio-button.tsx
-var import_react11 = require("react");
+var import_react12 = require("react");
 var import_lucide_react27 = require("lucide-react");
 
 // components/ui/popover.tsx
@@ -3991,9 +4031,9 @@ function FilterRadioButton({
   options,
   placeholder = ""
 }) {
-  const [isOpen, setIsOpen] = (0, import_react11.useState)(false);
-  const [selected, setSelected] = (0, import_react11.useState)(value);
-  (0, import_react11.useEffect)(() => {
+  const [isOpen, setIsOpen] = (0, import_react12.useState)(false);
+  const [selected, setSelected] = (0, import_react12.useState)(value);
+  (0, import_react12.useEffect)(() => {
     setSelected(value);
   }, [value]);
   const applyFilter = () => {
@@ -4059,22 +4099,22 @@ function FilterRadioButton({
 }
 
 // components/table/header/filter-constain.tsx
-var import_react12 = require("react");
+var import_react13 = require("react");
 var import_lucide_react28 = require("lucide-react");
 var import_jsx_runtime53 = require("react/jsx-runtime");
 function FilterPopoverInput({
   column,
   placeholder = "Buscar..."
 }) {
-  const [isPopoverOpen, setPopoverOpen] = (0, import_react12.useState)(false);
-  const [inputValue, setInputValue] = (0, import_react12.useState)(
+  const [isPopoverOpen, setPopoverOpen] = (0, import_react13.useState)(false);
+  const [inputValue, setInputValue] = (0, import_react13.useState)(
     column.getFilterValue() || ""
   );
-  const inputRef = (0, import_react12.useRef)(null);
-  (0, import_react12.useEffect)(() => {
+  const inputRef = (0, import_react13.useRef)(null);
+  (0, import_react13.useEffect)(() => {
     setInputValue(column.getFilterValue() || "");
   }, [column.getFilterValue()]);
-  (0, import_react12.useEffect)(() => {
+  (0, import_react13.useEffect)(() => {
     if (isPopoverOpen && inputRef.current) {
       inputRef.current.focus();
     }
@@ -4182,7 +4222,7 @@ function FilterPopoverInput({
 }
 
 // components/table/header/filter-between-date.tsx
-var import_react13 = require("react");
+var import_react14 = require("react");
 var import_lucide_react30 = require("lucide-react");
 
 // node_modules/date-fns/constants.js
@@ -5941,9 +5981,9 @@ var import_jsx_runtime55 = require("react/jsx-runtime");
 function FilterBetweenDate({
   column
 }) {
-  const [isOpen, setIsOpen] = (0, import_react13.useState)(false);
-  const [range, setRange] = (0, import_react13.useState)();
-  (0, import_react13.useEffect)(() => {
+  const [isOpen, setIsOpen] = (0, import_react14.useState)(false);
+  const [range, setRange] = (0, import_react14.useState)();
+  (0, import_react14.useEffect)(() => {
     const filterValue = column.getFilterValue();
     if (filterValue && Array.isArray(filterValue) && filterValue.length === 2) {
       setRange({

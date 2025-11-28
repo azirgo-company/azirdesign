@@ -104,18 +104,24 @@ var Link = forwardRef(
 Link.displayName = "Link";
 
 // components/page-header.tsx
-import { ArrowLeft } from "lucide-react";
-
-// components/ui/button.tsx
-import { Slot as Slot2 } from "@radix-ui/react-slot";
-import { cva } from "class-variance-authority";
+import { useInvalidate, useResource } from "@refinedev/core";
+import { ArrowLeft, RefreshCwIcon } from "lucide-react";
+import { useTransition } from "react";
+import toast from "react-hot-toast";
 
 // src/lib/utils.ts
 function cn(...args) {
   return args.filter(Boolean).join(" ");
 }
 
+// components/hooks/use-on-back.tsx
+var useOnBack = () => {
+  return () => window.history.back();
+};
+
 // components/ui/button.tsx
+import { Slot as Slot2 } from "@radix-ui/react-slot";
+import { cva } from "class-variance-authority";
 import { jsx as jsx4 } from "react/jsx-runtime";
 var buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
@@ -160,11 +166,6 @@ function Button({
   );
 }
 
-// components/hooks/use-on-back.tsx
-var useOnBack = () => {
-  return () => window.history.back();
-};
-
 // components/page-header.tsx
 import { Fragment, jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
 var PageHeader = ({
@@ -177,6 +178,11 @@ var PageHeader = ({
   ...props
 }) => {
   const back = useOnBack();
+  const invalidate = useInvalidate();
+  const [isPending, startTransition] = useTransition();
+  const { resource } = useResource();
+  console.log("Current resource in PageHeader:", resource);
+  console.log("Rendering PageHeader with title:", title);
   return /* @__PURE__ */ jsx5("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ jsxs3(Fragment, { children: [
     /* @__PURE__ */ jsxs3(
       "div",
@@ -191,12 +197,40 @@ var PageHeader = ({
             /* @__PURE__ */ jsxs3("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
               isBack && /* @__PURE__ */ jsx5(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ jsx5(ArrowLeft, {}) }),
               /* @__PURE__ */ jsxs3("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ jsx5("div", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                /* @__PURE__ */ jsx5("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
                 subTitle && /* @__PURE__ */ jsx5("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ jsx5("div", { className: "flex lg:mt-0 lg:ml-4", children: extra })
+          /* @__PURE__ */ jsxs3("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
+            /* @__PURE__ */ jsxs3(
+              Button,
+              {
+                variant: "secondary",
+                disabled: isPending,
+                onClick: () => {
+                  startTransition(() => {
+                    invalidate({
+                      resource: resource?.name,
+                      invalidates: ["list"]
+                    }).then(() => {
+                      toast.success("Informaci\xF3n actualizada");
+                    });
+                  });
+                },
+                children: [
+                  /* @__PURE__ */ jsx5(
+                    RefreshCwIcon,
+                    {
+                      className: "h-4 w-4" + (isPending ? " animate-spin" : "")
+                    }
+                  ),
+                  /* @__PURE__ */ jsx5("span", { className: "hidden md:block", children: "Recargar" })
+                ]
+              }
+            ),
+            extra
+          ] })
         ]
       }
     ),

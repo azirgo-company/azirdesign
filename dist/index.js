@@ -163,18 +163,24 @@ var Link = (0, import_react2.forwardRef)(
 Link.displayName = "Link";
 
 // components/page-header.tsx
+var import_core2 = require("@refinedev/core");
 var import_lucide_react2 = require("lucide-react");
-
-// components/ui/button.tsx
-var import_react_slot2 = require("@radix-ui/react-slot");
-var import_class_variance_authority = require("class-variance-authority");
+var import_react3 = require("react");
+var import_react_hot_toast = __toESM(require("react-hot-toast"));
 
 // src/lib/utils.ts
 function cn(...args) {
   return args.filter(Boolean).join(" ");
 }
 
+// components/hooks/use-on-back.tsx
+var useOnBack = () => {
+  return () => window.history.back();
+};
+
 // components/ui/button.tsx
+var import_react_slot2 = require("@radix-ui/react-slot");
+var import_class_variance_authority = require("class-variance-authority");
 var import_jsx_runtime4 = require("react/jsx-runtime");
 var buttonVariants = (0, import_class_variance_authority.cva)(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
@@ -219,11 +225,6 @@ function Button({
   );
 }
 
-// components/hooks/use-on-back.tsx
-var useOnBack = () => {
-  return () => window.history.back();
-};
-
 // components/page-header.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
 var PageHeader = ({
@@ -236,6 +237,11 @@ var PageHeader = ({
   ...props
 }) => {
   const back = useOnBack();
+  const invalidate = (0, import_core2.useInvalidate)();
+  const [isPending, startTransition] = (0, import_react3.useTransition)();
+  const { resource } = (0, import_core2.useResource)();
+  console.log("Current resource in PageHeader:", resource);
+  console.log("Rendering PageHeader with title:", title);
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
       "div",
@@ -250,12 +256,40 @@ var PageHeader = ({
             /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
               isBack && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_lucide_react2.ArrowLeft, {}) }),
               /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
                 subTitle && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex lg:mt-0 lg:ml-4", children: extra })
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+              Button,
+              {
+                variant: "secondary",
+                disabled: isPending,
+                onClick: () => {
+                  startTransition(() => {
+                    invalidate({
+                      resource: resource?.name,
+                      invalidates: ["list"]
+                    }).then(() => {
+                      import_react_hot_toast.default.success("Informaci\xF3n actualizada");
+                    });
+                  });
+                },
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+                    import_lucide_react2.RefreshCwIcon,
+                    {
+                      className: "h-4 w-4" + (isPending ? " animate-spin" : "")
+                    }
+                  ),
+                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "hidden md:block", children: "Recargar" })
+                ]
+              }
+            ),
+            extra
+          ] })
         ]
       }
     ),
@@ -470,7 +504,7 @@ function Skeleton({ className, ...props }) {
 }
 
 // components/inputs/image-input.tsx
-var import_react3 = __toESM(require("react"));
+var import_react4 = __toESM(require("react"));
 var import_react_easy_crop = __toESM(require("react-easy-crop"));
 var import_lucide_react5 = require("lucide-react");
 
@@ -634,20 +668,20 @@ function ImageInput({
   formFieldName = "file",
   className
 }) {
-  const inputRef = (0, import_react3.useRef)(null);
-  const [previewUrl, setPreviewUrl] = (0, import_react3.useState)(value ?? null);
-  const [localFileUrl, setLocalFileUrl] = (0, import_react3.useState)(null);
+  const inputRef = (0, import_react4.useRef)(null);
+  const [previewUrl, setPreviewUrl] = (0, import_react4.useState)(value ?? null);
+  const [localFileUrl, setLocalFileUrl] = (0, import_react4.useState)(null);
   const resolvedUploadUrl = uploadUrl ?? "https://semillapp-api-production-08ab.up.railway.app/upload";
-  const [isCropOpen, setIsCropOpen] = (0, import_react3.useState)(false);
-  const [crop, setCrop] = (0, import_react3.useState)({ x: 0, y: 0 });
-  const [zoom, setZoom] = (0, import_react3.useState)(1);
-  const [croppedAreaPixels, setCroppedAreaPixels] = (0, import_react3.useState)(null);
-  const [isUploading, setIsUploading] = (0, import_react3.useState)(false);
-  const [error, setError] = (0, import_react3.useState)(null);
-  import_react3.default.useEffect(() => {
+  const [isCropOpen, setIsCropOpen] = (0, import_react4.useState)(false);
+  const [crop, setCrop] = (0, import_react4.useState)({ x: 0, y: 0 });
+  const [zoom, setZoom] = (0, import_react4.useState)(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = (0, import_react4.useState)(null);
+  const [isUploading, setIsUploading] = (0, import_react4.useState)(false);
+  const [error, setError] = (0, import_react4.useState)(null);
+  import_react4.default.useEffect(() => {
     setPreviewUrl(value ?? null);
   }, [value]);
-  const onSelectFile = (0, import_react3.useCallback)((file) => {
+  const onSelectFile = (0, import_react4.useCallback)((file) => {
     if (!file) return;
     const url = URL.createObjectURL(file);
     setLocalFileUrl(url);
@@ -660,7 +694,7 @@ function ImageInput({
     const file = e.target.files?.[0];
     if (file) onSelectFile(file);
   };
-  const onDrop = (0, import_react3.useCallback)(
+  const onDrop = (0, import_react4.useCallback)(
     (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -674,13 +708,13 @@ function ImageInput({
     e.preventDefault();
     e.stopPropagation();
   };
-  const onCropComplete = (0, import_react3.useCallback)(
+  const onCropComplete = (0, import_react4.useCallback)(
     (_area, areaPixels) => {
       setCroppedAreaPixels(areaPixels);
     },
     []
   );
-  const doUpload = (0, import_react3.useCallback)(async () => {
+  const doUpload = (0, import_react4.useCallback)(async () => {
     if (!croppedAreaPixels) return;
     setIsUploading(true);
     setError(null);
@@ -723,7 +757,7 @@ function ImageInput({
     onChange(null);
     setError(null);
   };
-  const dropLabel = (0, import_react3.useMemo)(() => {
+  const dropLabel = (0, import_react4.useMemo)(() => {
     let cropText = `se recorta a ${cropSize}\xD7${cropSize}`;
     if (cropSize === 296) cropText = "se recorta a 560\xD7296";
     return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex flex-col items-center justify-center gap-1 text-center", children: [

@@ -2864,7 +2864,10 @@ var Breadcrumbs = ({ showHome = true, meta }) => {
 };
 
 // components/page-header.tsx
-import { ArrowLeft } from "lucide-react";
+import { useInvalidate, useResource as useResource2 } from "@refinedev/core";
+import { ArrowLeft, RefreshCwIcon as RefreshCwIcon2 } from "lucide-react";
+import { useTransition } from "react";
+import toast from "react-hot-toast";
 
 // components/hooks/use-on-back.tsx
 var useOnBack = () => {
@@ -2883,6 +2886,11 @@ var PageHeader = ({
   ...props
 }) => {
   const back = useOnBack();
+  const invalidate = useInvalidate();
+  const [isPending, startTransition] = useTransition();
+  const { resource } = useResource2();
+  console.log("Current resource in PageHeader:", resource);
+  console.log("Rendering PageHeader with title:", title);
   return /* @__PURE__ */ jsx34("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ jsxs19(Fragment5, { children: [
     /* @__PURE__ */ jsxs19(
       "div",
@@ -2897,12 +2905,40 @@ var PageHeader = ({
             /* @__PURE__ */ jsxs19("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
               isBack && /* @__PURE__ */ jsx34(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ jsx34(ArrowLeft, {}) }),
               /* @__PURE__ */ jsxs19("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ jsx34("div", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                /* @__PURE__ */ jsx34("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
                 subTitle && /* @__PURE__ */ jsx34("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ jsx34("div", { className: "flex lg:mt-0 lg:ml-4", children: extra })
+          /* @__PURE__ */ jsxs19("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
+            /* @__PURE__ */ jsxs19(
+              Button,
+              {
+                variant: "secondary",
+                disabled: isPending,
+                onClick: () => {
+                  startTransition(() => {
+                    invalidate({
+                      resource: resource?.name,
+                      invalidates: ["list"]
+                    }).then(() => {
+                      toast.success("Informaci\xF3n actualizada");
+                    });
+                  });
+                },
+                children: [
+                  /* @__PURE__ */ jsx34(
+                    RefreshCwIcon2,
+                    {
+                      className: "h-4 w-4" + (isPending ? " animate-spin" : "")
+                    }
+                  ),
+                  /* @__PURE__ */ jsx34("span", { className: "hidden md:block", children: "Recargar" })
+                ]
+              }
+            ),
+            extra
+          ] })
         ]
       }
     ),
@@ -2915,7 +2951,7 @@ import {
   useTranslate,
   useRefineContext as useRefineContext2,
   useUserFriendlyName,
-  useResource as useResource2
+  useResource as useResource3
 } from "@refinedev/core";
 import { Fragment as Fragment6, jsx as jsx35, jsxs as jsxs20 } from "react/jsx-runtime";
 var CreatePage = ({
@@ -2928,7 +2964,7 @@ var CreatePage = ({
   const translate = useTranslate();
   const { options: { breadcrumb: globalBreadcrumb } = {} } = useRefineContext2();
   const getUserFriendlyName = useUserFriendlyName();
-  const { resource, identifier } = useResource2(resourceFromProps);
+  const { resource, identifier } = useResource3(resourceFromProps);
   const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
   const renderTitle = () => {
     if (title === false) return null;
@@ -2969,7 +3005,7 @@ import {
   useMutationMode,
   useNavigation as useNavigation2,
   useRefineContext as useRefineContext3,
-  useResource as useResource3,
+  useResource as useResource4,
   useRouterType as useRouterType2,
   useToPath,
   useTranslate as useTranslate2,
@@ -3006,7 +3042,7 @@ var EditPage = ({
     action,
     id: idFromParams,
     identifier
-  } = useResource3(resourceFromProps);
+  } = useResource4(resourceFromProps);
   const goListPath = useToPath({
     resource,
     action: "list"
@@ -3087,7 +3123,7 @@ var EditPage = ({
 // components/crud/list/index.tsx
 import {
   useRefineContext as useRefineContext4,
-  useResource as useResource4,
+  useResource as useResource5,
   useRouterType as useRouterType3,
   useTranslate as useTranslate3,
   useUserFriendlyName as useUserFriendlyName3
@@ -3109,7 +3145,7 @@ var List = ({
   const { options: { breadcrumb: globalBreadcrumb } = {} } = useRefineContext4();
   const routerType = useRouterType3();
   const getUserFriendlyName = useUserFriendlyName3();
-  const { resource, identifier } = useResource4(resourceFromProps);
+  const { resource, identifier } = useResource5(resourceFromProps);
   const isCreateButtonVisible = canCreate ?? ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps);
   const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
   const createButtonProps = isCreateButtonVisible ? {
@@ -3148,7 +3184,7 @@ import {
   useGo as useGo2,
   useNavigation as useNavigation3,
   useRefineContext as useRefineContext5,
-  useResource as useResource5,
+  useResource as useResource6,
   useRouterType as useRouterType4,
   useToPath as useToPath2,
   useTranslate as useTranslate4,
@@ -3189,7 +3225,7 @@ var Show = (props) => {
     action,
     id: idFromParams,
     identifier
-  } = useResource5(resourceFromProps);
+  } = useResource6(resourceFromProps);
   const goListPath = useToPath2({
     resource,
     action: "list"
@@ -3640,6 +3676,9 @@ function Tooltip2({
   return /* @__PURE__ */ jsx45(TooltipProvider2, { children: /* @__PURE__ */ jsx45(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
 }
 
+// components/layout/index.tsx
+import { Toaster } from "react-hot-toast";
+
 // components/theme-toggle.tsx
 import { Moon as Moon2, Sun as Sun2 } from "lucide-react";
 import { jsx as jsx46 } from "react/jsx-runtime";
@@ -3675,6 +3714,7 @@ var AzirLayout = ({
   avatarUrl
 }) => {
   return /* @__PURE__ */ jsxs27(SidebarProvider, { children: [
+    /* @__PURE__ */ jsx47(Toaster, {}),
     /* @__PURE__ */ jsx47(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
     /* @__PURE__ */ jsxs27(SidebarInset, { children: [
       /* @__PURE__ */ jsx47("header", { className: "flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12", children: /* @__PURE__ */ jsxs27("div", { className: "flex w-full items-center justify-between gap-2 px-4", children: [
