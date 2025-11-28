@@ -3844,6 +3844,7 @@ var layout_default = AzirLayout;
 // components/table/azir-table.tsx
 var import_react_table = require("@tanstack/react-table");
 var import_lucide_react26 = require("lucide-react");
+var import_react12 = require("react");
 
 // components/table/pagination.tsx
 var import_lucide_react25 = require("lucide-react");
@@ -3946,14 +3947,55 @@ function DataTablePagination({
 
 // components/table/azir-table.tsx
 var import_jsx_runtime50 = require("react/jsx-runtime");
-function AzirTable({ table }) {
+function AzirTable({
+  table,
+  stickyColumns = 1,
+  resource
+}) {
   const {
     refineCore: {
       tableQuery: { isFetching }
     }
   } = table;
+  const tableRef = (0, import_react12.useRef)(null);
+  const [columnWidths, setColumnWidths] = (0, import_react12.useState)([]);
+  (0, import_react12.useEffect)(() => {
+    const measureColumns = () => {
+      if (tableRef.current && stickyColumns > 1) {
+        const firstRow = tableRef.current.querySelector("thead tr");
+        if (firstRow) {
+          const cells = firstRow.querySelectorAll("th");
+          const widths = Array.from(cells).map(
+            (cell) => cell.getBoundingClientRect().width
+          );
+          setColumnWidths(widths);
+        }
+      }
+    };
+    const timer = setTimeout(measureColumns, 0);
+    window.addEventListener("resize", measureColumns);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", measureColumns);
+    };
+  }, [table.getRowModel().rows, stickyColumns]);
+  const getStickyClasses = (index) => {
+    if (index >= stickyColumns) return "";
+    const isLastStickyColumn = index === stickyColumns - 1;
+    return `bg-background sticky z-${index === 0 ? "20" : "10"} ${isLastStickyColumn ? "shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]" : ""}`.trim();
+  };
+  const getStickyStyle = (index) => {
+    if (index >= stickyColumns) return {};
+    if (index === 0) return { left: 0 };
+    if (columnWidths.length > 0) {
+      const leftOffset = columnWidths.slice(0, index).reduce((sum, width) => sum + width, 0);
+      return { left: leftOffset };
+    }
+    return { left: 0 };
+  };
+  console.log("Rerendering AzirTable", resource);
   return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(import_jsx_runtime50.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "mb-2 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(ReloadButton, { variant: "secondary", size: "sm" }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "mb-2 flex justify-end", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(ReloadButton, { variant: "secondary", size: "sm", resourceName: resource }) }),
     /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "relative overflow-hidden rounded-md border", children: [
       /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Table, { children: [
         /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
@@ -3981,7 +4023,7 @@ function AzirTable({ table }) {
 }
 
 // components/table/header/filter-radio-button.tsx
-var import_react12 = require("react");
+var import_react13 = require("react");
 var import_lucide_react28 = require("lucide-react");
 
 // components/ui/popover.tsx
@@ -4068,9 +4110,9 @@ function FilterRadioButton({
   options,
   placeholder = ""
 }) {
-  const [isOpen, setIsOpen] = (0, import_react12.useState)(false);
-  const [selected, setSelected] = (0, import_react12.useState)(value);
-  (0, import_react12.useEffect)(() => {
+  const [isOpen, setIsOpen] = (0, import_react13.useState)(false);
+  const [selected, setSelected] = (0, import_react13.useState)(value);
+  (0, import_react13.useEffect)(() => {
     setSelected(value);
   }, [value]);
   const applyFilter = () => {
@@ -4136,22 +4178,22 @@ function FilterRadioButton({
 }
 
 // components/table/header/filter-constain.tsx
-var import_react13 = require("react");
+var import_react14 = require("react");
 var import_lucide_react29 = require("lucide-react");
 var import_jsx_runtime54 = require("react/jsx-runtime");
 function FilterPopoverInput({
   column,
   placeholder = "Buscar..."
 }) {
-  const [isPopoverOpen, setPopoverOpen] = (0, import_react13.useState)(false);
-  const [inputValue, setInputValue] = (0, import_react13.useState)(
+  const [isPopoverOpen, setPopoverOpen] = (0, import_react14.useState)(false);
+  const [inputValue, setInputValue] = (0, import_react14.useState)(
     column.getFilterValue() || ""
   );
-  const inputRef = (0, import_react13.useRef)(null);
-  (0, import_react13.useEffect)(() => {
+  const inputRef = (0, import_react14.useRef)(null);
+  (0, import_react14.useEffect)(() => {
     setInputValue(column.getFilterValue() || "");
   }, [column.getFilterValue()]);
-  (0, import_react13.useEffect)(() => {
+  (0, import_react14.useEffect)(() => {
     if (isPopoverOpen && inputRef.current) {
       inputRef.current.focus();
     }
@@ -4259,7 +4301,7 @@ function FilterPopoverInput({
 }
 
 // components/table/header/filter-between-date.tsx
-var import_react14 = require("react");
+var import_react15 = require("react");
 var import_lucide_react31 = require("lucide-react");
 
 // node_modules/date-fns/constants.js
@@ -6018,9 +6060,9 @@ var import_jsx_runtime56 = require("react/jsx-runtime");
 function FilterBetweenDate({
   column
 }) {
-  const [isOpen, setIsOpen] = (0, import_react14.useState)(false);
-  const [range, setRange] = (0, import_react14.useState)();
-  (0, import_react14.useEffect)(() => {
+  const [isOpen, setIsOpen] = (0, import_react15.useState)(false);
+  const [range, setRange] = (0, import_react15.useState)();
+  (0, import_react15.useEffect)(() => {
     const filterValue = column.getFilterValue();
     if (filterValue && Array.isArray(filterValue) && filterValue.length === 2) {
       setRange({

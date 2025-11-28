@@ -3776,6 +3776,7 @@ var layout_default = AzirLayout;
 // components/table/azir-table.tsx
 import { flexRender } from "@tanstack/react-table";
 import { Loader } from "lucide-react";
+import { useEffect as useEffect8, useRef as useRef6, useState as useState11 } from "react";
 
 // components/table/pagination.tsx
 import {
@@ -3883,14 +3884,55 @@ function DataTablePagination({
 
 // components/table/azir-table.tsx
 import { Fragment as Fragment10, jsx as jsx50, jsxs as jsxs30 } from "react/jsx-runtime";
-function AzirTable({ table }) {
+function AzirTable({
+  table,
+  stickyColumns = 1,
+  resource
+}) {
   const {
     refineCore: {
       tableQuery: { isFetching }
     }
   } = table;
+  const tableRef = useRef6(null);
+  const [columnWidths, setColumnWidths] = useState11([]);
+  useEffect8(() => {
+    const measureColumns = () => {
+      if (tableRef.current && stickyColumns > 1) {
+        const firstRow = tableRef.current.querySelector("thead tr");
+        if (firstRow) {
+          const cells = firstRow.querySelectorAll("th");
+          const widths = Array.from(cells).map(
+            (cell) => cell.getBoundingClientRect().width
+          );
+          setColumnWidths(widths);
+        }
+      }
+    };
+    const timer = setTimeout(measureColumns, 0);
+    window.addEventListener("resize", measureColumns);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", measureColumns);
+    };
+  }, [table.getRowModel().rows, stickyColumns]);
+  const getStickyClasses = (index) => {
+    if (index >= stickyColumns) return "";
+    const isLastStickyColumn = index === stickyColumns - 1;
+    return `bg-background sticky z-${index === 0 ? "20" : "10"} ${isLastStickyColumn ? "shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)]" : ""}`.trim();
+  };
+  const getStickyStyle = (index) => {
+    if (index >= stickyColumns) return {};
+    if (index === 0) return { left: 0 };
+    if (columnWidths.length > 0) {
+      const leftOffset = columnWidths.slice(0, index).reduce((sum, width) => sum + width, 0);
+      return { left: leftOffset };
+    }
+    return { left: 0 };
+  };
+  console.log("Rerendering AzirTable", resource);
   return /* @__PURE__ */ jsxs30(Fragment10, { children: [
-    /* @__PURE__ */ jsx50("div", { className: "mb-2 flex justify-end", children: /* @__PURE__ */ jsx50(ReloadButton, { variant: "secondary", size: "sm" }) }),
+    /* @__PURE__ */ jsx50("div", { className: "mb-2 flex justify-end", children: /* @__PURE__ */ jsx50(ReloadButton, { variant: "secondary", size: "sm", resourceName: resource }) }),
     /* @__PURE__ */ jsxs30("div", { className: "relative overflow-hidden rounded-md border", children: [
       /* @__PURE__ */ jsxs30(Table, { children: [
         /* @__PURE__ */ jsx50(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ jsx50(TableRow, { children: headerGroup.headers.map((header) => {
@@ -3918,7 +3960,7 @@ function AzirTable({ table }) {
 }
 
 // components/table/header/filter-radio-button.tsx
-import { useEffect as useEffect8, useState as useState11 } from "react";
+import { useEffect as useEffect9, useState as useState12 } from "react";
 import { Check, Filter, FunnelX } from "lucide-react";
 
 // components/ui/popover.tsx
@@ -4005,9 +4047,9 @@ function FilterRadioButton({
   options,
   placeholder = ""
 }) {
-  const [isOpen, setIsOpen] = useState11(false);
-  const [selected, setSelected] = useState11(value);
-  useEffect8(() => {
+  const [isOpen, setIsOpen] = useState12(false);
+  const [selected, setSelected] = useState12(value);
+  useEffect9(() => {
     setSelected(value);
   }, [value]);
   const applyFilter = () => {
@@ -4073,22 +4115,22 @@ function FilterRadioButton({
 }
 
 // components/table/header/filter-constain.tsx
-import { useEffect as useEffect9, useRef as useRef6, useState as useState12 } from "react";
+import { useEffect as useEffect10, useRef as useRef7, useState as useState13 } from "react";
 import { Check as Check2, FunnelX as FunnelX2, Search, X } from "lucide-react";
 import { jsx as jsx54, jsxs as jsxs32 } from "react/jsx-runtime";
 function FilterPopoverInput({
   column,
   placeholder = "Buscar..."
 }) {
-  const [isPopoverOpen, setPopoverOpen] = useState12(false);
-  const [inputValue, setInputValue] = useState12(
+  const [isPopoverOpen, setPopoverOpen] = useState13(false);
+  const [inputValue, setInputValue] = useState13(
     column.getFilterValue() || ""
   );
-  const inputRef = useRef6(null);
-  useEffect9(() => {
+  const inputRef = useRef7(null);
+  useEffect10(() => {
     setInputValue(column.getFilterValue() || "");
   }, [column.getFilterValue()]);
-  useEffect9(() => {
+  useEffect10(() => {
     if (isPopoverOpen && inputRef.current) {
       inputRef.current.focus();
     }
@@ -4196,7 +4238,7 @@ function FilterPopoverInput({
 }
 
 // components/table/header/filter-between-date.tsx
-import { useEffect as useEffect11, useState as useState13 } from "react";
+import { useEffect as useEffect12, useState as useState14 } from "react";
 import { CalendarDays, Check as Check3, FunnelX as FunnelX3 } from "lucide-react";
 
 // node_modules/date-fns/constants.js
@@ -5959,9 +6001,9 @@ import { jsx as jsx56, jsxs as jsxs33 } from "react/jsx-runtime";
 function FilterBetweenDate({
   column
 }) {
-  const [isOpen, setIsOpen] = useState13(false);
-  const [range, setRange] = useState13();
-  useEffect11(() => {
+  const [isOpen, setIsOpen] = useState14(false);
+  const [range, setRange] = useState14();
+  useEffect12(() => {
     const filterValue = column.getFilterValue();
     if (filterValue && Array.isArray(filterValue) && filterValue.length === 2) {
       setRange({
