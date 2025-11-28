@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react"
 
 export type PageHeaderProps = {
   title?: ReactNode
@@ -9,4 +9,7 @@ export type PageHeaderProps = {
   breadcrumb?: ReactNode
   extra?: ReactNode
   children?: ReactNode
+  reloadId?: string | number
+  reloadInvalidates?: ("list" | "detail" | "many" | "all")[]
+  showReloadButton?: boolean
 }

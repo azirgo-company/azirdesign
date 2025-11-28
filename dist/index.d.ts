@@ -2,8 +2,8 @@ import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as React$1 from 'react';
 import { ReactElement, AnchorHTMLAttributes } from 'react';
 import { FieldValues, FieldPath, UseControllerProps, ControllerRenderProps } from 'react-hook-form';
-import { P as PageHeaderProps } from './input-CUM7u7l0.js';
-export { B as Button, a as ButtonProps, I as Input, b as buttonVariants } from './input-CUM7u7l0.js';
+import { P as PageHeaderProps } from './input-Cg7xjffp.js';
+export { B as Button, a as ButtonProps, I as Input, b as buttonVariants } from './input-Cg7xjffp.js';
 import 'class-variance-authority/dist/types';
 import 'class-variance-authority';
 
@@ -30,7 +30,7 @@ declare const Link: React$1.ForwardRefExoticComponent<AnchorHTMLAttributes<HTMLA
     asChild?: boolean;
 } & React$1.RefAttributes<HTMLAnchorElement>>;
 
-declare const PageHeader: ({ extra, children, className, title, subTitle, isBack, ...props }: PageHeaderProps) => react_jsx_runtime.JSX.Element;
+declare const PageHeader: ({ extra, children, className, title, subTitle, isBack, reloadId, reloadInvalidates, showReloadButton, ...props }: PageHeaderProps) => react_jsx_runtime.JSX.Element;
 
 declare function Breadcrumb({ ...props }: React$1.ComponentProps<"nav">): react_jsx_runtime.JSX.Element;
 declare function BreadcrumbList({ className, ...props }: React$1.ComponentProps<"ol">): react_jsx_runtime.JSX.Element;

@@ -1,10 +1,9 @@
-import { useInvalidate, useResource } from "@refinedev/core"
-import { ArrowLeft, RefreshCwIcon } from "lucide-react"
-import { useTransition } from "react"
-import toast from "react-hot-toast"
+import { useResource } from "@refinedev/core"
+import { ArrowLeft } from "lucide-react"
 import { cn } from "../src/lib/utils"
 import { useOnBack } from "./hooks/use-on-back"
 import { PageHeaderProps } from "./layout/header/types"
+import { ReloadButton } from "./reload-button"
 import { Button } from "./ui/button"
 
 export const PageHeader = ({
@@ -14,15 +13,13 @@ export const PageHeader = ({
   title,
   subTitle,
   isBack = false,
+  reloadId,
+  reloadInvalidates,
+  showReloadButton = true,
   ...props
 }: PageHeaderProps) => {
   const back = useOnBack()
-  const invalidate = useInvalidate()
-  const [isPending, startTransition] = useTransition()
   const { resource } = useResource()
-
-  console.log("Current resource in PageHeader:", resource)
-  console.log("Rendering PageHeader with title:", title)
 
   return (
     <div className={cn(className, "w-full")}>
@@ -55,25 +52,13 @@ export const PageHeader = ({
             </div>
           </div>
           <div className="flex gap-2 lg:mt-0 lg:ml-4">
-            <Button
-              variant={"secondary"}
-              disabled={isPending}
-              onClick={() => {
-                startTransition(() => {
-                  invalidate({
-                    resource: resource?.name,
-                    invalidates: ["list"],
-                  }).then(() => {
-                    toast.success("Información actualizada")
-                  })
-                })
-              }}
-            >
-              <RefreshCwIcon
-                className={"h-4 w-4" + (isPending ? " animate-spin" : "")}
+            {showReloadButton && (
+              <ReloadButton
+                resourceName={resource?.name}
+                id={reloadId}
+                invalidates={reloadInvalidates}
               />
-              <span className="hidden md:block">Recargar</span>
-            </Button>
+            )}
             {extra}
           </div>
         </div>

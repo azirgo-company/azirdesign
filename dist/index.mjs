@@ -104,10 +104,8 @@ var Link = forwardRef(
 Link.displayName = "Link";
 
 // components/page-header.tsx
-import { useInvalidate, useResource } from "@refinedev/core";
-import { ArrowLeft, RefreshCwIcon } from "lucide-react";
-import { useTransition } from "react";
-import toast from "react-hot-toast";
+import { useResource as useResource2 } from "@refinedev/core";
+import { ArrowLeft } from "lucide-react";
 
 // src/lib/utils.ts
 function cn(...args) {
@@ -118,6 +116,12 @@ function cn(...args) {
 var useOnBack = () => {
   return () => window.history.back();
 };
+
+// components/reload-button.tsx
+import { useInvalidate, useResource } from "@refinedev/core";
+import { RefreshCw as RefreshCwIcon } from "lucide-react";
+import { useTransition } from "react";
+import toast from "react-hot-toast";
 
 // components/ui/button.tsx
 import { Slot as Slot2 } from "@radix-ui/react-slot";
@@ -166,8 +170,55 @@ function Button({
   );
 }
 
+// components/reload-button.tsx
+import { jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
+var ReloadButton = ({
+  className,
+  variant = "secondary",
+  size = "default",
+  resourceName,
+  invalidates = ["list"],
+  id,
+  onReload
+}) => {
+  const invalidate = useInvalidate();
+  const [isPending, startTransition] = useTransition();
+  const { resource } = useResource();
+  const handleReload = () => {
+    startTransition(() => {
+      invalidate({
+        resource: resourceName || resource?.name,
+        invalidates,
+        id
+      }).then(() => {
+        toast.success("Informaci\xF3n actualizada");
+        if (onReload) onReload();
+      });
+    });
+  };
+  return /* @__PURE__ */ jsxs3(
+    Button,
+    {
+      variant,
+      size,
+      className,
+      disabled: isPending,
+      onClick: handleReload,
+      children: [
+        /* @__PURE__ */ jsx5(
+          RefreshCwIcon,
+          {
+            className: "h-4 w-4" + (isPending ? " animate-spin" : "")
+          }
+        ),
+        /* @__PURE__ */ jsx5("span", { className: "hidden md:block", children: "Recargar" })
+      ]
+    }
+  );
+};
+
 // components/page-header.tsx
-import { Fragment, jsx as jsx5, jsxs as jsxs3 } from "react/jsx-runtime";
+import { Fragment, jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
 var PageHeader = ({
   extra,
   children,
@@ -175,16 +226,15 @@ var PageHeader = ({
   title,
   subTitle,
   isBack = false,
+  reloadId,
+  reloadInvalidates,
+  showReloadButton = true,
   ...props
 }) => {
   const back = useOnBack();
-  const invalidate = useInvalidate();
-  const [isPending, startTransition] = useTransition();
-  const { resource } = useResource();
-  console.log("Current resource in PageHeader:", resource);
-  console.log("Rendering PageHeader with title:", title);
-  return /* @__PURE__ */ jsx5("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ jsxs3(Fragment, { children: [
-    /* @__PURE__ */ jsxs3(
+  const { resource } = useResource2();
+  return /* @__PURE__ */ jsx6("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ jsxs4(Fragment, { children: [
+    /* @__PURE__ */ jsxs4(
       "div",
       {
         className: cn(
@@ -192,41 +242,23 @@ var PageHeader = ({
           !props.breadcrumb && "h-auto"
         ),
         children: [
-          /* @__PURE__ */ jsxs3("div", { className: "min-w-0 flex-1", children: [
+          /* @__PURE__ */ jsxs4("div", { className: "min-w-0 flex-1", children: [
             props.breadcrumb,
-            /* @__PURE__ */ jsxs3("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
-              isBack && /* @__PURE__ */ jsx5(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ jsx5(ArrowLeft, {}) }),
-              /* @__PURE__ */ jsxs3("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ jsx5("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
-                subTitle && /* @__PURE__ */ jsx5("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
+            /* @__PURE__ */ jsxs4("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
+              isBack && /* @__PURE__ */ jsx6(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ jsx6(ArrowLeft, {}) }),
+              /* @__PURE__ */ jsxs4("div", { className: "inline-flex flex-col", children: [
+                /* @__PURE__ */ jsx6("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                subTitle && /* @__PURE__ */ jsx6("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ jsxs3("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
-            /* @__PURE__ */ jsxs3(
-              Button,
+          /* @__PURE__ */ jsxs4("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
+            showReloadButton && /* @__PURE__ */ jsx6(
+              ReloadButton,
               {
-                variant: "secondary",
-                disabled: isPending,
-                onClick: () => {
-                  startTransition(() => {
-                    invalidate({
-                      resource: resource?.name,
-                      invalidates: ["list"]
-                    }).then(() => {
-                      toast.success("Informaci\xF3n actualizada");
-                    });
-                  });
-                },
-                children: [
-                  /* @__PURE__ */ jsx5(
-                    RefreshCwIcon,
-                    {
-                      className: "h-4 w-4" + (isPending ? " animate-spin" : "")
-                    }
-                  ),
-                  /* @__PURE__ */ jsx5("span", { className: "hidden md:block", children: "Recargar" })
-                ]
+                resourceName: resource?.name,
+                id: reloadId,
+                invalidates: reloadInvalidates
               }
             ),
             extra
@@ -234,19 +266,19 @@ var PageHeader = ({
         ]
       }
     ),
-    /* @__PURE__ */ jsx5("div", { className: "mt-4", children })
+    /* @__PURE__ */ jsx6("div", { className: "mt-4", children })
   ] }) });
 };
 
 // components/ui/breadcrumb.tsx
 import { ChevronRight, MoreHorizontal } from "lucide-react";
 import { Slot as Slot3 } from "@radix-ui/react-slot";
-import { jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
 function Breadcrumb({ ...props }) {
-  return /* @__PURE__ */ jsx6("nav", { "aria-label": "breadcrumb", "data-slot": "breadcrumb", ...props });
+  return /* @__PURE__ */ jsx7("nav", { "aria-label": "breadcrumb", "data-slot": "breadcrumb", ...props });
 }
 function BreadcrumbList({ className, ...props }) {
-  return /* @__PURE__ */ jsx6(
+  return /* @__PURE__ */ jsx7(
     "ol",
     {
       "data-slot": "breadcrumb-list",
@@ -259,7 +291,7 @@ function BreadcrumbList({ className, ...props }) {
   );
 }
 function BreadcrumbItem({ className, ...props }) {
-  return /* @__PURE__ */ jsx6(
+  return /* @__PURE__ */ jsx7(
     "li",
     {
       "data-slot": "breadcrumb-item",
@@ -274,7 +306,7 @@ function BreadcrumbLink({
   ...props
 }) {
   const Comp = asChild ? Slot3 : "a";
-  return /* @__PURE__ */ jsx6(
+  return /* @__PURE__ */ jsx7(
     Comp,
     {
       "data-slot": "breadcrumb-link",
@@ -284,7 +316,7 @@ function BreadcrumbLink({
   );
 }
 function BreadcrumbPage({ className, ...props }) {
-  return /* @__PURE__ */ jsx6(
+  return /* @__PURE__ */ jsx7(
     "span",
     {
       "data-slot": "breadcrumb-page",
@@ -301,7 +333,7 @@ function BreadcrumbSeparator({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ jsx6(
+  return /* @__PURE__ */ jsx7(
     "li",
     {
       "data-slot": "breadcrumb-separator",
@@ -309,7 +341,7 @@ function BreadcrumbSeparator({
       "aria-hidden": "true",
       className: cn("[&>svg]:size-3.5", className),
       ...props,
-      children: children ?? /* @__PURE__ */ jsx6(ChevronRight, {})
+      children: children ?? /* @__PURE__ */ jsx7(ChevronRight, {})
     }
   );
 }
@@ -317,7 +349,7 @@ function BreadcrumbEllipsis({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ jsxs4(
+  return /* @__PURE__ */ jsxs5(
     "span",
     {
       "data-slot": "breadcrumb-ellipsis",
@@ -326,17 +358,17 @@ function BreadcrumbEllipsis({
       className: cn("flex size-9 items-center justify-center", className),
       ...props,
       children: [
-        /* @__PURE__ */ jsx6(MoreHorizontal, { className: "size-4" }),
-        /* @__PURE__ */ jsx6("span", { className: "sr-only", children: "More" })
+        /* @__PURE__ */ jsx7(MoreHorizontal, { className: "size-4" }),
+        /* @__PURE__ */ jsx7("span", { className: "sr-only", children: "More" })
       ]
     }
   );
 }
 
 // components/ui/card.tsx
-import { jsx as jsx7 } from "react/jsx-runtime";
+import { jsx as jsx8 } from "react/jsx-runtime";
 function Card({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "div",
     {
       "data-slot": "card",
@@ -349,7 +381,7 @@ function Card({ className, ...props }) {
   );
 }
 function CardHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "div",
     {
       "data-slot": "card-header",
@@ -362,7 +394,7 @@ function CardHeader({ className, ...props }) {
   );
 }
 function CardTitle({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "div",
     {
       "data-slot": "card-title",
@@ -372,7 +404,7 @@ function CardTitle({ className, ...props }) {
   );
 }
 function CardDescription({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "div",
     {
       "data-slot": "card-description",
@@ -382,7 +414,7 @@ function CardDescription({ className, ...props }) {
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "div",
     {
       "data-slot": "card-content",
@@ -392,7 +424,7 @@ function CardContent({ className, ...props }) {
   );
 }
 function CardFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx7(
+  return /* @__PURE__ */ jsx8(
     "div",
     {
       "data-slot": "card-footer",
@@ -403,7 +435,7 @@ function CardFooter({ className, ...props }) {
 }
 
 // components/ui/input.tsx
-import { jsx as jsx8 } from "react/jsx-runtime";
+import { jsx as jsx9 } from "react/jsx-runtime";
 function Input({ className, type, float, onChange, ...props }) {
   const handleChange = (event) => {
     if (float && event.target.value) {
@@ -414,7 +446,7 @@ function Input({ className, type, float, onChange, ...props }) {
     }
     onChange?.(event);
   };
-  return /* @__PURE__ */ jsx8(
+  return /* @__PURE__ */ jsx9(
     "input",
     {
       type,
@@ -432,9 +464,9 @@ function Input({ className, type, float, onChange, ...props }) {
 }
 
 // components/ui/skeleton.tsx
-import { jsx as jsx9 } from "react/jsx-runtime";
+import { jsx as jsx10 } from "react/jsx-runtime";
 function Skeleton({ className, ...props }) {
-  return /* @__PURE__ */ jsx9(
+  return /* @__PURE__ */ jsx10(
     "div",
     {
       "data-slot": "skeleton",
@@ -452,22 +484,22 @@ import { X, Upload, Crop as CropIcon, Loader2 } from "lucide-react";
 // components/ui/dialog.tsx
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
-import { jsx as jsx10, jsxs as jsxs5 } from "react/jsx-runtime";
+import { jsx as jsx11, jsxs as jsxs6 } from "react/jsx-runtime";
 function Dialog({
   ...props
 }) {
-  return /* @__PURE__ */ jsx10(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
+  return /* @__PURE__ */ jsx11(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
 }
 function DialogPortal({
   ...props
 }) {
-  return /* @__PURE__ */ jsx10(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
+  return /* @__PURE__ */ jsx11(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
 }
 function DialogOverlay({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ jsx10(
+  return /* @__PURE__ */ jsx11(
     DialogPrimitive.Overlay,
     {
       "data-slot": "dialog-overlay",
@@ -485,9 +517,9 @@ function DialogContent({
   showCloseButton = true,
   ...props
 }) {
-  return /* @__PURE__ */ jsxs5(DialogPortal, { "data-slot": "dialog-portal", children: [
-    /* @__PURE__ */ jsx10(DialogOverlay, {}),
-    /* @__PURE__ */ jsxs5(
+  return /* @__PURE__ */ jsxs6(DialogPortal, { "data-slot": "dialog-portal", children: [
+    /* @__PURE__ */ jsx11(DialogOverlay, {}),
+    /* @__PURE__ */ jsxs6(
       DialogPrimitive.Content,
       {
         "data-slot": "dialog-content",
@@ -498,14 +530,14 @@ function DialogContent({
         ...props,
         children: [
           children,
-          showCloseButton && /* @__PURE__ */ jsxs5(
+          showCloseButton && /* @__PURE__ */ jsxs6(
             DialogPrimitive.Close,
             {
               "data-slot": "dialog-close",
               className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
               children: [
-                /* @__PURE__ */ jsx10(XIcon, {}),
-                /* @__PURE__ */ jsx10("span", { className: "sr-only", children: "Close" })
+                /* @__PURE__ */ jsx11(XIcon, {}),
+                /* @__PURE__ */ jsx11("span", { className: "sr-only", children: "Close" })
               ]
             }
           )
@@ -515,7 +547,7 @@ function DialogContent({
   ] });
 }
 function DialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsx10(
+  return /* @__PURE__ */ jsx11(
     "div",
     {
       "data-slot": "dialog-header",
@@ -525,7 +557,7 @@ function DialogHeader({ className, ...props }) {
   );
 }
 function DialogFooter({ className, ...props }) {
-  return /* @__PURE__ */ jsx10(
+  return /* @__PURE__ */ jsx11(
     "div",
     {
       "data-slot": "dialog-footer",
@@ -541,7 +573,7 @@ function DialogTitle({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ jsx10(
+  return /* @__PURE__ */ jsx11(
     DialogPrimitive.Title,
     {
       "data-slot": "dialog-title",
@@ -553,7 +585,7 @@ function DialogTitle({
 
 // components/inputs/image-input.tsx
 import { Slider } from "@radix-ui/react-slider";
-import { Fragment as Fragment2, jsx as jsx11, jsxs as jsxs6 } from "react/jsx-runtime";
+import { Fragment as Fragment2, jsx as jsx12, jsxs as jsxs7 } from "react/jsx-runtime";
 async function getCroppedBlob(imageSrc, pixelCrop, outputSize = 300) {
   const img = await new Promise((resolve, reject) => {
     const image = new Image();
@@ -701,21 +733,21 @@ function ImageInput({
   const dropLabel = useMemo(() => {
     let cropText = `se recorta a ${cropSize}\xD7${cropSize}`;
     if (cropSize === 296) cropText = "se recorta a 560\xD7296";
-    return /* @__PURE__ */ jsxs6("div", { className: "flex flex-col items-center justify-center gap-1 text-center", children: [
-      /* @__PURE__ */ jsx11("div", { className: "rounded-full border p-1.5", children: /* @__PURE__ */ jsx11(Upload, { className: "h-3.5 w-3.5" }) }),
-      /* @__PURE__ */ jsx11("div", { className: "text-xs font-medium", children: "Selecciona o arrastra una imagen" }),
-      /* @__PURE__ */ jsxs6("div", { className: "text-muted-foreground text-[11px]", children: [
+    return /* @__PURE__ */ jsxs7("div", { className: "flex flex-col items-center justify-center gap-1 text-center", children: [
+      /* @__PURE__ */ jsx12("div", { className: "rounded-full border p-1.5", children: /* @__PURE__ */ jsx12(Upload, { className: "h-3.5 w-3.5" }) }),
+      /* @__PURE__ */ jsx12("div", { className: "text-xs font-medium", children: "Selecciona o arrastra una imagen" }),
+      /* @__PURE__ */ jsxs7("div", { className: "text-muted-foreground text-[11px]", children: [
         "PNG, JPG \u2022 ",
         cropText
       ] })
     ] });
   }, [cropSize]);
-  return /* @__PURE__ */ jsxs6("div", { className: classNames("w-full", className), children: [
-    label && /* @__PURE__ */ jsx11("label", { className: "text-foreground mb-2 block text-sm font-medium", children: label }),
-    /* @__PURE__ */ jsxs6("div", { className: "flex items-start gap-4", children: [
-      previewUrl && /* @__PURE__ */ jsxs6("div", { className: "bg-muted relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border", children: [
-        /* @__PURE__ */ jsx11("div", { className: "h-full w-full object-cover", children: /* @__PURE__ */ jsx11(image_preview_cell_default, { src: previewUrl, alt: "preview" }) }),
-        /* @__PURE__ */ jsx11(
+  return /* @__PURE__ */ jsxs7("div", { className: classNames("w-full", className), children: [
+    label && /* @__PURE__ */ jsx12("label", { className: "text-foreground mb-2 block text-sm font-medium", children: label }),
+    /* @__PURE__ */ jsxs7("div", { className: "flex items-start gap-4", children: [
+      previewUrl && /* @__PURE__ */ jsxs7("div", { className: "bg-muted relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border", children: [
+        /* @__PURE__ */ jsx12("div", { className: "h-full w-full object-cover", children: /* @__PURE__ */ jsx12(image_preview_cell_default, { src: previewUrl, alt: "preview" }) }),
+        /* @__PURE__ */ jsx12(
           "button",
           {
             type: "button",
@@ -724,12 +756,12 @@ function ImageInput({
             className: "bg-background/95 hover:bg-background absolute top-1 right-1 rounded-full border p-1 shadow",
             title: "Quitar imagen",
             "aria-label": "Quitar imagen",
-            children: /* @__PURE__ */ jsx11(X, { className: "h-3.5 w-3.5" })
+            children: /* @__PURE__ */ jsx12(X, { className: "h-3.5 w-3.5" })
           }
         )
       ] }),
-      /* @__PURE__ */ jsxs6("div", { className: "flex flex-1 flex-col gap-2", children: [
-        !previewUrl ? /* @__PURE__ */ jsxs6(
+      /* @__PURE__ */ jsxs7("div", { className: "flex flex-1 flex-col gap-2", children: [
+        !previewUrl ? /* @__PURE__ */ jsxs7(
           "div",
           {
             onDrop,
@@ -749,7 +781,7 @@ function ImageInput({
             onClick: () => !disabled && inputRef.current?.click(),
             children: [
               dropLabel,
-              /* @__PURE__ */ jsx11(
+              /* @__PURE__ */ jsx12(
                 "input",
                 {
                   ref: inputRef,
@@ -762,7 +794,7 @@ function ImageInput({
               )
             ]
           }
-        ) : /* @__PURE__ */ jsxs6(
+        ) : /* @__PURE__ */ jsxs7(
           Button,
           {
             variant: "secondary",
@@ -771,9 +803,9 @@ function ImageInput({
             onClick: () => inputRef.current?.click(),
             disabled,
             children: [
-              /* @__PURE__ */ jsx11(Upload, { className: "mr-2 h-3.5 w-3.5" }),
+              /* @__PURE__ */ jsx12(Upload, { className: "mr-2 h-3.5 w-3.5" }),
               " Cambiar imagen",
-              /* @__PURE__ */ jsx11(
+              /* @__PURE__ */ jsx12(
                 "input",
                 {
                   ref: inputRef,
@@ -787,7 +819,7 @@ function ImageInput({
             ]
           }
         ),
-        previewUrl && /* @__PURE__ */ jsxs6(
+        previewUrl && /* @__PURE__ */ jsxs7(
           Button,
           {
             variant: "secondary",
@@ -796,24 +828,24 @@ function ImageInput({
             onClick: () => setIsCropOpen(true),
             disabled,
             children: [
-              /* @__PURE__ */ jsx11(CropIcon, { className: "mr-2 h-3.5 w-3.5" }),
+              /* @__PURE__ */ jsx12(CropIcon, { className: "mr-2 h-3.5 w-3.5" }),
               " Recortar"
             ]
           }
         )
       ] })
     ] }),
-    error && /* @__PURE__ */ jsx11("div", { className: "text-destructive mt-2 text-sm", children: error }),
-    /* @__PURE__ */ jsx11(
+    error && /* @__PURE__ */ jsx12("div", { className: "text-destructive mt-2 text-sm", children: error }),
+    /* @__PURE__ */ jsx12(
       Dialog,
       {
         open: isCropOpen,
         onOpenChange: (open) => {
           if (!isUploading) setIsCropOpen(open);
         },
-        children: /* @__PURE__ */ jsxs6(DialogContent, { className: "max-w-xl", children: [
-          /* @__PURE__ */ jsx11(DialogHeader, { children: /* @__PURE__ */ jsx11(DialogTitle, { children: "Recortar imagen" }) }),
-          /* @__PURE__ */ jsx11("div", { className: "bg-muted relative aspect-square w-full overflow-hidden rounded-lg", children: localFileUrl || previewUrl ? /* @__PURE__ */ jsx11(
+        children: /* @__PURE__ */ jsxs7(DialogContent, { className: "max-w-xl", children: [
+          /* @__PURE__ */ jsx12(DialogHeader, { children: /* @__PURE__ */ jsx12(DialogTitle, { children: "Recortar imagen" }) }),
+          /* @__PURE__ */ jsx12("div", { className: "bg-muted relative aspect-square w-full overflow-hidden rounded-lg", children: localFileUrl || previewUrl ? /* @__PURE__ */ jsx12(
             Cropper,
             {
               image: localFileUrl ?? previewUrl,
@@ -826,10 +858,10 @@ function ImageInput({
               restrictPosition: true,
               showGrid: true
             }
-          ) : /* @__PURE__ */ jsx11("div", { className: "text-muted-foreground flex h-full items-center justify-center text-sm", children: "Selecciona una imagen para recortar" }) }),
-          /* @__PURE__ */ jsxs6("div", { className: "mt-4 space-y-2", children: [
-            /* @__PURE__ */ jsx11("div", { className: "text-muted-foreground text-xs", children: "Zoom" }),
-            /* @__PURE__ */ jsx11(
+          ) : /* @__PURE__ */ jsx12("div", { className: "text-muted-foreground flex h-full items-center justify-center text-sm", children: "Selecciona una imagen para recortar" }) }),
+          /* @__PURE__ */ jsxs7("div", { className: "mt-4 space-y-2", children: [
+            /* @__PURE__ */ jsx12("div", { className: "text-muted-foreground text-xs", children: "Zoom" }),
+            /* @__PURE__ */ jsx12(
               Slider,
               {
                 value: [zoom],
@@ -839,15 +871,15 @@ function ImageInput({
                 onValueChange: (v) => setZoom(v[0] ?? 1)
               }
             ),
-            /* @__PURE__ */ jsxs6("div", { className: "text-muted-foreground text-xs", children: [
+            /* @__PURE__ */ jsxs7("div", { className: "text-muted-foreground text-xs", children: [
               "Salida final:",
               " ",
               cropSize === 296 ? "560\xD7296" : `${cropSize}\xD7${cropSize}`,
               "px"
             ] })
           ] }),
-          /* @__PURE__ */ jsxs6(DialogFooter, { className: "gap-2", children: [
-            /* @__PURE__ */ jsxs6(
+          /* @__PURE__ */ jsxs7(DialogFooter, { className: "gap-2", children: [
+            /* @__PURE__ */ jsxs7(
               Button,
               {
                 type: "button",
@@ -860,21 +892,21 @@ function ImageInput({
                 },
                 disabled: isUploading,
                 children: [
-                  /* @__PURE__ */ jsx11(X, { className: "mr-2 h-4 w-4" }),
+                  /* @__PURE__ */ jsx12(X, { className: "mr-2 h-4 w-4" }),
                   " Cancelar"
                 ]
               }
             ),
-            /* @__PURE__ */ jsx11(
+            /* @__PURE__ */ jsx12(
               Button,
               {
                 type: "button",
                 onClick: doUpload,
                 disabled: isUploading || !croppedAreaPixels || !(localFileUrl || previewUrl),
-                children: isUploading ? /* @__PURE__ */ jsxs6(Fragment2, { children: [
-                  /* @__PURE__ */ jsx11(Loader2, { className: "mr-2 h-4 w-4 animate-spin" }),
+                children: isUploading ? /* @__PURE__ */ jsxs7(Fragment2, { children: [
+                  /* @__PURE__ */ jsx12(Loader2, { className: "mr-2 h-4 w-4 animate-spin" }),
                   " Subiendo\u2026"
-                ] }) : /* @__PURE__ */ jsx11(Fragment2, { children: "Aceptar" })
+                ] }) : /* @__PURE__ */ jsx12(Fragment2, { children: "Aceptar" })
               }
             )
           ] })
@@ -886,7 +918,7 @@ function ImageInput({
 
 // components/ui/text-area.tsx
 import * as React3 from "react";
-import { jsx as jsx12, jsxs as jsxs7 } from "react/jsx-runtime";
+import { jsx as jsx13, jsxs as jsxs8 } from "react/jsx-runtime";
 function Textarea({ className, ...props }) {
   const [value, setValue] = React3.useState(props.value ?? "");
   const maxLength = props.maxLength;
@@ -897,8 +929,8 @@ function Textarea({ className, ...props }) {
     setValue(event.target.value);
     props.onChange?.(event);
   };
-  return /* @__PURE__ */ jsxs7("div", { className: "relative w-full", children: [
-    /* @__PURE__ */ jsx12(
+  return /* @__PURE__ */ jsxs8("div", { className: "relative w-full", children: [
+    /* @__PURE__ */ jsx13(
       "textarea",
       {
         "data-slot": "textarea",
@@ -910,7 +942,7 @@ function Textarea({ className, ...props }) {
         ...props
       }
     ),
-    typeof maxLength === "number" && /* @__PURE__ */ jsxs7("span", { className: "text-muted-foreground absolute right-2 bottom-[-22px] bg-transparent px-1 text-xs", children: [
+    typeof maxLength === "number" && /* @__PURE__ */ jsxs8("span", { className: "text-muted-foreground absolute right-2 bottom-[-22px] bg-transparent px-1 text-xs", children: [
       value?.toString().length,
       "/",
       maxLength

@@ -13,6 +13,9 @@ type PageHeaderProps = {
     breadcrumb?: ReactNode;
     extra?: ReactNode;
     children?: ReactNode;
+    reloadId?: string | number;
+    reloadInvalidates?: ("list" | "detail" | "many" | "all")[];
+    showReloadButton?: boolean;
 };
 
 declare const buttonVariants: (props?: ({

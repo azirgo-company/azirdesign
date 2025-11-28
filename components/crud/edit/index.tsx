@@ -12,20 +12,20 @@ import {
   useUserFriendlyName,
 } from "@refinedev/core"
 
-import { FC, isValidElement } from "react"
+import { isValidElement } from "react"
 
 import { Breadcrumbs } from "../../breadcrumb"
 import { DeleteButton } from "../../buttons/delete"
-import { EditProps } from "../types"
-import { PageHeader } from "../../page-header"
+import { ListButton } from "../../buttons/list"
+import { RefreshButton } from "../../buttons/refresh"
 import {
+  DeleteButtonProps,
   ListButtonProps,
   RefreshButtonProps,
-  DeleteButtonProps,
 } from "../../buttons/types"
-import { RefreshButton } from "../../buttons/refresh"
-import { ListButton } from "../../buttons/list"
+import { PageHeader } from "../../page-header"
 import { Skeleton } from "../../ui/skeleton"
+import { EditProps } from "../types"
 
 export const EditPage = ({
   title,
@@ -134,14 +134,14 @@ export const EditPage = ({
 
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return <h2 className="text-2xl leading-tight font-bold">{title}</h2>
+        return <h3 className="text-2xl leading-tight font-bold">{title}</h3>
       }
 
       return title
     }
 
     return (
-      <h2 className="text-2xl leading-tight font-bold">
+      <h3 className="text-2xl leading-tight font-bold">
         {translate(
           `${identifier}.titles.show`,
           `Show ${getUserFriendlyName(
@@ -152,7 +152,7 @@ export const EditPage = ({
             "singular"
           )}`
         )}
-      </h2>
+      </h3>
     )
   }
 
@@ -162,6 +162,7 @@ export const EditPage = ({
         title={renderTitle()}
         isBack
         breadcrumb={isValidElement(breadcrumb) ? breadcrumb : <Breadcrumbs />}
+        showReloadButton={false}
         extra={
           extra ?? (
             <div className="inline-flex flex-row items-center gap-x-2">

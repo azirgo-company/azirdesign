@@ -163,10 +163,8 @@ var Link = (0, import_react2.forwardRef)(
 Link.displayName = "Link";
 
 // components/page-header.tsx
-var import_core2 = require("@refinedev/core");
-var import_lucide_react2 = require("lucide-react");
-var import_react3 = require("react");
-var import_react_hot_toast = __toESM(require("react-hot-toast"));
+var import_core3 = require("@refinedev/core");
+var import_lucide_react3 = require("lucide-react");
 
 // src/lib/utils.ts
 function cn(...args) {
@@ -177,6 +175,12 @@ function cn(...args) {
 var useOnBack = () => {
   return () => window.history.back();
 };
+
+// components/reload-button.tsx
+var import_core2 = require("@refinedev/core");
+var import_lucide_react2 = require("lucide-react");
+var import_react3 = require("react");
+var import_react_hot_toast = __toESM(require("react-hot-toast"));
 
 // components/ui/button.tsx
 var import_react_slot2 = require("@radix-ui/react-slot");
@@ -225,8 +229,55 @@ function Button({
   );
 }
 
-// components/page-header.tsx
+// components/reload-button.tsx
 var import_jsx_runtime5 = require("react/jsx-runtime");
+var ReloadButton = ({
+  className,
+  variant = "secondary",
+  size = "default",
+  resourceName,
+  invalidates = ["list"],
+  id,
+  onReload
+}) => {
+  const invalidate = (0, import_core2.useInvalidate)();
+  const [isPending, startTransition] = (0, import_react3.useTransition)();
+  const { resource } = (0, import_core2.useResource)();
+  const handleReload = () => {
+    startTransition(() => {
+      invalidate({
+        resource: resourceName || resource?.name,
+        invalidates,
+        id
+      }).then(() => {
+        import_react_hot_toast.default.success("Informaci\xF3n actualizada");
+        if (onReload) onReload();
+      });
+    });
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+    Button,
+    {
+      variant,
+      size,
+      className,
+      disabled: isPending,
+      onClick: handleReload,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
+          import_lucide_react2.RefreshCw,
+          {
+            className: "h-4 w-4" + (isPending ? " animate-spin" : "")
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "hidden md:block", children: "Recargar" })
+      ]
+    }
+  );
+};
+
+// components/page-header.tsx
+var import_jsx_runtime6 = require("react/jsx-runtime");
 var PageHeader = ({
   extra,
   children,
@@ -234,16 +285,15 @@ var PageHeader = ({
   title,
   subTitle,
   isBack = false,
+  reloadId,
+  reloadInvalidates,
+  showReloadButton = true,
   ...props
 }) => {
   const back = useOnBack();
-  const invalidate = (0, import_core2.useInvalidate)();
-  const [isPending, startTransition] = (0, import_react3.useTransition)();
-  const { resource } = (0, import_core2.useResource)();
-  console.log("Current resource in PageHeader:", resource);
-  console.log("Rendering PageHeader with title:", title);
-  return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
+  const { resource } = (0, import_core3.useResource)();
+  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(import_jsx_runtime6.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
       "div",
       {
         className: cn(
@@ -251,41 +301,23 @@ var PageHeader = ({
           !props.breadcrumb && "h-auto"
         ),
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "min-w-0 flex-1", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "min-w-0 flex-1", children: [
             props.breadcrumb,
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
-              isBack && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(import_lucide_react2.ArrowLeft, {}) }),
-              /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
-                subTitle && /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
+              isBack && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_lucide_react3.ArrowLeft, {}) }),
+              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "inline-flex flex-col", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                subTitle && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(
-              Button,
+          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
+            showReloadButton && /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+              ReloadButton,
               {
-                variant: "secondary",
-                disabled: isPending,
-                onClick: () => {
-                  startTransition(() => {
-                    invalidate({
-                      resource: resource?.name,
-                      invalidates: ["list"]
-                    }).then(() => {
-                      import_react_hot_toast.default.success("Informaci\xF3n actualizada");
-                    });
-                  });
-                },
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
-                    import_lucide_react2.RefreshCwIcon,
-                    {
-                      className: "h-4 w-4" + (isPending ? " animate-spin" : "")
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { className: "hidden md:block", children: "Recargar" })
-                ]
+                resourceName: resource?.name,
+                id: reloadId,
+                invalidates: reloadInvalidates
               }
             ),
             extra
@@ -293,19 +325,19 @@ var PageHeader = ({
         ]
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "mt-4", children })
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "mt-4", children })
   ] }) });
 };
 
 // components/ui/breadcrumb.tsx
-var import_lucide_react3 = require("lucide-react");
+var import_lucide_react4 = require("lucide-react");
 var import_react_slot3 = require("@radix-ui/react-slot");
-var import_jsx_runtime6 = require("react/jsx-runtime");
+var import_jsx_runtime7 = require("react/jsx-runtime");
 function Breadcrumb({ ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("nav", { "aria-label": "breadcrumb", "data-slot": "breadcrumb", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("nav", { "aria-label": "breadcrumb", "data-slot": "breadcrumb", ...props });
 }
 function BreadcrumbList({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "ol",
     {
       "data-slot": "breadcrumb-list",
@@ -318,7 +350,7 @@ function BreadcrumbList({ className, ...props }) {
   );
 }
 function BreadcrumbItem({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "li",
     {
       "data-slot": "breadcrumb-item",
@@ -333,7 +365,7 @@ function BreadcrumbLink({
   ...props
 }) {
   const Comp = asChild ? import_react_slot3.Slot : "a";
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     Comp,
     {
       "data-slot": "breadcrumb-link",
@@ -343,7 +375,7 @@ function BreadcrumbLink({
   );
 }
 function BreadcrumbPage({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "span",
     {
       "data-slot": "breadcrumb-page",
@@ -360,7 +392,7 @@ function BreadcrumbSeparator({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
     "li",
     {
       "data-slot": "breadcrumb-separator",
@@ -368,7 +400,7 @@ function BreadcrumbSeparator({
       "aria-hidden": "true",
       className: cn("[&>svg]:size-3.5", className),
       ...props,
-      children: children ?? /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_lucide_react3.ChevronRight, {})
+      children: children ?? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react4.ChevronRight, {})
     }
   );
 }
@@ -376,7 +408,7 @@ function BreadcrumbEllipsis({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
     "span",
     {
       "data-slot": "breadcrumb-ellipsis",
@@ -385,17 +417,17 @@ function BreadcrumbEllipsis({
       className: cn("flex size-9 items-center justify-center", className),
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_lucide_react3.MoreHorizontal, { className: "size-4" }),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "sr-only", children: "More" })
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react4.MoreHorizontal, { className: "size-4" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "sr-only", children: "More" })
       ]
     }
   );
 }
 
 // components/ui/card.tsx
-var import_jsx_runtime7 = require("react/jsx-runtime");
+var import_jsx_runtime8 = require("react/jsx-runtime");
 function Card({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "div",
     {
       "data-slot": "card",
@@ -408,7 +440,7 @@ function Card({ className, ...props }) {
   );
 }
 function CardHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "div",
     {
       "data-slot": "card-header",
@@ -421,7 +453,7 @@ function CardHeader({ className, ...props }) {
   );
 }
 function CardTitle({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "div",
     {
       "data-slot": "card-title",
@@ -431,7 +463,7 @@ function CardTitle({ className, ...props }) {
   );
 }
 function CardDescription({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "div",
     {
       "data-slot": "card-description",
@@ -441,7 +473,7 @@ function CardDescription({ className, ...props }) {
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "div",
     {
       "data-slot": "card-content",
@@ -451,7 +483,7 @@ function CardContent({ className, ...props }) {
   );
 }
 function CardFooter({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
     "div",
     {
       "data-slot": "card-footer",
@@ -462,7 +494,7 @@ function CardFooter({ className, ...props }) {
 }
 
 // components/ui/input.tsx
-var import_jsx_runtime8 = require("react/jsx-runtime");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 function Input({ className, type, float, onChange, ...props }) {
   const handleChange = (event) => {
     if (float && event.target.value) {
@@ -473,7 +505,7 @@ function Input({ className, type, float, onChange, ...props }) {
     }
     onChange?.(event);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
     "input",
     {
       type,
@@ -491,9 +523,9 @@ function Input({ className, type, float, onChange, ...props }) {
 }
 
 // components/ui/skeleton.tsx
-var import_jsx_runtime9 = require("react/jsx-runtime");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 function Skeleton({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
     "div",
     {
       "data-slot": "skeleton",
@@ -506,27 +538,27 @@ function Skeleton({ className, ...props }) {
 // components/inputs/image-input.tsx
 var import_react4 = __toESM(require("react"));
 var import_react_easy_crop = __toESM(require("react-easy-crop"));
-var import_lucide_react5 = require("lucide-react");
+var import_lucide_react6 = require("lucide-react");
 
 // components/ui/dialog.tsx
 var DialogPrimitive = __toESM(require("@radix-ui/react-dialog"));
-var import_lucide_react4 = require("lucide-react");
-var import_jsx_runtime10 = require("react/jsx-runtime");
+var import_lucide_react5 = require("lucide-react");
+var import_jsx_runtime11 = require("react/jsx-runtime");
 function Dialog({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogPrimitive.Root, { "data-slot": "dialog", ...props });
 }
 function DialogPortal({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogPrimitive.Portal, { "data-slot": "dialog-portal", ...props });
 }
 function DialogOverlay({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     DialogPrimitive.Overlay,
     {
       "data-slot": "dialog-overlay",
@@ -544,9 +576,9 @@ function DialogContent({
   showCloseButton = true,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(DialogPortal, { "data-slot": "dialog-portal", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(DialogOverlay, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(DialogPortal, { "data-slot": "dialog-portal", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogOverlay, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
       DialogPrimitive.Content,
       {
         "data-slot": "dialog-content",
@@ -557,14 +589,14 @@ function DialogContent({
         ...props,
         children: [
           children,
-          showCloseButton && /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+          showCloseButton && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
             DialogPrimitive.Close,
             {
               "data-slot": "dialog-close",
               className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(import_lucide_react4.XIcon, {}),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "sr-only", children: "Close" })
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.XIcon, {}),
+                /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "sr-only", children: "Close" })
               ]
             }
           )
@@ -574,7 +606,7 @@ function DialogContent({
   ] });
 }
 function DialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     "div",
     {
       "data-slot": "dialog-header",
@@ -584,7 +616,7 @@ function DialogHeader({ className, ...props }) {
   );
 }
 function DialogFooter({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     "div",
     {
       "data-slot": "dialog-footer",
@@ -600,7 +632,7 @@ function DialogTitle({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     DialogPrimitive.Title,
     {
       "data-slot": "dialog-title",
@@ -612,7 +644,7 @@ function DialogTitle({
 
 // components/inputs/image-input.tsx
 var import_react_slider = require("@radix-ui/react-slider");
-var import_jsx_runtime11 = require("react/jsx-runtime");
+var import_jsx_runtime12 = require("react/jsx-runtime");
 async function getCroppedBlob(imageSrc, pixelCrop, outputSize = 300) {
   const img = await new Promise((resolve, reject) => {
     const image = new Image();
@@ -760,21 +792,21 @@ function ImageInput({
   const dropLabel = (0, import_react4.useMemo)(() => {
     let cropText = `se recorta a ${cropSize}\xD7${cropSize}`;
     if (cropSize === 296) cropText = "se recorta a 560\xD7296";
-    return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex flex-col items-center justify-center gap-1 text-center", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "rounded-full border p-1.5", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.Upload, { className: "h-3.5 w-3.5" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "text-xs font-medium", children: "Selecciona o arrastra una imagen" }),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "text-muted-foreground text-[11px]", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex flex-col items-center justify-center gap-1 text-center", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "rounded-full border p-1.5", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.Upload, { className: "h-3.5 w-3.5" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-xs font-medium", children: "Selecciona o arrastra una imagen" }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "text-muted-foreground text-[11px]", children: [
         "PNG, JPG \u2022 ",
         cropText
       ] })
     ] });
   }, [cropSize]);
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: classNames("w-full", className), children: [
-    label && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("label", { className: "text-foreground mb-2 block text-sm font-medium", children: label }),
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex items-start gap-4", children: [
-      previewUrl && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "bg-muted relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "h-full w-full object-cover", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(image_preview_cell_default, { src: previewUrl, alt: "preview" }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: classNames("w-full", className), children: [
+    label && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("label", { className: "text-foreground mb-2 block text-sm font-medium", children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex items-start gap-4", children: [
+      previewUrl && /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "bg-muted relative h-24 w-24 shrink-0 overflow-hidden rounded-xl border", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "h-full w-full object-cover", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(image_preview_cell_default, { src: previewUrl, alt: "preview" }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
           "button",
           {
             type: "button",
@@ -783,12 +815,12 @@ function ImageInput({
             className: "bg-background/95 hover:bg-background absolute top-1 right-1 rounded-full border p-1 shadow",
             title: "Quitar imagen",
             "aria-label": "Quitar imagen",
-            children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.X, { className: "h-3.5 w-3.5" })
+            children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.X, { className: "h-3.5 w-3.5" })
           }
         )
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "flex flex-1 flex-col gap-2", children: [
-        !previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "flex flex-1 flex-col gap-2", children: [
+        !previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
           "div",
           {
             onDrop,
@@ -808,7 +840,7 @@ function ImageInput({
             onClick: () => !disabled && inputRef.current?.click(),
             children: [
               dropLabel,
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                 "input",
                 {
                   ref: inputRef,
@@ -821,7 +853,7 @@ function ImageInput({
               )
             ]
           }
-        ) : /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+        ) : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
           Button,
           {
             variant: "secondary",
@@ -830,9 +862,9 @@ function ImageInput({
             onClick: () => inputRef.current?.click(),
             disabled,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.Upload, { className: "mr-2 h-3.5 w-3.5" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.Upload, { className: "mr-2 h-3.5 w-3.5" }),
               " Cambiar imagen",
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
                 "input",
                 {
                   ref: inputRef,
@@ -846,7 +878,7 @@ function ImageInput({
             ]
           }
         ),
-        previewUrl && /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+        previewUrl && /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
           Button,
           {
             variant: "secondary",
@@ -855,24 +887,24 @@ function ImageInput({
             onClick: () => setIsCropOpen(true),
             disabled,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.Crop, { className: "mr-2 h-3.5 w-3.5" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.Crop, { className: "mr-2 h-3.5 w-3.5" }),
               " Recortar"
             ]
           }
         )
       ] })
     ] }),
-    error && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "text-destructive mt-2 text-sm", children: error }),
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+    error && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-destructive mt-2 text-sm", children: error }),
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
       Dialog,
       {
         open: isCropOpen,
         onOpenChange: (open) => {
           if (!isUploading) setIsCropOpen(open);
         },
-        children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(DialogContent, { className: "max-w-xl", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(DialogTitle, { children: "Recortar imagen" }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "bg-muted relative aspect-square w-full overflow-hidden rounded-lg", children: localFileUrl || previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+        children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(DialogContent, { className: "max-w-xl", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DialogHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(DialogTitle, { children: "Recortar imagen" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "bg-muted relative aspect-square w-full overflow-hidden rounded-lg", children: localFileUrl || previewUrl ? /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
             import_react_easy_crop.default,
             {
               image: localFileUrl ?? previewUrl,
@@ -885,10 +917,10 @@ function ImageInput({
               restrictPosition: true,
               showGrid: true
             }
-          ) : /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "text-muted-foreground flex h-full items-center justify-center text-sm", children: "Selecciona una imagen para recortar" }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "mt-4 space-y-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "text-muted-foreground text-xs", children: "Zoom" }),
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+          ) : /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-muted-foreground flex h-full items-center justify-center text-sm", children: "Selecciona una imagen para recortar" }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "mt-4 space-y-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "text-muted-foreground text-xs", children: "Zoom" }),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
               import_react_slider.Slider,
               {
                 value: [zoom],
@@ -898,15 +930,15 @@ function ImageInput({
                 onValueChange: (v) => setZoom(v[0] ?? 1)
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "text-muted-foreground text-xs", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "text-muted-foreground text-xs", children: [
               "Salida final:",
               " ",
               cropSize === 296 ? "560\xD7296" : `${cropSize}\xD7${cropSize}`,
               "px"
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(DialogFooter, { className: "gap-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(DialogFooter, { className: "gap-2", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
               Button,
               {
                 type: "button",
@@ -919,21 +951,21 @@ function ImageInput({
                 },
                 disabled: isUploading,
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.X, { className: "mr-2 h-4 w-4" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.X, { className: "mr-2 h-4 w-4" }),
                   " Cancelar"
                 ]
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
               Button,
               {
                 type: "button",
                 onClick: doUpload,
                 disabled: isUploading || !croppedAreaPixels || !(localFileUrl || previewUrl),
-                children: isUploading ? /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(import_jsx_runtime11.Fragment, { children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.Loader2, { className: "mr-2 h-4 w-4 animate-spin" }),
+                children: isUploading ? /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(import_jsx_runtime12.Fragment, { children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react6.Loader2, { className: "mr-2 h-4 w-4 animate-spin" }),
                   " Subiendo\u2026"
-                ] }) : /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_jsx_runtime11.Fragment, { children: "Aceptar" })
+                ] }) : /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_jsx_runtime12.Fragment, { children: "Aceptar" })
               }
             )
           ] })
@@ -945,7 +977,7 @@ function ImageInput({
 
 // components/ui/text-area.tsx
 var React3 = __toESM(require("react"));
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime13 = require("react/jsx-runtime");
 function Textarea({ className, ...props }) {
   const [value, setValue] = React3.useState(props.value ?? "");
   const maxLength = props.maxLength;
@@ -956,8 +988,8 @@ function Textarea({ className, ...props }) {
     setValue(event.target.value);
     props.onChange?.(event);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "relative w-full", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "relative w-full", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
       "textarea",
       {
         "data-slot": "textarea",
@@ -969,7 +1001,7 @@ function Textarea({ className, ...props }) {
         ...props
       }
     ),
-    typeof maxLength === "number" && /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { className: "text-muted-foreground absolute right-2 bottom-[-22px] bg-transparent px-1 text-xs", children: [
+    typeof maxLength === "number" && /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("span", { className: "text-muted-foreground absolute right-2 bottom-[-22px] bg-transparent px-1 text-xs", children: [
       value?.toString().length,
       "/",
       maxLength

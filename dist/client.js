@@ -2977,18 +2977,67 @@ var Breadcrumbs = ({ showHome = true, meta }) => {
 };
 
 // components/page-header.tsx
-var import_core12 = require("@refinedev/core");
-var import_lucide_react20 = require("lucide-react");
-var import_react6 = require("react");
-var import_react_hot_toast = __toESM(require("react-hot-toast"));
+var import_core13 = require("@refinedev/core");
+var import_lucide_react21 = require("lucide-react");
 
 // components/hooks/use-on-back.tsx
 var useOnBack = () => {
   return () => window.history.back();
 };
 
-// components/page-header.tsx
+// components/reload-button.tsx
+var import_core12 = require("@refinedev/core");
+var import_lucide_react20 = require("lucide-react");
+var import_react6 = require("react");
+var import_react_hot_toast = __toESM(require("react-hot-toast"));
 var import_jsx_runtime34 = require("react/jsx-runtime");
+var ReloadButton = ({
+  className,
+  variant = "secondary",
+  size = "default",
+  resourceName,
+  invalidates = ["list"],
+  id,
+  onReload
+}) => {
+  const invalidate = (0, import_core12.useInvalidate)();
+  const [isPending, startTransition] = (0, import_react6.useTransition)();
+  const { resource } = (0, import_core12.useResource)();
+  const handleReload = () => {
+    startTransition(() => {
+      invalidate({
+        resource: resourceName || resource?.name,
+        invalidates,
+        id
+      }).then(() => {
+        import_react_hot_toast.default.success("Informaci\xF3n actualizada");
+        if (onReload) onReload();
+      });
+    });
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(
+    Button,
+    {
+      variant,
+      size,
+      className,
+      disabled: isPending,
+      onClick: handleReload,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(
+          import_lucide_react20.RefreshCw,
+          {
+            className: "h-4 w-4" + (isPending ? " animate-spin" : "")
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "hidden md:block", children: "Recargar" })
+      ]
+    }
+  );
+};
+
+// components/page-header.tsx
+var import_jsx_runtime35 = require("react/jsx-runtime");
 var PageHeader = ({
   extra,
   children,
@@ -2996,16 +3045,15 @@ var PageHeader = ({
   title,
   subTitle,
   isBack = false,
+  reloadId,
+  reloadInvalidates,
+  showReloadButton = true,
   ...props
 }) => {
   const back = useOnBack();
-  const invalidate = (0, import_core12.useInvalidate)();
-  const [isPending, startTransition] = (0, import_react6.useTransition)();
-  const { resource } = (0, import_core12.useResource)();
-  console.log("Current resource in PageHeader:", resource);
-  console.log("Rendering PageHeader with title:", title);
-  return /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(import_jsx_runtime34.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(
+  const { resource } = (0, import_core13.useResource)();
+  return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: cn(className, "w-full"), children: /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(import_jsx_runtime35.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(
       "div",
       {
         className: cn(
@@ -3013,41 +3061,23 @@ var PageHeader = ({
           !props.breadcrumb && "h-auto"
         ),
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "min-w-0 flex-1", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "min-w-0 flex-1", children: [
             props.breadcrumb,
-            /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
-              isBack && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(import_lucide_react20.ArrowLeft, {}) }),
-              /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "inline-flex flex-col", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
-                subTitle && /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
+            /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "mt-3 inline-flex flex-row items-center gap-x-4", children: [
+              isBack && /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Button, { variant: "ghost", onClick: () => back?.(), children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_lucide_react21.ArrowLeft, {}) }),
+              /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "inline-flex flex-col", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { className: "text-2xl font-bold text-black sm:truncate sm:text-3xl sm:tracking-tight dark:text-white", children: title }),
+                subTitle && /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "mt-2 flex items-center text-sm text-gray-300", children: subTitle })
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime34.jsxs)(
-              Button,
+          /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)("div", { className: "flex gap-2 lg:mt-0 lg:ml-4", children: [
+            showReloadButton && /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+              ReloadButton,
               {
-                variant: "secondary",
-                disabled: isPending,
-                onClick: () => {
-                  startTransition(() => {
-                    invalidate({
-                      resource: resource?.name,
-                      invalidates: ["list"]
-                    }).then(() => {
-                      import_react_hot_toast.default.success("Informaci\xF3n actualizada");
-                    });
-                  });
-                },
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime34.jsx)(
-                    import_lucide_react20.RefreshCwIcon,
-                    {
-                      className: "h-4 w-4" + (isPending ? " animate-spin" : "")
-                    }
-                  ),
-                  /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("span", { className: "hidden md:block", children: "Recargar" })
-                ]
+                resourceName: resource?.name,
+                id: reloadId,
+                invalidates: reloadInvalidates
               }
             ),
             extra
@@ -3055,13 +3085,13 @@ var PageHeader = ({
         ]
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime34.jsx)("div", { className: "mt-4", children })
+    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "mt-4", children })
   ] }) });
 };
 
 // components/crud/create/index.tsx
-var import_core13 = require("@refinedev/core");
-var import_jsx_runtime35 = require("react/jsx-runtime");
+var import_core14 = require("@refinedev/core");
+var import_jsx_runtime36 = require("react/jsx-runtime");
 var CreatePage = ({
   title,
   resource: resourceFromProps,
@@ -3069,20 +3099,20 @@ var CreatePage = ({
   extra,
   children
 }) => {
-  const translate = (0, import_core13.useTranslate)();
-  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core13.useRefineContext)();
-  const getUserFriendlyName = (0, import_core13.useUserFriendlyName)();
-  const { resource, identifier } = (0, import_core13.useResource)(resourceFromProps);
+  const translate = (0, import_core14.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core14.useRefineContext)();
+  const getUserFriendlyName = (0, import_core14.useUserFriendlyName)();
+  const { resource, identifier } = (0, import_core14.useResource)(resourceFromProps);
   const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
   const renderTitle = () => {
     if (title === false) return null;
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { children: title });
+        return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { children: title });
       }
       return title;
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("h2", { children: translate(
+    return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { children: translate(
       `${identifier}.titles.create`,
       `Create ${getUserFriendlyName(
         resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
@@ -3090,25 +3120,25 @@ var CreatePage = ({
       )}`
     ) });
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime35.jsxs)(import_jsx_runtime35.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(
       PageHeader,
       {
         title: renderTitle(),
         isBack: true,
-        breadcrumb: (0, import_react7.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(Breadcrumbs, {}),
-        extra: extra ?? /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(import_jsx_runtime35.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime35.jsx)(ListButton, { resource: resourceFromProps }) })
+        breadcrumb: (0, import_react7.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Breadcrumbs, {}),
+        extra: extra ?? /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(import_jsx_runtime36.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(ListButton, { resource: resourceFromProps }) })
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime35.jsx)("div", { className: "!mt-0 pt-4", children })
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "!mt-0 pt-4", children })
   ] });
 };
 CreatePage.displayName = "CreatePage";
 
 // components/crud/edit/index.tsx
-var import_core14 = require("@refinedev/core");
+var import_core15 = require("@refinedev/core");
 var import_react8 = require("react");
-var import_jsx_runtime36 = require("react/jsx-runtime");
+var import_jsx_runtime37 = require("react/jsx-runtime");
 var EditPage = ({
   title,
   resource: resourceFromProps,
@@ -3124,22 +3154,22 @@ var EditPage = ({
   isLoading,
   autoSaveProps
 }) => {
-  const translate = (0, import_core14.useTranslate)();
-  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core14.useRefineContext)();
-  const { mutationMode: mutationModeContext } = (0, import_core14.useMutationMode)();
+  const translate = (0, import_core15.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core15.useRefineContext)();
+  const { mutationMode: mutationModeContext } = (0, import_core15.useMutationMode)();
   const mutationMode = mutationModeFromProps ?? mutationModeContext;
-  const routerType = (0, import_core14.useRouterType)();
-  const back = (0, import_core14.useBack)();
-  const go = (0, import_core14.useGo)();
-  const { goBack, list: legacyGoList } = (0, import_core14.useNavigation)();
-  const getUserFriendlyName = (0, import_core14.useUserFriendlyName)();
+  const routerType = (0, import_core15.useRouterType)();
+  const back = (0, import_core15.useBack)();
+  const go = (0, import_core15.useGo)();
+  const { goBack, list: legacyGoList } = (0, import_core15.useNavigation)();
+  const getUserFriendlyName = (0, import_core15.useUserFriendlyName)();
   const {
     resource,
     action,
     id: idFromParams,
     identifier
-  } = (0, import_core14.useResource)(resourceFromProps);
-  const goListPath = (0, import_core14.useToPath)({
+  } = (0, import_core15.useResource)(resourceFromProps);
+  const goListPath = (0, import_core15.useToPath)({
     resource,
     action: "list"
   });
@@ -3172,11 +3202,11 @@ var EditPage = ({
     dataProviderName,
     ...deleteButtonPropsFromProps
   } : void 0;
-  const defaultHeaderButtons = /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "flex flex-row items-center gap-2", children: [
-    autoSaveProps && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(import_core14.AutoSaveIndicator, { ...autoSaveProps }),
-    hasList && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(ListButton, { ...listButtonProps }),
-    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(RefreshButton, { ...refreshButtonProps }),
-    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(DeleteButton, { ...deleteButtonProps })
+  const defaultHeaderButtons = /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "flex flex-row items-center gap-2", children: [
+    autoSaveProps && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(import_core15.AutoSaveIndicator, { ...autoSaveProps }),
+    hasList && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(ListButton, { ...listButtonProps }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(RefreshButton, { ...refreshButtonProps }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(DeleteButton, { ...deleteButtonProps })
   ] });
   const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
     defaultButtons: defaultHeaderButtons,
@@ -3187,11 +3217,11 @@ var EditPage = ({
     if (title === false) return null;
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { className: "text-2xl leading-tight font-bold", children: title });
+        return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: title });
       }
       return title;
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("h2", { className: "text-2xl leading-tight font-bold", children: translate(
+    return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: translate(
       `${identifier}.titles.show`,
       `Show ${getUserFriendlyName(
         resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
@@ -3199,27 +3229,28 @@ var EditPage = ({
       )}`
     ) });
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(import_jsx_runtime37.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(
       PageHeader,
       {
         title: renderTitle(),
         isBack: true,
-        breadcrumb: (0, import_react8.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Breadcrumbs, {}),
-        extra: extra ?? /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "inline-flex flex-row items-center gap-x-2", children: headerButtons })
+        breadcrumb: (0, import_react8.isValidElement)(breadcrumb) ? breadcrumb : /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Breadcrumbs, {}),
+        showReloadButton: false,
+        extra: extra ?? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: "inline-flex flex-row items-center gap-x-2", children: headerButtons })
       }
     ),
-    /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)("div", { className: "pt-4", children: [
-      isLoading && /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(Skeleton, { className: "h-[80vh] w-full" }),
+    /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)("div", { className: "pt-4", children: [
+      isLoading && /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Skeleton, { className: "h-[80vh] w-full" }),
       !isLoading && children
     ] })
   ] });
 };
 
 // components/crud/list/index.tsx
-var import_core15 = require("@refinedev/core");
+var import_core16 = require("@refinedev/core");
 var import_react9 = require("react");
-var import_jsx_runtime37 = require("react/jsx-runtime");
+var import_jsx_runtime38 = require("react/jsx-runtime");
 var List = ({
   canCreate,
   title,
@@ -3231,23 +3262,23 @@ var List = ({
   headerButtons: headerButtonsFromProps,
   extra
 }) => {
-  const translate = (0, import_core15.useTranslate)();
-  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core15.useRefineContext)();
-  const routerType = (0, import_core15.useRouterType)();
-  const getUserFriendlyName = (0, import_core15.useUserFriendlyName)();
-  const { resource, identifier } = (0, import_core15.useResource)(resourceFromProps);
+  const translate = (0, import_core16.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core16.useRefineContext)();
+  const routerType = (0, import_core16.useRouterType)();
+  const getUserFriendlyName = (0, import_core16.useUserFriendlyName)();
+  const { resource, identifier } = (0, import_core16.useResource)(resourceFromProps);
   const isCreateButtonVisible = canCreate ?? ((resource?.canCreate ?? !!resource?.create) || createButtonPropsFromProps);
   const breadcrumb = typeof breadcrumbFromProps === "undefined" ? globalBreadcrumb : breadcrumbFromProps;
   const createButtonProps = isCreateButtonVisible ? {
     resource: routerType === "legacy" ? resource?.route : identifier,
     ...createButtonPropsFromProps
   } : void 0;
-  const defaultExtra = isCreateButtonVisible ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(CreateButton, { ...createButtonProps }) : null;
+  const defaultExtra = isCreateButtonVisible ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(CreateButton, { ...createButtonProps }) : null;
   const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
     defaultButtons: defaultExtra,
     createButtonProps
   }) : headerButtonsFromProps : defaultExtra;
-  return /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime37.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)(
     PageHeader,
     {
       title: title ?? translate(
@@ -3257,21 +3288,21 @@ var List = ({
           "plural"
         )
       ),
-      extra: /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { className: headerButtonProps?.className, children: headerButtons }),
-      breadcrumb: (0, import_react9.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(import_jsx_runtime37.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime37.jsx)(Breadcrumbs, {}),
+      extra: /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("div", { className: headerButtonProps?.className, children: headerButtons }),
+      breadcrumb: (0, import_react9.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_jsx_runtime38.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Breadcrumbs, {}),
       children: [
         extra,
-        /* @__PURE__ */ (0, import_jsx_runtime37.jsx)("div", { children })
+        /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("div", { children })
       ]
     }
   ) });
 };
 
 // components/crud/show/index.tsx
+var import_core17 = require("@refinedev/core");
 var import_react10 = require("react");
-var import_core16 = require("@refinedev/core");
-var import_lucide_react21 = require("lucide-react");
-var import_jsx_runtime38 = require("react/jsx-runtime");
+var import_lucide_react22 = require("lucide-react");
+var import_jsx_runtime39 = require("react/jsx-runtime");
 var Show = (props) => {
   const {
     children,
@@ -3293,20 +3324,20 @@ var Show = (props) => {
     breadcrumb: breadcrumbFromProps,
     title
   } = props;
-  const translate = (0, import_core16.useTranslate)();
-  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core16.useRefineContext)();
-  const routerType = (0, import_core16.useRouterType)();
-  const back = (0, import_core16.useBack)();
-  const go = (0, import_core16.useGo)();
-  const { goBack, list: legacyGoList } = (0, import_core16.useNavigation)();
-  const getUserFriendlyName = (0, import_core16.useUserFriendlyName)();
+  const translate = (0, import_core17.useTranslate)();
+  const { options: { breadcrumb: globalBreadcrumb } = {} } = (0, import_core17.useRefineContext)();
+  const routerType = (0, import_core17.useRouterType)();
+  const back = (0, import_core17.useBack)();
+  const go = (0, import_core17.useGo)();
+  const { goBack, list: legacyGoList } = (0, import_core17.useNavigation)();
+  const getUserFriendlyName = (0, import_core17.useUserFriendlyName)();
   const {
     resource,
     action,
     id: idFromParams,
     identifier
-  } = (0, import_core16.useResource)(resourceFromProps);
-  const goListPath = (0, import_core16.useToPath)({
+  } = (0, import_core17.useResource)(resourceFromProps);
+  const goListPath = (0, import_core17.useToPath)({
     resource,
     action: "list"
   });
@@ -3345,19 +3376,19 @@ var Show = (props) => {
     recordItemId: id,
     dataProviderName
   };
-  const defaultHeaderButtons = /* @__PURE__ */ (0, import_jsx_runtime38.jsxs)(import_jsx_runtime38.Fragment, { children: [
-    listButtonProps && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(ListButton, { ...listButtonProps }),
-    isEditButtonVisible && /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(EditButton, { colorScheme: "brand", ...editButtonProps }),
-    /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(RefreshButton, { ...refreshButtonProps })
+  const defaultHeaderButtons = /* @__PURE__ */ (0, import_jsx_runtime39.jsxs)(import_jsx_runtime39.Fragment, { children: [
+    listButtonProps && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(ListButton, { ...listButtonProps }),
+    isEditButtonVisible && /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(EditButton, { colorScheme: "brand", ...editButtonProps }),
+    /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(ReloadButton, {})
   ] });
-  const buttonBack = goBackFromProps === null ? null : /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
+  const buttonBack = goBackFromProps === null ? null : /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(
     Button,
     {
       "aria-label": "back",
       variant: "ghost",
       size: "sm",
       onClick: action !== "list" && typeof action !== "undefined" ? routerType === "legacy" ? goBack : back : void 0,
-      children: typeof goBackFromProps !== "undefined" ? goBackFromProps : /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_lucide_react21.ArrowLeft, {})
+      children: typeof goBackFromProps !== "undefined" ? goBackFromProps : /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(import_lucide_react22.ArrowLeft, {})
     }
   );
   const headerButtons = headerButtonsFromProps ? typeof headerButtonsFromProps === "function" ? headerButtonsFromProps({
@@ -3372,11 +3403,11 @@ var Show = (props) => {
     if (title === false) return null;
     if (title) {
       if (typeof title === "string" || typeof title === "number") {
-        return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: title });
+        return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: title });
       }
       return title;
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: translate(
+    return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)("h3", { className: "text-2xl leading-tight font-bold", children: translate(
       `${identifier}.titles.show`,
       `Show ${getUserFriendlyName(
         resource?.meta?.label ?? resource?.options?.label ?? resource?.label ?? identifier,
@@ -3384,30 +3415,33 @@ var Show = (props) => {
       )}`
     ) });
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(
     PageHeader,
     {
       title: renderTitle(),
       isBack: true,
-      breadcrumb: (0, import_react10.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(import_jsx_runtime38.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime38.jsx)(Breadcrumbs, {}),
+      breadcrumb: (0, import_react10.isValidElement)(breadcrumb) ? /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(import_jsx_runtime39.Fragment, { children: breadcrumb }) : /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(Breadcrumbs, {}),
+      reloadId: id,
+      reloadInvalidates: ["detail"],
+      extra: headerButtons,
       children
     }
   );
 };
 
 // components/ui/form.tsx
-var React15 = __toESM(require("react"));
+var React14 = __toESM(require("react"));
 var import_react_slot7 = require("@radix-ui/react-slot");
 var import_react_hook_form = require("react-hook-form");
 
 // components/ui/label.tsx
 var LabelPrimitive = __toESM(require("@radix-ui/react-label"));
-var import_jsx_runtime39 = require("react/jsx-runtime");
+var import_jsx_runtime40 = require("react/jsx-runtime");
 function Label2({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime39.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime40.jsx)(
     LabelPrimitive.Root,
     {
       "data-slot": "label",
@@ -3421,23 +3455,23 @@ function Label2({
 }
 
 // components/ui/form.tsx
-var import_jsx_runtime40 = require("react/jsx-runtime");
+var import_jsx_runtime41 = require("react/jsx-runtime");
 var Form = import_react_hook_form.FormProvider;
-var FormFieldContext = React15.createContext(
+var FormFieldContext = React14.createContext(
   {}
 );
-var FormItemContext = React15.createContext(
+var FormItemContext = React14.createContext(
   {}
 );
 
 // components/form.tsx
-var import_core17 = require("@refinedev/core");
+var import_core18 = require("@refinedev/core");
 var import_react11 = require("react");
 
 // components/ui/card.tsx
-var import_jsx_runtime41 = require("react/jsx-runtime");
+var import_jsx_runtime42 = require("react/jsx-runtime");
 function Card({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
     "div",
     {
       "data-slot": "card",
@@ -3450,7 +3484,7 @@ function Card({ className, ...props }) {
   );
 }
 function CardContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
     "div",
     {
       "data-slot": "card-content",
@@ -3460,7 +3494,7 @@ function CardContent({ className, ...props }) {
   );
 }
 function CardFooter({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime41.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
     "div",
     {
       "data-slot": "card-footer",
@@ -3471,7 +3505,7 @@ function CardFooter({ className, ...props }) {
 }
 
 // components/form.tsx
-var import_jsx_runtime42 = require("react/jsx-runtime");
+var import_jsx_runtime43 = require("react/jsx-runtime");
 var Form2 = ({
   formProps,
   isWatchable,
@@ -3479,10 +3513,10 @@ var Form2 = ({
   ...props
 }) => {
   const watchable = (0, import_react11.useRef)(false);
-  const { resource: _resource, action } = (0, import_core17.useParsed)();
-  const routerType = (0, import_core17.useRouterType)();
-  const back = (0, import_core17.useBack)();
-  const { goBack } = (0, import_core17.useNavigation)();
+  const { resource: _resource, action } = (0, import_core18.useParsed)();
+  const routerType = (0, import_core18.useRouterType)();
+  const back = (0, import_core18.useBack)();
+  const { goBack } = (0, import_core18.useNavigation)();
   const onBack = action !== "list" || typeof action !== "undefined" ? routerType === "legacy" ? goBack : back : void 0;
   if (isWatchable && !watchable.current) {
     watchable.current = true;
@@ -3491,10 +3525,10 @@ var Form2 = ({
   const onSubmit = props.handleSubmit((_data) => {
     props.refineCore.onFinish(props.getValues()).then();
   });
-  return /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(Form, { ...props, children: /* @__PURE__ */ (0, import_jsx_runtime42.jsx)("form", { ...formProps, onSubmit, children: /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)(Card, { className: "border-border/40 shadow-sm", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(CardContent, { className: "space-y-4 pt-6", children: props.children }),
-    /* @__PURE__ */ (0, import_jsx_runtime42.jsxs)(CardFooter, { className: "flex justify-end gap-x-4", children: [
-      !props.hideCancel && /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(Form, { ...props, children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("form", { ...formProps, onSubmit, children: /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(Card, { className: "border-border/40 shadow-sm", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(CardContent, { className: "space-y-4 pt-6", children: props.children }),
+    /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(CardFooter, { className: "flex justify-end gap-x-4", children: [
+      !props.hideCancel && /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
         Button,
         {
           type: "button",
@@ -3504,7 +3538,7 @@ var Form2 = ({
           children: "Cancel"
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime42.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
         SaveButton,
         {
           type: "submit",
@@ -3518,17 +3552,17 @@ var Form2 = ({
 
 // components/ui/select.tsx
 var SelectPrimitive = __toESM(require("@radix-ui/react-select"));
-var import_lucide_react22 = require("lucide-react");
-var import_jsx_runtime43 = require("react/jsx-runtime");
+var import_lucide_react23 = require("lucide-react");
+var import_jsx_runtime44 = require("react/jsx-runtime");
 function Select({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(SelectPrimitive.Root, { "data-slot": "select", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.Root, { "data-slot": "select", ...props });
 }
 function SelectValue({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(SelectPrimitive.Value, { "data-slot": "select-value", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.Value, { "data-slot": "select-value", ...props });
 }
 function SelectTrigger({
   className,
@@ -3536,7 +3570,7 @@ function SelectTrigger({
   children,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
     SelectPrimitive.Trigger,
     {
       "data-slot": "select-trigger",
@@ -3548,7 +3582,7 @@ function SelectTrigger({
       ...props,
       children: [
         children,
-        /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(import_lucide_react22.ChevronDownIcon, { className: "size-4 opacity-50" }) })
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.Icon, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react23.ChevronDownIcon, { className: "size-4 opacity-50" }) })
       ]
     }
   );
@@ -3559,7 +3593,7 @@ function SelectContent({
   position = "popper",
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(SelectPrimitive.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
     SelectPrimitive.Content,
     {
       "data-slot": "select-content",
@@ -3571,8 +3605,8 @@ function SelectContent({
       position,
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(SelectScrollUpButton, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectScrollUpButton, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
           SelectPrimitive.Viewport,
           {
             className: cn(
@@ -3582,7 +3616,7 @@ function SelectContent({
             children
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(SelectScrollDownButton, {})
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectScrollDownButton, {})
       ]
     }
   ) });
@@ -3592,7 +3626,7 @@ function SelectItem({
   children,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsxs)(
     SelectPrimitive.Item,
     {
       "data-slot": "select-item",
@@ -3602,8 +3636,8 @@ function SelectItem({
       ),
       ...props,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime43.jsx)("span", { className: "absolute right-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(import_lucide_react22.CheckIcon, { className: "size-4" }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(SelectPrimitive.ItemText, { children })
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)("span", { className: "absolute right-2 flex size-3.5 items-center justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.ItemIndicator, { children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react23.CheckIcon, { className: "size-4" }) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(SelectPrimitive.ItemText, { children })
       ]
     }
   );
@@ -3612,7 +3646,7 @@ function SelectScrollUpButton({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
     SelectPrimitive.ScrollUpButton,
     {
       "data-slot": "select-scroll-up-button",
@@ -3621,7 +3655,7 @@ function SelectScrollUpButton({
         className
       ),
       ...props,
-      children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(import_lucide_react22.ChevronUpIcon, { className: "size-4" })
+      children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react23.ChevronUpIcon, { className: "size-4" })
     }
   );
 }
@@ -3629,7 +3663,7 @@ function SelectScrollDownButton({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
     SelectPrimitive.ScrollDownButton,
     {
       "data-slot": "select-scroll-down-button",
@@ -3638,20 +3672,20 @@ function SelectScrollDownButton({
         className
       ),
       ...props,
-      children: /* @__PURE__ */ (0, import_jsx_runtime43.jsx)(import_lucide_react22.ChevronDownIcon, { className: "size-4" })
+      children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(import_lucide_react23.ChevronDownIcon, { className: "size-4" })
     }
   );
 }
 
 // components/ui/table.tsx
-var import_jsx_runtime44 = require("react/jsx-runtime");
+var import_jsx_runtime45 = require("react/jsx-runtime");
 function Table({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
     "div",
     {
       "data-slot": "table-container",
       className: "relative w-full overflow-x-auto",
-      children: /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
         "table",
         {
           "data-slot": "table",
@@ -3663,7 +3697,7 @@ function Table({ className, ...props }) {
   );
 }
 function TableHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
     "thead",
     {
       "data-slot": "table-header",
@@ -3673,7 +3707,7 @@ function TableHeader({ className, ...props }) {
   );
 }
 function TableBody({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
     "tbody",
     {
       "data-slot": "table-body",
@@ -3683,7 +3717,7 @@ function TableBody({ className, ...props }) {
   );
 }
 function TableRow({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
     "tr",
     {
       "data-slot": "table-row",
@@ -3696,7 +3730,7 @@ function TableRow({ className, ...props }) {
   );
 }
 function TableHead({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
     "th",
     {
       "data-slot": "table-head",
@@ -3709,7 +3743,7 @@ function TableHead({ className, ...props }) {
   );
 }
 function TableCell({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime44.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
     "td",
     {
       "data-slot": "table-cell",
@@ -3724,12 +3758,12 @@ function TableCell({ className, ...props }) {
 
 // components/ui/tooltip.tsx
 var TooltipPrimitive = __toESM(require("@radix-ui/react-tooltip"));
-var import_jsx_runtime45 = require("react/jsx-runtime");
+var import_jsx_runtime46 = require("react/jsx-runtime");
 function TooltipProvider2({
   delayDuration = 0,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
     TooltipPrimitive.Provider,
     {
       "data-slot": "tooltip-provider",
@@ -3741,22 +3775,22 @@ function TooltipProvider2({
 function Tooltip2({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(TooltipProvider2, { children: /* @__PURE__ */ (0, import_jsx_runtime45.jsx)(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
+  return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(TooltipProvider2, { children: /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(TooltipPrimitive.Root, { "data-slot": "tooltip", ...props }) });
 }
 
 // components/layout/index.tsx
 var import_react_hot_toast2 = require("react-hot-toast");
 
 // components/theme-toggle.tsx
-var import_lucide_react23 = require("lucide-react");
-var import_jsx_runtime46 = require("react/jsx-runtime");
+var import_lucide_react24 = require("lucide-react");
+var import_jsx_runtime47 = require("react/jsx-runtime");
 function ThemeToggle({
   variant = "ghost",
   size = "icon",
   className
 }) {
   const { theme, toggleTheme } = useTheme();
-  return /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
     Button,
     {
       variant,
@@ -3764,13 +3798,13 @@ function ThemeToggle({
       onClick: toggleTheme,
       className,
       "aria-label": "Cambiar tema",
-      children: theme === "light" ? /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_lucide_react23.Moon, { className: "h-4 w-4" }) : /* @__PURE__ */ (0, import_jsx_runtime46.jsx)(import_lucide_react23.Sun, { className: "h-4 w-4" })
+      children: theme === "light" ? /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(import_lucide_react24.Moon, { className: "h-4 w-4" }) : /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(import_lucide_react24.Sun, { className: "h-4 w-4" })
     }
   );
 }
 
 // components/layout/index.tsx
-var import_jsx_runtime47 = require("react/jsx-runtime");
+var import_jsx_runtime48 = require("react/jsx-runtime");
 var AzirLayout = ({
   children,
   sidebarSrc = "/semillapp.png",
@@ -3781,15 +3815,15 @@ var AzirLayout = ({
   email,
   avatarUrl
 }) => {
-  return /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(SidebarProvider, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(import_react_hot_toast2.Toaster, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
-    /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)(SidebarInset, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("header", { className: "flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12", children: /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "flex w-full items-center justify-between gap-2 px-4", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(SidebarTrigger, { className: "-ml-1" }),
-        /* @__PURE__ */ (0, import_jsx_runtime47.jsxs)("div", { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(ThemeToggle, {}),
-          /* @__PURE__ */ (0, import_jsx_runtime47.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(SidebarProvider, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(import_react_hot_toast2.Toaster, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(SidebarInset, { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("header", { className: "flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12", children: /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex w-full items-center justify-between gap-2 px-4", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(SidebarTrigger, { className: "-ml-1" }),
+        /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(ThemeToggle, {}),
+          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(
             NavUser,
             {
               className: "-mr-2",
@@ -3801,15 +3835,15 @@ var AzirLayout = ({
           )
         ] })
       ] }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime47.jsx)("div", { className: "flex flex-1 flex-col gap-4 p-4 pt-0", children })
+      /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("div", { className: "flex flex-1 flex-col gap-4 p-4 pt-0", children })
     ] })
   ] });
 };
 var layout_default = AzirLayout;
 
 // components/table/pagination.tsx
-var import_lucide_react24 = require("lucide-react");
-var import_jsx_runtime48 = require("react/jsx-runtime");
+var import_lucide_react25 = require("lucide-react");
+var import_jsx_runtime49 = require("react/jsx-runtime");
 function DataTablePagination({
   table,
   className
@@ -3823,29 +3857,29 @@ function DataTablePagination({
   const handlePageSizeChange = (value) => {
     table.setPageSize(Number(value));
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: cn("flex items-center justify-between px-2", className), children: [
-    /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "text-muted-foreground flex-1 text-sm", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: cn("flex items-center justify-between px-2", className), children: [
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "text-muted-foreground flex-1 text-sm", children: [
       selectedRows,
       " of ",
       totalRows,
       " row(s) selected."
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex items-center space-x-6 lg:space-x-8", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("p", { className: "text-sm font-medium", children: "Rows per page" }),
-        /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(Select, { value: `${pageSize}`, onValueChange: handlePageSizeChange, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(SelectTrigger, { className: "h-8 w-[70px]", children: /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(SelectValue, { placeholder: pageSize }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(SelectContent, { side: "top", children: [10, 20, 25, 30, 40, 50].map((size) => /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(SelectItem, { value: `${size}`, children: size }, size)) })
+    /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-6 lg:space-x-8", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("p", { className: "text-sm font-medium", children: "Rows per page" }),
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Select, { value: `${pageSize}`, onValueChange: handlePageSizeChange, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectTrigger, { className: "h-8 w-[70px]", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectValue, { placeholder: pageSize }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectContent, { side: "top", children: [10, 20, 25, 30, 40, 50].map((size) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(SelectItem, { value: `${size}`, children: size }, size)) })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex w-[100px] items-center justify-center text-sm font-medium", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex w-[100px] items-center justify-center text-sm font-medium", children: [
         "Page ",
         pageIndex + 1,
         " of ",
         pageCount
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex items-center space-x-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(
+      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "flex items-center space-x-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
           Button,
           {
             variant: "outline",
@@ -3854,12 +3888,12 @@ function DataTablePagination({
             onClick: () => table.setPageIndex(0),
             disabled: !canPreviousPage,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("span", { className: "sr-only", children: "Go to first page" }),
-              /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(import_lucide_react24.ChevronsLeft, {})
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to first page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react25.ChevronsLeft, {})
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
           Button,
           {
             variant: "outline",
@@ -3868,12 +3902,12 @@ function DataTablePagination({
             onClick: () => table.previousPage(),
             disabled: !canPreviousPage,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("span", { className: "sr-only", children: "Go to previous page" }),
-              /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(import_lucide_react24.ChevronLeft, {})
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to previous page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react25.ChevronLeft, {})
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
           Button,
           {
             variant: "outline",
@@ -3882,12 +3916,12 @@ function DataTablePagination({
             onClick: () => table.nextPage(),
             disabled: !canNextPage,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("span", { className: "sr-only", children: "Go to next page" }),
-              /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(import_lucide_react24.ChevronRight, {})
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to next page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react25.ChevronRight, {})
             ]
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(
+        /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(
           Button,
           {
             variant: "outline",
@@ -3896,8 +3930,8 @@ function DataTablePagination({
             onClick: () => table.setPageIndex(pageCount - 1),
             disabled: !canNextPage,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("span", { className: "sr-only", children: "Go to last page" }),
-              /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(import_lucide_react24.ChevronsRight, {})
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("span", { className: "sr-only", children: "Go to last page" }),
+              /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react25.ChevronsRight, {})
             ]
           }
         )
@@ -3907,58 +3941,58 @@ function DataTablePagination({
 }
 
 // components/table/azir-table.tsx
-var import_lucide_react25 = require("lucide-react");
+var import_lucide_react26 = require("lucide-react");
 var import_react_table = require("@tanstack/react-table");
-var import_jsx_runtime49 = require("react/jsx-runtime");
+var import_jsx_runtime50 = require("react/jsx-runtime");
 function AzirTable({ table }) {
   const {
     refineCore: {
       tableQuery: { isFetching }
     }
   } = table;
-  return /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(import_jsx_runtime49.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)("div", { className: "relative overflow-hidden rounded-md border", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime49.jsxs)(Table, { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TableHead, { children: header.isPlaceholder ? null : (0, import_react_table.flexRender)(
+  return /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(import_jsx_runtime50.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)("div", { className: "relative overflow-hidden rounded-md border", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime50.jsxs)(Table, { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableHeader, { children: table.getHeaderGroups().map((headerGroup) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableRow, { children: headerGroup.headers.map((header) => {
+          return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableHead, { children: header.isPlaceholder ? null : (0, import_react_table.flexRender)(
             header.column.columnDef.header,
             header.getContext()
           ) }, header.id);
         }) }, headerGroup.id)) }),
-        /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TableBody, { children: table.getRowModel().rows?.length ? table.getRowModel().rows.map((row) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableBody, { children: table.getRowModel().rows?.length ? table.getRowModel().rows.map((row) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
           TableRow,
           {
             "data-state": row.getIsSelected() && "selected",
-            children: row.getVisibleCells().map((cell) => /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TableCell, { children: (0, import_react_table.flexRender)(
+            children: row.getVisibleCells().map((cell) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableCell, { children: (0, import_react_table.flexRender)(
               cell.column.columnDef.cell,
               cell.getContext()
             ) }, cell.id))
           },
           row.id
-        )) : /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TableRow, { children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(TableCell, { colSpan: 2, className: "h-24 w-full text-center", children: "No hay resultados." }) }) })
+        )) : /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableRow, { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableCell, { colSpan: 2, className: "h-24 w-full text-center", children: "No hay resultados." }) }) })
       ] }),
-      isFetching && /* @__PURE__ */ (0, import_jsx_runtime49.jsx)("div", { className: "absolute inset-0 z-10 flex items-center justify-center bg-white/30", children: /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(import_lucide_react25.Loader, { className: "animate-spin" }) })
+      isFetching && /* @__PURE__ */ (0, import_jsx_runtime50.jsx)("div", { className: "absolute inset-0 z-10 flex items-center justify-center bg-white/30", children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(import_lucide_react26.Loader, { className: "animate-spin" }) })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime49.jsx)(DataTablePagination, { className: "mt-2", table })
+    /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(DataTablePagination, { className: "mt-2", table })
   ] });
 }
 
 // components/table/header/filter-radio-button.tsx
 var import_react12 = require("react");
-var import_lucide_react27 = require("lucide-react");
+var import_lucide_react28 = require("lucide-react");
 
 // components/ui/popover.tsx
 var PopoverPrimitive = __toESM(require("@radix-ui/react-popover"));
-var import_jsx_runtime50 = require("react/jsx-runtime");
+var import_jsx_runtime51 = require("react/jsx-runtime");
 function Popover({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(PopoverPrimitive.Root, { "data-slot": "popover", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(PopoverPrimitive.Root, { "data-slot": "popover", ...props });
 }
 function PopoverTrigger({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(PopoverPrimitive.Trigger, { "data-slot": "popover-trigger", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(PopoverPrimitive.Trigger, { "data-slot": "popover-trigger", ...props });
 }
 function PopoverContent({
   className,
@@ -3966,7 +4000,7 @@ function PopoverContent({
   sideOffset = 4,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(PopoverPrimitive.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(PopoverPrimitive.Portal, { children: /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
     PopoverPrimitive.Content,
     {
       "data-slot": "popover-content",
@@ -3983,13 +4017,13 @@ function PopoverContent({
 
 // components/ui/radio-group.tsx
 var RadioGroupPrimitive = __toESM(require("@radix-ui/react-radio-group"));
-var import_lucide_react26 = require("lucide-react");
-var import_jsx_runtime51 = require("react/jsx-runtime");
+var import_lucide_react27 = require("lucide-react");
+var import_jsx_runtime52 = require("react/jsx-runtime");
 function RadioGroup2({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
     RadioGroupPrimitive.Root,
     {
       "data-slot": "radio-group",
@@ -4002,7 +4036,7 @@ function RadioGroupItem({
   className,
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
     RadioGroupPrimitive.Item,
     {
       "data-slot": "radio-group-item",
@@ -4011,12 +4045,12 @@ function RadioGroupItem({
         className
       ),
       ...props,
-      children: /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(
+      children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
         RadioGroupPrimitive.Indicator,
         {
           "data-slot": "radio-group-indicator",
           className: "relative flex items-center justify-center",
-          children: /* @__PURE__ */ (0, import_jsx_runtime51.jsx)(import_lucide_react26.CircleIcon, { className: "fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" })
+          children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(import_lucide_react27.CircleIcon, { className: "fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" })
         }
       )
     }
@@ -4024,7 +4058,7 @@ function RadioGroupItem({
 }
 
 // components/table/header/filter-radio-button.tsx
-var import_jsx_runtime52 = require("react/jsx-runtime");
+var import_jsx_runtime53 = require("react/jsx-runtime");
 function FilterRadioButton({
   value,
   setValue,
@@ -4045,20 +4079,20 @@ function FilterRadioButton({
     setValue(void 0);
     setIsOpen(false);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("span", { className: "inline-flex items-center gap-1", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(Popover, { open: isOpen, onOpenChange: setIsOpen, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("span", { className: "inline-flex items-center gap-1", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(Popover, { open: isOpen, onOpenChange: setIsOpen, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
         Button,
         {
           size: "sm",
           variant: "ghost",
           "aria-label": "Filtrar",
           className: "text-primary text-xs",
-          children: value !== void 0 ? options.find((opt) => opt.value === value)?.label ?? placeholder : /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(import_lucide_react27.Filter, { size: 16, color: "black" })
+          children: value !== void 0 ? options.find((opt) => opt.value === value)?.label ?? placeholder : /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_lucide_react28.Filter, { size: 16, color: "black" })
         }
       ) }),
-      /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(PopoverContent, { className: "w-48 p-4", align: "start", sideOffset: 8, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(PopoverContent, { className: "w-48 p-4", align: "start", sideOffset: 8, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
           RadioGroup2,
           {
             value: selected?.toString() ?? "",
@@ -4069,39 +4103,39 @@ function FilterRadioButton({
               if (matched) setSelected(matched.value);
             },
             className: "space-y-2",
-            children: options.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(
+            children: options.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(
               "div",
               {
                 className: "flex items-center gap-2",
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+                  /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
                     RadioGroupItem,
                     {
                       value: opt.value.toString(),
                       id: opt.value.toString()
                     }
                   ),
-                  /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("label", { htmlFor: opt.value.toString(), className: "text-sm", children: opt.label })
+                  /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("label", { htmlFor: opt.value.toString(), className: "text-sm", children: opt.label })
                 ]
               },
               opt.value.toString()
             ))
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: "mt-4 flex justify-end gap-2", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { size: "sm", variant: "ghost", onClick: applyFilter, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(import_lucide_react27.Check, {}) }),
-          value !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { size: "sm", variant: "ghost", onClick: clearFilter, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(import_lucide_react27.FunnelX, { className: "text-destructive" }) })
+        /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)("div", { className: "mt-4 flex justify-end gap-2", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Button, { size: "sm", variant: "ghost", onClick: applyFilter, children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_lucide_react28.Check, {}) }),
+          value !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Button, { size: "sm", variant: "ghost", onClick: clearFilter, children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_lucide_react28.FunnelX, { className: "text-destructive" }) })
         ] })
       ] })
     ] }),
-    value !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(Button, { size: "sm", variant: "ghost", onClick: clearFilter, children: /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(import_lucide_react27.FunnelX, { className: "text-destructive" }) })
+    value !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(Button, { size: "sm", variant: "ghost", onClick: clearFilter, children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_lucide_react28.FunnelX, { className: "text-destructive" }) })
   ] });
 }
 
 // components/table/header/filter-constain.tsx
 var import_react13 = require("react");
-var import_lucide_react28 = require("lucide-react");
-var import_jsx_runtime53 = require("react/jsx-runtime");
+var import_lucide_react29 = require("lucide-react");
+var import_jsx_runtime54 = require("react/jsx-runtime");
 function FilterPopoverInput({
   column,
   placeholder = "Buscar..."
@@ -4145,17 +4179,17 @@ function FilterPopoverInput({
     return value.length > 12 ? value.slice(0, 12) + "..." : value;
   };
   const filterValue = column.getFilterValue() || "";
-  return /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { className: "inline-flex items-center gap-1", children: /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(Popover, { open: isPopoverOpen, onOpenChange: setPopoverOpen, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(PopoverTrigger, { asChild: true, children: !filterValue ? /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("span", { className: "inline-flex items-center gap-1", children: /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)(Popover, { open: isPopoverOpen, onOpenChange: setPopoverOpen, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(PopoverTrigger, { asChild: true, children: !filterValue ? /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
       Button,
       {
         size: "sm",
         variant: "ghost",
         "aria-label": isPopoverOpen ? "Close filter" : "Open filter",
         onClick: openPopover,
-        children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_lucide_react28.Search, {})
+        children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(import_lucide_react29.Search, {})
       }
-    ) : /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+    ) : /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
       "button",
       {
         type: "button",
@@ -4165,14 +4199,14 @@ function FilterPopoverInput({
         children: renderTruncatedValue(filterValue)
       }
     ) }),
-    /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(
+    /* @__PURE__ */ (0, import_jsx_runtime54.jsxs)(
       PopoverContent,
       {
         className: "flex w-full items-center gap-2 p-2",
         align: "start",
         sideOffset: 8,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
             "input",
             {
               ref: inputRef,
@@ -4185,37 +4219,37 @@ function FilterPopoverInput({
               onKeyDown: handleInputKeyDown
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
             Button,
             {
               size: "sm",
               variant: "ghost",
               onClick: applyFilter,
               "aria-label": "Apply filter",
-              children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_lucide_react28.Check, {})
+              children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(import_lucide_react29.Check, {})
             }
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
             Button,
             {
               size: "sm",
               variant: "ghost",
               onClick: clearFilter,
               "aria-label": "Clear filter",
-              children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_lucide_react28.X, { className: filterValue ? "text-primary" : "" })
+              children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(import_lucide_react29.X, { className: filterValue ? "text-primary" : "" })
             }
           )
         ]
       }
     ),
-    filterValue && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+    filterValue && /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
       Button,
       {
         size: "sm",
         variant: "ghost",
         onClick: clearFilter,
         "aria-label": "Clear filter",
-        children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(import_lucide_react28.FunnelX, { className: "text-destructive" })
+        children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(import_lucide_react29.FunnelX, { className: "text-destructive" })
       }
     )
   ] }) });
@@ -4223,7 +4257,7 @@ function FilterPopoverInput({
 
 // components/table/header/filter-between-date.tsx
 var import_react14 = require("react");
-var import_lucide_react30 = require("lucide-react");
+var import_lucide_react31 = require("lucide-react");
 
 // node_modules/date-fns/constants.js
 var daysInYear = 365.2425;
@@ -5795,10 +5829,10 @@ function cleanEscapedString(input) {
 }
 
 // components/ui/calendar.tsx
-var React16 = __toESM(require("react"));
-var import_lucide_react29 = require("lucide-react");
+var React15 = __toESM(require("react"));
+var import_lucide_react30 = require("lucide-react");
 var import_react_day_picker = require("react-day-picker");
-var import_jsx_runtime54 = require("react/jsx-runtime");
+var import_jsx_runtime55 = require("react/jsx-runtime");
 function Calendar({
   className,
   classNames,
@@ -5810,7 +5844,7 @@ function Calendar({
   ...props
 }) {
   const defaultClassNames = (0, import_react_day_picker.getDefaultClassNames)();
-  return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
     import_react_day_picker.DayPicker,
     {
       showOutsideDays,
@@ -5909,7 +5943,7 @@ function Calendar({
       },
       components: {
         Root: ({ className: className2, rootRef, ...props2 }) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
+          return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
             "div",
             {
               "data-slot": "calendar",
@@ -5921,22 +5955,22 @@ function Calendar({
         },
         Chevron: ({ className: className2, orientation, ...props2 }) => {
           if (orientation === "left") {
-            return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(import_lucide_react29.ChevronLeftIcon, { className: cn("size-4", className2), ...props2 });
+            return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_lucide_react30.ChevronLeftIcon, { className: cn("size-4", className2), ...props2 });
           }
           if (orientation === "right") {
-            return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
-              import_lucide_react29.ChevronRightIcon,
+            return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
+              import_lucide_react30.ChevronRightIcon,
               {
                 className: cn("size-4", className2),
                 ...props2
               }
             );
           }
-          return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(import_lucide_react29.ChevronDownIcon, { className: cn("size-4", className2), ...props2 });
+          return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_lucide_react30.ChevronDownIcon, { className: cn("size-4", className2), ...props2 });
         },
         DayButton: CalendarDayButton,
         WeekNumber: ({ children, ...props2 }) => {
-          return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("td", { ...props2, children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: "flex size-(--cell-size) items-center justify-center text-center", children }) });
+          return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("td", { ...props2, children: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)("div", { className: "flex size-(--cell-size) items-center justify-center text-center", children }) });
         },
         ...components
       },
@@ -5951,11 +5985,11 @@ function CalendarDayButton({
   ...props
 }) {
   const defaultClassNames = (0, import_react_day_picker.getDefaultClassNames)();
-  const ref = React16.useRef(null);
-  React16.useEffect(() => {
+  const ref = React15.useRef(null);
+  React15.useEffect(() => {
     if (modifiers.focused) ref.current?.focus();
   }, [modifiers.focused]);
-  return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
     Button,
     {
       ref,
@@ -5977,7 +6011,7 @@ function CalendarDayButton({
 }
 
 // components/table/header/filter-between-date.tsx
-var import_jsx_runtime55 = require("react/jsx-runtime");
+var import_jsx_runtime56 = require("react/jsx-runtime");
 function FilterBetweenDate({
   column
 }) {
@@ -6011,18 +6045,18 @@ function FilterBetweenDate({
     setIsOpen(false);
   };
   const renderLabel = () => {
-    if (!range?.from || !range?.to) return /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_lucide_react30.CalendarDays, {});
+    if (!range?.from || !range?.to) return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(import_lucide_react31.CalendarDays, {});
     const formattedFrom = format(range.from, "dd/MM/yyyy");
     const formattedTo = format(range.to, "dd/MM/yyyy");
-    return /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("span", { className: "text-primary text-xs", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("span", { className: "text-primary text-xs", children: [
       formattedFrom,
       " - ",
       formattedTo
     ] });
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("span", { className: "inline-flex items-center gap-1", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)(Popover, { open: isOpen, onOpenChange: setIsOpen, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("span", { className: "inline-flex items-center gap-1", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)(Popover, { open: isOpen, onOpenChange: setIsOpen, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(
         Button,
         {
           size: "sm",
@@ -6031,8 +6065,8 @@ function FilterBetweenDate({
           children: renderLabel()
         }
       ) }),
-      /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(PopoverContent, { className: "w-auto p-4", align: "start", sideOffset: 8, children: /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { className: "flex flex-col items-start gap-2", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(PopoverContent, { className: "w-auto p-4", align: "start", sideOffset: 8, children: /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { className: "flex flex-col items-start gap-2", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(
           Calendar,
           {
             mode: "range",
@@ -6042,36 +6076,36 @@ function FilterBetweenDate({
             required: true
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)("div", { className: "mt-2 flex w-full justify-end gap-2", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(Button, { size: "sm", variant: "ghost", onClick: applyFilter, children: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_lucide_react30.Check, {}) }),
-          /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(Button, { size: "sm", variant: "ghost", onClick: clearFilter, children: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_lucide_react30.FunnelX, { className: "text-destructive" }) })
+        /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("div", { className: "mt-2 flex w-full justify-end gap-2", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(Button, { size: "sm", variant: "ghost", onClick: applyFilter, children: /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(import_lucide_react31.Check, {}) }),
+          /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(Button, { size: "sm", variant: "ghost", onClick: clearFilter, children: /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(import_lucide_react31.FunnelX, { className: "text-destructive" }) })
         ] })
       ] }) })
     ] }),
-    range?.from && range?.to && /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
+    range?.from && range?.to && /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(
       Button,
       {
         size: "sm",
         variant: "ghost",
         onClick: clearFilter,
         "aria-label": "Clear filter",
-        children: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(import_lucide_react30.FunnelX, { className: "text-destructive" })
+        children: /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(import_lucide_react31.FunnelX, { className: "text-destructive" })
       }
     )
   ] });
 }
 
 // components/table/header/index.tsx
-var import_lucide_react31 = require("lucide-react");
-var import_jsx_runtime56 = require("react/jsx-runtime");
+var import_lucide_react32 = require("lucide-react");
+var import_jsx_runtime57 = require("react/jsx-runtime");
 function getSortIcon(isSorted) {
   switch (isSorted) {
     case "asc":
-      return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(import_lucide_react31.ArrowUpWideNarrow, { className: "text-primary size-4" });
+      return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(import_lucide_react32.ArrowUpWideNarrow, { className: "text-primary size-4" });
     case "desc":
-      return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(import_lucide_react31.ArrowDownWideNarrow, { className: "text-primary size-4" });
+      return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(import_lucide_react32.ArrowDownWideNarrow, { className: "text-primary size-4" });
     default:
-      return /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(import_lucide_react31.ArrowUpDown, { className: "size-4" });
+      return /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(import_lucide_react32.ArrowUpDown, { className: "size-4" });
   }
 }
 function TableHeaderActions({
@@ -6080,9 +6114,9 @@ function TableHeaderActions({
   sortable = false,
   filter
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime56.jsxs)("span", { className: "inline-flex items-center gap-1", children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime57.jsxs)("span", { className: "inline-flex items-center gap-1", children: [
     label,
-    sortable && /* @__PURE__ */ (0, import_jsx_runtime56.jsx)(
+    sortable && /* @__PURE__ */ (0, import_jsx_runtime57.jsx)(
       Button,
       {
         size: "sm",

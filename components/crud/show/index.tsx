@@ -1,6 +1,5 @@
 "use client"
 
-import React, { isValidElement } from "react"
 import {
   useBack,
   useGo,
@@ -12,21 +11,22 @@ import {
   useTranslate,
   useUserFriendlyName,
 } from "@refinedev/core"
+import { isValidElement } from "react"
 
 import { ArrowLeft } from "lucide-react"
 import { Breadcrumbs } from "../../breadcrumb"
 import { EditButton } from "../../buttons/edit"
 import { ListButton } from "../../buttons/list"
-import { RefreshButton } from "../../buttons/refresh"
-import { PageHeader } from "../../page-header"
-import { Button } from "../../ui/button"
-import { ShowProps } from "../types"
 import {
   DeleteButtonProps,
   EditButtonProps,
   ListButtonProps,
   RefreshButtonProps,
 } from "../../buttons/types"
+import { PageHeader } from "../../page-header"
+import { ReloadButton } from "../../reload-button"
+import { Button } from "../../ui/button"
+import { ShowProps } from "../types"
 
 export const Show = (props: ShowProps) => {
   const {
@@ -129,7 +129,7 @@ export const Show = (props: ShowProps) => {
         <EditButton colorScheme="brand" {...editButtonProps} />
       )}
       {/* {isDeleteButtonVisible && <DeleteButton {...deleteButtonProps} />} */}
-      <RefreshButton {...refreshButtonProps} />
+      <ReloadButton />
     </>
   )
 
@@ -207,6 +207,9 @@ export const Show = (props: ShowProps) => {
       breadcrumb={
         isValidElement(breadcrumb) ? <>{breadcrumb}</> : <Breadcrumbs />
       }
+      reloadId={id}
+      reloadInvalidates={["detail"]}
+      extra={headerButtons}
     >
       {children}
     </PageHeader>
