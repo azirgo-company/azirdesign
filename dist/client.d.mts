@@ -365,8 +365,9 @@ interface AzirTableProps<TQueryFnData extends BaseRecord = BaseRecord, TError ex
     table: UseTableReturnType<TData, TError>;
     stickyColumns?: number;
     resource?: string;
+    onRowClick?: (row: any) => void;
 }
-declare function AzirTable<TQueryFnData extends BaseRecord = BaseRecord, TError extends HttpError = HttpError, TData extends BaseRecord = TQueryFnData>({ table, stickyColumns, resource, }: AzirTableProps<TQueryFnData, TError, TData>): react_jsx_runtime.JSX.Element;
+declare function AzirTable<TQueryFnData extends BaseRecord = BaseRecord, TError extends HttpError = HttpError, TData extends BaseRecord = TQueryFnData>({ table, stickyColumns, resource, onRowClick, }: AzirTableProps<TQueryFnData, TError, TData>): react_jsx_runtime.JSX.Element;
 
 interface Option<T> {
     value: T;

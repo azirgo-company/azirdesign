@@ -22,6 +22,7 @@ interface AzirTableProps<
   table: UseTableReturnType<TData, TError>
   stickyColumns?: number
   resource?: string
+  onRowClick?: (row: any) => void
 }
 export default function AzirTable<
   TQueryFnData extends BaseRecord = BaseRecord,
@@ -31,6 +32,7 @@ export default function AzirTable<
   table,
   stickyColumns = 1,
   resource,
+  onRowClick,
 }: AzirTableProps<TQueryFnData, TError, TData>) {
   const {
     refineCore: {
@@ -124,6 +126,8 @@ export default function AzirTable<
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => onRowClick?.(row)}
+                  className={onRowClick ? "cursor-pointer" : undefined}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

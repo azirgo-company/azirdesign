@@ -3950,7 +3950,8 @@ var import_jsx_runtime50 = require("react/jsx-runtime");
 function AzirTable({
   table,
   stickyColumns = 1,
-  resource
+  resource,
+  onRowClick
 }) {
   const {
     refineCore: {
@@ -4008,6 +4009,8 @@ function AzirTable({
           TableRow,
           {
             "data-state": row.getIsSelected() && "selected",
+            onClick: () => onRowClick?.(row),
+            className: onRowClick ? "cursor-pointer" : void 0,
             children: row.getVisibleCells().map((cell) => /* @__PURE__ */ (0, import_jsx_runtime50.jsx)(TableCell, { children: (0, import_react_table.flexRender)(
               cell.column.columnDef.cell,
               cell.getContext()

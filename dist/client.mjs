@@ -3887,7 +3887,8 @@ import { Fragment as Fragment10, jsx as jsx50, jsxs as jsxs30 } from "react/jsx-
 function AzirTable({
   table,
   stickyColumns = 1,
-  resource
+  resource,
+  onRowClick
 }) {
   const {
     refineCore: {
@@ -3945,6 +3946,8 @@ function AzirTable({
           TableRow,
           {
             "data-state": row.getIsSelected() && "selected",
+            onClick: () => onRowClick?.(row),
+            className: onRowClick ? "cursor-pointer" : void 0,
             children: row.getVisibleCells().map((cell) => /* @__PURE__ */ jsx50(TableCell, { children: flexRender(
               cell.column.columnDef.cell,
               cell.getContext()
