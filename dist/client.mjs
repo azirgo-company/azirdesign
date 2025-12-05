@@ -1441,7 +1441,24 @@ function SidebarMenuSubButton({
 }
 
 // components/nav-refine.tsx
-import { useMenu } from "@refinedev/core";
+import { CanAccess, useMenu } from "@refinedev/core";
+
+// components/link.tsx
+import { forwardRef } from "react";
+import { useLink, useRouterContext, useRouterType } from "@refinedev/core";
+import { Slot as Slot3 } from "@radix-ui/react-slot";
+import { jsx as jsx12 } from "react/jsx-runtime";
+var Link = forwardRef(
+  ({ children, href, title, className, asChild }, ref) => {
+    const { Link: LegacyLink } = useRouterContext();
+    const routerType = useRouterType();
+    const Link2 = useLink();
+    const ActiveLink = routerType === "legacy" ? LegacyLink : Link2;
+    const Comp = asChild ? Slot3 : ActiveLink;
+    return /* @__PURE__ */ jsx12(Comp, { ref, to: href, className, title, children });
+  }
+);
+Link.displayName = "Link";
 
 // node_modules/@radix-ui/react-collapsible/dist/index.mjs
 import * as React11 from "react";
@@ -1459,7 +1476,7 @@ function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForD
 
 // node_modules/@radix-ui/react-context/dist/index.mjs
 import * as React4 from "react";
-import { jsx as jsx12 } from "react/jsx-runtime";
+import { jsx as jsx13 } from "react/jsx-runtime";
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
   function createContext32(rootComponentName, defaultContext) {
@@ -1470,7 +1487,7 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
       const value = React4.useMemo(() => context, Object.values(context));
-      return /* @__PURE__ */ jsx12(Context.Provider, { value, children });
+      return /* @__PURE__ */ jsx13(Context.Provider, { value, children });
     };
     Provider2.displayName = rootComponentName + "Provider";
     function useContext22(consumerName, scope) {
@@ -1635,7 +1652,7 @@ function useComposedRefs(...refs) {
 import * as React8 from "react";
 import * as ReactDOM from "react-dom";
 import { createSlot } from "@radix-ui/react-slot";
-import { jsx as jsx13 } from "react/jsx-runtime";
+import { jsx as jsx14 } from "react/jsx-runtime";
 var NODES = [
   "a",
   "button",
@@ -1663,7 +1680,7 @@ var Primitive = NODES.reduce((primitive, node) => {
     if (typeof window !== "undefined") {
       window[Symbol.for("radix-ui")] = true;
     }
-    return /* @__PURE__ */ jsx13(Comp, { ...primitiveProps, ref: forwardedRef });
+    return /* @__PURE__ */ jsx14(Comp, { ...primitiveProps, ref: forwardedRef });
   });
   Node.displayName = `Primitive.${node}`;
   return { ...primitive, [node]: Node };
@@ -1808,7 +1825,7 @@ function useId(deterministicId) {
 }
 
 // node_modules/@radix-ui/react-collapsible/dist/index.mjs
-import { jsx as jsx14 } from "react/jsx-runtime";
+import { jsx as jsx15 } from "react/jsx-runtime";
 var COLLAPSIBLE_NAME = "Collapsible";
 var [createCollapsibleContext, createCollapsibleScope] = createContextScope(COLLAPSIBLE_NAME);
 var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
@@ -1828,7 +1845,7 @@ var Collapsible = React11.forwardRef(
       onChange: onOpenChange,
       caller: COLLAPSIBLE_NAME
     });
-    return /* @__PURE__ */ jsx14(
+    return /* @__PURE__ */ jsx15(
       CollapsibleProvider,
       {
         scope: __scopeCollapsible,
@@ -1836,7 +1853,7 @@ var Collapsible = React11.forwardRef(
         contentId: useId(),
         open,
         onOpenToggle: React11.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-        children: /* @__PURE__ */ jsx14(
+        children: /* @__PURE__ */ jsx15(
           Primitive.div,
           {
             "data-state": getState(open),
@@ -1855,7 +1872,7 @@ var CollapsibleTrigger = React11.forwardRef(
   (props, forwardedRef) => {
     const { __scopeCollapsible, ...triggerProps } = props;
     const context = useCollapsibleContext(TRIGGER_NAME, __scopeCollapsible);
-    return /* @__PURE__ */ jsx14(
+    return /* @__PURE__ */ jsx15(
       Primitive.button,
       {
         type: "button",
@@ -1877,7 +1894,7 @@ var CollapsibleContent = React11.forwardRef(
   (props, forwardedRef) => {
     const { forceMount, ...contentProps } = props;
     const context = useCollapsibleContext(CONTENT_NAME, props.__scopeCollapsible);
-    return /* @__PURE__ */ jsx14(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ jsx14(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
+    return /* @__PURE__ */ jsx15(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ jsx15(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
   }
 );
 CollapsibleContent.displayName = CONTENT_NAME;
@@ -1917,7 +1934,7 @@ var CollapsibleContentImpl = React11.forwardRef((props, forwardedRef) => {
       setIsPresent(present);
     }
   }, [context.open, present]);
-  return /* @__PURE__ */ jsx14(
+  return /* @__PURE__ */ jsx15(
     Primitive.div,
     {
       "data-state": getState(context.open),
@@ -1941,16 +1958,16 @@ function getState(open) {
 var Root5 = Collapsible;
 
 // components/ui/collapsible.tsx
-import { jsx as jsx15 } from "react/jsx-runtime";
+import { jsx as jsx16 } from "react/jsx-runtime";
 function Collapsible2({
   ...props
 }) {
-  return /* @__PURE__ */ jsx15(Root5, { "data-slot": "collapsible", ...props });
+  return /* @__PURE__ */ jsx16(Root5, { "data-slot": "collapsible", ...props });
 }
 function CollapsibleTrigger2({
   ...props
 }) {
-  return /* @__PURE__ */ jsx15(
+  return /* @__PURE__ */ jsx16(
     CollapsibleTrigger,
     {
       "data-slot": "collapsible-trigger",
@@ -1961,7 +1978,7 @@ function CollapsibleTrigger2({
 function CollapsibleContent2({
   ...props
 }) {
-  return /* @__PURE__ */ jsx15(
+  return /* @__PURE__ */ jsx16(
     CollapsibleContent,
     {
       "data-slot": "collapsible-content",
@@ -1969,23 +1986,6 @@ function CollapsibleContent2({
     }
   );
 }
-
-// components/link.tsx
-import { forwardRef as forwardRef3 } from "react";
-import { useLink, useRouterContext, useRouterType } from "@refinedev/core";
-import { Slot as Slot3 } from "@radix-ui/react-slot";
-import { jsx as jsx16 } from "react/jsx-runtime";
-var Link = forwardRef3(
-  ({ children, href, title, className, asChild }, ref) => {
-    const { Link: LegacyLink } = useRouterContext();
-    const routerType = useRouterType();
-    const Link2 = useLink();
-    const ActiveLink = routerType === "legacy" ? LegacyLink : Link2;
-    const Comp = asChild ? Slot3 : ActiveLink;
-    return /* @__PURE__ */ jsx16(Comp, { ref, to: href, className, title, children });
-  }
-);
-Link.displayName = "Link";
 
 // components/nav-refine.tsx
 import { jsx as jsx17, jsxs as jsxs8 } from "react/jsx-runtime";
@@ -1995,7 +1995,7 @@ function NavRefine() {
     return tree.map((item, key) => {
       const { list, meta } = item;
       const isSelected = item.key === selectedKey2;
-      return /* @__PURE__ */ jsx17(
+      return /* @__PURE__ */ jsx17(CanAccess, { resource: item.name, action: "list", children: /* @__PURE__ */ jsx17(
         Collapsible2,
         {
           asChild: true,
@@ -2022,7 +2022,7 @@ function NavRefine() {
           ) }) }, item.key)
         },
         key
-      );
+      ) }, key);
     });
   };
   const groups = {};
@@ -2653,7 +2653,7 @@ var RefreshButton = ({
 RefreshButton.displayName = "RefreshButton";
 
 // components/buttons/save/index.tsx
-import { CanAccess, useSaveButton } from "@refinedev/core";
+import { CanAccess as CanAccess2, useSaveButton } from "@refinedev/core";
 import { Loader2 as Loader22, SaveIcon } from "lucide-react";
 import { Slot as Slot4 } from "@radix-ui/react-slot";
 import { jsx as jsx30, jsxs as jsxs16 } from "react/jsx-runtime";
@@ -2668,7 +2668,7 @@ var SaveButton = ({
   ...props
 }) => {
   const { label } = useSaveButton();
-  const Com = !accessControl?.enabled ? Slot4 : CanAccess;
+  const Com = !accessControl?.enabled ? Slot4 : CanAccess2;
   if (accessControl?.hideIfUnauthorized && accessControl?.enabled) {
     return null;
   }

@@ -1566,6 +1566,23 @@ function SidebarMenuSubButton({
 // components/nav-refine.tsx
 var import_core3 = require("@refinedev/core");
 
+// components/link.tsx
+var import_react2 = require("react");
+var import_core2 = require("@refinedev/core");
+var import_react_slot3 = require("@radix-ui/react-slot");
+var import_jsx_runtime12 = require("react/jsx-runtime");
+var Link = (0, import_react2.forwardRef)(
+  ({ children, href, title, className, asChild }, ref) => {
+    const { Link: LegacyLink } = (0, import_core2.useRouterContext)();
+    const routerType = (0, import_core2.useRouterType)();
+    const Link2 = (0, import_core2.useLink)();
+    const ActiveLink = routerType === "legacy" ? LegacyLink : Link2;
+    const Comp = asChild ? import_react_slot3.Slot : ActiveLink;
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Comp, { ref, to: href, className, title, children });
+  }
+);
+Link.displayName = "Link";
+
 // node_modules/@radix-ui/react-collapsible/dist/index.mjs
 var React11 = __toESM(require("react"), 1);
 
@@ -1582,7 +1599,7 @@ function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForD
 
 // node_modules/@radix-ui/react-context/dist/index.mjs
 var React4 = __toESM(require("react"), 1);
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_jsx_runtime13 = require("react/jsx-runtime");
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
   function createContext32(rootComponentName, defaultContext) {
@@ -1593,7 +1610,7 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
       const value = React4.useMemo(() => context, Object.values(context));
-      return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Context.Provider, { value, children });
+      return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Context.Provider, { value, children });
     };
     Provider2.displayName = rootComponentName + "Provider";
     function useContext22(consumerName, scope) {
@@ -1757,8 +1774,8 @@ function useComposedRefs(...refs) {
 // node_modules/@radix-ui/react-primitive/dist/index.mjs
 var React8 = __toESM(require("react"), 1);
 var ReactDOM = __toESM(require("react-dom"), 1);
-var import_react_slot3 = require("@radix-ui/react-slot");
-var import_jsx_runtime13 = require("react/jsx-runtime");
+var import_react_slot4 = require("@radix-ui/react-slot");
+var import_jsx_runtime14 = require("react/jsx-runtime");
 var NODES = [
   "a",
   "button",
@@ -1779,14 +1796,14 @@ var NODES = [
   "ul"
 ];
 var Primitive = NODES.reduce((primitive, node) => {
-  const Slot7 = (0, import_react_slot3.createSlot)(`Primitive.${node}`);
+  const Slot7 = (0, import_react_slot4.createSlot)(`Primitive.${node}`);
   const Node = React8.forwardRef((props, forwardedRef) => {
     const { asChild, ...primitiveProps } = props;
     const Comp = asChild ? Slot7 : node;
     if (typeof window !== "undefined") {
       window[Symbol.for("radix-ui")] = true;
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Comp, { ...primitiveProps, ref: forwardedRef });
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Comp, { ...primitiveProps, ref: forwardedRef });
   });
   Node.displayName = `Primitive.${node}`;
   return { ...primitive, [node]: Node };
@@ -1931,7 +1948,7 @@ function useId(deterministicId) {
 }
 
 // node_modules/@radix-ui/react-collapsible/dist/index.mjs
-var import_jsx_runtime14 = require("react/jsx-runtime");
+var import_jsx_runtime15 = require("react/jsx-runtime");
 var COLLAPSIBLE_NAME = "Collapsible";
 var [createCollapsibleContext, createCollapsibleScope] = createContextScope(COLLAPSIBLE_NAME);
 var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
@@ -1951,7 +1968,7 @@ var Collapsible = React11.forwardRef(
       onChange: onOpenChange,
       caller: COLLAPSIBLE_NAME
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
       CollapsibleProvider,
       {
         scope: __scopeCollapsible,
@@ -1959,7 +1976,7 @@ var Collapsible = React11.forwardRef(
         contentId: useId(),
         open,
         onOpenToggle: React11.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-        children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+        children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
           Primitive.div,
           {
             "data-state": getState(open),
@@ -1978,7 +1995,7 @@ var CollapsibleTrigger = React11.forwardRef(
   (props, forwardedRef) => {
     const { __scopeCollapsible, ...triggerProps } = props;
     const context = useCollapsibleContext(TRIGGER_NAME, __scopeCollapsible);
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
       Primitive.button,
       {
         type: "button",
@@ -2000,7 +2017,7 @@ var CollapsibleContent = React11.forwardRef(
   (props, forwardedRef) => {
     const { forceMount, ...contentProps } = props;
     const context = useCollapsibleContext(CONTENT_NAME, props.__scopeCollapsible);
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
   }
 );
 CollapsibleContent.displayName = CONTENT_NAME;
@@ -2040,7 +2057,7 @@ var CollapsibleContentImpl = React11.forwardRef((props, forwardedRef) => {
       setIsPresent(present);
     }
   }, [context.open, present]);
-  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
     Primitive.div,
     {
       "data-state": getState(context.open),
@@ -2064,16 +2081,16 @@ function getState(open) {
 var Root5 = Collapsible;
 
 // components/ui/collapsible.tsx
-var import_jsx_runtime15 = require("react/jsx-runtime");
+var import_jsx_runtime16 = require("react/jsx-runtime");
 function Collapsible2({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Root5, { "data-slot": "collapsible", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Root5, { "data-slot": "collapsible", ...props });
 }
 function CollapsibleTrigger2({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
     CollapsibleTrigger,
     {
       "data-slot": "collapsible-trigger",
@@ -2084,7 +2101,7 @@ function CollapsibleTrigger2({
 function CollapsibleContent2({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
     CollapsibleContent,
     {
       "data-slot": "collapsible-content",
@@ -2092,23 +2109,6 @@ function CollapsibleContent2({
     }
   );
 }
-
-// components/link.tsx
-var import_react2 = require("react");
-var import_core2 = require("@refinedev/core");
-var import_react_slot4 = require("@radix-ui/react-slot");
-var import_jsx_runtime16 = require("react/jsx-runtime");
-var Link = (0, import_react2.forwardRef)(
-  ({ children, href, title, className, asChild }, ref) => {
-    const { Link: LegacyLink } = (0, import_core2.useRouterContext)();
-    const routerType = (0, import_core2.useRouterType)();
-    const Link2 = (0, import_core2.useLink)();
-    const ActiveLink = routerType === "legacy" ? LegacyLink : Link2;
-    const Comp = asChild ? import_react_slot4.Slot : ActiveLink;
-    return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Comp, { ref, to: href, className, title, children });
-  }
-);
-Link.displayName = "Link";
 
 // components/nav-refine.tsx
 var import_jsx_runtime17 = require("react/jsx-runtime");
@@ -2118,7 +2118,7 @@ function NavRefine() {
     return tree.map((item, key) => {
       const { list, meta } = item;
       const isSelected = item.key === selectedKey2;
-      return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
+      return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_core3.CanAccess, { resource: item.name, action: "list", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
         Collapsible2,
         {
           asChild: true,
@@ -2145,7 +2145,7 @@ function NavRefine() {
           ) }) }, item.key)
         },
         key
-      );
+      ) }, key);
     });
   };
   const groups = {};
