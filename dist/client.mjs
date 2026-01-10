@@ -2833,7 +2833,7 @@ var Breadcrumbs = ({ showHome = true, meta }) => {
   const dashboardResource = resources[0];
   const rootRouteResource = matchResourceFromRoute("/", resources);
   const BreadCrumbItems = breadcrumbs.map(({ label, href }, key) => /* @__PURE__ */ jsxs18(Fragment3, { children: [
-    /* @__PURE__ */ jsx33(BreadcrumbItem, { children: href ? /* @__PURE__ */ jsx33(BreadcrumbLink, { asChild: true, href: `#x`, children: /* @__PURE__ */ jsx33(Link, { href, children: label }) }) : /* @__PURE__ */ jsx33(BreadcrumbPage, { children: label }) }),
+    /* @__PURE__ */ jsx33(BreadcrumbItem, { children: typeof href === "string" && href ? /* @__PURE__ */ jsx33(BreadcrumbLink, { asChild: true, href, children: /* @__PURE__ */ jsx33(Link, { href, children: label }) }) : /* @__PURE__ */ jsx33(BreadcrumbPage, { children: label }) }),
     key < breadcrumbs.length - 1 && /* @__PURE__ */ jsx33(BreadcrumbSeparator, {})
   ] }, key));
   return /* @__PURE__ */ jsx33(Breadcrumb, { children: /* @__PURE__ */ jsxs18(BreadcrumbList, { children: [

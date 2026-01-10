@@ -2946,7 +2946,7 @@ var Breadcrumbs = ({ showHome = true, meta }) => {
   const dashboardResource = resources[0];
   const rootRouteResource = (0, import_core11.matchResourceFromRoute)("/", resources);
   const BreadCrumbItems = breadcrumbs.map(({ label, href }, key) => /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(import_react5.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(BreadcrumbItem, { children: href ? /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(BreadcrumbLink, { asChild: true, href: `#x`, children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Link, { href, children: label }) }) : /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(BreadcrumbPage, { children: label }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(BreadcrumbItem, { children: typeof href === "string" && href ? /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(BreadcrumbLink, { asChild: true, href, children: /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Link, { href, children: label }) }) : /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(BreadcrumbPage, { children: label }) }),
     key < breadcrumbs.length - 1 && /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(BreadcrumbSeparator, {})
   ] }, key));
   return /* @__PURE__ */ (0, import_jsx_runtime33.jsx)(Breadcrumb, { children: /* @__PURE__ */ (0, import_jsx_runtime33.jsxs)(BreadcrumbList, { children: [

@@ -5,9 +5,10 @@ import {
   useResource,
 } from "@refinedev/core"
 
-import { Fragment } from "react"
-import { HomeIcon } from "lucide-react"
 import { RefineBreadcrumbProps } from "@refinedev/ui-types"
+import { HomeIcon } from "lucide-react"
+import { Fragment } from "react"
+import { Link } from "../link"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,7 +17,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../ui/breadcrumb"
-import { Link } from "../link"
 
 export type BreadcrumbProps = RefineBreadcrumbProps
 
@@ -36,8 +36,8 @@ export const Breadcrumbs = ({ showHome = true, meta }: BreadcrumbProps) => {
   const BreadCrumbItems = breadcrumbs.map(({ label, href }, key) => (
     <Fragment key={key}>
       <BreadcrumbItem>
-        {href ? (
-          <BreadcrumbLink asChild href={`#x`}>
+        {typeof href === "string" && href ? (
+          <BreadcrumbLink asChild href={href}>
             <Link href={href}>{label}</Link>
           </BreadcrumbLink>
         ) : (
