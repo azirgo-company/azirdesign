@@ -131,7 +131,12 @@ declare function NavProjects({ projects, }: {
     }[];
 }): react_jsx_runtime.JSX.Element;
 
-declare function NavRefine(): react_jsx_runtime.JSX.Element;
+interface NavRefineProps {
+    groupLabels?: {
+        [key: string]: string;
+    };
+}
+declare function NavRefine({ groupLabels }: NavRefineProps): react_jsx_runtime.JSX.Element;
 
 interface NavUserProps {
     className?: string;

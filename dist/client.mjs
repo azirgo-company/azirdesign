@@ -1989,7 +1989,7 @@ function CollapsibleContent2({
 
 // components/nav-refine.tsx
 import { jsx as jsx17, jsxs as jsxs8 } from "react/jsx-runtime";
-function NavRefine() {
+function NavRefine({ groupLabels }) {
   const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
   const renderTreeView = (tree, selectedKey2) => {
     return tree.map((item, key) => {
@@ -2031,16 +2031,12 @@ function NavRefine() {
     if (!groups[group]) groups[group] = [];
     groups[group].push(item);
   });
-  const groupLabels = {
-    dashboard: "Dashboard",
-    principales: "Principales",
-    payments: "Pagos",
-    app: "Aplicaci\xF3n",
-    otros: "Otros",
-    users: "Usuarios"
+  const defaultGroupLabels = {
+    dashboard: "Dashboard"
   };
+  const mergedGroupLabels = { ...defaultGroupLabels, ...groupLabels };
   return /* @__PURE__ */ jsx17("div", { className: "mb-10", children: Object.entries(groups).map(([group, items]) => /* @__PURE__ */ jsxs8(SidebarGroup, { children: [
-    /* @__PURE__ */ jsx17(SidebarGroupLabel, { children: groupLabels[group] || group }),
+    /* @__PURE__ */ jsx17(SidebarGroupLabel, { children: mergedGroupLabels[group] || group }),
     /* @__PURE__ */ jsx17(SidebarGroupContent, { children: /* @__PURE__ */ jsx17(SidebarMenu, { children: renderTreeView(items, selectedKey) }) })
   ] }, group)) });
 }

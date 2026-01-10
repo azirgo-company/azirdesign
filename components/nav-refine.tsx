@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { CanAccess, ITreeMenu, useMenu } from "@refinedev/core";
-import { cn } from "../src/lib/utils";
-import { Link } from "./link";
-import { Collapsible, CollapsibleTrigger } from "./ui/collapsible";
+import { CanAccess, ITreeMenu, useMenu } from "@refinedev/core"
+import { cn } from "../src/lib/utils"
+import { Link } from "./link"
+import { Collapsible, CollapsibleTrigger } from "./ui/collapsible"
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -11,15 +11,19 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "./ui/sidebar";
+} from "./ui/sidebar"
 
-export function NavRefine() {
-  const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
+export interface NavRefineProps {
+  groupLabels?: { [key: string]: string }
+}
+
+export function NavRefine({ groupLabels }: NavRefineProps) {
+  const { menuItems, selectedKey, defaultOpenKeys } = useMenu()
 
   const renderTreeView = (tree: ITreeMenu[], selectedKey: string) => {
     return tree.map((item, key) => {
-      const { list, meta } = item;
-      const isSelected = item.key === selectedKey;
+      const { list, meta } = item
+      const isSelected = item.key === selectedKey
       return (
         <CanAccess key={key} resource={item.name} action="list">
           <Collapsible
@@ -47,37 +51,35 @@ export function NavRefine() {
             </SidebarMenuItem>
           </Collapsible>
         </CanAccess>
-      );
-    });
-  };
+      )
+    })
+  }
 
   // Group items by meta.group
-  const groups: { [key: string]: ITreeMenu[] } = {};
+  const groups: { [key: string]: ITreeMenu[] } = {}
   menuItems.forEach((item) => {
-    const group = item.meta?.group || "otros";
-    if (!groups[group]) groups[group] = [];
-    groups[group].push(item);
-  });
+    const group = item.meta?.group || "otros"
+    if (!groups[group]) groups[group] = []
+    groups[group].push(item)
+  })
 
-  const groupLabels: { [key: string]: string } = {
+  const defaultGroupLabels: { [key: string]: string } = {
     dashboard: "Dashboard",
-    principales: "Principales",
-    payments: "Pagos",
-    app: "Aplicación",
-    otros: "Otros",
-    users: "Usuarios",
-  };
+  }
+  const mergedGroupLabels = { ...defaultGroupLabels, ...groupLabels }
 
   return (
     <div className="mb-10">
       {Object.entries(groups).map(([group, items]) => (
         <SidebarGroup key={group}>
-          <SidebarGroupLabel>{groupLabels[group] || group}</SidebarGroupLabel>
+          <SidebarGroupLabel>
+            {mergedGroupLabels[group] || group}
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>{renderTreeView(items, selectedKey)}</SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       ))}
     </div>
-  );
+  )
 }

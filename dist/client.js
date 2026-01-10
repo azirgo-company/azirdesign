@@ -2112,7 +2112,7 @@ function CollapsibleContent2({
 
 // components/nav-refine.tsx
 var import_jsx_runtime17 = require("react/jsx-runtime");
-function NavRefine() {
+function NavRefine({ groupLabels }) {
   const { menuItems, selectedKey, defaultOpenKeys } = (0, import_core3.useMenu)();
   const renderTreeView = (tree, selectedKey2) => {
     return tree.map((item, key) => {
@@ -2154,16 +2154,12 @@ function NavRefine() {
     if (!groups[group]) groups[group] = [];
     groups[group].push(item);
   });
-  const groupLabels = {
-    dashboard: "Dashboard",
-    principales: "Principales",
-    payments: "Pagos",
-    app: "Aplicaci\xF3n",
-    otros: "Otros",
-    users: "Usuarios"
+  const defaultGroupLabels = {
+    dashboard: "Dashboard"
   };
+  const mergedGroupLabels = { ...defaultGroupLabels, ...groupLabels };
   return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "mb-10", children: Object.entries(groups).map(([group, items]) => /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(SidebarGroup, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(SidebarGroupLabel, { children: groupLabels[group] || group }),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(SidebarGroupLabel, { children: mergedGroupLabels[group] || group }),
     /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(SidebarGroupContent, { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(SidebarMenu, { children: renderTreeView(items, selectedKey) }) })
   ] }, group)) });
 }
