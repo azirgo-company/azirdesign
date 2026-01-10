@@ -752,839 +752,28 @@ function AddCardForm({ user }) {
 }
 var add_card_form_default = AddCardForm;
 
-// components/ui/sidebar.tsx
-var React3 = __toESM(require("react"));
-var import_class_variance_authority2 = require("class-variance-authority");
-var import_lucide_react5 = require("lucide-react");
-
-// components/ui/sheet.tsx
-var SheetPrimitive = __toESM(require("@radix-ui/react-dialog"));
-var import_lucide_react4 = require("lucide-react");
-var import_jsx_runtime7 = require("react/jsx-runtime");
-function Sheet({ ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
-}
-function SheetTrigger({
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
-}
-function SheetClose({
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(SheetPrimitive.Close, { "data-slot": "sheet-close", ...props });
-}
-function SheetPortal({
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
-}
-function SheetOverlay({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    SheetPrimitive.Overlay,
-    {
-      "data-slot": "sheet-overlay",
-      className: cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SheetContent({
-  className,
-  children,
-  side = "right",
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(SheetPortal, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(SheetOverlay, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
-      SheetPrimitive.Content,
-      {
-        "data-slot": "sheet-content",
-        className: cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
-          side === "right" && "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
-          side === "left" && "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
-          side === "top" && "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b",
-          side === "bottom" && "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t",
-          className
-        ),
-        ...props,
-        children: [
-          children,
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(SheetPrimitive.Close, { className: "ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(import_lucide_react4.XIcon, { className: "size-4" }),
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "sr-only", children: "Close" })
-          ] })
-        ]
-      }
-    )
-  ] });
-}
-function SheetHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    "div",
-    {
-      "data-slot": "sheet-header",
-      className: cn("flex flex-col gap-1.5 p-4", className),
-      ...props
-    }
-  );
-}
-function SheetFooter({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    "div",
-    {
-      "data-slot": "sheet-footer",
-      className: cn("mt-auto flex flex-col gap-2 p-4", className),
-      ...props
-    }
-  );
-}
-function SheetTitle({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    SheetPrimitive.Title,
-    {
-      "data-slot": "sheet-title",
-      className: cn("text-foreground font-semibold", className),
-      ...props
-    }
-  );
-}
-function SheetDescription({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    SheetPrimitive.Description,
-    {
-      "data-slot": "sheet-description",
-      className: cn("text-muted-foreground text-sm", className),
-      ...props
-    }
-  );
-}
-
-// components/hooks/use-mobile.ts
-var React2 = __toESM(require("react"));
-var MOBILE_BREAKPOINT = 768;
-function useIsMobile() {
-  const [isMobile, setIsMobile] = React2.useState(void 0);
-  React2.useEffect(() => {
-    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
-    const onChange = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-    };
-    mql.addEventListener("change", onChange);
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
-    return () => mql.removeEventListener("change", onChange);
-  }, []);
-  return !!isMobile;
-}
-
-// components/ui/sidebar.tsx
-var import_react_slot2 = require("@radix-ui/react-slot");
-var import_react_tooltip = require("@radix-ui/react-tooltip");
-
-// components/ui/skeleton.tsx
-var import_jsx_runtime8 = require("react/jsx-runtime");
-function Skeleton({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-    "div",
-    {
-      "data-slot": "skeleton",
-      className: cn("bg-accent animate-pulse rounded-md", className),
-      ...props
-    }
-  );
-}
-
-// components/ui/separator.tsx
-var SeparatorPrimitive = __toESM(require("@radix-ui/react-separator"));
-var import_jsx_runtime9 = require("react/jsx-runtime");
-function Separator2({
-  className,
-  orientation = "horizontal",
-  decorative = true,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
-    SeparatorPrimitive.Root,
-    {
-      "data-slot": "separator",
-      decorative,
-      orientation,
-      className: cn(
-        "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
-        className
-      ),
-      ...props
-    }
-  );
-}
-
-// components/ui/input.tsx
-var import_jsx_runtime10 = require("react/jsx-runtime");
-function Input({ className, type, float, onChange, ...props }) {
-  const handleChange = (event) => {
-    if (float && event.target.value) {
-      const numericValue = parseFloat(event.target.value);
-      if (!isNaN(numericValue)) {
-        event.target.value = numericValue.toString();
-      }
-    }
-    onChange?.(event);
-  };
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
-    "input",
-    {
-      type,
-      "data-slot": "input",
-      className: cn(
-        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
-        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
-        className
-      ),
-      onChange: handleChange,
-      ...props
-    }
-  );
-}
-
-// components/ui/sidebar.tsx
-var import_jsx_runtime11 = require("react/jsx-runtime");
-var SIDEBAR_COOKIE_NAME = "sidebar_state";
-var SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-var SIDEBAR_WIDTH = "16rem";
-var SIDEBAR_WIDTH_MOBILE = "18rem";
-var SIDEBAR_WIDTH_ICON = "3rem";
-var SIDEBAR_KEYBOARD_SHORTCUT = "b";
-var SidebarContext = React3.createContext(null);
-function useSidebar() {
-  const context = React3.useContext(SidebarContext);
-  if (!context) {
-    throw new Error("useSidebar must be used within a SidebarProvider.");
-  }
-  return context;
-}
-function SidebarProvider({
-  defaultOpen = true,
-  open: openProp,
-  onOpenChange: setOpenProp,
-  className,
-  style,
-  children,
-  ...props
-}) {
-  const isMobile = useIsMobile();
-  const [openMobile, setOpenMobile] = React3.useState(false);
-  const [_open, _setOpen] = React3.useState(defaultOpen);
-  const open = openProp ?? _open;
-  const setOpen = React3.useCallback(
-    (value) => {
-      const openState = typeof value === "function" ? value(open) : value;
-      if (setOpenProp) {
-        setOpenProp(openState);
-      } else {
-        _setOpen(openState);
-      }
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
-    },
-    [setOpenProp, open]
-  );
-  const toggleSidebar = React3.useCallback(() => {
-    return isMobile ? setOpenMobile((open2) => !open2) : setOpen((open2) => !open2);
-  }, [isMobile, setOpen, setOpenMobile]);
-  React3.useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
-        event.preventDefault();
-        toggleSidebar();
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [toggleSidebar]);
-  const state = open ? "expanded" : "collapsed";
-  const contextValue = React3.useMemo(
-    () => ({
-      state,
-      open,
-      setOpen,
-      isMobile,
-      openMobile,
-      setOpenMobile,
-      toggleSidebar
-    }),
-    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
-  );
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(SidebarContext.Provider, { value: contextValue, children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_react_tooltip.TooltipProvider, { delayDuration: 0, children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "div",
-    {
-      "data-slot": "sidebar-wrapper",
-      style: {
-        "--sidebar-width": SIDEBAR_WIDTH,
-        "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
-        ...style
-      },
-      className: cn(
-        "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
-        className
-      ),
-      ...props,
-      children
-    }
-  ) }) });
-}
-function Sidebar({
-  side = "left",
-  variant = "sidebar",
-  collapsible = "offcanvas",
-  className,
-  children,
-  ...props
-}) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
-  if (collapsible === "none") {
-    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-      "div",
-      {
-        "data-slot": "sidebar",
-        className: cn(
-          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col",
-          className
-        ),
-        ...props,
-        children
-      }
-    );
-  }
-  if (isMobile) {
-    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Sheet, { open: openMobile, onOpenChange: setOpenMobile, ...props, children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
-      SheetContent,
-      {
-        "data-sidebar": "sidebar",
-        "data-slot": "sidebar",
-        "data-mobile": "true",
-        className: "bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden",
-        style: {
-          "--sidebar-width": SIDEBAR_WIDTH_MOBILE
-        },
-        side,
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(SheetHeader, { className: "sr-only", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(SheetTitle, { children: "Sidebar" }),
-            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(SheetDescription, { children: "Displays the mobile sidebar." })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "flex h-full w-full flex-col", children })
-        ]
-      }
-    ) });
-  }
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
-    "div",
-    {
-      className: "group peer text-sidebar-foreground hidden md:block",
-      "data-state": state,
-      "data-collapsible": state === "collapsed" ? collapsible : "",
-      "data-variant": variant,
-      "data-side": side,
-      "data-slot": "sidebar",
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-          "div",
-          {
-            "data-slot": "sidebar-gap",
-            className: cn(
-              "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear",
-              "group-data-[collapsible=offcanvas]:w-0",
-              "group-data-[side=right]:rotate-180",
-              variant === "floating" || variant === "inset" ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]" : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
-            )
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-          "div",
-          {
-            "data-slot": "sidebar-container",
-            className: cn(
-              "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex",
-              side === "left" ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]" : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
-              // Adjust the padding for floating and inset variants.
-              variant === "floating" || variant === "inset" ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]" : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
-              className
-            ),
-            ...props,
-            children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-              "div",
-              {
-                "data-sidebar": "sidebar",
-                "data-slot": "sidebar-inner",
-                className: "bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm",
-                children
-              }
-            )
-          }
-        )
-      ]
-    }
-  );
-}
-function SidebarTrigger({
-  className,
-  onClick,
-  ...props
-}) {
-  const { toggleSidebar } = useSidebar();
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
-    Button,
-    {
-      "data-sidebar": "trigger",
-      "data-slot": "sidebar-trigger",
-      variant: "ghost",
-      size: "icon",
-      className: cn("size-7", className),
-      onClick: (event) => {
-        onClick?.(event);
-        toggleSidebar();
-      },
-      ...props,
-      children: [
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_lucide_react5.PanelLeftIcon, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "sr-only", children: "Toggle Sidebar" })
-      ]
-    }
-  );
-}
-function SidebarRail({ className, ...props }) {
-  const { toggleSidebar } = useSidebar();
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "button",
-    {
-      "data-sidebar": "rail",
-      "data-slot": "sidebar-rail",
-      "aria-label": "Toggle Sidebar",
-      tabIndex: -1,
-      onClick: toggleSidebar,
-      title: "Toggle Sidebar",
-      className: cn(
-        "hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] sm:flex",
-        "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",
-        "[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize",
-        "hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full",
-        "[[data-side=left][data-collapsible=offcanvas]_&]:-right-2",
-        "[[data-side=right][data-collapsible=offcanvas]_&]:-left-2",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SidebarInset({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "main",
-    {
-      "data-slot": "sidebar-inset",
-      className: cn(
-        "bg-background relative flex w-full flex-1 flex-col",
-        "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SidebarInput({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    Input,
-    {
-      "data-slot": "sidebar-input",
-      "data-sidebar": "input",
-      className: cn("bg-background h-8 w-full shadow-none", className),
-      ...props
-    }
-  );
-}
-function SidebarHeader({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "div",
-    {
-      "data-slot": "sidebar-header",
-      "data-sidebar": "header",
-      className: cn("flex flex-col gap-2 p-2", className),
-      ...props
-    }
-  );
-}
-function SidebarFooter({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "div",
-    {
-      "data-slot": "sidebar-footer",
-      "data-sidebar": "footer",
-      className: cn("flex flex-col gap-2 p-2", className),
-      ...props
-    }
-  );
-}
-function SidebarSeparator({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    Separator2,
-    {
-      "data-slot": "sidebar-separator",
-      "data-sidebar": "separator",
-      className: cn("bg-sidebar-border mx-2 w-auto", className),
-      ...props
-    }
-  );
-}
-function SidebarContent({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "div",
-    {
-      "data-slot": "sidebar-content",
-      "data-sidebar": "content",
-      className: cn(
-        "flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SidebarGroup({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "div",
-    {
-      "data-slot": "sidebar-group",
-      "data-sidebar": "group",
-      className: cn("relative flex w-full min-w-0 flex-col p-2", className),
-      ...props
-    }
-  );
-}
-function SidebarGroupLabel({
-  className,
-  asChild = false,
-  ...props
-}) {
-  const Comp = asChild ? import_react_slot2.Slot : "div";
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    Comp,
-    {
-      "data-slot": "sidebar-group-label",
-      "data-sidebar": "group-label",
-      className: cn(
-        "text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
-        "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SidebarGroupAction({
-  className,
-  asChild = false,
-  ...props
-}) {
-  const Comp = asChild ? import_react_slot2.Slot : "button";
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    Comp,
-    {
-      "data-slot": "sidebar-group-action",
-      "data-sidebar": "group-action",
-      className: cn(
-        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
-        // Increases the hit area of the button on mobile.
-        "after:absolute after:-inset-2 md:after:hidden",
-        "group-data-[collapsible=icon]:hidden",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SidebarGroupContent({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "div",
-    {
-      "data-slot": "sidebar-group-content",
-      "data-sidebar": "group-content",
-      className: cn("w-full text-sm", className),
-      ...props
-    }
-  );
-}
-function SidebarMenu({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "ul",
-    {
-      "data-slot": "sidebar-menu",
-      "data-sidebar": "menu",
-      className: cn("flex w-full min-w-0 flex-col gap-1", className),
-      ...props
-    }
-  );
-}
-function SidebarMenuItem({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "li",
-    {
-      "data-slot": "sidebar-menu-item",
-      "data-sidebar": "menu-item",
-      className: cn("group/menu-item relative", className),
-      ...props
-    }
-  );
-}
-var sidebarMenuButtonVariants = (0, import_class_variance_authority2.cva)(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
-        outline: "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]"
-      },
-      size: {
-        default: "h-8 text-sm",
-        sm: "h-7 text-xs",
-        lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!"
-      }
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default"
-    }
-  }
-);
-function SidebarMenuButton({
-  asChild = false,
-  isActive = false,
-  variant = "default",
-  size = "default",
-  tooltip,
-  className,
-  ...props
-}) {
-  const Comp = asChild ? import_react_slot2.Slot : "button";
-  const { isMobile, state } = useSidebar();
-  const button = /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    Comp,
-    {
-      "data-slot": "sidebar-menu-button",
-      "data-sidebar": "menu-button",
-      "data-size": size,
-      "data-active": isActive,
-      className: cn(sidebarMenuButtonVariants({ variant, size }), className),
-      ...props
-    }
-  );
-  if (!tooltip) {
-    return button;
-  }
-  if (typeof tooltip === "string") {
-    tooltip = {
-      children: tooltip
-    };
-  }
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(import_react_tooltip.Tooltip, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(import_react_tooltip.TooltipTrigger, { asChild: true, children: button }),
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-      import_react_tooltip.TooltipContent,
-      {
-        side: "right",
-        align: "center",
-        hidden: state !== "collapsed" || isMobile,
-        ...tooltip
-      }
-    )
-  ] });
-}
-function SidebarMenuAction({
-  className,
-  asChild = false,
-  showOnHover = false,
-  ...props
-}) {
-  const Comp = asChild ? import_react_slot2.Slot : "button";
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    Comp,
-    {
-      "data-slot": "sidebar-menu-action",
-      "data-sidebar": "menu-action",
-      className: cn(
-        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer-hover/menu-button:text-sidebar-accent-foreground absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
-        // Increases the hit area of the button on mobile.
-        "after:absolute after:-inset-2 md:after:hidden",
-        "peer-data-[size=sm]/menu-button:top-1",
-        "peer-data-[size=default]/menu-button:top-1.5",
-        "peer-data-[size=lg]/menu-button:top-2.5",
-        "group-data-[collapsible=icon]:hidden",
-        showOnHover && "peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SidebarMenuBadge({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "div",
-    {
-      "data-slot": "sidebar-menu-badge",
-      "data-sidebar": "menu-badge",
-      className: cn(
-        "text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none",
-        "peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground",
-        "peer-data-[size=sm]/menu-button:top-1",
-        "peer-data-[size=default]/menu-button:top-1.5",
-        "peer-data-[size=lg]/menu-button:top-2.5",
-        "group-data-[collapsible=icon]:hidden",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SidebarMenuSkeleton({
-  className,
-  showIcon = false,
-  ...props
-}) {
-  const width = React3.useMemo(() => {
-    return `${Math.floor(Math.random() * 40) + 50}%`;
-  }, []);
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
-    "div",
-    {
-      "data-slot": "sidebar-menu-skeleton",
-      "data-sidebar": "menu-skeleton",
-      className: cn("flex h-8 items-center gap-2 rounded-md px-2", className),
-      ...props,
-      children: [
-        showIcon && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-          Skeleton,
-          {
-            className: "size-4 rounded-md",
-            "data-sidebar": "menu-skeleton-icon"
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-          Skeleton,
-          {
-            className: "h-4 max-w-(--skeleton-width) flex-1",
-            "data-sidebar": "menu-skeleton-text",
-            style: {
-              "--skeleton-width": width
-            }
-          }
-        )
-      ]
-    }
-  );
-}
-function SidebarMenuSub({ className, ...props }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "ul",
-    {
-      "data-slot": "sidebar-menu-sub",
-      "data-sidebar": "menu-sub",
-      className: cn(
-        "border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5",
-        "group-data-[collapsible=icon]:hidden",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SidebarMenuSubItem({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    "li",
-    {
-      "data-slot": "sidebar-menu-sub-item",
-      "data-sidebar": "menu-sub-item",
-      className: cn("group/menu-sub-item relative", className),
-      ...props
-    }
-  );
-}
-function SidebarMenuSubButton({
-  asChild = false,
-  size = "md",
-  isActive = false,
-  className,
-  ...props
-}) {
-  const Comp = asChild ? import_react_slot2.Slot : "a";
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
-    Comp,
-    {
-      "data-slot": "sidebar-menu-sub-button",
-      "data-sidebar": "menu-sub-button",
-      "data-size": size,
-      "data-active": isActive,
-      className: cn(
-        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
-        "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
-        size === "sm" && "text-xs",
-        size === "md" && "text-sm",
-        "group-data-[collapsible=icon]:hidden",
-        className
-      ),
-      ...props
-    }
-  );
-}
-
 // components/nav-refine.tsx
 var import_core3 = require("@refinedev/core");
 
 // components/link.tsx
 var import_react2 = require("react");
 var import_core2 = require("@refinedev/core");
-var import_react_slot3 = require("@radix-ui/react-slot");
-var import_jsx_runtime12 = require("react/jsx-runtime");
+var import_react_slot2 = require("@radix-ui/react-slot");
+var import_jsx_runtime7 = require("react/jsx-runtime");
 var Link = (0, import_react2.forwardRef)(
   ({ children, href, title, className, asChild }, ref) => {
     const { Link: LegacyLink } = (0, import_core2.useRouterContext)();
     const routerType = (0, import_core2.useRouterType)();
     const Link2 = (0, import_core2.useLink)();
     const ActiveLink = routerType === "legacy" ? LegacyLink : Link2;
-    const Comp = asChild ? import_react_slot3.Slot : ActiveLink;
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Comp, { ref, to: href, className, title, children });
+    const Comp = asChild ? import_react_slot2.Slot : ActiveLink;
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Comp, { ref, to: href, className, title, children });
   }
 );
 Link.displayName = "Link";
 
 // node_modules/@radix-ui/react-collapsible/dist/index.mjs
-var React11 = __toESM(require("react"), 1);
+var React9 = __toESM(require("react"), 1);
 
 // node_modules/@radix-ui/primitive/dist/index.mjs
 var canUseDOM = !!(typeof window !== "undefined" && window.document && window.document.createElement);
@@ -1598,24 +787,24 @@ function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForD
 }
 
 // node_modules/@radix-ui/react-context/dist/index.mjs
-var React4 = __toESM(require("react"), 1);
-var import_jsx_runtime13 = require("react/jsx-runtime");
+var React2 = __toESM(require("react"), 1);
+var import_jsx_runtime8 = require("react/jsx-runtime");
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
   function createContext32(rootComponentName, defaultContext) {
-    const BaseContext = React4.createContext(defaultContext);
+    const BaseContext = React2.createContext(defaultContext);
     const index = defaultContexts.length;
     defaultContexts = [...defaultContexts, defaultContext];
     const Provider2 = (props) => {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
-      const value = React4.useMemo(() => context, Object.values(context));
-      return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Context.Provider, { value, children });
+      const value = React2.useMemo(() => context, Object.values(context));
+      return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Context.Provider, { value, children });
     };
     Provider2.displayName = rootComponentName + "Provider";
     function useContext22(consumerName, scope) {
       const Context = scope?.[scopeName]?.[index] || BaseContext;
-      const context = React4.useContext(Context);
+      const context = React2.useContext(Context);
       if (context) return context;
       if (defaultContext !== void 0) return defaultContext;
       throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
@@ -1624,11 +813,11 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
   }
   const createScope = () => {
     const scopeContexts = defaultContexts.map((defaultContext) => {
-      return React4.createContext(defaultContext);
+      return React2.createContext(defaultContext);
     });
     return function useScope(scope) {
       const contexts = scope?.[scopeName] || scopeContexts;
-      return React4.useMemo(
+      return React2.useMemo(
         () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
         [scope, contexts]
       );
@@ -1651,7 +840,7 @@ function composeContextScopes(...scopes) {
         const currentScope = scopeProps[`__scope${scopeName}`];
         return { ...nextScopes2, ...currentScope };
       }, {});
-      return React4.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+      return React2.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
     };
   };
   createScope.scopeName = baseScope.scopeName;
@@ -1659,16 +848,16 @@ function composeContextScopes(...scopes) {
 }
 
 // node_modules/@radix-ui/react-use-controllable-state/dist/index.mjs
-var React6 = __toESM(require("react"), 1);
+var React4 = __toESM(require("react"), 1);
 
 // node_modules/@radix-ui/react-use-layout-effect/dist/index.mjs
-var React5 = __toESM(require("react"), 1);
-var useLayoutEffect2 = globalThis?.document ? React5.useLayoutEffect : () => {
+var React3 = __toESM(require("react"), 1);
+var useLayoutEffect2 = globalThis?.document ? React3.useLayoutEffect : () => {
 };
 
 // node_modules/@radix-ui/react-use-controllable-state/dist/index.mjs
 var React22 = __toESM(require("react"), 1);
-var useInsertionEffect = React6[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
+var useInsertionEffect = React4[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
 function useControllableState({
   prop,
   defaultProp,
@@ -1683,8 +872,8 @@ function useControllableState({
   const isControlled = prop !== void 0;
   const value = isControlled ? prop : uncontrolledProp;
   if (true) {
-    const isControlledRef = React6.useRef(prop !== void 0);
-    React6.useEffect(() => {
+    const isControlledRef = React4.useRef(prop !== void 0);
+    React4.useEffect(() => {
       const wasControlled = isControlledRef.current;
       if (wasControlled !== isControlled) {
         const from = wasControlled ? "controlled" : "uncontrolled";
@@ -1696,7 +885,7 @@ function useControllableState({
       isControlledRef.current = isControlled;
     }, [isControlled, caller]);
   }
-  const setValue = React6.useCallback(
+  const setValue = React4.useCallback(
     (nextValue) => {
       if (isControlled) {
         const value2 = isFunction(nextValue) ? nextValue(prop) : nextValue;
@@ -1715,13 +904,13 @@ function useUncontrolledState({
   defaultProp,
   onChange
 }) {
-  const [value, setValue] = React6.useState(defaultProp);
-  const prevValueRef = React6.useRef(value);
-  const onChangeRef = React6.useRef(onChange);
+  const [value, setValue] = React4.useState(defaultProp);
+  const prevValueRef = React4.useRef(value);
+  const onChangeRef = React4.useRef(onChange);
   useInsertionEffect(() => {
     onChangeRef.current = onChange;
   }, [onChange]);
-  React6.useEffect(() => {
+  React4.useEffect(() => {
     if (prevValueRef.current !== value) {
       onChangeRef.current?.(value);
       prevValueRef.current = value;
@@ -1735,7 +924,7 @@ function isFunction(value) {
 var SYNC_STATE = Symbol("RADIX:SYNC_STATE");
 
 // node_modules/@radix-ui/react-compose-refs/dist/index.mjs
-var React7 = __toESM(require("react"), 1);
+var React5 = __toESM(require("react"), 1);
 function setRef(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -1768,14 +957,14 @@ function composeRefs(...refs) {
   };
 }
 function useComposedRefs(...refs) {
-  return React7.useCallback(composeRefs(...refs), refs);
+  return React5.useCallback(composeRefs(...refs), refs);
 }
 
 // node_modules/@radix-ui/react-primitive/dist/index.mjs
-var React8 = __toESM(require("react"), 1);
+var React6 = __toESM(require("react"), 1);
 var ReactDOM = __toESM(require("react-dom"), 1);
-var import_react_slot4 = require("@radix-ui/react-slot");
-var import_jsx_runtime14 = require("react/jsx-runtime");
+var import_react_slot3 = require("@radix-ui/react-slot");
+var import_jsx_runtime9 = require("react/jsx-runtime");
 var NODES = [
   "a",
   "button",
@@ -1796,14 +985,14 @@ var NODES = [
   "ul"
 ];
 var Primitive = NODES.reduce((primitive, node) => {
-  const Slot7 = (0, import_react_slot4.createSlot)(`Primitive.${node}`);
-  const Node = React8.forwardRef((props, forwardedRef) => {
+  const Slot7 = (0, import_react_slot3.createSlot)(`Primitive.${node}`);
+  const Node = React6.forwardRef((props, forwardedRef) => {
     const { asChild, ...primitiveProps } = props;
     const Comp = asChild ? Slot7 : node;
     if (typeof window !== "undefined") {
       window[Symbol.for("radix-ui")] = true;
     }
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Comp, { ...primitiveProps, ref: forwardedRef });
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Comp, { ...primitiveProps, ref: forwardedRef });
   });
   Node.displayName = `Primitive.${node}`;
   return { ...primitive, [node]: Node };
@@ -1811,9 +1000,9 @@ var Primitive = NODES.reduce((primitive, node) => {
 
 // node_modules/@radix-ui/react-presence/dist/index.mjs
 var React23 = __toESM(require("react"), 1);
-var React9 = __toESM(require("react"), 1);
+var React7 = __toESM(require("react"), 1);
 function useStateMachine(initialState, machine) {
-  return React9.useReducer((state, event) => {
+  return React7.useReducer((state, event) => {
     const nextState = machine[state][event];
     return nextState ?? state;
   }, initialState);
@@ -1936,11 +1125,11 @@ function getElementRef(element) {
 }
 
 // node_modules/@radix-ui/react-id/dist/index.mjs
-var React10 = __toESM(require("react"), 1);
-var useReactId = React10[" useId ".trim().toString()] || (() => void 0);
+var React8 = __toESM(require("react"), 1);
+var useReactId = React8[" useId ".trim().toString()] || (() => void 0);
 var count = 0;
 function useId(deterministicId) {
-  const [id, setId] = React10.useState(useReactId());
+  const [id, setId] = React8.useState(useReactId());
   useLayoutEffect2(() => {
     if (!deterministicId) setId((reactId) => reactId ?? String(count++));
   }, [deterministicId]);
@@ -1948,11 +1137,11 @@ function useId(deterministicId) {
 }
 
 // node_modules/@radix-ui/react-collapsible/dist/index.mjs
-var import_jsx_runtime15 = require("react/jsx-runtime");
+var import_jsx_runtime10 = require("react/jsx-runtime");
 var COLLAPSIBLE_NAME = "Collapsible";
 var [createCollapsibleContext, createCollapsibleScope] = createContextScope(COLLAPSIBLE_NAME);
 var [CollapsibleProvider, useCollapsibleContext] = createCollapsibleContext(COLLAPSIBLE_NAME);
-var Collapsible = React11.forwardRef(
+var Collapsible = React9.forwardRef(
   (props, forwardedRef) => {
     const {
       __scopeCollapsible,
@@ -1968,15 +1157,15 @@ var Collapsible = React11.forwardRef(
       onChange: onOpenChange,
       caller: COLLAPSIBLE_NAME
     });
-    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
       CollapsibleProvider,
       {
         scope: __scopeCollapsible,
         disabled,
         contentId: useId(),
         open,
-        onOpenToggle: React11.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-        children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+        onOpenToggle: React9.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
+        children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           Primitive.div,
           {
             "data-state": getState(open),
@@ -1991,11 +1180,11 @@ var Collapsible = React11.forwardRef(
 );
 Collapsible.displayName = COLLAPSIBLE_NAME;
 var TRIGGER_NAME = "CollapsibleTrigger";
-var CollapsibleTrigger = React11.forwardRef(
+var CollapsibleTrigger = React9.forwardRef(
   (props, forwardedRef) => {
     const { __scopeCollapsible, ...triggerProps } = props;
     const context = useCollapsibleContext(TRIGGER_NAME, __scopeCollapsible);
-    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
       Primitive.button,
       {
         type: "button",
@@ -2013,28 +1202,28 @@ var CollapsibleTrigger = React11.forwardRef(
 );
 CollapsibleTrigger.displayName = TRIGGER_NAME;
 var CONTENT_NAME = "CollapsibleContent";
-var CollapsibleContent = React11.forwardRef(
+var CollapsibleContent = React9.forwardRef(
   (props, forwardedRef) => {
     const { forceMount, ...contentProps } = props;
     const context = useCollapsibleContext(CONTENT_NAME, props.__scopeCollapsible);
-    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Presence, { present: forceMount || context.open, children: ({ present }) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(CollapsibleContentImpl, { ...contentProps, ref: forwardedRef, present }) });
   }
 );
 CollapsibleContent.displayName = CONTENT_NAME;
-var CollapsibleContentImpl = React11.forwardRef((props, forwardedRef) => {
+var CollapsibleContentImpl = React9.forwardRef((props, forwardedRef) => {
   const { __scopeCollapsible, present, children, ...contentProps } = props;
   const context = useCollapsibleContext(CONTENT_NAME, __scopeCollapsible);
-  const [isPresent, setIsPresent] = React11.useState(present);
-  const ref = React11.useRef(null);
+  const [isPresent, setIsPresent] = React9.useState(present);
+  const ref = React9.useRef(null);
   const composedRefs = useComposedRefs(forwardedRef, ref);
-  const heightRef = React11.useRef(0);
+  const heightRef = React9.useRef(0);
   const height = heightRef.current;
-  const widthRef = React11.useRef(0);
+  const widthRef = React9.useRef(0);
   const width = widthRef.current;
   const isOpen = context.open || isPresent;
-  const isMountAnimationPreventedRef = React11.useRef(isOpen);
-  const originalStylesRef = React11.useRef(void 0);
-  React11.useEffect(() => {
+  const isMountAnimationPreventedRef = React9.useRef(isOpen);
+  const originalStylesRef = React9.useRef(void 0);
+  React9.useEffect(() => {
     const rAF = requestAnimationFrame(() => isMountAnimationPreventedRef.current = false);
     return () => cancelAnimationFrame(rAF);
   }, []);
@@ -2057,7 +1246,7 @@ var CollapsibleContentImpl = React11.forwardRef((props, forwardedRef) => {
       setIsPresent(present);
     }
   }, [context.open, present]);
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
     Primitive.div,
     {
       "data-state": getState(context.open),
@@ -2078,19 +1267,19 @@ var CollapsibleContentImpl = React11.forwardRef((props, forwardedRef) => {
 function getState(open) {
   return open ? "open" : "closed";
 }
-var Root5 = Collapsible;
+var Root3 = Collapsible;
 
 // components/ui/collapsible.tsx
-var import_jsx_runtime16 = require("react/jsx-runtime");
+var import_jsx_runtime11 = require("react/jsx-runtime");
 function Collapsible2({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Root5, { "data-slot": "collapsible", ...props });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Root3, { "data-slot": "collapsible", ...props });
 }
 function CollapsibleTrigger2({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     CollapsibleTrigger,
     {
       "data-slot": "collapsible-trigger",
@@ -2101,10 +1290,821 @@ function CollapsibleTrigger2({
 function CollapsibleContent2({
   ...props
 }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
     CollapsibleContent,
     {
       "data-slot": "collapsible-content",
+      ...props
+    }
+  );
+}
+
+// components/ui/sidebar.tsx
+var React11 = __toESM(require("react"));
+var import_class_variance_authority2 = require("class-variance-authority");
+var import_lucide_react5 = require("lucide-react");
+
+// components/ui/sheet.tsx
+var SheetPrimitive = __toESM(require("@radix-ui/react-dialog"));
+var import_lucide_react4 = require("lucide-react");
+var import_jsx_runtime12 = require("react/jsx-runtime");
+function Sheet({ ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(SheetPrimitive.Root, { "data-slot": "sheet", ...props });
+}
+function SheetTrigger({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(SheetPrimitive.Trigger, { "data-slot": "sheet-trigger", ...props });
+}
+function SheetClose({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(SheetPrimitive.Close, { "data-slot": "sheet-close", ...props });
+}
+function SheetPortal({
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(SheetPrimitive.Portal, { "data-slot": "sheet-portal", ...props });
+}
+function SheetOverlay({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    SheetPrimitive.Overlay,
+    {
+      "data-slot": "sheet-overlay",
+      className: cn(
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SheetContent({
+  className,
+  children,
+  side = "right",
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(SheetPortal, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(SheetOverlay, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+      SheetPrimitive.Content,
+      {
+        "data-slot": "sheet-content",
+        className: cn(
+          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
+          side === "right" && "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
+          side === "left" && "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
+          side === "top" && "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b",
+          side === "bottom" && "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t",
+          className
+        ),
+        ...props,
+        children: [
+          children,
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(SheetPrimitive.Close, { className: "ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(import_lucide_react4.XIcon, { className: "size-4" }),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "sr-only", children: "Close" })
+          ] })
+        ]
+      }
+    )
+  ] });
+}
+function SheetHeader({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    "div",
+    {
+      "data-slot": "sheet-header",
+      className: cn("flex flex-col gap-1.5 p-4", className),
+      ...props
+    }
+  );
+}
+function SheetFooter({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    "div",
+    {
+      "data-slot": "sheet-footer",
+      className: cn("mt-auto flex flex-col gap-2 p-4", className),
+      ...props
+    }
+  );
+}
+function SheetTitle({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    SheetPrimitive.Title,
+    {
+      "data-slot": "sheet-title",
+      className: cn("text-foreground font-semibold", className),
+      ...props
+    }
+  );
+}
+function SheetDescription({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+    SheetPrimitive.Description,
+    {
+      "data-slot": "sheet-description",
+      className: cn("text-muted-foreground text-sm", className),
+      ...props
+    }
+  );
+}
+
+// components/hooks/use-mobile.ts
+var React10 = __toESM(require("react"));
+var MOBILE_BREAKPOINT = 768;
+function useIsMobile() {
+  const [isMobile, setIsMobile] = React10.useState(void 0);
+  React10.useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const onChange = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
+    mql.addEventListener("change", onChange);
+    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+  return !!isMobile;
+}
+
+// components/ui/sidebar.tsx
+var import_react_slot4 = require("@radix-ui/react-slot");
+var import_react_tooltip = require("@radix-ui/react-tooltip");
+
+// components/ui/skeleton.tsx
+var import_jsx_runtime13 = require("react/jsx-runtime");
+function Skeleton({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+    "div",
+    {
+      "data-slot": "skeleton",
+      className: cn("bg-accent animate-pulse rounded-md", className),
+      ...props
+    }
+  );
+}
+
+// components/ui/separator.tsx
+var SeparatorPrimitive = __toESM(require("@radix-ui/react-separator"));
+var import_jsx_runtime14 = require("react/jsx-runtime");
+function Separator2({
+  className,
+  orientation = "horizontal",
+  decorative = true,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
+    SeparatorPrimitive.Root,
+    {
+      "data-slot": "separator",
+      decorative,
+      orientation,
+      className: cn(
+        "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
+        className
+      ),
+      ...props
+    }
+  );
+}
+
+// components/ui/input.tsx
+var import_jsx_runtime15 = require("react/jsx-runtime");
+function Input({ className, type, float, onChange, ...props }) {
+  const handleChange = (event) => {
+    if (float && event.target.value) {
+      const numericValue = parseFloat(event.target.value);
+      if (!isNaN(numericValue)) {
+        event.target.value = numericValue.toString();
+      }
+    }
+    onChange?.(event);
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+    "input",
+    {
+      type,
+      "data-slot": "input",
+      className: cn(
+        "file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+        "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+        className
+      ),
+      onChange: handleChange,
+      ...props
+    }
+  );
+}
+
+// components/ui/sidebar.tsx
+var import_jsx_runtime16 = require("react/jsx-runtime");
+var SIDEBAR_COOKIE_NAME = "sidebar_state";
+var SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+var SIDEBAR_WIDTH = "16rem";
+var SIDEBAR_WIDTH_MOBILE = "18rem";
+var SIDEBAR_WIDTH_ICON = "3rem";
+var SIDEBAR_KEYBOARD_SHORTCUT = "b";
+var SidebarContext = React11.createContext(null);
+function useSidebar() {
+  const context = React11.useContext(SidebarContext);
+  if (!context) {
+    throw new Error("useSidebar must be used within a SidebarProvider.");
+  }
+  return context;
+}
+function SidebarProvider({
+  defaultOpen = true,
+  open: openProp,
+  onOpenChange: setOpenProp,
+  className,
+  style,
+  children,
+  ...props
+}) {
+  const isMobile = useIsMobile();
+  const [openMobile, setOpenMobile] = React11.useState(false);
+  const [_open, _setOpen] = React11.useState(defaultOpen);
+  const open = openProp ?? _open;
+  const setOpen = React11.useCallback(
+    (value) => {
+      const openState = typeof value === "function" ? value(open) : value;
+      if (setOpenProp) {
+        setOpenProp(openState);
+      } else {
+        _setOpen(openState);
+      }
+      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+    },
+    [setOpenProp, open]
+  );
+  const toggleSidebar = React11.useCallback(() => {
+    return isMobile ? setOpenMobile((open2) => !open2) : setOpen((open2) => !open2);
+  }, [isMobile, setOpen, setOpenMobile]);
+  React11.useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === SIDEBAR_KEYBOARD_SHORTCUT && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault();
+        toggleSidebar();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [toggleSidebar]);
+  const state = open ? "expanded" : "collapsed";
+  const contextValue = React11.useMemo(
+    () => ({
+      state,
+      open,
+      setOpen,
+      isMobile,
+      openMobile,
+      setOpenMobile,
+      toggleSidebar
+    }),
+    [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+  );
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SidebarContext.Provider, { value: contextValue, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_react_tooltip.TooltipProvider, { delayDuration: 0, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-wrapper",
+      style: {
+        "--sidebar-width": SIDEBAR_WIDTH,
+        "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
+        ...style
+      },
+      className: cn(
+        "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
+        className
+      ),
+      ...props,
+      children
+    }
+  ) }) });
+}
+function Sidebar({
+  side = "left",
+  variant = "sidebar",
+  collapsible = "offcanvas",
+  className,
+  children,
+  ...props
+}) {
+  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+  if (collapsible === "none") {
+    return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+      "div",
+      {
+        "data-slot": "sidebar",
+        className: cn(
+          "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col",
+          className
+        ),
+        ...props,
+        children
+      }
+    );
+  }
+  if (isMobile) {
+    return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Sheet, { open: openMobile, onOpenChange: setOpenMobile, ...props, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+      SheetContent,
+      {
+        "data-sidebar": "sidebar",
+        "data-slot": "sidebar",
+        "data-mobile": "true",
+        className: "bg-sidebar text-sidebar-foreground w-(--sidebar-width) p-0 [&>button]:hidden",
+        style: {
+          "--sidebar-width": SIDEBAR_WIDTH_MOBILE
+        },
+        side,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(SheetHeader, { className: "sr-only", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SheetTitle, { children: "Sidebar" }),
+            /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(SheetDescription, { children: "Displays the mobile sidebar." })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "flex h-full w-full flex-col", children })
+        ]
+      }
+    ) });
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+    "div",
+    {
+      className: "group peer text-sidebar-foreground hidden md:block",
+      "data-state": state,
+      "data-collapsible": state === "collapsed" ? collapsible : "",
+      "data-variant": variant,
+      "data-side": side,
+      "data-slot": "sidebar",
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          "div",
+          {
+            "data-slot": "sidebar-gap",
+            className: cn(
+              "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear",
+              "group-data-[collapsible=offcanvas]:w-0",
+              "group-data-[side=right]:rotate-180",
+              variant === "floating" || variant === "inset" ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]" : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)"
+            )
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          "div",
+          {
+            "data-slot": "sidebar-container",
+            className: cn(
+              "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex",
+              side === "left" ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]" : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
+              // Adjust the padding for floating and inset variants.
+              variant === "floating" || variant === "inset" ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]" : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
+              className
+            ),
+            ...props,
+            children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+              "div",
+              {
+                "data-sidebar": "sidebar",
+                "data-slot": "sidebar-inner",
+                className: "bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full w-full flex-col group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm",
+                children
+              }
+            )
+          }
+        )
+      ]
+    }
+  );
+}
+function SidebarTrigger({
+  className,
+  onClick,
+  ...props
+}) {
+  const { toggleSidebar } = useSidebar();
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+    Button,
+    {
+      "data-sidebar": "trigger",
+      "data-slot": "sidebar-trigger",
+      variant: "ghost",
+      size: "icon",
+      className: cn("size-7", className),
+      onClick: (event) => {
+        onClick?.(event);
+        toggleSidebar();
+      },
+      ...props,
+      children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_lucide_react5.PanelLeftIcon, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "sr-only", children: "Toggle Sidebar" })
+      ]
+    }
+  );
+}
+function SidebarRail({ className, ...props }) {
+  const { toggleSidebar } = useSidebar();
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "button",
+    {
+      "data-sidebar": "rail",
+      "data-slot": "sidebar-rail",
+      "aria-label": "Toggle Sidebar",
+      tabIndex: -1,
+      onClick: toggleSidebar,
+      title: "Toggle Sidebar",
+      className: cn(
+        "hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 -translate-x-1/2 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:left-1/2 after:w-[2px] sm:flex",
+        "in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize",
+        "[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize",
+        "hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full",
+        "[[data-side=left][data-collapsible=offcanvas]_&]:-right-2",
+        "[[data-side=right][data-collapsible=offcanvas]_&]:-left-2",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarInset({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "main",
+    {
+      "data-slot": "sidebar-inset",
+      className: cn(
+        "bg-background relative flex w-full flex-1 flex-col",
+        "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarInput({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    Input,
+    {
+      "data-slot": "sidebar-input",
+      "data-sidebar": "input",
+      className: cn("bg-background h-8 w-full shadow-none", className),
+      ...props
+    }
+  );
+}
+function SidebarHeader({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-header",
+      "data-sidebar": "header",
+      className: cn("flex flex-col gap-2 p-2", className),
+      ...props
+    }
+  );
+}
+function SidebarFooter({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-footer",
+      "data-sidebar": "footer",
+      className: cn("flex flex-col gap-2 p-2", className),
+      ...props
+    }
+  );
+}
+function SidebarSeparator({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    Separator2,
+    {
+      "data-slot": "sidebar-separator",
+      "data-sidebar": "separator",
+      className: cn("bg-sidebar-border mx-2 w-auto", className),
+      ...props
+    }
+  );
+}
+function SidebarContent({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-content",
+      "data-sidebar": "content",
+      className: cn(
+        "flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarGroup({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-group",
+      "data-sidebar": "group",
+      className: cn("relative flex w-full min-w-0 flex-col p-2", className),
+      ...props
+    }
+  );
+}
+function SidebarGroupLabel({
+  className,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot4.Slot : "div";
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    Comp,
+    {
+      "data-slot": "sidebar-group-label",
+      "data-sidebar": "group-label",
+      className: cn(
+        "text-sidebar-foreground/70 ring-sidebar-ring flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarGroupAction({
+  className,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot4.Slot : "button";
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    Comp,
+    {
+      "data-slot": "sidebar-group-action",
+      "data-sidebar": "group-action",
+      className: cn(
+        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        // Increases the hit area of the button on mobile.
+        "after:absolute after:-inset-2 md:after:hidden",
+        "group-data-[collapsible=icon]:hidden",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarGroupContent({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-group-content",
+      "data-sidebar": "group-content",
+      className: cn("w-full text-sm", className),
+      ...props
+    }
+  );
+}
+function SidebarMenu({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "ul",
+    {
+      "data-slot": "sidebar-menu",
+      "data-sidebar": "menu",
+      className: cn("flex w-full min-w-0 flex-col gap-1", className),
+      ...props
+    }
+  );
+}
+function SidebarMenuItem({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "li",
+    {
+      "data-slot": "sidebar-menu-item",
+      "data-sidebar": "menu-item",
+      className: cn("group/menu-item relative", className),
+      ...props
+    }
+  );
+}
+var sidebarMenuButtonVariants = (0, import_class_variance_authority2.cva)(
+  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  {
+    variants: {
+      variant: {
+        default: "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+        outline: "bg-background shadow-[0_0_0_1px_hsl(var(--sidebar-border))] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_hsl(var(--sidebar-accent))]"
+      },
+      size: {
+        default: "h-8 text-sm",
+        sm: "h-7 text-xs",
+        lg: "h-12 text-sm group-data-[collapsible=icon]:p-0!"
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default"
+    }
+  }
+);
+function SidebarMenuButton({
+  asChild = false,
+  isActive = false,
+  variant = "default",
+  size = "default",
+  tooltip,
+  className,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot4.Slot : "button";
+  const { isMobile, state } = useSidebar();
+  const button = /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    Comp,
+    {
+      "data-slot": "sidebar-menu-button",
+      "data-sidebar": "menu-button",
+      "data-size": size,
+      "data-active": isActive,
+      className: cn(sidebarMenuButtonVariants({ variant, size }), className),
+      ...props
+    }
+  );
+  if (!tooltip) {
+    return button;
+  }
+  if (typeof tooltip === "string") {
+    tooltip = {
+      children: tooltip
+    };
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_react_tooltip.Tooltip, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(import_react_tooltip.TooltipTrigger, { asChild: true, children: button }),
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+      import_react_tooltip.TooltipContent,
+      {
+        side: "right",
+        align: "center",
+        hidden: state !== "collapsed" || isMobile,
+        ...tooltip
+      }
+    )
+  ] });
+}
+function SidebarMenuAction({
+  className,
+  asChild = false,
+  showOnHover = false,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot4.Slot : "button";
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    Comp,
+    {
+      "data-slot": "sidebar-menu-action",
+      "data-sidebar": "menu-action",
+      className: cn(
+        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer-hover/menu-button:text-sidebar-accent-foreground absolute top-1.5 right-1 flex aspect-square w-5 items-center justify-center rounded-md p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
+        // Increases the hit area of the button on mobile.
+        "after:absolute after:-inset-2 md:after:hidden",
+        "peer-data-[size=sm]/menu-button:top-1",
+        "peer-data-[size=default]/menu-button:top-1.5",
+        "peer-data-[size=lg]/menu-button:top-2.5",
+        "group-data-[collapsible=icon]:hidden",
+        showOnHover && "peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarMenuBadge({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "div",
+    {
+      "data-slot": "sidebar-menu-badge",
+      "data-sidebar": "menu-badge",
+      className: cn(
+        "text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none",
+        "peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground",
+        "peer-data-[size=sm]/menu-button:top-1",
+        "peer-data-[size=default]/menu-button:top-1.5",
+        "peer-data-[size=lg]/menu-button:top-2.5",
+        "group-data-[collapsible=icon]:hidden",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarMenuSkeleton({
+  className,
+  showIcon = false,
+  ...props
+}) {
+  const width = React11.useMemo(() => {
+    return `${Math.floor(Math.random() * 40) + 50}%`;
+  }, []);
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(
+    "div",
+    {
+      "data-slot": "sidebar-menu-skeleton",
+      "data-sidebar": "menu-skeleton",
+      className: cn("flex h-8 items-center gap-2 rounded-md px-2", className),
+      ...props,
+      children: [
+        showIcon && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          Skeleton,
+          {
+            className: "size-4 rounded-md",
+            "data-sidebar": "menu-skeleton-icon"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+          Skeleton,
+          {
+            className: "h-4 max-w-(--skeleton-width) flex-1",
+            "data-sidebar": "menu-skeleton-text",
+            style: {
+              "--skeleton-width": width
+            }
+          }
+        )
+      ]
+    }
+  );
+}
+function SidebarMenuSub({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "ul",
+    {
+      "data-slot": "sidebar-menu-sub",
+      "data-sidebar": "menu-sub",
+      className: cn(
+        "border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5",
+        "group-data-[collapsible=icon]:hidden",
+        className
+      ),
+      ...props
+    }
+  );
+}
+function SidebarMenuSubItem({
+  className,
+  ...props
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    "li",
+    {
+      "data-slot": "sidebar-menu-sub-item",
+      "data-sidebar": "menu-sub-item",
+      className: cn("group/menu-sub-item relative", className),
+      ...props
+    }
+  );
+}
+function SidebarMenuSubButton({
+  asChild = false,
+  size = "md",
+  isActive = false,
+  className,
+  ...props
+}) {
+  const Comp = asChild ? import_react_slot4.Slot : "a";
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(
+    Comp,
+    {
+      "data-slot": "sidebar-menu-sub-button",
+      "data-sidebar": "menu-sub-button",
+      "data-size": size,
+      "data-active": isActive,
+      className: cn(
+        "text-sidebar-foreground ring-sidebar-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground active:bg-sidebar-accent active:text-sidebar-accent-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-md px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+        "data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground",
+        size === "sm" && "text-xs",
+        size === "md" && "text-sm",
+        "group-data-[collapsible=icon]:hidden",
+        className
+      ),
       ...props
     }
   );
@@ -2171,6 +2171,7 @@ function AppSidebar({
   src = "/dashboard.png",
   alt = "Dashboard",
   span = "Dashboard",
+  labels = {},
   ...props
 }) {
   return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(Sidebar, { collapsible: "icon", ...props, children: [
@@ -2185,7 +2186,7 @@ function AppSidebar({
         ] })
       }
     ) }) }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SidebarContent, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(NavRefine, {}) }),
+    /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SidebarContent, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(NavRefine, { groupLabels: labels }) }),
     /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(SidebarRail, {})
   ] });
 }
@@ -3809,11 +3810,20 @@ var AzirLayout = ({
   handleSignOut,
   name,
   email,
-  avatarUrl
+  avatarUrl,
+  labels
 }) => {
   return /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(SidebarProvider, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(import_react_hot_toast2.Toaster, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(AppSidebar, { src: sidebarSrc, alt: sidebarAlt, span: sidebarSpan }),
+    /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(
+      AppSidebar,
+      {
+        src: sidebarSrc,
+        alt: sidebarAlt,
+        span: sidebarSpan,
+        labels
+      }
+    ),
     /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)(SidebarInset, { children: [
       /* @__PURE__ */ (0, import_jsx_runtime48.jsx)("header", { className: "flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12", children: /* @__PURE__ */ (0, import_jsx_runtime48.jsxs)("div", { className: "flex w-full items-center justify-between gap-2 px-4", children: [
         /* @__PURE__ */ (0, import_jsx_runtime48.jsx)(SidebarTrigger, { className: "-ml-1" }),

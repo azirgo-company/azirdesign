@@ -1,4 +1,5 @@
 import * as react_jsx_runtime from 'react/jsx-runtime';
+import { RefineThemedLayoutV2SiderProps, RefineCreateButtonProps, RefineDeleteButtonProps, RefineEditButtonProps, RefineListButtonProps, RefineRefreshButtonProps, RefineSaveButtonProps, RefineButtonResourceProps, RefineButtonSingleProps, RefineShowButtonProps, RefineCrudCreateProps, RefineCrudEditProps, RefineCrudListProps, RefineCrudShowProps } from '@refinedev/ui-types';
 import * as class_variance_authority_dist_types from 'class-variance-authority/dist/types';
 import * as React$1 from 'react';
 import React__default, { ReactElement, FC, PropsWithChildren, DetailedHTMLProps, FormHTMLAttributes, ReactNode } from 'react';
@@ -7,7 +8,6 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { TooltipContent } from '@radix-ui/react-tooltip';
 import { I as Input, B as Button, b as buttonVariants, a as ButtonProps, P as PageHeaderProps } from './input-Cg7xjffp.mjs';
 import * as SeparatorPrimitive from '@radix-ui/react-separator';
-import { RefineThemedLayoutV2SiderProps, RefineCreateButtonProps, RefineDeleteButtonProps, RefineEditButtonProps, RefineListButtonProps, RefineRefreshButtonProps, RefineSaveButtonProps, RefineButtonResourceProps, RefineButtonSingleProps, RefineShowButtonProps, RefineCrudCreateProps, RefineCrudEditProps, RefineCrudListProps, RefineCrudShowProps } from '@refinedev/ui-types';
 import { LucideIcon } from 'lucide-react';
 import { CanAccess, BaseRecord, HttpError } from '@refinedev/core';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
@@ -107,8 +107,11 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar>, RefineTh
     src?: string;
     alt?: string;
     span?: string;
+    labels?: {
+        [key: string]: string;
+    };
 }
-declare function AppSidebar({ meta, src, alt, span, ...props }: AppSidebarProps): react_jsx_runtime.JSX.Element;
+declare function AppSidebar({ meta, src, alt, span, labels, ...props }: AppSidebarProps): react_jsx_runtime.JSX.Element;
 
 declare function NavMain({ items, }: {
     items: {
@@ -355,7 +358,7 @@ declare function useTheme(): {
     setTheme: (newTheme: Theme) => void;
 };
 
-declare const AzirLayout: ({ children, sidebarSrc, sidebarAlt, sidebarSpan, handleSignOut, name, email, avatarUrl, }: {
+declare const AzirLayout: ({ children, sidebarSrc, sidebarAlt, sidebarSpan, handleSignOut, name, email, avatarUrl, labels, }: {
     children: React.ReactNode;
     sidebarSrc?: string;
     sidebarAlt?: string;
@@ -364,6 +367,9 @@ declare const AzirLayout: ({ children, sidebarSrc, sidebarAlt, sidebarSpan, hand
     name?: string;
     email?: string;
     avatarUrl?: string;
+    labels?: {
+        [key: string]: string;
+    };
 }) => react_jsx_runtime.JSX.Element;
 
 interface AzirTableProps<TQueryFnData extends BaseRecord = BaseRecord, TError extends HttpError = HttpError, TData extends BaseRecord = TQueryFnData> {

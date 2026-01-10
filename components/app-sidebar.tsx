@@ -1,16 +1,16 @@
 "use client"
 
+import { RefineThemedLayoutV2SiderProps } from "@refinedev/ui-types"
+import { NavRefine } from "./nav-refine"
 import {
   Sidebar,
-  SidebarMenu,
   SidebarContent,
-  SidebarMenuItem,
-  SidebarMenuButton,
   SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
   SidebarRail,
 } from "./ui/sidebar"
-import { NavRefine } from "./nav-refine"
-import { RefineThemedLayoutV2SiderProps } from "@refinedev/ui-types"
 
 interface AppSidebarProps
   extends React.ComponentProps<typeof Sidebar>,
@@ -18,6 +18,7 @@ interface AppSidebarProps
   src?: string
   alt?: string
   span?: string
+  labels?: { [key: string]: string }
 }
 
 export function AppSidebar({
@@ -25,6 +26,7 @@ export function AppSidebar({
   src = "/dashboard.png",
   alt = "Dashboard",
   span = "Dashboard",
+  labels = {},
   ...props
 }: AppSidebarProps) {
   return (
@@ -45,7 +47,7 @@ export function AppSidebar({
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavRefine />
+        <NavRefine groupLabels={labels} />
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

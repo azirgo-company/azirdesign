@@ -15,6 +15,7 @@ export const AzirLayout = ({
   name,
   email,
   avatarUrl,
+  labels,
 }: {
   children: React.ReactNode
   sidebarSrc?: string
@@ -24,11 +25,17 @@ export const AzirLayout = ({
   name?: string
   email?: string
   avatarUrl?: string
+  labels?: { [key: string]: string }
 }) => {
   return (
     <SidebarProvider>
       <Toaster />
-      <AppSidebar src={sidebarSrc} alt={sidebarAlt} span={sidebarSpan} />
+      <AppSidebar
+        src={sidebarSrc}
+        alt={sidebarAlt}
+        span={sidebarSpan}
+        labels={labels}
+      />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
           <div className="flex w-full items-center justify-between gap-2 px-4">
